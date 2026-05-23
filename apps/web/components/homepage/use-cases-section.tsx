@@ -117,6 +117,8 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
                               alt="Status bar"
                               width={240}
                               height={20}
+                              loading="lazy"
+                              sizes="240px"
                               className="mx-auto"
                             />
                           </div>
@@ -129,6 +131,8 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
                                 alt={card.name}
                                 width={72}
                                 height={72}
+                                loading="lazy"
+                                sizes="72px"
                                 className="rounded-full mb-2"
                               />
                             </div>
