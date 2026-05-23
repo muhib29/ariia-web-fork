@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import { HeroSection } from '@/components/homepage/hero-section';
 import { HomeBelowFold } from '@/components/homepage/HomeBelowFold';
-import { fetchAPI, hasStrapiConfig } from '@/utils/api-helper';
+import { fetchAPI } from '@/utils/api-helper';
 import { homeQuery } from '@/graphql/querys';
 
 export const revalidate = 300;
