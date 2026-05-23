@@ -26,12 +26,12 @@ export function SecuritySection({ header, imageWithContent }: SecuritySectionPro
       id="security"
       className="py-10 mt-8 sm:mt-0 md:py-20 px-6 relative overflow-hidden bg-[#222d53] text-white"
     >
-      <div className="absolute inset-0 w-full overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 w-full overflow-hidden pointer-events-none homepage-decor-blur">
         <div className="absolute top-[-100px] left-[0px] w-[105%] h-[270px] rounded-full blur-3xl opacity-[30%] bg-gradient-to-r from-[#667BD6] to-[#7F56D9]" />
         <div className="absolute bottom-[-150px] left-[0px] w-[105%] h-[270px] rounded-full blur-3xl opacity-[100%] bg-gradient-to-r from-[#224e78] via-[#285d91] to-[#2a628b]" />
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10 homepage-section-content">
         {/* Header */}
         <FadeInWhenInView>
           <div className="text-center mb-8 md:mb-[50px]">

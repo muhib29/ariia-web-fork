@@ -2,12 +2,18 @@
 
 import Image, { type ImageProps } from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { isTouchDevice } from '@/lib/device-capabilities';
 
 type DeferredImageProps = ImageProps & {
   rootMargin?: string;
 };
 
-/** Loads images only when scrolled near — keeps multi-MB SVGs off initial network. */
+function shouldEagerLoad(): boolean {
+  if (typeof window === 'undefined') return false;
+  return isTouchDevice() || window.matchMedia('(max-width: 767px)').matches;
+}
+
+/** Loads images when near viewport; eager on phones to avoid empty card areas while scrolling. */
 export function DeferredImage({
   rootMargin = '500px 0px',
   alt,
@@ -20,6 +26,11 @@ export function DeferredImage({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (shouldEagerLoad()) {
+      setVisible(true);
+      return;
+    }
+
     const node = ref.current;
     if (!node) return;
 

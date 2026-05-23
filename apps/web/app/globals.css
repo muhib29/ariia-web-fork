@@ -212,50 +212,37 @@ section {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/*
- * Scroll-reveal animations: desktop only.
- * On phones/tablets content is always fully visible (same UI, no fade) — avoids iOS
- * white-screen bugs from opacity:0 + IntersectionObserver misses.
- */
-.fade-in-when-in-view {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: none;
-}
+/* Homepage: keep section content above decorative layers (iOS Safari scroll paint bug) */
+@media (max-width: 767px) {
+  .homepage-section-content {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+  }
 
-@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
-  .fade-in-when-in-view:not(.fade-in-when-in-view--revealed) {
-    opacity: 0;
-    transform: translate3d(0, var(--fade-y, 20px), 0);
+  /*
+   * Large CSS blur() layers blank the viewport on iOS when scrolling.
+   * Decor stays; blur is stripped on small screens only.
+   */
+  .homepage-decor-blur {
+    filter: none !important;
+    -webkit-filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     pointer-events: none;
-    transition:
-      opacity var(--fade-duration, 0.6s) cubic-bezier(0.25, 0.8, 0.25, 1) var(--fade-delay, 0ms),
-      transform var(--fade-duration, 0.6s) cubic-bezier(0.25, 0.8, 0.25, 1) var(--fade-delay, 0ms);
+    z-index: 0;
   }
 
-  .fade-in-when-in-view--revealed {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
-    transition:
-      opacity var(--fade-duration, 0.6s) cubic-bezier(0.25, 0.8, 0.25, 1) var(--fade-delay, 0ms),
-      transform var(--fade-duration, 0.6s) cubic-bezier(0.25, 0.8, 0.25, 1) var(--fade-delay, 0ms);
+  .section-bg-fade {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .fade-in-when-in-view {
-    opacity: 1 !important;
-    transform: none !important;
-    pointer-events: auto !important;
-    transition: none !important;
+@media (min-width: 768px) {
+  [style*='willChange'] {
+    backface-visibility: hidden;
   }
-}
-
-/* Optimize section animations for smoother scroll */
-[style*="willChange"] {
-  backface-visibility: hidden;
 }
 
 @keyframes fade-slide-in-bottom {

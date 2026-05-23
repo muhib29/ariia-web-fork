@@ -62,7 +62,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
       className="py-7 md:py-15 px-6 bg-white relative overflow-visible md:overflow-hidden"
     >
       {/* Background: top orb, center orb, bottom orb — fades at section edges */}
-      <div className="absolute inset-0 pointer-events-none section-bg-fade">
+      <div className="absolute inset-0 pointer-events-none section-bg-fade homepage-decor-blur">
         {/* Top circle */}
         <div className="absolute w-[400px] h-[250px] md:w-[500px] md:h-[300px] -top-24 left-1/2 -translate-x-1/2 rounded-full blur-[100px] md:blur-[120px] bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9] opacity-25 md:opacity-30" />
         {/* Center orb */}
@@ -75,7 +75,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
         <div className="hidden md:block absolute inset-x-0 bottom-0 h-[420px] rounded-none bg-gradient-to-t from-[#EAF3FF] via-[#EEF6FF]/90 to-transparent opacity-95" />
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10 homepage-section-content">
         {/* Header */}
         <div className="text-center">
           <SectionHeader
@@ -92,7 +92,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
         {/* Cards */}
         <div className="relative">
           {/* Mobile-only hue behind cards (organic spread, no hard edges) */}
-              <div className="absolute md:hidden inset-x-0 -top-4 -bottom-12 z-0 pointer-events-none">
+              <div className="absolute md:hidden inset-x-0 -top-4 -bottom-12 z-0 pointer-events-none homepage-decor-blur">
                     <div className="absolute -left-12 top-10 h-[360px] w-[360px] rounded-full blur-[84px] bg-gradient-to-r from-[#3B6BFF]/18 to-[#2E96FF]/14" />
                     <div className="absolute left-1/2 top-14 -translate-x-1/2 h-[380px] w-[86%] rounded-full blur-[92px] bg-gradient-to-r from-[#3B6BFF]/12 via-[#2E96FF]/14 to-[#7F56D9]/12" />
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[420px] w-[92%] rounded-full blur-[96px] bg-gradient-to-r from-[#3B6BFF]/16 via-[#2E96FF]/18 to-[#7F56D9]/14" />
@@ -180,7 +180,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
               : null}
           </div>
           {/* Mobile-only glow under the last card */}
-          <div className="absolute md:hidden -z-0 inset-x-6 -bottom-5 h-[120px] rounded-[999px] blur-[70px] bg-gradient-to-r from-[#3B6BFF]/18 via-[#2E96FF]/16 to-[#2EFFEA]/14 pointer-events-none" />
+          <div className="absolute md:hidden -z-0 inset-x-6 -bottom-5 h-[120px] rounded-[999px] blur-[70px] bg-gradient-to-r from-[#3B6BFF]/18 via-[#2E96FF]/16 to-[#2EFFEA]/14 pointer-events-none homepage-decor-blur" />
 
           {/* Desktop-only centered bluish glow under the cards */}
           <div className="hidden md:block absolute inset-x-0 bottom-0 h-[220px] pointer-events-none z-0">

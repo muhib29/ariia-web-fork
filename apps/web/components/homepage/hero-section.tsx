@@ -6,7 +6,6 @@ import { useLayoutEffect, useRef, useState, useEffect, useCallback } from 'react
 import { GradientHeader } from './GradientHeader';
 import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
 import { useIsMobileResolved } from '@/hooks/useClientMediaQuery';
-import { useIdleReady } from '@/hooks/useIdleReady';
 import dynamic from 'next/dynamic';
 
 const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
@@ -33,11 +32,9 @@ export { FadeInWhenInView };
 function SmoothTypewriter({
   words,
   renderCursor = true,
-  enabled = true,
 }: {
   words: string[];
   renderCursor?: boolean;
-  enabled?: boolean;
 }) {
   const safeWords =
     words && words.length > 0 ? words : ['AI Agents', 'Smart Assistants', 'Digital Co-Pilots'];
@@ -46,7 +43,6 @@ function SmoothTypewriter({
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!enabled) return;
     const currentWord = safeWords[wordIndex % safeWords.length];
     const typingSpeed = isDeleting ? 35 : 55;
     const pauseAfterTyping = 1200;
@@ -71,11 +67,7 @@ function SmoothTypewriter({
         window.clearTimeout(timeoutId);
       }
     };
-  }, [displayText, isDeleting, enabled, safeWords, wordIndex]);
-
-  if (!enabled) {
-    return <span>{safeWords[0]}</span>;
-  }
+  }, [displayText, isDeleting, safeWords, wordIndex]);
 
   return (
     <>
@@ -94,7 +86,6 @@ function SmoothTypewriter({
 
 export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
   const isMobile = useIsMobileResolved();
-  const interactionsReady = useIdleReady(1800);
   const heroDescription =
     leftContent?.description ||
     'Autonomous, personalized, and intelligent—bringing powerful enterprise-grade AI to businesses of every size.';
@@ -164,21 +155,21 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
   }, [updatePath]);
 
   useEffect(() => {
-    if (!showConnector || !interactionsReady) {
-      if (!showConnector) setIsAnimationComplete(true);
+    if (!showConnector) {
+      setIsAnimationComplete(true);
       return;
     }
 
-    const connectorDelay = isMobile ? 200 : 400;
+    const connectorDelay = isMobile ? 350 : 1000;
     const timer = setTimeout(() => {
       setIsAnimationComplete(true);
       schedulePathUpdate();
     }, connectorDelay);
     return () => clearTimeout(timer);
-  }, [interactionsReady, isMobile, schedulePathUpdate, showConnector]);
+  }, [isMobile, schedulePathUpdate, showConnector]);
 
   useLayoutEffect(() => {
-    if (!interactionsReady || !isAnimationComplete || !showConnector) return;
+    if (!isAnimationComplete || !showConnector) return;
     const resizeObserver = new ResizeObserver(() => schedulePathUpdate());
     const container = containerRef.current;
     const orb = orbRef.current;
@@ -195,10 +186,10 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
       resizeObserver.disconnect();
       window.removeEventListener('resize', schedulePathUpdate);
     };
-  }, [interactionsReady, selectedBusiness, isMobile, isAnimationComplete, schedulePathUpdate, showConnector]);
+  }, [selectedBusiness, isMobile, isAnimationComplete, schedulePathUpdate, showConnector]);
 
   return (
-    <section className="relative flex flex-col justify-center bg-white overflow-hidden min-h-[760px] md:min-h-[780px] lg:h-[860px] lg:min-h-[860px] lg:max-h-[860px] 2xl:h-[900px] 2xl:min-h-[900px] 2xl:max-h-[900px] pt-20 xl:pt-10 pb-6 md:pb-8 lg:pb-0 hero-orb-breakpoint-1860">
+    <section className="relative flex flex-col justify-center bg-white overflow-x-hidden max-md:overflow-y-visible md:overflow-hidden min-h-[760px] md:min-h-[780px] lg:h-[860px] lg:min-h-[860px] lg:max-h-[860px] 2xl:h-[900px] 2xl:min-h-[900px] 2xl:max-h-[900px] pt-20 xl:pt-10 pb-6 md:pb-8 lg:pb-0 hero-orb-breakpoint-1860">
       {/* Decorative elements */}
       <div className="absolute inset-0 h-full w-full vertical-lines" />
 
@@ -215,7 +206,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
         <div className="absolute inset-0 rounded-full opacity-45 bg-[radial-gradient(circle_at_50%_50%,rgba(103,121,255,0.35)_0%,rgba(46,255,234,0.1)_55%,transparent_70%)]" />
       </div>
 
-      <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none homepage-decor-blur">
         <div
           className="absolute block bottom-[-80px] right-[-100px] w-[300px] h-[260px] rounded-full blur-3xl opacity-30 bg-[linear-gradient(135deg,_#6779FF_0%,_#4E97FA_50%,_#35B5F5_100%)] md:hidden"
         />
@@ -239,7 +230,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
         />
       </div>
 
-      <div className="relative max-w-[80rem] 2xl:max-w-[83rem] mx-auto px-6 md:px-12 z-10 -translate-y-2 md:-translate-y-10 lg:-translate-y-12 xl:-translate-y-14 2xl:-translate-y-16">
+      <div className="relative max-w-[80rem] 2xl:max-w-[83rem] mx-auto px-6 md:px-12 z-10 homepage-section-content -translate-y-2 md:-translate-y-10 lg:-translate-y-12 xl:-translate-y-14 2xl:-translate-y-16">
         <div className="grid lg:grid-cols-2 gap-5 md:gap-12 items-center pt-0">
           {/* Left Column */}
           <div className="flex flex-col items-center lg:items-start mt-0 md:mt-2 lg:mt-0 space-y-1 md:space-y-5">
@@ -262,7 +253,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                     with
                     {' '}
                     <GradientHeader className="gradient-header-no-anim gradient-header-hero-blue inline">
-                      <SmoothTypewriter words={typewriterWords} enabled={interactionsReady} />
+                      <SmoothTypewriter words={typewriterWords} />
                     </GradientHeader>
                   </span>
 
@@ -272,7 +263,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                   </span>
                   <span className="hidden md:mt-0 md:ml-2 md:inline-flex md:items-baseline">
                     <GradientHeader className="gradient-header-no-anim gradient-header-hero-blue">
-                      <SmoothTypewriter words={typewriterWords} renderCursor={false} enabled={interactionsReady} />
+                      <SmoothTypewriter words={typewriterWords} renderCursor={false} />
                     </GradientHeader>
                     <span
                       className="typewriter-cursor ml-0.5 inline-block min-w-[0.35em] w-[10px] animate-pulse align-baseline"
@@ -358,11 +349,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
               }
             >
               <div className="relative w-full h-full rounded-full overflow-hidden md:top-5 ">
-                {interactionsReady ? (
-                  <SplineScene config={SPLINE_SCENES.hero} priority deferMs={500} />
-                ) : (
-                  <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_30%_30%,#7b9cfd_0%,#4E97FA_35%,#35B5F5_60%,#2EFFEA_100%)]" aria-hidden />
-                )}
+                <SplineScene config={SPLINE_SCENES.hero} priority deferMs={0} />
 
                 {isCalling ? (
                   <button

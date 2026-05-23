@@ -30,7 +30,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
       className="pt-10 md:pt-18 pb-0 px-4 md:px-6 relative overflow-hidden overflow-x-hidden bg-white"
     >
       {/* Background Gradient Blur */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden homepage-decor-blur">
         {/* Top glow matches Use Cases card gradient palette */}
         <div className="absolute top-[-70px] left-1/2 -translate-x-1/2 w-[100%] h-[100px] rounded-full blur-3xl opacity-[15%] bg-[linear-gradient(90deg,rgba(53,128,255,0.22)_20%,#3580FF_100%,#2E96FF_100%)]" />
 
@@ -40,7 +40,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
         {/* Keep bottom clear so FAQ ends on white */}
       </div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-4xl mx-auto relative z-10 homepage-section-content">
         {/* Blue circle shadow on left side of container (FAQ label blue) */}
         <div
           className="hidden md:block absolute left-[-450px] top-1/2 -translate-y-1/2 w-[320px] h-[550px] rounded-full blur-[90px] opacity-20 pointer-events-none bg-[#3B6BFF]"
