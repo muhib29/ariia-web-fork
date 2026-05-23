@@ -54,8 +54,8 @@ export function shouldLoadSpline(): boolean {
 }
 
 /**
- * Memory conservation: all touch devices under 768px (no RAM detection).
- * Lazy-mounts below-fold sections; never unmounts them once shown (see ViewportSection).
+ * Mobile Safari safe mode: all touch devices under 768px (no RAM detection).
+ * Enables site-wide CSS that disables GPU-heavy blurs (see MobileSafariMode).
  */
 export function shouldConserveMemory(): boolean {
   if (typeof window === 'undefined') return false;

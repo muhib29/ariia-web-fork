@@ -198,7 +198,7 @@ export function FeaturesSection() {
       {/* Cards Grid — each card has its own div for custom layouts */}
       <div
         ref={cardsAreaRef}
-        className="w-full max-w-[1156px] mx-auto flex flex-col gap-3 md:gap-4 relative z-10 px-4 xl:px-0"
+        className="w-full max-w-[1156px] mx-auto flex flex-col gap-3 md:gap-4 relative z-10 px-4 xl:px-0 ios-safe-content"
       >
         {/* Glow is intentionally scoped to the cards area only (excludes header/title region) */}
         {/* Section-level glow effect disabled - hover effects only show on individual cards */}
@@ -302,7 +302,7 @@ export function FeaturesSection() {
                       className="bg-no-repeat bg-contain bg-center
                   bg-[url('/images/features/real-time-bg.svg')] z-2 absolute  h-auto w-[400px] sm:h-[339px] sm:w-[339px]"
                     ></div>
-                    <div className="pointer-events-none absolute inset-0   rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px] ios-hide-mobile-blur max-md:hidden" />
                     <Image
                       src="/images/features/real-time.png"
                       alt="Real-Time Intelligence & Performance Analytics"
@@ -619,7 +619,7 @@ export function FeaturesSection() {
               {/* 15. Follow-Up Calls */}
               <FadeInWhenInView delay={200} className="w-full xl:w-[386px]">
                 <GlowCard className="relative flex flex-col w-full h-auto xl:h-[197px] rounded-[20px] px-6 pt-4 pb-6 text-left border-[1px] border-gray-200 shadow-[0px_3px_4px_0px_#00000040] overflow-hidden bg-[linear-gradient(180deg,#F8F9FC_0%,#F8F9FC_48%,#EDF5FF_76%,#E7F2FF_100%)]">
-                  <div className="absolute bottom-0 left-1/2 h-[18px] w-[18px] -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#36C5F0_0%,#58E6FD_100%)] blur-[36px] opacity-100" />
+                  <div className="absolute bottom-0 left-1/2 h-[18px] w-[18px] -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#36C5F0_0%,#58E6FD_100%)] blur-[36px] opacity-100 ios-hide-mobile-blur max-md:hidden" />
                   <Image
                     src="/images/features/down-bg.svg"
                     alt=""
@@ -644,7 +644,7 @@ export function FeaturesSection() {
               {/* 16. Knowledge Base */}
               <FadeInWhenInView delay={300} className="w-full xl:w-[345px]">
                 <GlowCard className="relative flex flex-col w-full h-auto xl:h-[197px] rounded-[20px] p-6 pt-4 text-left border-[1px] border-gray-200 shadow-[0px_3px_4px_0px_#00000040] overflow-hidden bg-[linear-gradient(180deg,#F8F9FC_0%,#F8F9FC_48%,#EDF5FF_76%,#E7F2FF_100%)]">
-                  <div className="absolute bottom-0 left-1/2 h-[18px] w-[18px] -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#36C5F0_0%,#58E6FD_100%)] blur-[36px] opacity-100" />
+                  <div className="absolute bottom-0 left-1/2 h-[18px] w-[18px] -translate-x-1/2 rounded-full bg-[linear-gradient(180deg,#36C5F0_0%,#58E6FD_100%)] blur-[36px] opacity-100 ios-hide-mobile-blur max-md:hidden" />
                   <Image
                     src="/images/features/down-bg.svg"
                     alt=""
@@ -727,7 +727,7 @@ export function FeaturesSection() {
       </div>
 
       {/* Background — fades at top/bottom */}
-      <div className="absolute inset-0 z-[0] pointer-events-none section-bg-fade overflow-hidden">
+      <div className="absolute inset-0 z-[0] pointer-events-none section-bg-fade overflow-hidden ios-flatten-blur">
         {/* Top-left bluish shadow */}
         <div className="absolute w-[520px] h-[520px] -top-40 -left-62 rounded-full blur-[80px] md:blur-[150px] bg-gradient-to-br from-[#3B6BFF] via-[#4E97FA] to-[#BFD9FF] opacity-40 md:opacity-70" />
 

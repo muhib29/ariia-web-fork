@@ -1,17 +1,13 @@
 'use client';
 
 import Image, { type ImageProps } from 'next/image';
-import { useConserveMemory } from '@/hooks/useConserveMemory';
 import { useEffect, useRef, useState } from 'react';
 
 type DeferredImageProps = ImageProps & {
   rootMargin?: string;
 };
 
-/**
- * Loads images when near the viewport. On mobile, keeps them mounted once loaded
- * (no unload — unloading caused visible gaps / memory churn on iOS).
- */
+/** Loads images when near the viewport; keeps them mounted once loaded. */
 export function DeferredImage({
   rootMargin = '400px 0px',
   alt,
@@ -21,16 +17,13 @@ export function DeferredImage({
   sizes,
   ...props
 }: DeferredImageProps) {
-  const conserve = useConserveMemory();
   const ref = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
-  const margin = conserve ? '200px 0px' : rootMargin;
 
   useEffect(() => {
+    if (loaded) return;
     const node = ref.current;
     if (!node) return;
-
-    if (loaded) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -39,14 +32,12 @@ export function DeferredImage({
           observer.disconnect();
         }
       },
-      { rootMargin: margin, threshold: 0.01 },
+      { rootMargin, threshold: 0.01 },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [loaded, margin]);
-
-  const mobileSizes = conserve ? '(max-width: 767px) 90vw, 50vw' : sizes;
+  }, [loaded, rootMargin]);
 
   if (fill) {
     return (
@@ -55,7 +46,7 @@ export function DeferredImage({
           <Image
             alt={alt}
             fill
-            sizes={mobileSizes}
+            sizes={sizes}
             {...props}
             className="object-contain"
             loading="lazy"
@@ -74,7 +65,7 @@ export function DeferredImage({
         <Image
           alt={alt}
           className={className}
-          sizes={mobileSizes}
+          sizes={sizes}
           {...props}
           loading="lazy"
           fetchPriority="low"

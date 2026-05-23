@@ -212,31 +212,46 @@ section {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Homepage: keep section content above decorative layers (iOS Safari scroll paint bug) */
-@media (max-width: 767px) {
-  .homepage-section-content {
-    position: relative;
-    z-index: 2;
-    isolation: isolate;
-  }
+/*
+ * iOS Safari (all touch viewports <768px): heavy blur/mask layers exhaust GPU memory
+ * and blank the page while scrolling — especially across SPA route changes.
+ * Applied via .ios-safe-mode on <html> from MobileSafariMode.
+ */
+html.ios-safe-mode .ios-safe-content {
+  position: relative;
+  z-index: 1;
+}
 
-  /*
-   * Large CSS blur() layers blank the viewport on iOS when scrolling.
-   * Decor stays; blur is stripped on small screens only.
-   */
-  .homepage-decor-blur {
-    filter: none !important;
-    -webkit-filter: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    pointer-events: none;
-    z-index: 0;
-  }
+html.ios-safe-mode .ios-flatten-blur,
+html.ios-safe-mode .homepage-decor-blur {
+  filter: none !important;
+  -webkit-filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none;
+}
 
-  .section-bg-fade {
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
-  }
+html.ios-safe-mode .section-bg-fade {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+/* Decorative absolute blurs inside marketing sections (features, pricing, home) */
+html.ios-safe-mode section .absolute.rounded-full[class*='blur'] {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+html.ios-safe-mode section .absolute[class*='blur-3xl'],
+html.ios-safe-mode section .absolute[class*='blur-2xl'],
+html.ios-safe-mode section .absolute[class*='blur-'] {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+/* Card-local glow blurs */
+html.ios-safe-mode .ios-hide-mobile-blur {
+  display: none !important;
 }
 
 @media (min-width: 768px) {
