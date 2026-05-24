@@ -10,9 +10,10 @@ import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
 import { useIsMobileResolved } from '@/hooks/useClientMediaQuery';
 import dynamic from 'next/dynamic';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
-
-const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
+import { SplineStaticPlaceholder } from '@/components/SplineStaticPlaceholder';
 import { HeroLogo } from '../icons/HeroLogo';
+
+const DesktopSplineScene = dynamic(() => import('@/components/SplineScene'), { ssr: false });
 
 export interface HeroSectionProps {
   leftContent?: {
@@ -194,19 +195,20 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
 
       {isMobile === false && (
         <div className="absolute top-[57%] lg:top-[50%] 2xl:top-[50%] left-1/2 w-[690px] h-[690px] -translate-x-1/2 -translate-y-1/2 scale-95 hidden md:block">
-          <SplineScene config={SPLINE_SCENES.heroPattern} />
+          <DesktopSplineScene config={SPLINE_SCENES.heroPattern} />
         </div>
       )}
 
       {isMobile === true && (
         <div className="absolute top-[26%] left-1/2 w-[390px] h-[390px] sm:w-[600px] sm:h-[600px] -translate-x-1/2 -translate-y-1/2 scale-105 block md:hidden">
-          <SplineScene config={SPLINE_SCENES.heroPatternMobile} />
+          <SplineStaticPlaceholder config={SPLINE_SCENES.heroPatternMobile} />
         </div>
       )}
 
       <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
         <div
           className="absolute block bottom-[-80px] right-[-100px] w-[300px] h-[260px] rounded-full blur-3xl opacity-30 bg-[linear-gradient(135deg,_#6779FF_0%,_#4E97FA_50%,_#35B5F5_100%)] md:hidden"
+          
         />
         <div
           className="absolute block top-[400px] left-[80px] w-2xs h-28 rounded-full blur-3xl opacity-45 bg-gradient-to-r from-[#4E97FA] to-[#2EFFEA] md:hidden"
@@ -356,7 +358,11 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
               }
             >
               <div className="relative w-full h-full rounded-full overflow-hidden md:top-5 ">
-                <SplineScene config={SPLINE_SCENES.hero} priority />
+                {isMobile === false ? (
+                  <DesktopSplineScene config={SPLINE_SCENES.hero} priority fillParent />
+                ) : (
+                  <SplineStaticPlaceholder config={SPLINE_SCENES.hero} fillParent />
+                )}
 
                 {isCalling ? (
                   <button
