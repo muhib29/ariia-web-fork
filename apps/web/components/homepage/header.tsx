@@ -244,7 +244,7 @@ function HeaderContent({
         style={stickyStyle}
       >
         <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4">
-          <AriiaSvgMark className="w-20 h-10 md:h-9 md:w-28" />
+          <AriiaSvgMark priority className="w-20 h-10 md:h-9 md:w-28" />
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6">

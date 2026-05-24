@@ -7,9 +7,11 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import React, { useEffect } from 'react';
 import { SectionHeader } from '../SectionHeader';
+import dynamic from 'next/dynamic';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
-import SplineScene from '../SplineScene';
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
+
+const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
 
 export interface CareerJobInfo {
   employment?: string;

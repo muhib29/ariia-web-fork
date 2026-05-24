@@ -1,88 +1,241 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useCallback, useEffect, useState } from 'react';
-import type { CSSProperties } from 'react';
-import type { Application } from '@splinetool/runtime';
+import { useState, useEffect, useLayoutEffect, useRef, type CSSProperties } from 'react';
 import type { SplineSceneConfig } from '@/config/spline-scenes';
-import { shouldLoadSpline } from '@/lib/device-capabilities';
+import { useScreenSize } from '@/hooks/useScreenSize';
 import { whenPageInteractive } from '@/lib/when-page-interactive';
-import { SplineStaticPlaceholder } from './SplineStaticPlaceholder';
+import { requestSplineSlot, releaseSplineSlot } from '@/lib/spline-loader';
 
-const SplineSceneInner = dynamic(() => import('./SplineSceneInner'), { ssr: false });
+type SplineApplication = {
+  setZoom: (zoom: number) => void;
+};
+
+type SplineComponentType = typeof import('@splinetool/react-spline').default;
 
 export interface SplineSceneProps {
   config: SplineSceneConfig;
   className?: string;
   style?: CSSProperties;
-  onLoad?: (spline: Application) => void;
+  onLoad?: (spline: SplineApplication) => void;
   priority?: boolean;
   fillParent?: boolean;
 }
 
-/**
- * Desktop: static placeholder first, then Spline after load + idle (non-blocking).
- * Mobile / touch: static placeholder only — no WebGL.
- */
 export default function SplineScene({
   config,
   className = '',
-  style,
+  style = {},
   onLoad,
   priority = false,
   fillParent = false,
 }: SplineSceneProps) {
-  const [allowSpline, setAllowSpline] = useState(false);
-  const [readyToMountInner, setReadyToMountInner] = useState(false);
-  const [sceneLoaded, setSceneLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const [canLoadSpline, setCanLoadSpline] = useState(false);
+  const [slotReady, setSlotReady] = useState(false);
+  const [SplineComponent, setSplineComponent] = useState<SplineComponentType | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const screenSize = useScreenSize();
+  const currentHeight = config.height[screenSize];
+  const shouldLoadImmediately = priority || config.priority;
+  const [isNearViewport, setIsNearViewport] = useState(shouldLoadImmediately);
 
   useEffect(() => {
-    const allowed = shouldLoadSpline();
-    setAllowSpline(allowed);
-    if (!allowed) return;
-
-    return whenPageInteractive(() => setReadyToMountInner(true));
+    return whenPageInteractive(() => setCanLoadSpline(true));
   }, []);
 
-  const handleSceneReady = useCallback(() => {
-    setSceneLoaded(true);
-  }, []);
+  useEffect(() => {
+    if (shouldLoadImmediately || !containerRef.current) return;
 
-  if (!allowSpline) {
-    return (
-      <SplineStaticPlaceholder
-        config={config}
-        className={className}
-        style={style}
-        fillParent={fillParent}
-      />
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsNearViewport(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '320px 0px' },
     );
-  }
 
-  const wrapperStyle: CSSProperties = fillParent
-    ? { width: '100%', height: '100%', position: 'relative', ...style }
-    : { position: 'relative', ...style };
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [shouldLoadImmediately]);
 
+  useEffect(() => {
+    if (!canLoadSpline || !isNearViewport) return;
+
+    let cancelled = false;
+    let slotHeld = false;
+
+    requestSplineSlot()
+      .then(() => {
+        if (cancelled) return;
+        slotHeld = true;
+        setSlotReady(true);
+        return import('@splinetool/react-spline');
+      })
+      .then((mod) => {
+        if (slotHeld) {
+          releaseSplineSlot();
+          slotHeld = false;
+        }
+        if (cancelled || !mod) return;
+        setSplineComponent(() => mod.default);
+      })
+      .catch((err) => {
+        console.error('Failed to load Spline:', err);
+        if (!cancelled) setError(true);
+        if (slotHeld) {
+          releaseSplineSlot();
+          slotHeld = false;
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      setSlotReady(false);
+      if (slotHeld) {
+        releaseSplineSlot();
+        slotHeld = false;
+      }
+    };
+  }, [canLoadSpline, isNearViewport]);
+
+  const constrainCanvasToParent = () => {
+    if (!fillParent || !containerRef.current) return;
+
+    const root = containerRef.current;
+    const canvas = root.querySelector('canvas');
+    if (!canvas) return;
+
+    const el = canvas as HTMLElement;
+    el.style.width = '100%';
+    el.style.height = '100%';
+    el.style.maxWidth = '100%';
+    el.style.maxHeight = '100%';
+    el.style.display = 'block';
+
+    let node: HTMLElement | null = el.parentElement;
+    while (node && node !== root) {
+      node.style.width = '100%';
+      node.style.height = '100%';
+      node.style.overflow = 'hidden';
+      node = node.parentElement;
+    }
+  };
+
+  const handleLoad = (spline: SplineApplication) => {
+    setIsLoaded(true);
+    constrainCanvasToParent();
+
+    if (config.disableInteractions) {
+      try {
+        spline.setZoom(1);
+        const canvas = containerRef.current?.querySelector('canvas');
+        if (canvas) {
+          (canvas as HTMLElement).style.pointerEvents = 'none';
+        }
+      } catch (err) {
+        console.warn('Could not disable interactions:', err);
+      }
+    }
+
+    onLoad?.(spline);
+  };
+
+  useLayoutEffect(() => {
+    if (!fillParent || !isLoaded || !containerRef.current) return;
+
+    constrainCanvasToParent();
+    const observer = new ResizeObserver(() => constrainCanvasToParent());
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [fillParent, isLoaded]);
+
+  const handleError = (err: Error) => {
+    setError(true);
+    console.error(`✗ Failed to load scene: ${config.id}`, err);
+  };
+
+  const containerStyle: CSSProperties = fillParent
+    ? {
+        position: 'absolute',
+        inset: 0,
+        overflow: 'hidden',
+        ...style,
+      }
+    : { width: '100%', height: currentHeight, position: 'relative', ...style };
+
+  const splineStyle: CSSProperties = {
+    position: fillParent ? 'absolute' : 'relative',
+    inset: fillParent ? 0 : undefined,
+    width: '100%',
+    height: fillParent ? '100%' : currentHeight,
+    background: 'transparent',
+    opacity: isLoaded ? 1 : 0,
+    transition: 'opacity 0.5s ease',
+    ...(config.disableInteractions && {
+      pointerEvents: 'none',
+      touchAction: 'none',
+      userSelect: 'none',
+    }),
+  };
+
+  
   return (
-    <div className={`relative ${className}`.trim()} style={wrapperStyle}>
-      <div
-        className={`absolute inset-0 transition-opacity duration-500 ${
-          sceneLoaded ? 'pointer-events-none opacity-0' : 'opacity-100'
-        }`}
-        aria-hidden={sceneLoaded}
-      >
-        <SplineStaticPlaceholder config={config} fillParent={fillParent} />
-      </div>
+    <div
+      ref={containerRef}
+      className={`spline-container ${className}`}
+      style={containerStyle}
+      data-scene-id={config.id}
+    >
+      {error && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#fee',
+            color: '#dc2626',
+            gap: '12px',
+          }}
+        >
+          <p>Unable to load 3D scene</p>
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            style={{
+              padding: '8px 16px',
+              background: '#dc2626',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      )}
 
-      {readyToMountInner && (
-        <SplineSceneInner
-          config={config}
-          priority={priority}
-          fillParent={fillParent}
-          onLoad={onLoad}
-          onSceneReady={handleSceneReady}
-          className="absolute inset-0"
-        />
+      {SplineComponent && slotReady && !error && (
+        <div style={splineStyle}>
+          <SplineComponent
+            scene={config.url}
+            style={
+              fillParent
+                ? { width: '100%', height: '100%', overflow: 'hidden' }
+                : undefined
+            }
+            onLoad={handleLoad}
+            onError={(err: unknown) =>
+              handleError(err instanceof Error ? err : new Error(String(err)))
+            }
+          />
+        </div>
       )}
     </div>
   );

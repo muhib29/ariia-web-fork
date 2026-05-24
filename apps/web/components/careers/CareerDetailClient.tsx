@@ -13,9 +13,11 @@ import { GiftIcon } from '../icons/GiftIcon';
 import { FileUpload } from './FileUpload';
 import { SuccessModal } from './SuccessModal';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { SectionHeader } from '../SectionHeader';
-import SplineScene from '../SplineScene';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
+
+const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
 import remarkBreaks from 'remark-breaks';
 

@@ -240,7 +240,10 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                 className="relative top-0 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
                 delay={0}
               >
-                <HeroLogo className="object-contain max-w-[90px]  md:pb-2 md:max-w-full" />
+                <HeroLogo
+                  priority
+                  className="object-contain max-w-[90px]  md:pb-2 md:max-w-full"
+                />
               </FadeInWhenInView>
             </div>
 
@@ -357,7 +360,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                 ' relative z-10 w-[182px] h-[182px] max-[424px]:w-[160px] max-[424px]:h-[160px] max-[374px]:w-[134px] max-[374px]:h-[134px] ml-0 -translate-x-5 max-[424px]:translate-x-0 md:translate-x-0 md:ml-0 rounded-full md:mx-0 md:w-[255px] md:h-[255px] mt-14 md:mt-16 lg:mt-32 xl:mt-40 2xl:mt-40 lg:ml-10'
               }
             >
-              <div className="relative w-full h-full rounded-full overflow-hidden md:top-5 ">
+              <div className="relative w-full h-full rounded-full overflow-hidden md:top-5">
                 {isMobile === false ? (
                   <DesktopSplineScene config={SPLINE_SCENES.hero} priority fillParent />
                 ) : (
