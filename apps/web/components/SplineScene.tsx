@@ -175,7 +175,7 @@ export default function SplineScene({
     };
 
     const scheduleLoad = () => {
-      const delayMs = shouldLoadImmediately ? 0 : 2500;
+      const delayMs = 0;
       console.log(`[Spline:${config.id}] ⏱️ Scheduling Spline load in ${delayMs}ms`, {
         shouldLoadImmediately,
         timestamp: new Date().toISOString(),
