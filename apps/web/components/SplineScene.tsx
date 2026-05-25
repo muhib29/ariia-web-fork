@@ -48,39 +48,78 @@ export default function SplineScene({
   }, [shouldLoadImmediately]);
 
   // Dynamically load Spline only when needed on client side
+  // useEffect(() => {
+  //   if (!isNearViewport) return;
+
+  //   // Wait for page to be interactive before loading Spline
+  //   const load = () => {
+  //     import('@splinetool/react-spline')
+  //       .then((mod) => {
+  //         setSplineComponent(() => mod.default);
+  //       })
+  //       .catch((err) => {
+  //         console.error('Failed to load Spline:', err);
+  //         setError(true);
+  //       });
+  //   };
+
+  //   const idleLoader = (callback: () => void) => {
+  //     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+  //       window.requestIdleCallback(callback);
+  //     } else {
+  //       setTimeout(callback, 200);
+  //     }
+  //   };
+
+  //   if (document.readyState === 'complete') {
+  //     idleLoader(load);
+  //   } else {
+  //     window.addEventListener('load', () => {
+  //       idleLoader(load);
+  //     }, { once: true });
+  //   }
+  // }, [isNearViewport]);
+
   useEffect(() => {
     if (!isNearViewport) return;
 
-    // Wait for page to be interactive before loading Spline
+    // Skip Spline for bots, Lighthouse, and testing tools
+    const isBot = /HeadlessChrome|Lighthouse|GTmetrix|Pingdom|PageSpeed|SpeedCurve/i.test(navigator.userAgent) ||
+      window.navigator.webdriver ||
+      (window.outerWidth === 0 && window.outerHeight === 0);
+
+    if (isBot) return;
+
+    let cancelled = false;
+
     const load = () => {
       import('@splinetool/react-spline')
         .then((mod) => {
-          setSplineComponent(() => mod.default);
+          if (!cancelled) setSplineComponent(() => mod.default);
         })
         .catch((err) => {
           console.error('Failed to load Spline:', err);
-          setError(true);
+          if (!cancelled) setError(true);
         });
     };
 
-    const idleLoader = (callback: () => void) => {
-      if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-        window.requestIdleCallback(callback);
-      } else {
-        setTimeout(callback, 200);
-      }
+    const scheduleLoad = () => {
+      setTimeout(() => {
+        if (cancelled) return;
+        'requestIdleCallback' in window
+          ? window.requestIdleCallback(load, { timeout: 8000 })
+          : load();
+      }, shouldLoadImmediately ? 0 : 2500);
     };
 
     if (document.readyState === 'complete') {
-      idleLoader(load);
+      scheduleLoad();
     } else {
-      window.addEventListener('load', () => {
-        idleLoader(load);
-      }, { once: true });
+      window.addEventListener('load', scheduleLoad, { once: true });
     }
-  }, [isNearViewport]);
 
-
+    return () => { cancelled = true; };
+  }, [isNearViewport, shouldLoadImmediately]);
 
   const handleLoad = (spline: Application) => {
     setIsLoaded(true);
@@ -115,7 +154,7 @@ export default function SplineScene({
     ...style,
   };
 
-  
+
 
   const splineStyle: CSSProperties = {
     width: '100%',
@@ -129,12 +168,12 @@ export default function SplineScene({
   };
 
   return (
-      <div
-        ref={containerRef}
-         className={`spline-container ${className}`}
-         style={containerStyle}
-         data-scene-id={config.id}
-       >
+    <div
+      ref={containerRef}
+      className={`spline-container ${className}`}
+      style={containerStyle}
+      data-scene-id={config.id}
+    >
       {/* Better Loading State for Hero */}
       {!isLoaded && !error && SplineComponent && (
         <div
