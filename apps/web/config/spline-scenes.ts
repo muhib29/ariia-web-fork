@@ -25,7 +25,7 @@ export const SPLINE_SCENES: Record<string, SplineSceneConfig> = {
       desktop: '300px',
     },
     disableInteractions: true,
-    priority: false,
+    priority: true,
   },
   heroPattern: {
     id: 'hero-pattern',
