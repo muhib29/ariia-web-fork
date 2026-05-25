@@ -63,11 +63,19 @@ export default function SplineScene({
         });
     };
 
+    const idleLoader = (callback: () => void) => {
+      if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+        window.requestIdleCallback(callback);
+      } else {
+        setTimeout(callback, 200);
+      }
+    };
+
     if (document.readyState === 'complete') {
-      requestIdleCallback ? requestIdleCallback(load) : setTimeout(load, 200);
+      idleLoader(load);
     } else {
       window.addEventListener('load', () => {
-        requestIdleCallback ? requestIdleCallback(load) : setTimeout(load, 200);
+        idleLoader(load);
       }, { once: true });
     }
   }, [isNearViewport]);
