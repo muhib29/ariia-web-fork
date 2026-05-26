@@ -8,7 +8,7 @@ import { MobileSafariMode } from './MobileSafariMode';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <DeferredLenis>
+    <LenisProvider>
       <NextThemesProvider
         attribute="class"
         defaultTheme="light"
@@ -19,36 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <HashScrollManager />
         <MobileSafariMode>{children}</MobileSafariMode>
       </NextThemesProvider>
-    </DeferredLenis>
+    </LenisProvider>
   );
 }
-
-function DeferredLenis({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    let cancelled = false;
-    const activate = () => {
-      if (!cancelled) setMounted(true);
-    };
-
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      const id = (window as any).requestIdleCallback(activate, { timeout: 2000 });
-      return () => {
-        cancelled = true;
-        if ((window as any).cancelIdleCallback) {
-          (window as any).cancelIdleCallback(id);
-        }
-      };
-    }
-
-    const t = setTimeout(activate, 1500) as unknown as number;
-    return () => {
-      cancelled = true;
-      clearTimeout(t as unknown as number);
-    };
-  }, []);
-
-  if (!mounted) return <>{children}</>;
-  return <LenisProvider>{children}</LenisProvider>;
-}
+// DeferredLenis removed — `LenisProvider` is now rendered directly.
