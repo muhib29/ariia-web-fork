@@ -29,6 +29,7 @@ import {
 } from '@workspace/ui/components/collapsible';
 import { DialogTitle } from '@workspace/ui/components/dialog';
 import { usePathname } from 'next/navigation';
+import { getLenis } from '@/lib/lenis';
 import { SmoothLink } from '../SmoothLink';
 import { cn } from '@workspace/ui/lib/utils';
 import { AriiaSvgMark } from '../icons/AriiaSvgMark';
@@ -214,6 +215,7 @@ function HeaderContent({
   setHoveredDropdown,
   mobileMenuOpen,
   setMobileMenuOpen,
+  handleMobileMenuOpenChange,
   isSticky = false,
 }: {
   hoveredDropdown: string | null;
@@ -224,6 +226,7 @@ function HeaderContent({
   setHoveredDropdown: (name: string | null) => void;
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
+  handleMobileMenuOpenChange: (open: boolean) => void;
   isSticky?: boolean;
 }) {
   const menuItemClasses = (href: string) =>
@@ -361,7 +364,7 @@ function HeaderContent({
           </Link>
         </Button>
         <div className="block md:hidden relative z-[60]">
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <Sheet open={mobileMenuOpen} onOpenChange={handleMobileMenuOpenChange}>
             <SheetTrigger asChild>
               <Button
                 type="button"
@@ -410,6 +413,10 @@ function HeaderContent({
                       type="button"
                       aria-label="Close menu"
                       className="relative z-[3] flex items-center justify-center size-10 opacity-90 rounded-full bg-white/45 shadow-md border border-white/45 touch-manipulation cursor-pointer"
+                      onPointerDown={(e) => {
+                        e.preventDefault();
+                        setMobileMenuOpen(false);
+                      }}
                     >
                       <X className="h-4 w-4 text-gray-700 pointer-events-none" />
                     </button>
@@ -421,7 +428,7 @@ function HeaderContent({
                     <Link
                       key={item.href}
                       href={item.href}
-                      prefetch={true}
+                      prefetch={false}
                       className="flex items-center gap-2 px-4 border-b border-[#93d8fa4c] py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors touch-manipulation relative z-[1]"
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -460,7 +467,7 @@ function HeaderContent({
                             <Link
                               key={link.href}
                               href={link.href}
-                              prefetch={true}
+                              prefetch={false}
                               className={cn(
                                 'flex ml-2 items-start gap-2 py-2 px-1 min-h-[44px] text-gray-800 font-[400] transition-colors touch-manipulation relative z-[1]',
                               )}
@@ -508,7 +515,7 @@ function HeaderContent({
                             <Link
                               key={link.href}
                               href={link.href}
-                              prefetch={true}
+                              prefetch={false}
                               className={cn(
                                 'flex ml-2 items-start gap-2 py-2 px-1 min-h-[44px] text-gray-800 font-[400] transition-colors touch-manipulation relative z-[1]',
                               )} // @ts-ignore
@@ -530,7 +537,7 @@ function HeaderContent({
                   <div className="w-full bg-white/45 backdrop-blur-xl rounded-full p-[5px] shadow-[0_14px_36px_rgba(15,23,42,0.14)] flex items-center justify-between gap-2 border border-white/45">
                     <Link
                       href="/login"
-                      prefetch={true}
+                      prefetch={false}
                       className="flex-1 text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors px-3 py-3 min-h-[44px] rounded-full text-center bg-transparent touch-manipulation flex items-center justify-center"
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -540,7 +547,7 @@ function HeaderContent({
                       asChild
                       className="flex-1 bg-gray-900/95 hover:bg-gray-800/90 text-white font-medium text-sm mx-0 px-4 h-[32px] rounded-full"
                     >
-                      <Link href="/trial" prefetch={true} onClick={() => setMobileMenuOpen(false)}>
+                      <Link href="/trial" prefetch={false} onClick={() => setMobileMenuOpen(false)}>
                         1-Month Free Trial
                       </Link>
                     </Button>
@@ -561,6 +568,17 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   const [activePath, setActivePath] = useState<string | null>(null);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuOpenChange = (open: boolean) => {
+    const lenis = getLenis();
+    if (open) {
+      lenis?.stop?.();
+    } else {
+      lenis?.start?.();
+    }
+    setMobileMenuOpen(open);
+  };
+
   const [isScrolled, setIsScrolled] = useState(false);
   const shouldHideGradient = NO_GRADIENT_ROUTES.includes(pathname);
 
@@ -641,6 +659,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
             setHoveredDropdown={setHoveredDropdown}
             mobileMenuOpen={mobileMenuOpen}
             setMobileMenuOpen={setMobileMenuOpen}
+            handleMobileMenuOpenChange={handleMobileMenuOpenChange}
             isSticky={isScrolled}
           />
         </div>
