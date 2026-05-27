@@ -388,7 +388,7 @@ function HeaderContent({
               side="top"
               hideOverlay
               showCloseButton={false}
-              className="p-0 bg-transparent rounded-none border-0 shadow-none z-[200] pointer-events-auto data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
+              className="p-0 bg-transparent rounded-none border-0 shadow-none z-[200] pointer-events-auto data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top mobile-menu-sheet"
               onOpenAutoFocus={(e) => e.preventDefault()}
               onCloseAutoFocus={(e) => e.preventDefault()}
             >
@@ -560,10 +560,17 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
 
   const handleMobileMenuOpenChange = (open: boolean) => {
     const lenis = getLenis();
+    const isChromeIOS = /CriOS/i.test(navigator.userAgent);
     if (open) {
       lenis?.stop?.();
+      window.dispatchEvent(new Event('spline-pause'));
+      if (isChromeIOS) {
+        document.documentElement.setAttribute('data-chrome-ios', 'true');
+      }
     } else {
       lenis?.start?.();
+      window.dispatchEvent(new Event('spline-resume'));
+      document.documentElement.removeAttribute('data-chrome-ios');
     }
     setMobileMenuOpen(open);
   };

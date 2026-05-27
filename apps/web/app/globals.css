@@ -427,6 +427,11 @@
   transform: translateZ(0);
 }
 
+[data-chrome-ios="true"] .mobile-menu-sheet {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 /* Custom gradient backgrounds */
 .gradient-bg {
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);

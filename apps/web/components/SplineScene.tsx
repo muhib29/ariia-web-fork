@@ -29,6 +29,7 @@ export default function SplineScene({
   const [error, setError] = useState(false);
   const [SplineComponent, setSplineComponent] = useState<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const splineViewerRef = useRef<HTMLDivElement>(null);
   const screenSize = useScreenSize();
   const currentHeight = config.height[screenSize];
   const shouldLoadImmediately = priority || config.priority;
@@ -78,6 +79,30 @@ export default function SplineScene({
 
     return () => {
       window.removeEventListener('spline-user-interacted', onInteractionEvent);
+    };
+  }, []);
+
+  useEffect(() => {
+    const onPause = () => {
+      if (splineViewerRef.current) {
+        splineViewerRef.current.style.visibility = 'hidden';
+        splineViewerRef.current.style.pointerEvents = 'none';
+      }
+    };
+
+    const onResume = () => {
+      if (splineViewerRef.current) {
+        splineViewerRef.current.style.visibility = 'visible';
+        splineViewerRef.current.style.pointerEvents = 'auto';
+      }
+    };
+
+    window.addEventListener('spline-pause', onPause);
+    window.addEventListener('spline-resume', onResume);
+
+    return () => {
+      window.removeEventListener('spline-pause', onPause);
+      window.removeEventListener('spline-resume', onResume);
     };
   }, []);
 
@@ -192,7 +217,7 @@ export default function SplineScene({
         </div>
       )}
       {SplineComponent && !error && (
-        <div style={splineStyle}>
+        <div ref={splineViewerRef} style={splineStyle}>
           <SplineComponent scene={config.url} onLoad={handleLoad} onError={handleError} />
         </div>
       )}
