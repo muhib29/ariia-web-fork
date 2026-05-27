@@ -214,7 +214,6 @@ function HeaderContent({
   setActivePath,
   setHoveredDropdown,
   mobileMenuOpen,
-  setMobileMenuOpen,
   handleMobileMenuOpenChange,
   isSticky = false,
 }: {
@@ -225,7 +224,6 @@ function HeaderContent({
   setActivePath: (path: string) => void;
   setHoveredDropdown: (name: string | null) => void;
   mobileMenuOpen: boolean;
-  setMobileMenuOpen: (open: boolean) => void;
   handleMobileMenuOpenChange: (open: boolean) => void;
   isSticky?: boolean;
 }) {
@@ -233,7 +231,7 @@ function HeaderContent({
     `flex items-start gap-3 p-3 rounded-lg transition-colors ${activePath === href ? 'bg-[#EEFBFF]' : ''
     } menu-item-hover`;
 
-  const bgClass = isSticky ? 'bg-white/70 backdrop-blur-md' : 'bg-white';
+  const bgClass = isSticky ? 'bg-white/40' : 'bg-white';
   const stickyStyle = isSticky ? { WebkitBackdropFilter: 'blur(12px)' } : {};
 
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
@@ -398,7 +396,7 @@ function HeaderContent({
                 <span className="sr-only">Mobile Navigation Menu</span>
               </DialogTitle>
 
-              <div className="mx-2 mt-2 rounded-[18px] border border-white/40 bg-white/10 backdrop-blur-md shadow-[0_14px_36px_rgba(15,23,42,0.12)] overflow-y-auto relative flex flex-col max-h-[calc(100dvh-1.5rem)] touch-manipulation isolate z-[1]">
+              <div className="mx-2 mt-2 rounded-[18px] border border-white/40 bg-white/25 shadow-[0_14px_36px_rgba(15,23,42,0.12)] overflow-y-auto relative flex flex-col max-h-[calc(100dvh-1.5rem)] touch-manipulation isolate z-[1]">
                 <div className="sticky top-0 z-[2] flex items-center justify-between px-4 pt-3 pb-2 bg-transparent shrink-0">
                   {/* Top logo row */}
                   <div className="bg-white/45 rounded-full px-3 py-1 border border-white/45 flex items-center gap-2 pointer-events-none">
@@ -421,7 +419,7 @@ function HeaderContent({
                       href={item.href}
                       prefetch={false}
                       className="flex items-center gap-2 px-4 border-b border-[#93d8fa4c] py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors touch-manipulation relative z-[1]"
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => handleMobileMenuOpenChange(false)}
                     >
                       <span>{item.label}</span>
                     </Link>
@@ -463,7 +461,7 @@ function HeaderContent({
                                 'flex ml-2 items-start gap-2 py-2 px-1 min-h-[44px] text-gray-800 font-[400] transition-colors touch-manipulation relative z-[1]',
                               )}
                               //@ts-ignore
-                              onClick={() => setMobileMenuOpen(false)}
+                              onClick={() => handleMobileMenuOpenChange(false)}
                             >
                               <div className="flex flex-col gap-[1px]">
                                 <span className="text-base leading-6">{link.label}</span>
@@ -510,7 +508,7 @@ function HeaderContent({
                               className={cn(
                                 'flex ml-2 items-start gap-2 py-2 px-1 min-h-[44px] text-gray-800 font-[400] transition-colors touch-manipulation relative z-[1]',
                               )} // @ts-ignore
-                              onClick={() => setMobileMenuOpen(false)}
+                              onClick={() => handleMobileMenuOpenChange(false)}
                             >
                               <div className="flex flex-col gap-[1px]">
                                 <span className="text-base leading-6">{link.label}</span>
@@ -525,12 +523,12 @@ function HeaderContent({
 
                 {/* Bottom CTA bar (Log In + 1-Month Free Trial) */}
                 <div className="px-4 pb-6 pt-2 shrink-0 relative z-[1]">
-                  <div className="w-full bg-white/45 backdrop-blur-xl rounded-full p-[5px] shadow-[0_14px_36px_rgba(15,23,42,0.14)] flex items-center justify-between gap-2 border border-white/45">
+                  <div className="w-full bg-white/40 rounded-full p-[5px] shadow-[0_14px_36px_rgba(15,23,42,0.14)] flex items-center justify-between gap-2 border border-white/45">
                     <Link
                       href="/login"
                       prefetch={false}
                       className="flex-1 text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors px-3 py-3 min-h-[44px] rounded-full text-center bg-transparent touch-manipulation flex items-center justify-center"
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => handleMobileMenuOpenChange(false)}
                     >
                       Log In
                     </Link>
@@ -538,7 +536,7 @@ function HeaderContent({
                       asChild
                       className="flex-1 bg-gray-900/95 hover:bg-gray-800/90 text-white font-medium text-sm mx-0 px-4 h-[32px] rounded-full"
                     >
-                      <Link href="/trial" prefetch={false} onClick={() => setMobileMenuOpen(false)}>
+                      <Link href="/trial" prefetch={false} onClick={() => handleMobileMenuOpenChange(false)}>
                         1-Month Free Trial
                       </Link>
                     </Button>
@@ -649,7 +647,6 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
             setActivePath={setActivePath}
             setHoveredDropdown={setHoveredDropdown}
             mobileMenuOpen={mobileMenuOpen}
-            setMobileMenuOpen={setMobileMenuOpen}
             handleMobileMenuOpenChange={handleMobileMenuOpenChange}
             isSticky={isScrolled}
           />

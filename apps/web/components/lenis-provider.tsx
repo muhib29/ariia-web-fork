@@ -39,12 +39,17 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
   // Reset Lenis on route change
   useEffect(() => {
-    const lenis = getLenis();
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    }
     if (typeof window !== 'undefined' && !window.location.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      const timeout = window.setTimeout(() => {
+        const lenis = getLenis();
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        }
+      }, 50);
+
+      return () => window.clearTimeout(timeout);
     }
   }, [pathname]);
 

@@ -4,6 +4,8 @@ import { PricingSection } from '../../components/homepage/pricing-section';
 import { pricingQuery } from '../../graphql/querys';
 import { fetchAPI } from '../../utils/api-helper';
 
+export const revalidate = 60;
+
 const PRICE_PER_MINUTE = 0.22;
 const MIN_MINUTES = 1;
 const MAX_MINUTES = 6000;
