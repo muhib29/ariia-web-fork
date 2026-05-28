@@ -102,7 +102,7 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
         } z-30 pointer-events-none `}
       >
         <div className="max-w-[73.123rem] mx-auto px-0 md:px-6 pb-0 pointer-events-auto">
-          <div className="relative z-40 overflow-hidden md:rounded-3xl shadow-xl w-[377px] rounded-xl h-[179px] mx-auto md:w-full md:h-full bg-cover bg-center bg-no-repeat bg-[url('/images/newsletter-mob-bg.png')] md:bg-[#0B0F1A] md:bg-[url('/images/newsletter-bg.png')]">
+          <div className="relative z-40 overflow-hidden md:rounded-3xl shadow-xl w-[377px] rounded-xl h-[179px] mx-auto md:w-full md:h-full bg-cover bg-center bg-no-repeat bg-[url('/images/newsletter-mob-bg.webp')] md:bg-[#0B0F1A] md:bg-[url('/images/newsletter-bg.webp')]">
             <div className="px-8 pt-8 md:px-16  md:py-12 mt-0 text-center text-white bg-transparent">
               <h2 className="text-[22px] mb-2 sm:mb-5 md:w-full leading-[30px] md:text-[2.3125rem] md:leading-tight font-bold sm:font-semibold max-w-none mx-auto">
                 Get the latest product updates—join our newsletter

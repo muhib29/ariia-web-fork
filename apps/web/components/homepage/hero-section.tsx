@@ -387,7 +387,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                   >
                     <Image
                       priority={true}
-                      src="/images/Missed Outbound.svg"
+                      src="/images/MissedOutbound.svg"
                       alt="Cancel Call"
                       width={30}
                       height={25}

@@ -298,7 +298,7 @@ export function CustomerDetail({ customer }: { customer: CustomerDetailData }) {
               <div className="w-full mt-2 sm:mt-8 sm:mb-4">
                 <div
                   className="relative rounded-3xl shadow-xl bg-[#101828] bg-cover bg-center text-white"
-                  style={{ backgroundImage: "url('/images/newsletter-bg.png')" }}
+                  style={{ backgroundImage: "url('/images/newsletter-bg.webp')" }}
                 >
                   <div className="px-6 md:px-12 py-10 text-center">
                     <p className="text-lg md:text-xl italic mb-4 leading-relaxed">

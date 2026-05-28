@@ -718,7 +718,7 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
               <div className="w-full max-w-6xl mx-auto mb-10 md:mb-20 mt-1 md:mt-4">
                 <div
                   className="relative flex flex-col md:flex-row items-center rounded-3xl bg-[#101828] bg-cover bg-center overflow-hidden shadow-lg"
-                  style={{ backgroundImage: "url('/images/newsletter-bg.png')" }}
+                  style={{ backgroundImage: "url('/images/newsletter-bg.webp')" }}
                 >
                   <div className="pointer-events-none absolute inset-x-0 top-0 h-[170px] md:h-[220px] max-sm:bg-[url('/images/why-join-us.svg')] bg-top bg-no-repeat bg-cover opacity-45" />
 

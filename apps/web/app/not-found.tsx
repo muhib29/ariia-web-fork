@@ -8,7 +8,7 @@ export default function NotFound() {
         {/* Illustration */}
         <div className="-mb-40">
           <Image
-            src="/images/customer-cards.png"
+            src="/images/customer-cards.webp"
             alt="404 Illustration"
             width={400}
             height={300}

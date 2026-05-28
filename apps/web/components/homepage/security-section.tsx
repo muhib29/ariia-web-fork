@@ -80,7 +80,7 @@ export function SecuritySection({ header, imageWithContent }: SecuritySectionPro
         <FadeInWhenInView delay={200}>
           <div className="rounded-[20px] bg-white text-gray-900 p-6 md:p-8 shadow-lg backdrop-blur-md relative overflow-hidden">
             <Image
-              src="/images/compliance-bg.png"
+              src="/images/compliance-bg.webp"
               alt="Compliance background"
               fill
               sizes="100vw"

@@ -16,7 +16,7 @@ export function HeroLogo({
 }: HeroLogoProps) {
   return (
     <Image
-      src="/images/hero-logo.png"
+      src="/images/hero-logo.webp"
       alt="ARIIA"
       width={width}
       height={height}

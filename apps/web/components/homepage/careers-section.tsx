@@ -165,13 +165,13 @@ export function CareersSection({ career }: { career: CareerData }) {
             <FadeInWhenInView delay={120} yOffset={18}>
               <div
                 className="h-full rounded-[24px] bg-gradient-to-br from-[#E8F3FF] to-[#F8FAFF] px-6 py-4 flex flex-col justify-center items-center bg-cover bg-center shadow-lg transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl"
-                style={{ backgroundImage: "url('/images/c-1bg.png')" }}
+                style={{ backgroundImage: "url('/images/c-1bg.webp')" }}
               >
                 <h3 className="font-semibold text-base md:text-lg mb-2 text-gray-800 text-center">
                   {card1.title}
                 </h3>
                 <Image
-                  src="/images/c-line.png"
+                  src="/images/c-line.webp"
                   alt="divider"
                   width={320}
                   height={4}
@@ -189,13 +189,13 @@ export function CareersSection({ career }: { career: CareerData }) {
             <FadeInWhenInView delay={220} yOffset={18}>
               <div
                 className="h-full rounded-[24px] bg-gradient-to-br from-[#F8FAFF] to-[#E8F3FF] p-6 flex flex-col justify-center items-center bg-cover bg-center shadow-lg transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl"
-                style={{ backgroundImage: "url('/images/c-2bg.png')" }}
+                style={{ backgroundImage: "url('/images/c-2bg.webp')" }}
               >
                 <h3 className="font-semibold text-base md:text-lg mb-2 text-gray-800 text-center">
                   {card2.title}
                 </h3>
                 <Image
-                  src="/images/c-line.png"
+                  src="/images/c-line.webp"
                   alt="divider"
                   width={320}
                   height={4}
@@ -216,7 +216,7 @@ export function CareersSection({ career }: { career: CareerData }) {
           <div className="group flex flex-col items-center justify-center rounded-[32px] bg-gradient-to-br from-[#F8FAFF] to-[#E8F3FF] p-0 min-h-[180px] md:h-[300px] h-full overflow-hidden relative shadow-lg transition-shadow duration-300 motion-safe:hover:shadow-xl">
             <div className="relative w-full h-full min-h-[180px] flex items-center justify-center">
               <Image
-                src={'/images/c-main.png'}
+                src={'/images/c-main.webp'}
                 alt="Careers Illustration"
                 fill
                 className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
@@ -233,13 +233,13 @@ export function CareersSection({ career }: { career: CareerData }) {
             <FadeInWhenInView delay={170} yOffset={18}>
               <div
                 className="h-full rounded-[24px] bg-gradient-to-br from-[#E8F3FF] to-[#F8FAFF] px-6 py-4 flex flex-col justify-center items-center bg-cover bg-center shadow-lg transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl"
-                style={{ backgroundImage: "url('/images/c-3bg.png')" }}
+                style={{ backgroundImage: "url('/images/c-3bg.webp')" }}
               >
                 <h3 className="font-semibold text-base md:text-lg mb-2 text-gray-800 text-center">
                   {card3.title}
                 </h3>
                 <Image
-                  src="/images/c-line.png"
+                  src="/images/c-line.webp"
                   alt="divider"
                   width={320}
                   height={4}
@@ -257,13 +257,13 @@ export function CareersSection({ career }: { career: CareerData }) {
             <FadeInWhenInView delay={270} yOffset={18}>
               <div
                 className="h-full rounded-[24px] bg-gradient-to-br from-[#F8FAFF] to-[#E8F3FF] p-6 flex flex-col justify-center items-center bg-cover bg-center shadow-lg transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl"
-                style={{ backgroundImage: "url('/images/c-4bg.png')" }}
+                style={{ backgroundImage: "url('/images/c-4bg.webp')" }}
               >
                 <h3 className="font-semibold text-base md:text-lg mb-2 text-gray-800 text-center">
                   {card4.title}
                 </h3>
                 <Image
-                  src="/images/c-line.png"
+                  src="/images/c-line.webp"
                   alt="divider"
                   width={320}
                   height={4}
@@ -287,7 +287,7 @@ export function CareersSection({ career }: { career: CareerData }) {
       >
         <div
           className="relative rounded-3xl bg-[#101828] bg-cover bg-center transition-all duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-2xl"
-          style={{ backgroundImage: "url('/images/newsletter-bg.png')" }}
+          style={{ backgroundImage: "url('/images/newsletter-bg.webp')" }}
         >
           <div className="px-6 md:px-12 py-8 text-center text-white text-base md:text-lg font-medium whitespace-pre-line">
             {career.header?.description ||

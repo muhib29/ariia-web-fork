@@ -271,7 +271,7 @@ export function FeaturesSection() {
                 </p>
               </div>
               <Image
-                src="/images/features/voice-order.png"
+                src="/images/features/voice-order.webp"
                 alt="Voice Orders"
                 width={361}
                 height={291}
@@ -304,7 +304,7 @@ export function FeaturesSection() {
                     ></div>
                     <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px] ios-hide-mobile-blur max-md:hidden" />
                     <Image
-                      src="/images/features/real-time.png"
+                      src="/images/features/real-time.webp"
                       alt="Real-Time Intelligence & Performance Analytics"
                       width={339}
                       height={339}
@@ -376,7 +376,7 @@ export function FeaturesSection() {
                     or cancel a table without speaking to a human.
                   </p>
                   <Image
-                    src="/images/features/reservation.png"
+                    src="/images/features/reservation.webp"
                     alt="Reservation Management"
                     width={1500}
                     height={1500}
@@ -479,7 +479,7 @@ export function FeaturesSection() {
               </div>
               <div className="mt-6 sm:mt-4 flex w-full items-center justify-center">
                 <Image
-                  src="/images/features/appointment-scheduling.png"
+                  src="/images/features/appointment-scheduling.webp"
                   alt="Appointment Scheduling"
                   width={361}
                   height={259}
@@ -532,7 +532,7 @@ export function FeaturesSection() {
                     </p>
                   </div>
                   <Image
-                    src="/images/features/menue-sync.png"
+                    src="/images/features/menue-sync.webp"
                     alt="Menu Sync and POS integration"
                     width={224}
                     height={156}
@@ -561,14 +561,14 @@ export function FeaturesSection() {
               </div>
               <div className="flex w-full flex-col items-center gap-1 mt-5 sm:mt-0">
                 <Image
-                  src="/images/features/call-summary.png"
+                  src="/images/features/call-summary.webp"
                   alt="Call Summary"
                   width={361}
                   height={106}
                   className="h-auto w-[361px] object-contain"
                 />
                 <Image
-                  src="/images/features/call-summary-2.png"
+                  src="/images/features/call-summary-2.webp"
                   alt="Call Summary Details"
                   width={361}
                   height={121}
@@ -687,7 +687,7 @@ export function FeaturesSection() {
               </div>
               <div className="mt-4 w-full flex-1 flex items-end justify-center overflow-hidden">
                 <Image
-                  src="/images/features/transcription.png"
+                  src="/images/features/transcription.webp"
                   alt="Transcription"
                   width={568}
                   height={200}

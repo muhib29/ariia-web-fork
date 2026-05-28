@@ -127,7 +127,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
                           <div className="px-6 py-4 text-center text-white">
                             <div className="flex justify-center">
                               <Image
-                                src={card.image || '/images/avatar-spa.png'}
+                                src={card.image || '/images/avatar-spa.webp'}
                                 alt={card.name}
                                 width={72}
                                 height={72}

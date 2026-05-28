@@ -284,7 +284,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
             style={{
               backgroundImage: pricing?.heroSection?.backgroundImage?.url
                 ? `url('${pricing.heroSection.backgroundImage.url}')`
-                : "url('/images/newsletter-bg.png')",
+                : "url('/images/newsletter-bg.webp')",
             }}
           >
             <div className="relative z-10 w-full flex flex-col items-center">
@@ -449,12 +449,12 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                 Custom: '/images/enterprise.svg',
               };
               const planBgs: Record<string, string> = {
-                Starter: '/images/starter-bg.png',
-                Growth: '/images/growth-bg.png',
-                Scale: '/images/scale-bg.png',
-                Business: '/images/business-bg.png',
-                Enterprise: '/images/enterprise-bg.png',
-                Custom: '/images/enterprise-bg.png',
+                Starter: '/images/starter-bg.webp',
+                Growth: '/images/growth-bg.webp',
+                Scale: '/images/scale-bg.webp',
+                Business: '/images/business-bg.webp',
+                Enterprise: '/images/enterprise-bg.webp',
+                Custom: '/images/enterprise-bg.webp',
               };
               // Get plans by title
               const getPlan = (title: string) => currentPlanSet.find((p) => p.title === title);
@@ -634,7 +634,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                       </div>
                       {/*Enterprise illustration */}
                       <img
-                        src="/images/pricing-illu.png"
+                        src="/images/pricing-illu.webp"
                         alt="Enterprise Illustration"
                         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[60%] object-cover z-10"
                       />
