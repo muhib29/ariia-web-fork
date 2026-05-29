@@ -21,7 +21,7 @@ import {
   X,
 } from 'lucide-react';
 import { Button } from '@workspace/ui/components/button';
-// Replaced Radix Sheet with plain div-based menu for mobile — no external sheet import
+// Replaced Radix   with plain div-based menu for mobile — no external sheet import
 import {
   Collapsible,
   CollapsibleContent,

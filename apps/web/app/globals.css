@@ -353,7 +353,7 @@
     @apply border-border;
     transition-property:
       color, background-color, border-color, text-decoration-color, fill, stroke, opacity,
-      box-shadow, transform, filter, backdrop-filter;
+      box-shadow, transform, filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
@@ -601,7 +601,6 @@ section {
   .blur-xl, .blur-2xl, .blur-3xl, [class*="blur-"] {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
-    will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
