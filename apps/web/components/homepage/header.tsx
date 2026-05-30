@@ -1,190 +1,110 @@
-'use client';
+"use client";
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import {
-  ChevronDown,
-  Users,
-  Sparkles,
-  Briefcase,
-  Building2,
-  Mail,
-  BookOpen,
-  BoxIcon,
-  ShieldCheck,
-  Lock,
-  ScrollText,
-  DollarSign,
-  ShieldQuestionIcon,
-  CircleHelp,
-  UserRound,
-  X,
+  ChevronDown, Users, Sparkles, Briefcase, Building2, Mail,
+  BookOpen, BoxIcon, ShieldCheck, Lock, ScrollText, DollarSign,
+  CircleHelp, UserRound, X,
 } from 'lucide-react';
-import { Button } from '@workspace/ui/components/button';
 import { usePathname, useRouter } from 'next/navigation';
+import { AriiaSvgMark } from '../icons/AriiaSvgMark';
+
+// ---------------------------------------------------------------------------
+// Shared inline style helpers (replaces icon className)
+// ---------------------------------------------------------------------------
+const iconStyle = { width: 20, height: 20, color: '#6b7280', flexShrink: 0 } as const;
 
 // ---------------------------------------------------------------------------
 // Data
 // ---------------------------------------------------------------------------
-
 const COMPANY_MENU = [
-  {
-    href: '/#about-us',
-    title: 'About Us',
-    description: 'Learn about our mission to transform businesses with AI agents.',
-    icon: <UserRound className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/story-behind-ariia/',
-    title: 'The Story Behind ARIIA',
-    description: "Discover the story behind ARIIA's name & its vision for the future.",
-    icon: <Sparkles className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/careers/',
-    title: 'Careers',
-    description: 'Help us build the next gen of AI. Explore job openings and join our journey.',
-    icon: <Briefcase className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/customers/',
-    title: 'Customers',
-    description: 'See how ARIIA is transforming customer experiences for businesses.',
-    icon: <Users className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/contact-us/',
-    title: 'Contact Us',
-    description: "Have questions? Reach out, and we'll respond within 24 hours.",
-    icon: <Mail className="h-5 w-5 text-gray-500" />,
-  },
+  { href: '/#about-us',           title: 'About Us',                description: 'Learn about our mission to transform businesses with AI agents.',        icon: <UserRound style={iconStyle} /> },
+  { href: '/story-behind-ariia/', title: 'The Story Behind ARIIA',  description: "Discover the story behind ARIIA's name & its vision for the future.",    icon: <Sparkles  style={iconStyle} /> },
+  { href: '/careers/',            title: 'Careers',                 description: 'Help us build the next gen of AI. Explore job openings and join our journey.', icon: <Briefcase style={iconStyle} /> },
+  { href: '/customers/',          title: 'Customers',               description: 'See how ARIIA is transforming customer experiences for businesses.',       icon: <Users     style={iconStyle} /> },
+  { href: '/contact-us/',         title: 'Contact Us',              description: "Have questions? Reach out, and we'll respond within 24 hours.",            icon: <Mail      style={iconStyle} /> },
 ];
 
 const RESOURCES_MENU = [
-  {
-    href: '/blog/',
-    title: 'Blog',
-    description: 'Stay informed with industry trends, insights, and the latest ARIIA news.',
-    icon: <BookOpen className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/#use-cases',
-    title: 'Use Cases',
-    description: 'Check out demos and how ARIIA can be applied across industries.',
-    icon: <BoxIcon className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/industries/',
-    title: 'Industries',
-    description: 'See the sectors where ARIIA can enhance operations and customer experiences.',
-    icon: <Building2 className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/#faq',
-    title: 'Questions & Answers',
-    description: 'Find what you need in our Q&A section.',
-    icon: <CircleHelp className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/#security',
-    title: 'Security & Data Protection',
-    description: 'Understand how ARIIA safeguards your data.',
-    icon: <Lock className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/terms-of-service/',
-    title: 'Terms of Service',
-    description: 'Review the terms for using our services.',
-    icon: <ScrollText className="h-5 w-5 text-gray-500" />,
-  },
-  {
-    href: '/privacy-policy/',
-    title: 'Privacy Policy',
-    description: 'Learn how your privacy and personal data is protected.',
-    icon: <ShieldCheck className="h-5 w-5 text-gray-500" />,
-  },
+  { href: '/blog/',             title: 'Blog',                      description: 'Stay informed with industry trends, insights, and the latest ARIIA news.',       icon: <BookOpen  style={iconStyle} /> },
+  { href: '/#use-cases',        title: 'Use Cases',                 description: 'Check out demos and how ARIIA can be applied across industries.',               icon: <BoxIcon   style={iconStyle} /> },
+  { href: '/industries/',       title: 'Industries',                description: 'See the sectors where ARIIA can enhance operations and customer experiences.',   icon: <Building2 style={iconStyle} /> },
+  { href: '/#faq',              title: 'Questions & Answers',       description: 'Find what you need in our Q&A section.',                                        icon: <CircleHelp style={iconStyle} /> },
+  { href: '/#security',         title: 'Security & Data Protection',description: 'Understand how ARIIA safeguards your data.',                                    icon: <Lock      style={iconStyle} /> },
+  { href: '/terms-of-service/', title: 'Terms of Service',          description: 'Review the terms for using our services.',                                      icon: <ScrollText style={iconStyle} /> },
+  { href: '/privacy-policy/',   title: 'Privacy Policy',            description: 'Learn how your privacy and personal data is protected.',                        icon: <ShieldCheck style={iconStyle} /> },
 ];
 
-const MOBILE_SINGLE_LINKS = [
-  { href: '/features', label: 'Features', icon: <Sparkles className="w-5 h-5 text-gray-500" /> },
-  { href: '/pricing', label: 'Pricing', icon: <DollarSign className="w-5 h-5 text-gray-500" /> },
-];
-
-const MOBILE_COMPANY_LINKS = [
-  { href: '/#about-us', label: 'About Us' },
+const MOBILE_SINGLE_LINKS   = [{ href: '/features', label: 'Features' }, { href: '/pricing', label: 'Pricing' }];
+const MOBILE_COMPANY_LINKS  = [
+  { href: '/#about-us',           label: 'About Us'               },
   { href: '/story-behind-ariia/', label: 'The Story Behind ARIIA' },
-  { href: '/careers/', label: 'Careers' },
-  { href: '/customers/', label: 'Customers' },
-  { href: '/contact-us/', label: 'Contact Us' },
+  { href: '/careers/',            label: 'Careers'                },
+  { href: '/customers/',          label: 'Customers'              },
+  { href: '/contact-us/',         label: 'Contact Us'             },
 ];
-
 const MOBILE_RESOURCES_LINKS = [
-  { href: '/blog/', label: 'Blog' },
-  { href: '/#use-cases', label: 'Use Cases' },
-  { href: '/industries/', label: 'Industries' },
-  { href: '/#faq', label: 'Questions & Answers' },
-  { href: '/#security', label: 'Security & Data Protection' },
-  { href: '/terms-of-service/', label: 'Terms of Service' },
-  { href: '/privacy-policy/', label: 'Privacy Policy' },
+  { href: '/blog/',             label: 'Blog'                       },
+  { href: '/#use-cases',        label: 'Use Cases'                  },
+  { href: '/industries/',       label: 'Industries'                 },
+  { href: '/#faq',              label: 'Questions & Answers'        },
+  { href: '/#security',         label: 'Security & Data Protection' },
+  { href: '/terms-of-service/', label: 'Terms of Service'           },
+  { href: '/privacy-policy/',   label: 'Privacy Policy'             },
 ];
 
-// ---------------------------------------------------------------------------
-// Simple cn helper (avoids importing clsx/tailwind-merge)
-// ---------------------------------------------------------------------------
-function cn(...classes: (string | false | null | undefined)[]) {
-  return classes.filter(Boolean).join(' ');
-}
 
 // ---------------------------------------------------------------------------
-// Collapsible section for mobile menu
+// MobileSection — pure CSS height animation, zero Radix
 // ---------------------------------------------------------------------------
 function MobileSection({
-  label,
-  links,
-  isOpen,
-  onToggle,
-  onNavigate,
-}: {
-  label: string;
-  links: { href: string; label: string }[];
-  isOpen: boolean;
-  onToggle: () => void;
-  onNavigate: (href: string) => void;
-}) {
+  label, links, isOpen, onToggle, onNavigate,
+}: { label: string; links: { href: string; label: string }[]; isOpen: boolean; onToggle: () => void; onNavigate: (href: string) => void; }) {
   return (
     <div>
       <button
         type="button"
         onClick={onToggle}
-        className={cn(
-          'flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation',
-          !isOpen && 'border-b border-[#93d8fa4c]',
-        )}
+        style={{
+          display: 'flex', alignItems: 'center', width: '100%', padding: '12px 16px',
+          minHeight: 44, background: 'none', border: 'none', borderBottom: isOpen ? 'none' : '1px solid rgba(147,216,250,0.3)',
+          fontSize: 15, fontWeight: 700, color: '#374151', cursor: 'pointer', textAlign: 'left',
+          WebkitTapHighlightColor: 'transparent',
+        }}
+        onMouseEnter={e => (e.currentTarget.style.background = '#f3f4f6')}
+        onMouseLeave={e => (e.currentTarget.style.background = 'none')}
       >
-        <span>{label}</span>
-        <ChevronDown
-          className={cn('size-4 ml-auto transition-transform duration-200', isOpen && 'rotate-180')}
-          style={{ color: isOpen ? '#35B5F5' : undefined }}
-        />
+        <span style={{ flex: 1 }}>{label}</span>
+        <ChevronDown style={{
+          width: 16, height: 16, color: isOpen ? '#35B5F5' : '#6b7280',
+          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.2s ease, color 0.2s ease',
+        }} />
       </button>
 
-      {/* Animate open/close with max-height trick — zero JS layout thrash */}
-      <div
-        style={{
-          maxHeight: isOpen ? `${links.length * 60}px` : '0px',
-          overflow: 'hidden',
-          transition: 'max-height 0.22s ease',
-        }}
-      >
-        <div className="flex flex-col w-full px-4 gap-1 pb-4 border-b border-[#93d8fa4c]">
-          {links.map((link) => (
+      <div style={{
+        maxHeight: isOpen ? `${links.length * 56}px` : '0px',
+        overflow: 'hidden',
+        transition: 'max-height 0.22s ease',
+        willChange: 'max-height',
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', padding: '0 16px 16px 16px', borderBottom: '1px solid rgba(147,216,250,0.3)', gap: 4 }}>
+          {links.map(link => (
             <button
               key={link.href}
               type="button"
-              className="flex ml-2 items-start gap-2 py-2 px-1 min-h-[44px] text-gray-800 font-normal transition-colors touch-manipulation text-left"
               onClick={() => onNavigate(link.href)}
+              style={{
+                display: 'flex', alignItems: 'center', padding: '8px 4px 8px 12px',
+                minHeight: 44, background: 'none', border: 'none',
+                fontSize: 16, color: '#1f2937', cursor: 'pointer', textAlign: 'left',
+                WebkitTapHighlightColor: 'transparent',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = '#f3f4f6')}
+              onMouseLeave={e => (e.currentTarget.style.background = 'none')}
             >
-              <span className="text-base leading-6">{link.label}</span>
+              {link.label}
             </button>
           ))}
         </div>
@@ -194,32 +114,26 @@ function MobileSection({
 }
 
 // ---------------------------------------------------------------------------
-// Main Header
+// Header
 // ---------------------------------------------------------------------------
 export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   const NO_GRADIENT_ROUTES = ['/', '/#faq', '/#about-us/', '/pricing'];
   const pathname = usePathname();
-  const router = useRouter();
+  const router   = useRouter();
 
-  const [activePath, setActivePath] = useState<string | null>(null);
+  const [activePath,      setActivePath]      = useState<string | null>(null);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const [companyOpen, setCompanyOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [mobileMenuOpen,  setMobileMenuOpen]  = useState(false);
+  const [isScrolled,      setIsScrolled]      = useState(false);
+  const [isMounted,       setIsMounted]       = useState(false);
+  const [companyOpen,     setCompanyOpen]     = useState(false);
+  const [resourcesOpen,   setResourcesOpen]   = useState(false);
 
-  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hoverTimer        = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shouldHideGradient = NO_GRADIENT_ROUTES.includes(pathname);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  useEffect(() => { setMobileMenuOpen(false); }, [pathname]);
+  useEffect(() => { setIsMounted(true); }, []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 40);
@@ -229,120 +143,104 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   }, []);
 
   useEffect(() => {
-    return () => {
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    };
-  }, []);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
+  useEffect(() => () => { if (hoverTimer.current) clearTimeout(hoverTimer.current); }, []);
+
   const handleDropdownEnter = (name: string) => {
-    if (hoverTimerRef.current) {
-      clearTimeout(hoverTimerRef.current);
-      hoverTimerRef.current = null;
-    }
+    if (hoverTimer.current) { clearTimeout(hoverTimer.current); hoverTimer.current = null; }
     setHoveredDropdown(name);
   };
-
   const handleDropdownLeave = () => {
-    hoverTimerRef.current = setTimeout(() => setHoveredDropdown(null), 300);
+    hoverTimer.current = setTimeout(() => setHoveredDropdown(null), 150);
   };
+  const handleMobileNav = (href: string) => { setMobileMenuOpen(false); router.push(href); };
 
-  const handleMobileNav = (href: string) => {
-    setMobileMenuOpen(false);
-    router.push(href);
-  };
-
-  const menuItemClasses = (href: string) =>
-    `flex items-start gap-3 p-3 rounded-lg transition-colors ${activePath === href ? 'bg-[#EEFBFF]' : ''} menu-item-hover`;
-
-  const bgClass = isScrolled ? 'bg-white/70' : 'bg-white';
+  // Pill background
+  const pillBg = isScrolled ? 'rgba(255,255,255,0.7)' : '#ffffff';
+  const pillStyle = {
+    display: 'flex', alignItems: 'center', background: pillBg,
+    borderRadius: 9999, boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
+  } as const;
 
   return (
-    <div className="w-full">
-      {/* Gradient bar at very top */}
-      <div
-        id="gradient-bar"
-        className="h-10 fixed top-0 left-0 w-full z-40 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
-          opacity: !isScrolled ? 1 : 0,
-          willChange: 'opacity',
-        }}
-      />
+    <>
+      {/* ── Gradient bar ── */}
+      <div style={{
+        height: 40, position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 40,
+        background: 'linear-gradient(90deg,#6779FF 0%,#4E97FA 25%,#35B5F5 50%,#2EFFEA 100%)',
+        opacity: isScrolled ? 0 : 1,
+        transition: 'opacity 0.5s cubic-bezier(0.23,1,0.32,1)',
+        pointerEvents: 'none',
+        willChange: 'opacity',
+      }} />
 
-      <header
-        className={`transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-          isHomePage && !isScrolled ? 'header-vertical-lines' : ''
-        } fixed left-0 w-full z-50 !bg-transparent`}
-        style={{ maxWidth: '100vw', top: 0, willChange: 'transform, padding-top' }}
-      >
+      {/* ── Header ── */}
+      <header style={{
+        position: 'fixed', left: 0, top: 0, width: '100%', zIndex: 50,
+        background: 'transparent', maxWidth: '100vw',
+        transition: 'all 0.5s cubic-bezier(0.23,1,0.32,1)',
+      }}>
+        {/* Ambient glow — only on non-gradient routes */}
         {!shouldHideGradient && (
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute w-[300px] h-[150px] md:w-[500px] md:h-[300px] -top-[3rem] md:-top-[12rem] right-[5%] bg-gradient-to-r from-[#6779FF] to-[#4E97FA] opacity-30 blur-[10rem]" />
+          <div style={{ position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none' }}>
+            <div style={{
+              position: 'absolute', width: 300, height: 150,
+              top: '-3rem', right: '5%',
+              background: 'linear-gradient(90deg,#6779FF,#4E97FA)',
+              opacity: 0.3, filter: 'blur(10rem)',
+            }} />
           </div>
         )}
 
-        <div className="max-w-[73.1rem] mx-auto px-4 md:px-6 lg:px-4 py-6">
-          {/* ----------------------------------------------------------------
-              Header row
-          ---------------------------------------------------------------- */}
-          <div className="flex items-center justify-between">
+        <div style={{ maxWidth: '73.1rem', margin: '0 auto', padding: '24px 16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-            {/* LEFT PILL — logo + desktop nav */}
-            <div
-              className={`flex items-center ${bgClass} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-3 py-0 md:px-4 md:py-2`}
-            >
-              <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4">
-                {/* Replace with <AriiaSvgMark /> if available */}
-                <span className="font-bold text-lg tracking-tight select-none px-1">ARIIA</span>
+            {/* ── LEFT PILL ── */}
+            <div style={{ ...pillStyle, padding: '0 12px' }}>
+              <Link href="/" style={{ display: 'flex', alignItems: 'center', marginRight: 0, flexShrink: 0, textDecoration: 'none' }}>
+                <AriiaSvgMark priority width={80} height={40} />
               </Link>
 
-              <nav className="hidden md:flex items-center space-x-6">
-                <Link
-                  href="/features"
-                  className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 py-2"
-                >
+              {/* Desktop nav — hidden on mobile via CSS class */}
+              <nav className="hdr-desktop-nav">
+                {/* Features */}
+                <Link href="/features" style={navLinkStyle}
+                  onMouseEnter={e => Object.assign((e.target as HTMLElement).style, navLinkHover)}
+                  onMouseLeave={e => Object.assign((e.target as HTMLElement).style, navLinkBase)}>
                   Features
                 </Link>
-                <Link
-                  href="/pricing"
-                  className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 py-2 mr-3"
-                >
+                {/* Pricing */}
+                <Link href="/pricing" style={{ ...navLinkStyle, marginRight: 12 }}
+                  onMouseEnter={e => Object.assign((e.target as HTMLElement).style, navLinkHover)}
+                  onMouseLeave={e => Object.assign((e.target as HTMLElement).style, navLinkBase)}>
                   Pricing
                 </Link>
 
                 {/* Company dropdown */}
-                <div
-                  className="relative"
+                <div style={{ position: 'relative' }}
                   onMouseEnter={() => handleDropdownEnter('company')}
-                  onMouseLeave={handleDropdownLeave}
-                >
-                  <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-3 hover:bg-[#EEFBFF]">
+                  onMouseLeave={handleDropdownLeave}>
+                  <button style={dropBtnStyle}
+                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#EEFBFF')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = 'transparent')}>
                     Company
-                    <ChevronDown
-                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${hoveredDropdown === 'company' ? 'rotate-180' : ''}`}
-                    />
+                    <ChevronDown style={{ marginLeft: 4, width: 16, height: 16, transition: 'transform 0.2s', transform: hoveredDropdown === 'company' ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                   </button>
-
                   {hoveredDropdown === 'company' && (
-                    <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
-                      {COMPANY_MENU.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={menuItemClasses(item.href)}
+                    <div style={dropPanelStyle} className="hdr-dropdown-panel">
+                      {COMPANY_MENU.map(item => (
+                        <Link key={item.href} href={item.href} style={dropItemStyle(activePath === item.href)}
                           onClick={() => { setActivePath(item.href); setHoveredDropdown(null); }}
-                        >
-                          <div className="pt-1">{item.icon}</div>
-                          <div className="text-left">
-                            <p className="text-sm font-medium text-gray-900">{item.title}</p>
-                            <p className="text-xs text-gray-600 leading-tight">{item.description}</p>
-                          </div>
+                          onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#EEFBFF')}
+                          onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = activePath === item.href ? '#EEFBFF' : 'transparent')}>
+                          <span style={{ paddingTop: 2, flexShrink: 0 }}>{item.icon}</span>
+                          <span>
+                            <span style={{ display: 'block', fontSize: 14, fontWeight: 500, color: '#111827' }}>{item.title}</span>
+                            <span style={{ display: 'block', fontSize: 12, color: '#4b5563', lineHeight: 1.4 }}>{item.description}</span>
+                          </span>
                         </Link>
                       ))}
                     </div>
@@ -350,32 +248,27 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                 </div>
 
                 {/* Resources dropdown */}
-                <div
-                  className="relative"
+                <div style={{ position: 'relative' }}
                   onMouseEnter={() => handleDropdownEnter('resources')}
-                  onMouseLeave={handleDropdownLeave}
-                >
-                  <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-2 hover:bg-[#EEFBFF]">
+                  onMouseLeave={handleDropdownLeave}>
+                  <button style={{ ...dropBtnStyle, marginLeft: -8 }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#EEFBFF')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = 'transparent')}>
                     Resources
-                    <ChevronDown
-                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${hoveredDropdown === 'resources' ? 'rotate-180' : ''}`}
-                    />
+                    <ChevronDown style={{ marginLeft: 4, width: 16, height: 16, transition: 'transform 0.2s', transform: hoveredDropdown === 'resources' ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                   </button>
-
                   {hoveredDropdown === 'resources' && (
-                    <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
-                      {RESOURCES_MENU.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={menuItemClasses(item.href)}
+                    <div style={dropPanelStyle} className="hdr-dropdown-panel">
+                      {RESOURCES_MENU.map(item => (
+                        <Link key={item.href} href={item.href} style={dropItemStyle(activePath === item.href)}
                           onClick={() => { setActivePath(item.href); setHoveredDropdown(null); }}
-                        >
-                          <div className="pt-1">{item.icon}</div>
-                          <div className="text-left">
-                            <p className="text-sm font-medium text-gray-900">{item.title}</p>
-                            <p className="text-xs text-gray-600 leading-tight">{item.description}</p>
-                          </div>
+                          onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = '#EEFBFF')}
+                          onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = activePath === item.href ? '#EEFBFF' : 'transparent')}>
+                          <span style={{ paddingTop: 2, flexShrink: 0 }}>{item.icon}</span>
+                          <span>
+                            <span style={{ display: 'block', fontSize: 14, fontWeight: 500, color: '#111827' }}>{item.title}</span>
+                            <span style={{ display: 'block', fontSize: 12, color: '#4b5563', lineHeight: 1.4 }}>{item.description}</span>
+                          </span>
                         </Link>
                       ))}
                     </div>
@@ -384,124 +277,119 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
               </nav>
             </div>
 
-            {/* RIGHT PILL — login + CTA + hamburger */}
-            <div
-              className={`flex items-center ${bgClass} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-1 py-1 md:px-2 md:py-2 space-x-1 sm:space-x-4`}
-            >
-              <Link
-                href="/login"
-                prefetch={false}
-                className="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors ml-5 px-3 hidden md:block"
-              >
+            {/* ── RIGHT PILL ── */}
+            <div style={{ ...pillStyle, padding: '4px 4px' }}>
+              {/* Log In — desktop only */}
+              <Link href="/login" prefetch={false} className="hdr-login-link" style={{ color: '#4b5563', fontWeight: 500, fontSize: 14, textDecoration: 'none', padding: '0 12px 0 20px' }}
+                onMouseEnter={e => ((e.target as HTMLElement).style.color = '#111827')}
+                onMouseLeave={e => ((e.target as HTMLElement).style.color = '#4b5563')}>
                 Log In
               </Link>
 
-              <Link
-                href="/trial"
-                prefetch={false}
-                className="bg-gray-900/95 hover:bg-gray-800/90 text-white font-medium text-xs sm:text-sm mx-0 px-3 sm:px-6 py-2 h-8 sm:h-9 rounded-full inline-flex items-center"
-              >
-                <span className="hidden sm:inline">1-Month Free Trial</span>
-                <span className="sm:hidden">1-Month Free Trial</span>
+              {/* CTA */}
+              <Link href="/trial" prefetch={false} style={{
+                background: 'rgba(17,24,39,0.95)', color: '#fff', fontWeight: 500, fontSize: 14,
+                padding: '8px 24px', borderRadius: 9999, textDecoration: 'none',
+                display: 'inline-flex', alignItems: 'center', height: 36, whiteSpace: 'nowrap',
+              }}
+                onMouseEnter={e => ((e.target as HTMLElement).style.background = 'rgba(31,41,55,0.9)')}
+                onMouseLeave={e => ((e.target as HTMLElement).style.background = 'rgba(17,24,39,0.95)')}>
+                1-Month Free Trial
               </Link>
 
               {/* Hamburger — mobile only */}
-              <div className="block md:hidden relative z-[60]">
-                <button
-                  type="button"
-                  className="rounded-full size-8 sm:size-10 touch-manipulation flex items-center justify-center hover:bg-gray-100"
-                  aria-label="Open menu"
-                  aria-expanded={mobileMenuOpen}
-                  onClick={() => setMobileMenuOpen(true)}
-                >
-                  <svg className="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                </button>
-              </div>
+              <button
+                type="button" className="hdr-hamburger"
+                aria-label="Open menu" aria-expanded={mobileMenuOpen}
+                onClick={() => setMobileMenuOpen(true)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, marginLeft: 4, display: 'none', WebkitTapHighlightColor: 'transparent' }}>
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: '#111827' }}>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* ----------------------------------------------------------------
-            Mobile menu overlay — rendered client-side only after mount
-        ---------------------------------------------------------------- */}
+        {/* ── MOBILE MENU ── */}
         {isMounted && mobileMenuOpen && (
-          <div
-            style={{ position: 'fixed', inset: 0, zIndex: 200 }}
-            className="pointer-events-auto"
-          >
+          <div style={{ position: 'fixed', inset: 0, zIndex: 200, pointerEvents: 'auto' }}>
             {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/20"
-              onClick={() => setMobileMenuOpen(false)}
-            />
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} onClick={() => setMobileMenuOpen(false)} />
 
             {/* Panel */}
-            <div
-              className="mx-2 mt-2 rounded-[18px] border border-white/40 bg-white/90 shadow-[0_14px_36px_rgba(15,23,42,0.12)] overflow-y-auto relative flex flex-col max-h-[calc(100dvh-1.5rem)] touch-manipulation"
-              style={{ position: 'relative', zIndex: 1 }}
-            >
+            <div style={{
+              position: 'relative', zIndex: 1,
+              margin: '8px 8px 0', borderRadius: 18,
+              border: '1px solid rgba(255,255,255,0.4)',
+              background: 'rgba(255,255,255,0.92)',
+              boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
+              overflowY: 'auto',
+              maxHeight: 'calc(100dvh - 1.5rem)',
+              display: 'flex', flexDirection: 'column',
+            }}>
               {/* Top bar */}
-              <div className="sticky top-0 z-[2] flex items-center justify-between px-4 pt-3 pb-2 bg-transparent shrink-0">
-                <div className="bg-white/45 rounded-full px-3 py-1 border border-white/45 flex items-center gap-2 pointer-events-none">
-                  <span className="font-bold text-base tracking-tight">ARIIA</span>
+              <div style={{ position: 'sticky', top: 0, zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px 8px', background: 'transparent', flexShrink: 0 }}>
+                <div style={{ background: 'rgba(255,255,255,0.45)', borderRadius: 9999, padding: '4px 12px', border: '1px solid rgba(255,255,255,0.45)', pointerEvents: 'none' }}>
+                  <AriiaSvgMark width={64} height={28} />
                 </div>
                 <button
-                  type="button"
-                  aria-label="Close menu"
-                  className="flex items-center justify-center size-10 opacity-90 rounded-full bg-white/45 shadow-md border border-white/45 touch-manipulation cursor-pointer"
+                  type="button" aria-label="Close menu"
                   onClick={() => setMobileMenuOpen(false)}
-                >
-                  <X className="h-4 w-4 text-gray-700 pointer-events-none" />
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    width: 40, height: 40, borderRadius: '50%',
+                    background: 'rgba(255,255,255,0.45)', border: '1px solid rgba(255,255,255,0.45)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)', cursor: 'pointer',
+                    WebkitTapHighlightColor: 'transparent',
+                  }}>
+                  <X style={{ width: 16, height: 16, color: '#374151', pointerEvents: 'none' }} />
                 </button>
               </div>
 
               {/* Nav items */}
-              <nav className="pb-6">
-                {MOBILE_SINGLE_LINKS.map((item) => (
-                  <button
-                    key={item.href}
-                    type="button"
-                    className="flex items-center gap-2 px-4 border-b border-[#93d8fa4c] py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors touch-manipulation w-full text-left"
-                    onClick={() => handleMobileNav(item.href)}
-                  >
-                    <span>{item.label}</span>
+              <nav style={{ paddingBottom: 24 }}>
+                {MOBILE_SINGLE_LINKS.map(item => (
+                  <button key={item.href} type="button" onClick={() => handleMobileNav(item.href)}
+                    style={{
+                      display: 'flex', alignItems: 'center', width: '100%', padding: '12px 16px',
+                      minHeight: 44, background: 'none', border: 'none',
+                      borderBottom: '1px solid rgba(147,216,250,0.3)',
+                      fontSize: 15, fontWeight: 700, color: '#374151', cursor: 'pointer', textAlign: 'left',
+                      WebkitTapHighlightColor: 'transparent',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.background = '#f3f4f6')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'none')}>
+                    {item.label}
                   </button>
                 ))}
 
-                <MobileSection
-                  label="Company"
-                  links={MOBILE_COMPANY_LINKS}
-                  isOpen={companyOpen}
-                  onToggle={() => setCompanyOpen((v) => !v)}
-                  onNavigate={handleMobileNav}
-                />
-
-                <MobileSection
-                  label="Resources"
-                  links={MOBILE_RESOURCES_LINKS}
-                  isOpen={resourcesOpen}
-                  onToggle={() => setResourcesOpen((v) => !v)}
-                  onNavigate={handleMobileNav}
-                />
+                <MobileSection label="Company"   links={MOBILE_COMPANY_LINKS}   isOpen={companyOpen}   onToggle={() => setCompanyOpen(v => !v)}   onNavigate={handleMobileNav} />
+                <MobileSection label="Resources" links={MOBILE_RESOURCES_LINKS} isOpen={resourcesOpen} onToggle={() => setResourcesOpen(v => !v)} onNavigate={handleMobileNav} />
               </nav>
 
-              {/* Bottom CTA bar */}
-              <div className="px-4 pb-6 pt-2 shrink-0">
-                <div className="w-full bg-white/40 rounded-full p-[5px] shadow-[0_14px_36px_rgba(15,23,42,0.14)] flex items-center justify-between gap-2 border border-white/45">
-                  <button
-                    type="button"
-                    className="flex-1 text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors px-3 py-3 min-h-[44px] rounded-full text-center bg-transparent touch-manipulation flex items-center justify-center"
-                    onClick={() => handleMobileNav('/login')}
-                  >
+              {/* Bottom CTA */}
+              <div style={{ padding: '8px 16px 24px', flexShrink: 0 }}>
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  background: 'rgba(255,255,255,0.4)', borderRadius: 9999,
+                  padding: 5, border: '1px solid rgba(255,255,255,0.45)',
+                  boxShadow: '0 14px 36px rgba(15,23,42,0.14)',
+                }}>
+                  <button type="button" onClick={() => handleMobileNav('/login')} style={{
+                    flex: 1, background: 'none', border: 'none', color: '#374151', fontWeight: 500,
+                    fontSize: 14, padding: '12px 12px', minHeight: 44, borderRadius: 9999,
+                    cursor: 'pointer', textAlign: 'center', WebkitTapHighlightColor: 'transparent',
+                  }}>
                     Log In
                   </button>
-                  <button
-                    type="button"
-                    className="flex-1 bg-gray-900/95 hover:bg-gray-800/90 text-white font-medium text-sm px-4 h-[44px] rounded-full touch-manipulation"
-                    onClick={() => handleMobileNav('/trial')}
-                  >
+                  <button type="button" onClick={() => handleMobileNav('/trial')} style={{
+                    flex: 1, background: 'rgba(17,24,39,0.95)', color: '#fff', fontWeight: 500,
+                    fontSize: 14, padding: '12px 16px', height: 44, borderRadius: 9999,
+                    border: 'none', cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
+                  }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(31,41,55,0.9)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'rgba(17,24,39,0.95)')}>
                     1-Month Free Trial
                   </button>
                 </div>
@@ -511,18 +399,70 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
         )}
       </header>
 
+      {/* ── Global styles — minimal, only what inline styles can't do ── */}
       <style jsx global>{`
-        .menu-item-hover:hover {
-          background-color: #eefbff !important;
+        /* Dropdown fade-in */
+        .hdr-dropdown-panel {
+          animation: hdr-fade-in 0.18s ease-out;
         }
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(-10px); }
-          to   { opacity: 1; transform: translateY(0); }
+        @keyframes hdr-fade-in {
+          from { opacity: 0; transform: translateY(-8px); }
+          to   { opacity: 1; transform: translateY(0);    }
         }
-        .animate-fade-in {
-          animation: fade-in 0.2s ease-out;
+
+        /* Desktop nav: visible on md+ */
+        .hdr-desktop-nav {
+          display: none;
         }
+        @media (min-width: 768px) {
+          .hdr-desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-left: 16px;
+          }
+        }
+
+        /* Log In link: hide on mobile */
+        .hdr-login-link { display: none; }
+        @media (min-width: 768px) { .hdr-login-link { display: block; } }
+
+        /* Hamburger: show on mobile only */
+        .hdr-hamburger { display: none !important; }
+        @media (max-width: 767px) { .hdr-hamburger { display: flex !important; } }
       `}</style>
-    </div>
+    </>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Shared style objects (defined after component so they don't rebuild each render)
+// ---------------------------------------------------------------------------
+const navLinkBase = { color: '#374151', textDecoration: 'none', background: 'transparent', borderRadius: 9999 } as const;
+const navLinkHover = { background: '#EEFBFF' } as const;
+const navLinkStyle: React.CSSProperties = {
+  ...navLinkBase,
+  fontWeight: 500, fontSize: 14,
+  padding: '8px 16px', borderRadius: 9999,
+  display: 'inline-block', transition: 'background 0.15s',
+};
+const dropBtnStyle: React.CSSProperties = {
+  display: 'flex', alignItems: 'center',
+  background: 'transparent', border: 'none', cursor: 'pointer',
+  fontWeight: 500, fontSize: 14, color: '#374151',
+  padding: '8px 12px', borderRadius: 9999,
+  outline: 'none', transition: 'background 0.15s',
+  whiteSpace: 'nowrap',
+};
+const dropPanelStyle: React.CSSProperties = {
+  position: 'absolute', top: '100%', left: 0, marginTop: 20,
+  width: 384, padding: 8, borderRadius: 12,
+  boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid #f3f4f6',
+  background: '#fff', zIndex: 50,
+  display: 'flex', flexDirection: 'column', gap: 2,
+};
+const dropItemStyle = (active: boolean): React.CSSProperties => ({
+  display: 'flex', alignItems: 'flex-start', gap: 12, padding: 12, borderRadius: 8,
+  textDecoration: 'none', background: active ? '#EEFBFF' : 'transparent',
+  transition: 'background 0.12s',
+});
