@@ -1,9 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { getLenis } from '@/lib/lenis';
-import { Button } from '@workspace/ui/components/button';
-import { cn } from '@workspace/ui/lib/utils';
 
 const COMPANY_MENU = [
   { href: '/#about-us', title: 'About Us', description: 'Learn about our mission to transform businesses with AI agents.' },
@@ -55,9 +52,6 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const NO_GRADIENT_ROUTES = ['/', '/#faq', '/#about-us/', '/pricing'];
-  const shouldHideGradient = NO_GRADIENT_ROUTES.includes(pathname);
-
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
@@ -69,12 +63,6 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   }, []);
 
   const handleMenuOpen = (open: boolean) => {
-    const lenis = getLenis();
-    if (open) {
-      lenis?.stop?.();
-    } else {
-      lenis?.start?.();
-    }
     setMenuOpen(open);
   };
 
@@ -93,8 +81,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   };
 
   const menuItemClasses = (href: string) =>
-    cn('flex items-start gap-3 p-3 rounded-lg transition-colors menu-item-hover',
-      activePath === href ? 'bg-[#EEFBFF]' : '');
+    `flex items-start gap-3 p-3 rounded-lg transition-colors menu-item-hover${activePath === href ? ' bg-[#EEFBFF]' : ''}`;
 
   return (
     <div className="w-full">
@@ -107,16 +94,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
         }}
       />
 
-      <header className={cn(
-        'fixed left-0 top-0 w-full z-50 !bg-transparent',
-        isHomePage ? 'header-vertical-lines' : ''
-      )}>
-        {!shouldHideGradient && (
-          <div className="absolute inset-0 -z-10 pointer-events-none">
-            <div className="absolute w-[300px] h-[150px] md:w-[500px] md:h-[300px] -top-[3rem] md:-top-[12rem] right-[5%] bg-gradient-to-r from-[#6779FF] to-[#4E97FA] opacity-30 blur-[10rem]" />
-          </div>
-        )}
-
+      <header className={`fixed left-0 top-0 w-full z-50 !bg-transparent${isHomePage ? ' header-vertical-lines' : ''}`}>
         <div className="max-w-[73.1rem] mx-auto px-4 md:px-6 lg:px-4 py-6">
           <div className="flex items-center justify-between">
 
@@ -137,7 +115,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                 <div className="relative" onMouseEnter={() => handleDropdownEnter('company')} onMouseLeave={handleDropdownLeave}>
                   <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-3 hover:bg-[#EEFBFF]">
                     Company
-                    <span className={cn('ml-1 text-xs transition-transform duration-200', hoveredDropdown === 'company' ? 'rotate-180' : '')}>▼</span>
+                    <span className={`ml-1 text-xs transition-transform duration-200${hoveredDropdown === 'company' ? ' rotate-180' : ''}`}>▼</span>
                   </button>
                   {hoveredDropdown === 'company' && (
                     <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
@@ -156,7 +134,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                 <div className="relative" onMouseEnter={() => handleDropdownEnter('resources')} onMouseLeave={handleDropdownLeave}>
                   <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-2 hover:bg-[#EEFBFF]">
                     Resources
-                    <span className={cn('ml-1 text-xs transition-transform duration-200', hoveredDropdown === 'resources' ? 'rotate-180' : '')}>▼</span>
+                    <span className={`ml-1 text-xs transition-transform duration-200${hoveredDropdown === 'resources' ? ' rotate-180' : ''}`}>▼</span>
                   </button>
                   {hoveredDropdown === 'resources' && (
                     <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
@@ -179,12 +157,9 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
               <a href="/login" className="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors ml-5 px-3 hidden md:block">
                 Log In
               </a>
-              <Button asChild className="bg-gray-900/95 hover:bg-gray-800/90 text-white font-medium text-xs sm:text-sm mx-0 px-3 sm:px-6 py-2 h-8 sm:h-9 rounded-full">
-                <a href="/trial">
-                  <span className="hidden sm:inline">1-Month Free Trial</span>
-                  <span className="sm:hidden">1-Month Free Trial</span>
-                </a>
-              </Button>
+              <a href="/trial" style={{ background: '#111', color: 'white', fontWeight: '500', fontSize: '14px', padding: '8px 24px', borderRadius: '999px', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                1-Month Free Trial
+              </a>
 
               {/* Mobile hamburger */}
               <div className="block md:hidden relative z-[60]">
@@ -246,11 +221,11 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                         <div>
                           <button
                             type="button"
-                            className={cn('flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation', !isCompanyOpen && 'border-b border-[#93d8fa4c]')}
+                            className={`flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation${!isCompanyOpen ? ' border-b border-[#93d8fa4c]' : ''}`}
                             onClick={() => setIsCompanyOpen((prev) => !prev)}
                           >
                             <span>Company</span>
-                            <span className={cn('ml-auto text-sm transition-transform duration-200', isCompanyOpen && 'rotate-180')} style={{ color: isCompanyOpen ? '#35B5F5' : undefined }}>▼</span>
+                            <span className={`ml-auto text-sm transition-transform duration-200${isCompanyOpen ? ' rotate-180' : ''}`} style={{ color: isCompanyOpen ? '#35B5F5' : undefined }}>▼</span>
                           </button>
                           {isCompanyOpen && (
                             <div className="flex flex-col w-full px-4 gap-1 pb-4 border-b border-[#93d8fa4c]">
@@ -266,11 +241,11 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                         <div>
                           <button
                             type="button"
-                            className={cn('flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation', !isResourcesOpen && 'border-b border-[#93d8fa4c]')}
+                            className={`flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation${!isResourcesOpen ? ' border-b border-[#93d8fa4c]' : ''}`}
                             onClick={() => setIsResourcesOpen((prev) => !prev)}
                           >
                             <span>Resources</span>
-                            <span className={cn('ml-auto text-sm transition-transform duration-200', isResourcesOpen && 'rotate-180')} style={{ color: isResourcesOpen ? '#35B5F5' : undefined }}>▼</span>
+                            <span className={`ml-auto text-sm transition-transform duration-200${isResourcesOpen ? ' rotate-180' : ''}`} style={{ color: isResourcesOpen ? '#35B5F5' : undefined }}>▼</span>
                           </button>
                           {isResourcesOpen && (
                             <div className="flex flex-col w-full px-4 gap-2 pb-4 border-b border-[#93d8fa4c]">
@@ -289,7 +264,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                           <a href="/login" className="flex-1 text-gray-700 hover:text-gray-900 font-medium text-sm px-3 py-3 min-h-[44px] rounded-full text-center touch-manipulation flex items-center justify-center" onClick={() => handleMenuOpen(false)}>
                             Log In
                           </a>
-                          <a href="/trial" className="flex-1 bg-gray-900/95 hover:bg-gray-800/90 text-white font-medium text-sm px-4 h-[32px] rounded-full flex items-center justify-center" onClick={() => handleMenuOpen(false)}>
+                          <a href="/trial" style={{ flex: 1, background: '#111', color: 'white', fontWeight: '500', fontSize: '14px', padding: '0 16px', height: '32px', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }} onClick={() => handleMenuOpen(false)}>
                             1-Month Free Trial
                           </a>
                         </div>
