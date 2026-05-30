@@ -4,11 +4,6 @@ import { usePathname } from 'next/navigation';
 import { getLenis } from '@/lib/lenis';
 import { AriiaSvgMark } from '../icons/AriiaSvgMark';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@workspace/ui/components/collapsible';
-import {
   ChevronDown,
   Users,
   Sparkles,
@@ -214,19 +209,17 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
 
               {/* Mobile hamburger */}
               <div className="block md:hidden relative z-[60]">
-                <Button
+                <button
                   type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full size-8 sm:size-10 touch-manipulation"
                   aria-label="Open menu"
                   aria-expanded={menuOpen}
+                  className="rounded-full size-8 sm:size-10 touch-manipulation bg-transparent border-none outline-none"
                   onClick={() => handleMenuOpen(true)}
                 >
                   <svg className="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 20 20" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
-                </Button>
+                </button>
 
                 {menuOpen && (
                   <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200 }} className="pointer-events-auto">
@@ -258,12 +251,16 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                           </a>
                         ))}
 
-                        <Collapsible open={isCompanyOpen} onOpenChange={setIsCompanyOpen}>
-                          <CollapsibleTrigger type="button" className={cn('flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation', !isCompanyOpen && 'border-b border-[#93d8fa4c]')}>
+                        <div>
+                          <button
+                            type="button"
+                            className={cn('flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation', !isCompanyOpen && 'border-b border-[#93d8fa4c]')}
+                            onClick={() => setIsCompanyOpen((prev) => !prev)}
+                          >
                             <span>Company</span>
                             <ChevronDown className={cn('size-4 ml-auto transition-transform duration-200', isCompanyOpen && 'rotate-180')} style={{ color: isCompanyOpen ? '#35B5F5' : undefined }} />
-                          </CollapsibleTrigger>
-                          <CollapsibleContent>
+                          </button>
+                          {isCompanyOpen && (
                             <div className="flex flex-col w-full px-4 gap-1 pb-4 border-b border-[#93d8fa4c]">
                               {MOBILE_COMPANY_LINKS.map((link) => (
                                 <a key={link.href} href={link.href} className="flex ml-2 items-start gap-2 py-2 px-1 min-h-[44px] text-gray-800 font-[400] touch-manipulation" onClick={() => handleMenuOpen(false)}>
@@ -271,15 +268,19 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                                 </a>
                               ))}
                             </div>
-                          </CollapsibleContent>
-                        </Collapsible>
+                          )}
+                        </div>
 
-                        <Collapsible open={isResourcesOpen} onOpenChange={setIsResourcesOpen}>
-                          <CollapsibleTrigger type="button" className={cn('flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation', !isResourcesOpen && 'border-b border-[#93d8fa4c]')}>
+                        <div>
+                          <button
+                            type="button"
+                            className={cn('flex items-center px-4 gap-2 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-100 transition-colors w-full touch-manipulation', !isResourcesOpen && 'border-b border-[#93d8fa4c]')}
+                            onClick={() => setIsResourcesOpen((prev) => !prev)}
+                          >
                             <span>Resources</span>
                             <ChevronDown className={cn('size-4 ml-auto transition-transform duration-200', isResourcesOpen && 'rotate-180')} style={{ color: isResourcesOpen ? '#35B5F5' : undefined }} />
-                          </CollapsibleTrigger>
-                          <CollapsibleContent>
+                          </button>
+                          {isResourcesOpen && (
                             <div className="flex flex-col w-full px-4 gap-2 pb-4 border-b border-[#93d8fa4c]">
                               {MOBILE_RESOURCES_LINKS.map((link) => (
                                 <a key={link.href} href={link.href} className="flex ml-2 items-start gap-2 py-2 px-1 min-h-[44px] text-gray-800 font-[400] touch-manipulation" onClick={() => handleMenuOpen(false)}>
@@ -287,8 +288,8 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                                 </a>
                               ))}
                             </div>
-                          </CollapsibleContent>
-                        </Collapsible>
+                          )}
+                        </div>
                       </nav>
 
                       <div className="px-4 pb-6 pt-2 shrink-0">
