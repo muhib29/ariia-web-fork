@@ -1,8 +1,14 @@
- @tailwind base;
-@tailwind components;
-@tailwind utilities;
+ @import '@workspace/ui/globals.css';
 
-@import '@workspace/ui/globals.css';
+@media (max-width: 768px) {
+  .homepage-header-nav {
+    display: none !important;
+  }
+
+  .homepage-mobile-menu-btn {
+    display: block !important;
+  }
+}
 /*
 @layer base {
   :root {
@@ -211,6 +217,123 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 } */
+
+/* Homepage header styles */
+.homepage-header {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 100%;
+  z-index: 50;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.homepage-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.homepage-header-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+}
+
+.homepage-header-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.homepage-header-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.homepage-header-nav > a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.homepage-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.homepage-header-actions > a {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.homepage-header-actions > a[href='/login'] {
+  color: #333;
+}
+
+.homepage-header-actions > a[href='/trial'] {
+  background: #111;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 999px;
+}
+
+.homepage-mobile-menu-btn {
+  display: none;
+  color: #111;
+}
+
+.homepage-mobile-menu-panel {
+  position: fixed;
+  top: 57px;
+  left: 0;
+  right: 0;
+  background: white;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.homepage-mobile-menu-panel > a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 14px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.homepage-mobile-menu-panel .homepage-header-actions {
+  padding: 14px 24px;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .homepage-header-inner {
+    padding: 12px 18px;
+  }
+
+  .homepage-header-nav {
+    display: none;
+  }
+
+  .homepage-header-actions > a[href='/login'],
+  .homepage-header-actions > a[href='/trial'] {
+    font-size: 16px;
+  }
+
+  .homepage-mobile-menu-btn {
+    display: block;
+  }
+}
 
 /* Optimize section animations for smoother scroll */
 /* [style*='willChange'] {

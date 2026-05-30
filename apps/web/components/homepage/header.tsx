@@ -31,32 +31,21 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   }, [pathname]);
 
   return (
-    <header style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      background: 'white',
-      zIndex: 50,
-      padding: '12px 24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      borderBottom: '1px solid #eee'
-    }}>
-      <a href="/" style={{ fontWeight: 'bold', fontSize: '20px', textDecoration: 'none', color: 'black' }}>
-        ARIIA
-      </a>
+    <header className="homepage-header">
+      <div className="homepage-header-inner">
+        <a href="/" className="homepage-header-logo">
+          ARIIA
+        </a>
 
-      <nav style={{ display: 'flex', gap: '24px' }}>
+        <nav className="homepage-header-nav">
         {NAV_LINKS.map((link) => (
-          <a key={link.href} href={link.href} style={{ color: '#333', textDecoration: 'none', fontSize: '14px' }}>
+          <a key={link.href} href={link.href} className="homepage-header-link">
             {link.label}
           </a>
         ))}
       </nav>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div className="homepage-header-actions">
         <a href="/login" style={{ color: '#333', textDecoration: 'none', fontSize: '14px' }}>
           Log In
         </a>
@@ -65,25 +54,18 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
         </a>
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
-          style={{ background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer', display: 'none' }}
-          className="mobile-menu-btn"
+          style={{ background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer' }}
+          className="homepage-mobile-menu-btn"
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? 'Close mobile menu' : 'Open mobile menu'}
         >
           {menuOpen ? '✕' : '☰'}
         </button>
       </div>
+      </div>
 
       {menuOpen && (
-        <div style={{
-          position: 'fixed',
-          top: '57px',
-          left: 0,
-          right: 0,
-          background: 'white',
-          borderBottom: '1px solid #eee',
-          display: 'flex',
-          flexDirection: 'column',
-          zIndex: 100
-        }}>
+        <div className="homepage-mobile-menu-panel">
           {ALL_LINKS.map((link) => (
             <a
               key={link.href}
@@ -111,13 +93,6 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
           </div>
         </div>
       )}
-
-      <style jsx global>{`
-        @media (max-width: 768px) {
-          nav { display: none !important; }
-          .mobile-menu-btn { display: block !important; }
-        }
-      `}</style>
     </header>
   );
 }
