@@ -34,7 +34,7 @@ const NAV_LINKS = [
 // HEADER
 // -----------------------------------------------------------------------------
 
-export function Header() {
+export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   const pathname = usePathname();
 
   const [mobileOpen, setMobileOpen] = useState(false);
