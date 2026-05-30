@@ -400,7 +400,7 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
           )}
         </div>
 
-        <Header isHomePage={false} />
+        <Header /> //changed
 
         {/* Back Button - below fixed header; spacer so it's not hidden */}
         <div className="w-full flex items-center justify-between pt-26 md:pt-28 pb-6 md:pb-12 px-5 md:px-1 max-w-[1140px] mx-auto z-40 relative">

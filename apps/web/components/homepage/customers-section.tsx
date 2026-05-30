@@ -53,8 +53,7 @@ export function CustomersSection({ customers }: { customers: CustomerCard[] }) {
       </div>
 
       {/* Header */}
-      <Header isHomePage={false} />
-
+      <Header /> //changed
       {/* Main Content */}
       <div className="flex-1 flex flex-col justify-start text-center items-center pt-10 px-4 max-w-6xl mx-auto z-10 relative w-full">
         <FadeInWhenInView>

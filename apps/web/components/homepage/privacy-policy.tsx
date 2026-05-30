@@ -53,7 +53,7 @@ export function PrivacyPolicy({ policy }: { policy: PrivacyPolicyData }) {
       </div>
 
       {/* Header */}
-      <Header isHomePage={false} />
+     <Header /> //changed
 
       {/* Main Content */}
       <div className="px-5 max-w-6xl mx-auto z-10 relative pb-4 pt-10 md:pb-8">

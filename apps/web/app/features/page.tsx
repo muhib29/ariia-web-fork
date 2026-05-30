@@ -7,7 +7,7 @@ export const revalidate = 60;
 export default async function FeaturesPage() {
   return (
     <>
-      <Header isHomePage={false} />
+      <Header  />//changed
       <FeaturesSection />
       <NewsletterFooter isHomePage={false} />
     </>

@@ -28,7 +28,7 @@ export function BlogSection({ blogs }: { blogs: any[] }) {
         <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[700px] -right-[10%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
         <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1000px] -right-[10%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
       </div>
-      <Header isHomePage={false} />
+      <Header /> //changed
       <div className="flex-1 flex flex-col justify-start text-center items-center pt-10 py-0 px-4 max-w-6xl mx-auto z-10 relative w-full">
         {/* Blog Header */}
         <FadeInWhenInView>

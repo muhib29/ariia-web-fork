@@ -74,8 +74,7 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
         <div className="absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-10" />
       </div>
 
-      <Header isHomePage={false} />
-
+<Header /> //changed
       <div className="flex-1 flex flex-col items-center px-4 max-w-6xl mx-auto w-full z-2">
         {/* Title and Badge */}
         <FadeInWhenInView className="text-center pt-10">
