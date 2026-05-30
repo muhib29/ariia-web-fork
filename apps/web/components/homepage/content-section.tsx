@@ -13,7 +13,7 @@ export function ContentSection() {
       imgSrc: '/images/chat-elements-home.webp',
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow.svg',
-      bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
+      bgImgClass: 'opacity-100 scale-[1] md:scale-[1.15]',
       titleColor: 'text-[#1a202c]',
       descColor: 'text-[#4a5568]',
       numClasses: 'bg-[#4677E5] text-white',
@@ -27,7 +27,7 @@ export function ContentSection() {
       imgSrc: '/images/customer-inquiries.webp',
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow-2.svg',
-      bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
+      bgImgClass: 'opacity-100 scale-[1] md:scale-[1.15]',
       imgClass: '-mt-3 md:-mt-7 !w-[120%] md:!w-[150%] md:scale-113 mx-auto  h-auto object-cover',
     },
     {
@@ -37,7 +37,7 @@ export function ContentSection() {
       imgSrc: '/images/calendar-widget.webp',
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow-3.svg',
-      bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
+      bgImgClass: 'opacity-100 scale-[2.15] md:scale-[1.15]',
       imgClass: '-mt-12 md:-mt-17 w-[60%] md:w-[90%] mx-auto h-auto object-contain',
     },
     {
@@ -47,7 +47,7 @@ export function ContentSection() {
       imgSrc: '/images/reservations-interface.webp',
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow-4.svg',
-      bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
+      bgImgClass: 'opacity-100 scale-[1.0] md:scale-[1.15]',
       imgClass:
         '-mt-9 md:-mt-16 mr-2 sm:mr-0 w-[95%] md:w-[110%] ml-auto max-w-none h-auto object-contain scale-108 sm:scale-100',
     },

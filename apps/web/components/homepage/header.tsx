@@ -2,44 +2,25 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { getLenis } from '@/lib/lenis';
-import { AriiaSvgMark } from '../icons/AriiaSvgMark';
-import {
-  ChevronDown,
-  Users,
-  Sparkles,
-  Briefcase,
-  Building2,
-  Mail,
-  BookOpen,
-  BoxIcon,
-  ShieldCheck,
-  Lock,
-  ScrollText,
-  DollarSign,
-  ShieldQuestionIcon,
-  CircleHelp,
-  UserRound,
-  X,
-} from 'lucide-react';
 import { Button } from '@workspace/ui/components/button';
 import { cn } from '@workspace/ui/lib/utils';
 
 const COMPANY_MENU = [
-  { href: '/#about-us', title: 'About Us', description: 'Learn about our mission to transform businesses with AI agents.', icon: <UserRound className="h-5 w-5 text-gray-500" /> },
-  { href: '/story-behind-ariia/', title: 'The Story Behind ARIIA', description: "Discover the story behind ARIIA's name & its vision for the future.", icon: <Sparkles className="h-5 w-5 text-gray-500" /> },
-  { href: '/careers/', title: 'Careers', description: 'Help us build the next gen of AI. Explore job openings and join our journey.', icon: <Briefcase className="h-5 w-5 text-gray-500" /> },
-  { href: '/customers/', title: 'Customers', description: 'See how ARIIA is transforming customer experiences for businesses.', icon: <Users className="h-5 w-5 text-gray-500" /> },
-  { href: '/contact-us/', title: 'Contact Us', description: "Have questions? Reach out, and we'll respond within 24 hours.", icon: <Mail className="h-5 w-5 text-gray-500" /> },
+  { href: '/#about-us', title: 'About Us', description: 'Learn about our mission to transform businesses with AI agents.' },
+  { href: '/story-behind-ariia/', title: 'The Story Behind ARIIA', description: "Discover the story behind ARIIA's name & its vision for the future." },
+  { href: '/careers/', title: 'Careers', description: 'Help us build the next gen of AI. Explore job openings and join our journey.' },
+  { href: '/customers/', title: 'Customers', description: 'See how ARIIA is transforming customer experiences for businesses.' },
+  { href: '/contact-us/', title: 'Contact Us', description: "Have questions? Reach out, and we'll respond within 24 hours." },
 ];
 
 const RESOURCES_MENU = [
-  { href: '/blog/', title: 'Blog', description: 'Stay informed with industry trends, insights, and the latest ARIIA news.', icon: <BookOpen className="h-5 w-5 text-gray-500" /> },
-  { href: '/#use-cases', title: 'Use Cases', description: 'Check out demos and how ARIIA can be applied across industries.', icon: <BoxIcon className="h-5 w-5 text-gray-500" /> },
-  { href: '/industries/', title: 'Industries', description: 'See the sectors where ARIIA can enhance operations and customer experiences.', icon: <Building2 className="h-5 w-5 text-gray-500" /> },
-  { href: '/#faq', title: 'Questions & Answers', description: 'Find what you need in our Q&A section.', icon: <CircleHelp className="h-5 w-5 text-gray-500" /> },
-  { href: '/#security', title: 'Security & Data Protection', description: 'Understand how ARIIA safeguards your data.', icon: <Lock className="h-5 w-5 text-gray-500" /> },
-  { href: '/terms-of-service/', title: 'Terms of Service', description: 'Review the terms for using our services.', icon: <ScrollText className="h-5 w-5 text-gray-500" /> },
-  { href: '/privacy-policy/', title: 'Privacy Policy', description: 'Learn how your privacy and personal data is protected.', icon: <ShieldCheck className="h-5 w-5 text-gray-500" /> },
+  { href: '/blog/', title: 'Blog', description: 'Stay informed with industry trends, insights, and the latest ARIIA news.' },
+  { href: '/#use-cases', title: 'Use Cases', description: 'Check out demos and how ARIIA can be applied across industries.' },
+  { href: '/industries/', title: 'Industries', description: 'See the sectors where ARIIA can enhance operations and customer experiences.' },
+  { href: '/#faq', title: 'Questions & Answers', description: 'Find what you need in our Q&A section.' },
+  { href: '/#security', title: 'Security & Data Protection', description: 'Understand how ARIIA safeguards your data.' },
+  { href: '/terms-of-service/', title: 'Terms of Service', description: 'Review the terms for using our services.' },
+  { href: '/privacy-policy/', title: 'Privacy Policy', description: 'Learn how your privacy and personal data is protected.' },
 ];
 
 const MOBILE_MENU_SINGLE_LINKS = [
@@ -142,7 +123,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
             {/* Left pill */}
             <div className="flex items-center bg-white rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-3 py-0 md:px-4 md:py-2">
               <a href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4">
-                <AriiaSvgMark className="w-20 h-10 md:h-9 md:w-28" />
+                <span className="text-lg font-bold md:text-xl">ARIIA</span>
               </a>
 
               <nav className="hidden md:flex items-center space-x-6">
@@ -156,13 +137,12 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                 <div className="relative" onMouseEnter={() => handleDropdownEnter('company')} onMouseLeave={handleDropdownLeave}>
                   <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-3 hover:bg-[#EEFBFF]">
                     Company
-                    <ChevronDown className={cn('ml-1 h-4 w-4 transition-transform duration-200', hoveredDropdown === 'company' ? 'rotate-180' : '')} />
+                    <span className={cn('ml-1 text-xs transition-transform duration-200', hoveredDropdown === 'company' ? 'rotate-180' : '')}>▼</span>
                   </button>
                   {hoveredDropdown === 'company' && (
                     <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
                       {COMPANY_MENU.map((item) => (
                         <a key={item.href} href={item.href} className={menuItemClasses(item.href)} onClick={() => { setActivePath(item.href); setHoveredDropdown(null); }}>
-                          <div className="pt-1">{item.icon}</div>
                           <div className="text-left">
                             <p className="text-sm font-medium text-gray-900">{item.title}</p>
                             <p className="text-xs text-gray-600 leading-tight">{item.description}</p>
@@ -176,13 +156,12 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                 <div className="relative" onMouseEnter={() => handleDropdownEnter('resources')} onMouseLeave={handleDropdownLeave}>
                   <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-2 hover:bg-[#EEFBFF]">
                     Resources
-                    <ChevronDown className={cn('ml-1 h-4 w-4 transition-transform duration-200', hoveredDropdown === 'resources' ? 'rotate-180' : '')} />
+                    <span className={cn('ml-1 text-xs transition-transform duration-200', hoveredDropdown === 'resources' ? 'rotate-180' : '')}>▼</span>
                   </button>
                   {hoveredDropdown === 'resources' && (
                     <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
                       {RESOURCES_MENU.map((item) => (
                         <a key={item.href} href={item.href} className={menuItemClasses(item.href)} onClick={() => { setActivePath(item.href); setHoveredDropdown(null); }}>
-                          <div className="pt-1">{item.icon}</div>
                           <div className="text-left">
                             <p className="text-sm font-medium text-gray-900">{item.title}</p>
                             <p className="text-xs text-gray-600 leading-tight">{item.description}</p>
@@ -223,19 +202,32 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
 
                 {menuOpen && (
                   <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200 }} className="pointer-events-auto">
-                    <div className="mx-2 mt-2 rounded-[18px] border border-white/40 bg-white/90 shadow-[0_14px_36px_rgba(15,23,42,0.12)] overflow-y-auto relative flex flex-col max-h-[calc(100dvh-1.5rem)] touch-manipulation z-[1]">
+                    <div style={{
+                      margin: '8px',
+                      marginTop: '8px',
+                      borderRadius: '18px',
+                      background: 'white',
+                      overflowY: 'auto',
+                      position: 'relative',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      maxHeight: 'calc(100dvh - 1.5rem)',
+                      border: '1px solid #eee',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                      zIndex: 1,
+                    }}>
 
                       <div className="sticky top-0 z-[2] flex items-center justify-between px-4 pt-3 pb-2 shrink-0">
-                        <div className="bg-white/45 rounded-full px-3 py-1 border border-white/45 flex items-center gap-2 pointer-events-none">
-                          <AriiaSvgMark className="w-16 h-7" />
+                        <div style={{ background: 'white', borderRadius: '999px', padding: '4px 12px', border: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '8px', pointerEvents: 'none' }}>
+                          <span className="text-base font-bold">ARIIA</span>
                         </div>
                         <button
                           type="button"
                           aria-label="Close menu"
-                          className="flex items-center justify-center size-10 rounded-full bg-white/45 shadow-md border border-white/45 touch-manipulation cursor-pointer"
-                          onClick={() => handleMenuOpen(false)}
-                        >
-                          <X className="h-4 w-4 text-gray-700 pointer-events-none" />
+                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', borderRadius: '50%', background: 'white', border: '1px solid #eee', cursor: 'pointer' }}
+                            onClick={() => handleMenuOpen(false)}
+                          >
+                            <span className="text-gray-700 pointer-events-none">✕</span>
                         </button>
                       </div>
 
@@ -258,7 +250,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                             onClick={() => setIsCompanyOpen((prev) => !prev)}
                           >
                             <span>Company</span>
-                            <ChevronDown className={cn('size-4 ml-auto transition-transform duration-200', isCompanyOpen && 'rotate-180')} style={{ color: isCompanyOpen ? '#35B5F5' : undefined }} />
+                            <span className={cn('ml-auto text-sm transition-transform duration-200', isCompanyOpen && 'rotate-180')} style={{ color: isCompanyOpen ? '#35B5F5' : undefined }}>▼</span>
                           </button>
                           {isCompanyOpen && (
                             <div className="flex flex-col w-full px-4 gap-1 pb-4 border-b border-[#93d8fa4c]">
@@ -278,7 +270,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                             onClick={() => setIsResourcesOpen((prev) => !prev)}
                           >
                             <span>Resources</span>
-                            <ChevronDown className={cn('size-4 ml-auto transition-transform duration-200', isResourcesOpen && 'rotate-180')} style={{ color: isResourcesOpen ? '#35B5F5' : undefined }} />
+                            <span className={cn('ml-auto text-sm transition-transform duration-200', isResourcesOpen && 'rotate-180')} style={{ color: isResourcesOpen ? '#35B5F5' : undefined }}>▼</span>
                           </button>
                           {isResourcesOpen && (
                             <div className="flex flex-col w-full px-4 gap-2 pb-4 border-b border-[#93d8fa4c]">
@@ -293,7 +285,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
                       </nav>
 
                       <div className="px-4 pb-6 pt-2 shrink-0">
-                        <div className="w-full bg-white/40 rounded-full p-[5px] shadow-[0_14px_36px_rgba(15,23,42,0.14)] flex items-center justify-between gap-2 border border-white/45">
+                        <div style={{ width: '100%', background: 'white', borderRadius: '999px', padding: '5px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', border: '1px solid #eee' }}>
                           <a href="/login" className="flex-1 text-gray-700 hover:text-gray-900 font-medium text-sm px-3 py-3 min-h-[44px] rounded-full text-center touch-manipulation flex items-center justify-center" onClick={() => handleMenuOpen(false)}>
                             Log In
                           </a>
