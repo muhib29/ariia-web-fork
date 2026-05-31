@@ -314,7 +314,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
 
       {/* ── MOBILE: MobileHeader handles everything below md ── */}
       <div className="block md:hidden">
-        <MobileHeader isHomePage={isHomePage} isScrolled={isScrolled} />
+        <MobileHeader />
       </div>
 
       {/* ── DESKTOP: original header, completely untouched ── */}
