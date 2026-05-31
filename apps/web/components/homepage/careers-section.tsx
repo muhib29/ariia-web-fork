@@ -142,7 +142,7 @@ export function CareersSection({ career }: { career: CareerData }) {
         <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[300px] top-[690px] left-[1%] bg-gradient-to-r from-[#4E97FA] via-[#35B5F5] to-[#2EFFEA] opacity-20 blur-[80px]" />
       </div>
 
-      <Header /> //changed
+      <Header /> {/* //changed */}
 
       {/* Careers Tag & Heading */}
       <FadeInWhenInView className="w-full max-w-6xl mx-auto px-4 flex flex-col items-center pt-24 md:pt-30">

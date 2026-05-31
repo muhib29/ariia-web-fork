@@ -236,7 +236,7 @@ export function ContactUs({ contact }: { contact: ContactUsData }) {
         <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1800px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
       </div>
 
-     <Header /> //changed
+     <Header /> {/* //changed */}
 
       <div className="py-10 px-6 max-w-6xl mx-auto z-10 text-center">
         <SectionHeader

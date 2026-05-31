@@ -18,7 +18,7 @@ export default async function PricingPage() {
 
   return (
     <>
-      <Header />  //changed
+      <Header />  {/* //changed */}
       <PricingSection pricing={pricing} />
       <NewsletterFooter isHomePage={false} />
     </>

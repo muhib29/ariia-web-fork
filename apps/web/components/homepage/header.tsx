@@ -1,14 +1,9 @@
 'use client';
-
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { ChevronDown, X } from 'lucide-react';
 import { AriiaSvgMark } from '../icons/AriiaSvgMark';
-
-// -----------------------------------------------------------------------------
-// DATA
-// -----------------------------------------------------------------------------
 
 const COMPANY_LINKS = [
   { href: '/#about-us', label: 'About Us' },
@@ -18,644 +13,230 @@ const COMPANY_LINKS = [
   { href: '/contact-us/', label: 'Contact Us' },
 ];
 
-const RESOURCE_LINKS = [
+const RESOURCES_LINKS = [
   { href: '/blog/', label: 'Blog' },
+  { href: '/#use-cases', label: 'Use Cases' },
   { href: '/industries/', label: 'Industries' },
+  { href: '/#faq', label: 'Questions & Answers' },
+  { href: '/#security', label: 'Security & Data Protection' },
   { href: '/terms-of-service/', label: 'Terms of Service' },
   { href: '/privacy-policy/', label: 'Privacy Policy' },
 ];
 
-const NAV_LINKS = [
-  { href: '/features', label: 'Features' },
-  { href: '/pricing', label: 'Pricing' },
-];
-
-// -----------------------------------------------------------------------------
-// HEADER
-// -----------------------------------------------------------------------------
-
-export function Header() {
-  const pathname = usePathname();
-
-  const [mobileOpen, setMobileOpen] = useState(false);
+export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  // ---------------------------------------------------------------------------
-  // CLOSE MOBILE MENU ON ROUTE CHANGE
-  // ---------------------------------------------------------------------------
+  const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    setMobileOpen(false);
+    setMenuOpen(false);
+    setCompanyOpen(false);
+    setResourcesOpen(false);
   }, [pathname]);
 
-  // ---------------------------------------------------------------------------
-  // LIGHTWEIGHT SCROLL DETECTION
-  // ---------------------------------------------------------------------------
-
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // ---------------------------------------------------------------------------
-  // BODY LOCK
-  // ---------------------------------------------------------------------------
-
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileOpen]);
-
-  // ---------------------------------------------------------------------------
-  // RENDER
-  // ---------------------------------------------------------------------------
+  const pillBg = isScrolled ? 'bg-white/70' : 'bg-white';
 
   return (
-    <>
-      <header
+    <div className="w-full">
+      {/* Gradient accent bar — fades out on scroll */}
+      <div
+        className="h-10 fixed top-0 left-0 w-full z-40 pointer-events-none transition-opacity duration-500"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          zIndex: 100,
-          padding: '18px 14px',
-          transition: 'background-color .25s ease',
+          background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
+          opacity: isScrolled ? 0 : 1,
         }}
-      >
-        {/* ------------------------------------------------------------------ */}
-        {/* WRAPPER */}
-        {/* ------------------------------------------------------------------ */}
+      />
 
-        <div
-          style={{
-            maxWidth: '1180px',
-            margin: '0 auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 12,
-          }}
-        >
-          {/* ---------------------------------------------------------------- */}
-          {/* LEFT PILL */}
-          {/* ---------------------------------------------------------------- */}
+      {/* Main header */}
+      <header className="fixed left-0 w-full z-50 bg-transparent" style={{ top: 0 }}>
+        <div className="max-w-[73.1rem] mx-auto px-4 md:px-6 lg:px-4 py-6">
+          <div className="flex items-center justify-between">
 
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-              background: '#fff',
-              borderRadius: 999,
-              padding: '10px 12px',
-              boxShadow: scrolled
-                ? '0 4px 14px rgba(0,0,0,0.08)'
-                : '0 2px 10px rgba(0,0,0,0.05)',
-              border: '1px solid rgba(0,0,0,0.04)',
-              flexShrink: 0,
-            }}
-          >
-            {/* LOGO */}
+            {/* Left pill: logo + desktop nav */}
+            <div className={`flex items-center ${pillBg} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-3 py-0 md:px-4 md:py-2`}>
+              <Link href="/" className="flex items-center justify-center shrink-0 mr-0 md:mr-4">
+                <AriiaSvgMark priority className="w-20 h-10 md:h-9 md:w-28" />
+              </Link>
 
-            <Link
-              href="/"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                textDecoration: 'none',
-              }}
-            >
-              <AriiaSvgMark width={82} height={36} />
-            </Link>
-
-            {/* DESKTOP NAV */}
-
-            <nav className="desktop-nav">
-              {NAV_LINKS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="nav-link"
-                >
-                  {item.label}
+              <nav className="hidden md:flex items-center space-x-1">
+                <Link href="/features" className="text-gray-700 hover:text-gray-900 font-medium text-sm hover:bg-[#EEFBFF] rounded-full px-4 py-2 transition-colors">
+                  Features
                 </Link>
-              ))}
+                <Link href="/pricing" className="text-gray-700 hover:text-gray-900 font-medium text-sm hover:bg-[#EEFBFF] rounded-full px-4 py-2 transition-colors">
+                  Pricing
+                </Link>
 
-              {/* COMPANY */}
-
-              <div className="dropdown">
-                <button className="dropdown-trigger">
-                  Company
-                  <ChevronDown size={16} />
-                </button>
-
-                <div className="dropdown-panel">
-                  {COMPANY_LINKS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="dropdown-item"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
+                {/* Company dropdown */}
+                <div
+                  className="relative"
+                  onMouseEnter={() => setHoveredDropdown('company')}
+                  onMouseLeave={() => setHoveredDropdown(null)}
+                >
+                  <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm hover:bg-[#EEFBFF] rounded-full px-4 py-2 transition-colors outline-none">
+                    Company
+                    <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${hoveredDropdown === 'company' ? 'rotate-180' : ''}`} />
+                  </button>
+                  {hoveredDropdown === 'company' && (
+                    <div className="absolute top-full left-0 mt-5 w-64 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-0.5 z-50">
+                      {COMPANY_LINKS.map((item) => (
+                        <Link key={item.href} href={item.href} className="block px-3 py-2 rounded-lg text-sm font-medium text-gray-800 hover:bg-[#EEFBFF] transition-colors">
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
 
-              {/* RESOURCES */}
-
-              <div className="dropdown">
-                <button className="dropdown-trigger">
-                  Resources
-                  <ChevronDown size={16} />
-                </button>
-
-                <div className="dropdown-panel">
-                  {RESOURCE_LINKS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="dropdown-item"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
+                {/* Resources dropdown */}
+                <div
+                  className="relative"
+                  onMouseEnter={() => setHoveredDropdown('resources')}
+                  onMouseLeave={() => setHoveredDropdown(null)}
+                >
+                  <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm hover:bg-[#EEFBFF] rounded-full px-4 py-2 transition-colors outline-none">
+                    Resources
+                    <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${hoveredDropdown === 'resources' ? 'rotate-180' : ''}`} />
+                  </button>
+                  {hoveredDropdown === 'resources' && (
+                    <div className="absolute top-full left-0 mt-5 w-64 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-0.5 z-50">
+                      {RESOURCES_LINKS.map((item) => (
+                        <Link key={item.href} href={item.href} className="block px-3 py-2 rounded-lg text-sm font-medium text-gray-800 hover:bg-[#EEFBFF] transition-colors">
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            </nav>
-          </div>
+              </nav>
+            </div>
 
-          {/* ---------------------------------------------------------------- */}
-          {/* RIGHT PILL */}
-          {/* ---------------------------------------------------------------- */}
+            {/* Right pill: login + trial + hamburger */}
+            <div className={`flex items-center ${pillBg} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-1 py-1 md:px-2 md:py-2 gap-1 sm:gap-2`}>
+              <Link href="/login" prefetch={false} className="hidden md:block text-gray-600 hover:text-gray-900 font-medium text-sm px-3 transition-colors">
+                Log In
+              </Link>
+              <Link href="/trial" prefetch={false} className="bg-gray-900 hover:bg-gray-800 text-white font-medium text-xs sm:text-sm px-3 sm:px-5 h-8 sm:h-9 rounded-full transition-colors flex items-center whitespace-nowrap">
+                1-Month Free Trial
+              </Link>
 
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              background: '#fff',
-              borderRadius: 999,
-              padding: '4px',
-              boxShadow: scrolled
-                ? '0 4px 14px rgba(0,0,0,0.08)'
-                : '0 2px 10px rgba(0,0,0,0.05)',
-              border: '1px solid rgba(0,0,0,0.04)',
-              flexShrink: 0,
-            }}
-          >
-            <Link href="/login" className="login-link">
-              Log In
-            </Link>
-
-            <Link href="/trial" className="trial-btn">
-              1-Month Free Trial
-            </Link>
-
-            {/* MOBILE BUTTON */}
-
-            <button
-              aria-label="Open menu"
-              className="mobile-btn"
-              onClick={() => setMobileOpen(true)}
-            >
-              <Menu size={22} />
-            </button>
+              {/* Hamburger — mobile only */}
+              <button
+                type="button"
+                className="flex md:hidden items-center justify-center size-8 sm:size-9 rounded-full hover:bg-gray-100 transition-colors"
+                aria-label="Open menu"
+                onClick={() => setMenuOpen(true)}
+              >
+                <svg className="h-5 w-5 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* -------------------------------------------------------------------- */}
-      {/* MOBILE OVERLAY */}
-      {/* -------------------------------------------------------------------- */}
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-[200]">
+          <div className="mx-2 mt-2 rounded-[18px] border border-white/40 bg-white/90 shadow-[0_14px_36px_rgba(15,23,42,0.12)] overflow-y-auto flex flex-col max-h-[calc(100dvh-1rem)]">
 
-      <div
-        className={`mobile-overlay ${mobileOpen ? 'open' : ''}`}
-        onClick={() => setMobileOpen(false)}
-      />
-
-      {/* -------------------------------------------------------------------- */}
-      {/* MOBILE MENU */}
-      {/* -------------------------------------------------------------------- */}
-
-      <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
-        {/* TOP */}
-
-        <div className="mobile-top">
-          <AriiaSvgMark width={78} height={32} />
-
-          <button
-            aria-label="Close menu"
-            className="mobile-close"
-            onClick={() => setMobileOpen(false)}
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* LINKS */}
-
-        <div className="mobile-links">
-          {NAV_LINKS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="mobile-link"
-            >
-              {item.label}
-            </Link>
-          ))}
-
-          {/* COMPANY */}
-
-          <button
-            className="mobile-accordion-trigger"
-            onClick={() => setCompanyOpen((v) => !v)}
-          >
-            Company
-
-            <ChevronDown
-              size={18}
-              style={{
-                transform: companyOpen
-                  ? 'rotate(180deg)'
-                  : 'rotate(0deg)',
-                transition: 'transform .2s ease',
-              }}
-            />
-          </button>
-
-          <div
-            className={`mobile-accordion ${
-              companyOpen ? 'open' : ''
-            }`}
-          >
-            {COMPANY_LINKS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="mobile-sub-link"
+            {/* Top row */}
+            <div className="flex items-center justify-between px-4 pt-3 pb-2 shrink-0">
+              <div className="bg-white/45 rounded-full px-3 py-1 border border-white/20 flex items-center">
+                <AriiaSvgMark className="w-16 h-7" />
+              </div>
+              <button
+                type="button"
+                aria-label="Close menu"
+                className="flex items-center justify-center size-10 rounded-full bg-white/45 border border-white/20 shadow-sm"
+                onClick={() => setMenuOpen(false)}
               >
-                {item.label}
+                <X className="h-4 w-4 text-gray-700" />
+              </button>
+            </div>
+
+            {/* Nav links */}
+            <nav className="pb-4">
+              <Link href="/features" className="flex items-center px-4 py-3 min-h-[44px] text-gray-700 font-bold border-b border-[#93d8fa4c] hover:bg-gray-50 transition-colors" onClick={() => setMenuOpen(false)}>
+                Features
               </Link>
-            ))}
-          </div>
-
-          {/* RESOURCES */}
-
-          <button
-            className="mobile-accordion-trigger"
-            onClick={() => setResourcesOpen((v) => !v)}
-          >
-            Resources
-
-            <ChevronDown
-              size={18}
-              style={{
-                transform: resourcesOpen
-                  ? 'rotate(180deg)'
-                  : 'rotate(0deg)',
-                transition: 'transform .2s ease',
-              }}
-            />
-          </button>
-
-          <div
-            className={`mobile-accordion ${
-              resourcesOpen ? 'open' : ''
-            }`}
-          >
-            {RESOURCE_LINKS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="mobile-sub-link"
-              >
-                {item.label}
+              <Link href="/pricing" className="flex items-center px-4 py-3 min-h-[44px] text-gray-700 font-bold border-b border-[#93d8fa4c] hover:bg-gray-50 transition-colors" onClick={() => setMenuOpen(false)}>
+                Pricing
               </Link>
-            ))}
+
+              {/* Company accordion */}
+              <div className={companyOpen ? '' : 'border-b border-[#93d8fa4c]'}>
+                <button
+                  type="button"
+                  className="flex items-center w-full px-4 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-50 transition-colors"
+                  onClick={() => setCompanyOpen(p => !p)}
+                >
+                  <span>Company</span>
+                  <ChevronDown className={`ml-auto h-4 w-4 transition-transform duration-200 ${companyOpen ? 'rotate-180' : ''}`} style={{ color: companyOpen ? '#35B5F5' : undefined }} />
+                </button>
+                {companyOpen && (
+                  <div className="flex flex-col px-4 pb-3 border-b border-[#93d8fa4c]">
+                    {COMPANY_LINKS.map((item) => (
+                      <Link key={item.href} href={item.href} className="ml-2 py-2 px-1 min-h-[44px] flex items-center text-gray-800 text-base hover:bg-gray-50 transition-colors" onClick={() => setMenuOpen(false)}>
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Resources accordion */}
+              <div className={resourcesOpen ? '' : 'border-b border-[#93d8fa4c]'}>
+                <button
+                  type="button"
+                  className="flex items-center w-full px-4 py-3 min-h-[44px] text-gray-700 font-bold hover:bg-gray-50 transition-colors"
+                  onClick={() => setResourcesOpen(p => !p)}
+                >
+                  <span>Resources</span>
+                  <ChevronDown className={`ml-auto h-4 w-4 transition-transform duration-200 ${resourcesOpen ? 'rotate-180' : ''}`} style={{ color: resourcesOpen ? '#35B5F5' : undefined }} />
+                </button>
+                {resourcesOpen && (
+                  <div className="flex flex-col px-4 pb-3 border-b border-[#93d8fa4c]">
+                    {RESOURCES_LINKS.map((item) => (
+                      <Link key={item.href} href={item.href} className="ml-2 py-2 px-1 min-h-[44px] flex items-center text-gray-800 text-base hover:bg-gray-50 transition-colors" onClick={() => setMenuOpen(false)}>
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </nav>
+
+            {/* Bottom CTA bar */}
+            <div className="px-4 pb-6 pt-2 shrink-0">
+              <div className="w-full bg-white/40 rounded-full p-[5px] shadow-[0_14px_36px_rgba(15,23,42,0.14)] flex items-center gap-2 border border-white/45">
+                <Link href="/login" prefetch={false} className="flex-1 text-gray-700 hover:text-gray-900 font-medium text-sm px-3 min-h-[44px] rounded-full text-center flex items-center justify-center transition-colors" onClick={() => setMenuOpen(false)}>
+                  Log In
+                </Link>
+                <Link href="/trial" prefetch={false} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-medium text-sm px-4 min-h-[44px] rounded-full flex items-center justify-center transition-colors" onClick={() => setMenuOpen(false)}>
+                  1-Month Free Trial
+                </Link>
+              </div>
+            </div>
+
           </div>
         </div>
-
-        {/* BOTTOM */}
-
-        <div className="mobile-bottom">
-          <Link href="/login" className="mobile-login">
-            Log In
-          </Link>
-
-          <Link href="/trial" className="mobile-trial">
-            1-Month Free Trial
-          </Link>
-        </div>
-      </div>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* STYLES */}
-      {/* -------------------------------------------------------------------- */}
-
-      <style jsx global>{`
-        * {
-          -webkit-tap-highlight-color: transparent;
-        }
-
-        .desktop-nav {
-          display: none;
-        }
-
-        .nav-link,
-        .dropdown-trigger {
-          height: 38px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 4px;
-          padding: 0 16px;
-          border-radius: 999px;
-          text-decoration: none;
-          color: #374151;
-          font-size: 14px;
-          font-weight: 500;
-          transition: background-color 0.15s ease;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          white-space: nowrap;
-        }
-
-        .nav-link:hover,
-        .dropdown-trigger:hover {
-          background: #eefbff;
-        }
-
-        .dropdown {
-          position: relative;
-        }
-
-        .dropdown-panel {
-          position: absolute;
-          top: calc(100% + 14px);
-          left: 0;
-          min-width: 240px;
-          background: white;
-          border-radius: 14px;
-          padding: 8px;
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-          border: 1px solid rgba(0, 0, 0, 0.05);
-          opacity: 0;
-          pointer-events: none;
-          transform: translateY(6px);
-          transition:
-            opacity 0.18s ease,
-            transform 0.18s ease;
-        }
-
-        .dropdown:hover .dropdown-panel {
-          opacity: 1;
-          pointer-events: auto;
-          transform: translateY(0);
-        }
-
-        .dropdown-item {
-          display: block;
-          padding: 12px 14px;
-          border-radius: 10px;
-          text-decoration: none;
-          color: #374151;
-          font-size: 14px;
-          transition: background-color 0.15s ease;
-        }
-
-        .dropdown-item:hover {
-          background: #eefbff;
-        }
-
-        .login-link {
-          display: none;
-        }
-
-        .trial-btn {
-          height: 40px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 999px;
-          background: #111827;
-          color: white;
-          text-decoration: none;
-          padding: 0 20px;
-          font-size: 14px;
-          font-weight: 500;
-          transition: background-color 0.15s ease;
-          white-space: nowrap;
-        }
-
-        .trial-btn:hover {
-          background: #1f2937;
-        }
-
-        .mobile-btn {
-          width: 40px;
-          height: 40px;
-          border: none;
-          background: transparent;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 999px;
-          cursor: pointer;
-          color: #111827;
-        }
-
-        .mobile-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.2);
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.22s ease;
-          z-index: 90;
-        }
-
-        .mobile-overlay.open {
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        .mobile-menu {
-          position: fixed;
-          top: 10px;
-          left: 10px;
-          right: 10px;
-          background: white;
-          border-radius: 22px;
-          z-index: 100;
-          box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
-          border: 1px solid rgba(0, 0, 0, 0.05);
-
-          transform: translateY(-12px);
-          opacity: 0;
-          pointer-events: none;
-
-          transition:
-            transform 0.24s ease,
-            opacity 0.24s ease;
-
-          max-height: calc(100vh - 20px);
-          overflow-y: auto;
-
-          -webkit-overflow-scrolling: touch;
-
-          will-change: transform, opacity;
-        }
-
-        .mobile-menu.open {
-          transform: translateY(0);
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        .mobile-top {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 18px 18px 12px;
-        }
-
-        .mobile-close {
-          width: 40px;
-          height: 40px;
-          border-radius: 999px;
-          border: none;
-          background: #f3f4f6;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-        }
-
-        .mobile-links {
-          padding: 0 10px;
-        }
-
-        .mobile-link,
-        .mobile-accordion-trigger {
-          width: 100%;
-          min-height: 52px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 12px;
-          border: none;
-          background: transparent;
-          text-decoration: none;
-          color: #374151;
-          font-size: 15px;
-          font-weight: 600;
-          border-radius: 12px;
-          cursor: pointer;
-        }
-
-        .mobile-link:hover,
-        .mobile-accordion-trigger:hover {
-          background: #f8fafc;
-        }
-
-        .mobile-accordion {
-          display: grid;
-          grid-template-rows: 0fr;
-          transition: grid-template-rows 0.2s ease;
-        }
-
-        .mobile-accordion.open {
-          grid-template-rows: 1fr;
-        }
-
-        .mobile-accordion > div {
-          overflow: hidden;
-        }
-
-        .mobile-sub-link {
-          display: block;
-          padding: 10px 16px 10px 22px;
-          text-decoration: none;
-          color: #6b7280;
-          font-size: 14px;
-        }
-
-        .mobile-bottom {
-          display: flex;
-          gap: 10px;
-          padding: 20px;
-        }
-
-        .mobile-login,
-        .mobile-trial {
-          flex: 1;
-          height: 46px;
-          border-radius: 999px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-decoration: none;
-          font-size: 14px;
-          font-weight: 600;
-        }
-
-        .mobile-login {
-          background: #f3f4f6;
-          color: #111827;
-        }
-
-        .mobile-trial {
-          background: #111827;
-          color: white;
-        }
-
-        @media (min-width: 768px) {
-          .desktop-nav {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            margin-left: 10px;
-          }
-
-          .login-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            height: 40px;
-            padding: 0 14px;
-            border-radius: 999px;
-            color: #374151;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background-color 0.15s ease;
-          }
-
-          .login-link:hover {
-            background: #f3f4f6;
-          }
-
-          .mobile-btn {
-            display: none;
-          }
-        }
-      `}</style>
-    </>
+      )}
+    </div>
   );
 }

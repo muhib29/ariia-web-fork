@@ -144,7 +144,7 @@ export default function PricingContactUs() {
         <div className="absolute w-[620px] h-[620px] bottom-[-260px] right-[0%] rounded-full blur-[170px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-20" />
       </div>
 
-      <Header /> //changed
+      <Header /> {/* //changed */}
       {/* Back Button */}
       <div className="w-full flex items-center justify-between pt-24 md:pt-32 pb-2 px-5 md:px-4 max-w-6xl mx-auto z-10 relative">
         <Link href="/pricing">

@@ -53,7 +53,7 @@ export function TermsOfService({ terms }: { terms: TermsOfServiceData }) {
       </div>
 
       {/* Header */}
-    <Header /> //changed
+    <Header /> {/* //changed */}
       {/* Main Content */}
       <div className="px-5 max-w-6xl mx-auto z-10 relative pb-4 md:pb-8">
         <div className="text-center pt-10 pb-0">

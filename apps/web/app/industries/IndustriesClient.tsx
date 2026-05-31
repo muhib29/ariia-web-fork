@@ -62,7 +62,7 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
         <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[600px] right-[1%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
         <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1080px] right-[1%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
       </div>
-      <Header /> //changed
+      <Header /> {/* //changed */}
       <div className="py-10 z-0 px-4 sm:px-4 md:px-6 max-w-6xl mx-auto relative w-full">
         {/* Header Section */}
         <div className="text-center text-[22px] mb-2 sm:mb-[30px]">

@@ -183,7 +183,7 @@ export function BlogDetail({ blog, otherBlogs = [] }: { blog: any; otherBlogs?: 
         {/* Title Background Glare - Matching Index Page Cyan/Blue Glow */}
         <div className="absolute w-[500px] h-[300px] md:w-[800px] md:h-[500px] top-[100px] left-1/2 -translate-x-1/2 rounded-full blur-[100px] md:blur-[160px] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-25 md:opacity-35 -z-1" />
       </div>
-     <Header /> //changed
+     <Header /> {/* //changed */}
       <div className="w-full flex items-center justify-between pt-22 md:pt-28  px-5 md:px-4 max-w-6xl mx-auto z-10 relative">
         <Link href="/blog">
           <span className="flex items-center text-gray-500 hover:text-black cursor-pointer transition-colors">

@@ -62,7 +62,7 @@ export function CustomerDetail({ customer }: { customer: CustomerDetailData }) {
         <div className="absolute w-[520px] h-[320px] md:w-[860px] md:h-[520px] top-[90px] left-1/2 -translate-x-1/2 rounded-full blur-[110px] md:blur-[170px] bg-gradient-to-r from-[#6779FF] via-[#7F56D9] to-[#2E96FF] opacity-20 md:opacity-30" />
       </div>
 
-      <Header /> //changed
+      <Header /> {/* //changed */}
 
       {/* Back + Share bar */}
       <div className="w-full flex items-center justify-between pt-22 md:pt-28 pb-2 px-5 md:px-4 max-w-6xl mx-auto z-10 relative">

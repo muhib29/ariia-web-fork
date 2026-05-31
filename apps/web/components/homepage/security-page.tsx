@@ -29,7 +29,7 @@ export function SecurityPageSection({ security }: SecurityPageSectionProps) {
   return (
     <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-20">
       {/* Header */}
-<Header /> //changed
+<Header /> {/* //changed */}
       {/* Main Content */}
       <div className="py-10 px-6 max-w-5xl mx-auto z-10 relative">
         {/* <div className="text-center mb-12">
