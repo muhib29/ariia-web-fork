@@ -148,15 +148,17 @@ export function MobileHeader({
           {/* Card wrapper */}
           <div
             style={{
-              margin: '8px',
-              borderRadius: 18,
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 200,
               background: '#fff',
-              boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
-              overflowY: 'auto',
+              overflowY: 'scroll',
               WebkitOverflowScrolling: 'touch',
-              display: 'flex',
-              flexDirection: 'column',
-              maxHeight: 'calc(100dvh - 1rem)',
+              margin: '8px',         
+              borderRadius: 18,     
             }}
           >
             {/* Close row */}
