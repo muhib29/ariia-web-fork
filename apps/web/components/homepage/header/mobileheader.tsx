@@ -46,31 +46,14 @@ export function MobileHeader() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'transparent',
+          background: 'transparent', // 👈 ONLY change from last working version
         }}
       >
-        {/* RESTORED: Left pill — logo */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          background: '#fff',
-          borderRadius: 999,
-          padding: '0 12px',
-        }}>
-          <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <AriiaSvgMark className="w-20 h-10" />
-          </a>
-        </div>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <AriiaSvgMark className="w-20 h-10" />
+        </a>
 
-        {/* RESTORED: Right pill — CTA + hamburger */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          background: '#fff',
-          borderRadius: 999,
-          padding: '4px',
-          gap: 4,
-        }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <a
             href="/trial"
             style={{
