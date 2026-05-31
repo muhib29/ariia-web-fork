@@ -35,7 +35,7 @@ export function MobileHeader() {
   return (
     <>
       {/* Top bar */}
-    {/* Top bar */}
+   {/* Top bar */}
       <div
         style={{
           position: 'fixed',
@@ -47,7 +47,7 @@ export function MobileHeader() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#fff', // solid — never transparent
+          background: '#fff',
         }}
       >
         {/* Left pill */}
@@ -57,6 +57,7 @@ export function MobileHeader() {
           background: '#fff',
           borderRadius: 999,
           padding: '0 12px',
+          boxShadow: '0 3px 6px rgba(181,181,181,0.25)', // 👈 added
         }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             <AriiaSvgMark className="w-20 h-10" />
@@ -71,6 +72,7 @@ export function MobileHeader() {
           borderRadius: 999,
           padding: '4px',
           gap: 4,
+          boxShadow: '0 3px 6px rgba(181,181,181,0.25)', // 👈 added
         }}>
           <a
             href="/trial"
