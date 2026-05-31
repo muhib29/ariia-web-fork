@@ -27,10 +27,16 @@ const RESOURCES_LINKS = [
   { href: '/privacy-policy/', label: 'Privacy Policy' },
 ];
 
-export function MobileHeader() {
+export function MobileHeader({
+  isScrolled = false,
+}: {
+  isScrolled?: boolean;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+
+  const pillBg = isScrolled ? 'rgba(255,255,255,0.7)' : '#fff'; // 👈 only change
 
   return (
     <>
@@ -54,10 +60,10 @@ export function MobileHeader() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          background: '#fff',
+          background: pillBg, // 👈
           borderRadius: 999,
           padding: '0 12px',
-          boxShadow: '0 3px 6px rgba(181,181,181,0.25)', // 👈 added
+          boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
         }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             <AriiaSvgMark className="w-20 h-10" />
@@ -68,11 +74,11 @@ export function MobileHeader() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          background: '#fff',
+          background: pillBg, // 👈
           borderRadius: 999,
           padding: '4px',
           gap: 4,
-          boxShadow: '0 3px 6px rgba(181,181,181,0.25)', // 👈 added
+          boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
         }}>
           <a
             href="/trial"
