@@ -35,7 +35,7 @@ export function MobileHeader() {
   return (
     <>
       {/* Top bar */}
-      {/* Top bar */}
+    {/* Top bar */}
       <div
         style={{
           position: 'fixed',
@@ -47,7 +47,7 @@ export function MobileHeader() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#fff', // 👈 back to solid — transparent is the bug
+          background: '#fff', // solid — never transparent
         }}
       >
         {/* Left pill */}
@@ -63,8 +63,15 @@ export function MobileHeader() {
           </a>
         </div>
 
-        {/* Right side unchanged */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        {/* Right pill */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          background: '#fff',
+          borderRadius: 999,
+          padding: '4px',
+          gap: 4,
+        }}>
           <a
             href="/trial"
             style={{
