@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
+import { getLenis } from '@/lib/lenis';
 
 const SINGLE_LINKS = [
   { href: '/features', label: 'Features' },
@@ -38,6 +39,26 @@ export function MobileHeader({
 
   const pillBg = isScrolled ? 'rgba(255,255,255,0.7)' : '#fff'; // 👈 only change
 
+
+  function openMenu() {
+    setMenuOpen(true);
+    setTimeout(() => {
+      getLenis()?.stop?.();
+      window.dispatchEvent(new Event('spline-pause'));
+    }, 0);
+  }
+
+  function closeMenu() {
+    setMenuOpen(false);
+    setCompanyOpen(false);
+    setResourcesOpen(false);
+    setTimeout(() => {
+      getLenis()?.start?.();
+      window.dispatchEvent(new Event('spline-resume'));
+    }, 0);
+  }
+
+
   return (
     <>
       {/* Top bar */}
@@ -54,6 +75,7 @@ export function MobileHeader({
           alignItems: 'center',
           justifyContent: 'space-between',
           background: '#fff',
+          height: 'fit-content',
         }}
       >
         {/* Left pill */}
@@ -98,7 +120,8 @@ export function MobileHeader({
           </a>
           <button
             type="button"
-            onClick={() => setMenuOpen(true)}
+            // onClick={() => setMenuOpen(true)}
+            onClick={openMenu}
             style={{
               touchAction: 'manipulation',
               background: 'none',
@@ -128,7 +151,7 @@ export function MobileHeader({
             right: 0,
             bottom: 0,
             zIndex: 200,
-            background: '#fff', // solid — never transparent
+            // background: '#fff', // solid — never transparent
           }}
         >
           {/* Card wrapper */}
@@ -138,10 +161,10 @@ export function MobileHeader({
               borderRadius: 18,
               background: '#fff',
               boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
-              overflowY: 'scroll',
+              overflowY: 'auto',
               WebkitOverflowScrolling: 'touch',
-              display: 'flex',
-              flexDirection: 'column',
+              display: 'flex', 
+              flexDirection: 'column',  
               maxHeight: 'calc(100dvh - 1rem)',
             }}
           >
@@ -150,11 +173,7 @@ export function MobileHeader({
               <AriiaSvgMark className="w-20 h-10" />
               <button
                 type="button"
-                onClick={() => {
-                  setMenuOpen(false);
-                  setCompanyOpen(false);
-                  setResourcesOpen(false);
-                }}
+               onClick={closeMenu}
                 style={{
                   touchAction: 'manipulation',
                   background: '#eee',
@@ -174,6 +193,7 @@ export function MobileHeader({
               <a
                 key={link.href}
                 href={link.href}
+                onClick={closeMenu}
                 style={{
                   display: 'block',
                   padding: '14px 16px',
@@ -215,6 +235,7 @@ export function MobileHeader({
               <a
                 key={link.href}
                 href={link.href}
+                onClick={closeMenu}
                 style={{
                   display: 'block',
                   padding: '12px 16px 12px 32px',
@@ -255,6 +276,7 @@ export function MobileHeader({
               <a
                 key={link.href}
                 href={link.href}
+                onClick={closeMenu}
                 style={{
                   display: 'block',
                   padding: '12px 16px 12px 32px',
@@ -271,6 +293,7 @@ export function MobileHeader({
             <div style={{ padding: '24px 16px', display: 'flex', gap: 12 }}>
               <a
                 href="/login"
+                onClick={closeMenu}
                 style={{
                   flex: 1,
                   display: 'block',
@@ -288,6 +311,7 @@ export function MobileHeader({
               </a>
               <a
                 href="/trial"
+                onClick={closeMenu}
                 style={{
                   flex: 1,
                   display: 'block',

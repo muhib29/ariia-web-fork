@@ -14,26 +14,16 @@ import {
   ShieldCheck,
   Lock,
   ScrollText,
-  DollarSign,
-  ShieldQuestionIcon,
   CircleHelp,
   UserRound,
-  X,
 } from 'lucide-react';
 import { Button } from '@workspace/ui/components/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@workspace/ui/components/collapsible';
-import { usePathname, useRouter } from 'next/navigation';
-import { getLenis } from '@/lib/lenis';
-// import { SmoothLink } from '../SmoothLink';  
+import { usePathname } from 'next/navigation';
 import { cn } from '@workspace/ui/lib/utils';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
 import { MobileHeader } from './mobileheader';
 
-// ─── all your data arrays unchanged ───────────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const COMPANY_MENU = [
   {
@@ -113,9 +103,9 @@ const RESOURCES_MENU = [
   },
 ];
 
-// ─── HeaderContent: desktop only, zero changes ────────────────────────────────
+// ─── Desktop nav — completely untouched ───────────────────────────────────────
 
-function HeaderContent({
+function DesktopNav({
   hoveredDropdown,
   handleDropdownEnter,
   handleDropdownLeave,
@@ -141,7 +131,7 @@ function HeaderContent({
 
   return (
     <div className="flex items-center justify-between">
-      {/* Left pill: logo + desktop nav */}
+      {/* Left pill */}
       <div
         className={`flex items-center ${bgClass} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-3 py-0 md:px-4 md:py-2`}
       >
@@ -152,7 +142,7 @@ function HeaderContent({
         <nav className="hidden md:flex items-center space-x-6">
           <Link
             href="/features"
-            className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 py-2 mr-0"
+            className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 py-2"
           >
             Features
           </Link>
@@ -239,7 +229,7 @@ function HeaderContent({
         </nav>
       </div>
 
-      {/* Right pill: Log In + CTA + hamburger (desktop only) */}
+      {/* Right pill */}
       <div
         className={`flex items-center ${bgClass} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-1 py-1 md:px-2 md:py-2 space-x-1 sm:space-x-4`}
       >
@@ -263,7 +253,7 @@ function HeaderContent({
   );
 }
 
-// ─── Header: parent, splits mobile vs desktop via CSS ─────────────────────────
+// ─── Header: parent ────────────────────────────────────────────────────────────
 
 export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
   const NO_GRADIENT_ROUTES = ['/', '/#faq', '/#about-us/', '/pricing'];
@@ -304,33 +294,34 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
       {/* Gradient bar */}
       <div
         id="gradient-bar"
-        className="h-10 fixed top-0 left-0 w-full z-40 transition-opacity duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none"
+        className="h-10 fixed top-0 left-0 w-full z-40 pointer-events-none"
         style={{
           background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
           opacity: !isScrolled ? 1 : 0,
+          transition: 'opacity 0.5s cubic-bezier(0.23,1,0.32,1)',
           willChange: 'opacity',
         }}
       />
 
-      {/* ── MOBILE: MobileHeader handles everything below md ── */}
+      {/* ── MOBILE ── */}
       <div className="block md:hidden">
-        <MobileHeader />
+        <MobileHeader isScrolled={isScrolled} />
       </div>
 
-      {/* ── DESKTOP: original header, completely untouched ── */}
+      {/* ── DESKTOP ── */}
       <header
-        className={`hidden md:block transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+        className={`hidden md:block fixed left-0 w-full z-50 !bg-transparent ${
           isHomePage && !isScrolled ? 'header-vertical-lines' : ''
-        } fixed left-0 w-full z-50 !bg-transparent`}
-        style={{ maxWidth: '100vw', top: '0px', willChange: 'transform, padding-top' }}
+        }`}
+        style={{ maxWidth: '100vw', top: 0 }}
       >
         {!shouldHideGradient && (
           <div className="absolute inset-0 -z-10">
-            <div className="absolute w-[300px] h-[150px] md:w-[500px] md:h-[300px] -top-[3rem] md:-top-[12rem] right-[5%] bg-gradient-to-r from-[#6779FF] to-[#4E97FA] opacity-30 blur-[10rem]" />
+            <div className="absolute w-[500px] h-[300px] -top-[12rem] right-[5%] bg-gradient-to-r from-[#6779FF] to-[#4E97FA] opacity-30 blur-[10rem]" />
           </div>
         )}
         <div className="max-w-[73.1rem] mx-auto px-4 md:px-6 lg:px-4 py-6">
-          <HeaderContent
+          <DesktopNav
             hoveredDropdown={hoveredDropdown}
             handleDropdownEnter={handleDropdownEnter}
             handleDropdownLeave={handleDropdownLeave}
