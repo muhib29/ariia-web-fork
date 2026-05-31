@@ -46,16 +46,31 @@ export function MobileHeader() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#fff',
+          background: 'transparent',
         }}
       >
-        {/* Logo */}
-        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <AriiaSvgMark className="w-20 h-10" />
-        </a>
+        {/* RESTORED: Left pill — logo */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          background: '#fff',
+          borderRadius: 999,
+          padding: '0 12px',
+        }}>
+          <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+            <AriiaSvgMark className="w-20 h-10" />
+          </a>
+        </div>
 
-        {/* Right side: CTA + hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        {/* RESTORED: Right pill — CTA + hamburger */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          background: '#fff',
+          borderRadius: 999,
+          padding: '4px',
+          gap: 4,
+        }}>
           <a
             href="/trial"
             style={{
@@ -73,7 +88,6 @@ export function MobileHeader() {
             1-Month Free Trial
           </a>
 
-          {/* Hamburger icon */}
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
@@ -100,7 +114,7 @@ export function MobileHeader() {
         </div>
       </div>
 
-      {/* Menu overlay */}
+      {/* Menu overlay — untouched */}
       {menuOpen && (
         <div
           style={{
@@ -115,7 +129,6 @@ export function MobileHeader() {
             WebkitOverflowScrolling: 'touch',
           }}
         >
-          {/* Close row — with logo */}
           <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <AriiaSvgMark className="w-20 h-10" />
             <button
@@ -140,7 +153,6 @@ export function MobileHeader() {
             </button>
           </div>
 
-          {/* Single links */}
           {SINGLE_LINKS.map((link) => (
             <a
               key={link.href}
@@ -159,7 +171,6 @@ export function MobileHeader() {
             </a>
           ))}
 
-          {/* Company accordion */}
           <button
             type="button"
             onClick={() => setCompanyOpen((p) => !p)}
@@ -180,14 +191,7 @@ export function MobileHeader() {
             }}
           >
             <span>Company</span>
-            <ChevronDown
-              style={{
-                width: 16,
-                height: 16,
-                color: companyOpen ? '#35B5F5' : '#111',
-                transform: companyOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-              }}
-            />
+            <ChevronDown style={{ width: 16, height: 16, color: companyOpen ? '#35B5F5' : '#111', transform: companyOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           </button>
 
           {companyOpen && COMPANY_LINKS.map((link) => (
@@ -207,7 +211,6 @@ export function MobileHeader() {
             </a>
           ))}
 
-          {/* Resources accordion */}
           <button
             type="button"
             onClick={() => setResourcesOpen((p) => !p)}
@@ -228,14 +231,7 @@ export function MobileHeader() {
             }}
           >
             <span>Resources</span>
-            <ChevronDown
-              style={{
-                width: 16,
-                height: 16,
-                color: resourcesOpen ? '#35B5F5' : '#111',
-                transform: resourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-              }}
-            />
+            <ChevronDown style={{ width: 16, height: 16, color: resourcesOpen ? '#35B5F5' : '#111', transform: resourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           </button>
 
           {resourcesOpen && RESOURCES_LINKS.map((link) => (
@@ -255,7 +251,6 @@ export function MobileHeader() {
             </a>
           ))}
 
-          {/* CTA */}
           <div style={{ padding: '24px 16px', display: 'flex', gap: 12 }}>
             <a
               href="/login"
