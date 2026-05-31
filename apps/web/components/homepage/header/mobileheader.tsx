@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
-import { getLenis } from '@/lib/lenis';
 
 const SINGLE_LINKS = [
   { href: '/features', label: 'Features' },
@@ -28,36 +27,10 @@ const RESOURCES_LINKS = [
   { href: '/privacy-policy/', label: 'Privacy Policy' },
 ];
 
-export function MobileHeader({
-  isScrolled = false,
-}: {
-  isScrolled?: boolean;
-}) {
+export function MobileHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
-
-  const pillBg = isScrolled ? 'rgba(255,255,255,0.7)' : '#fff'; // 👈 only change
-
-
-  function openMenu() {
-    setMenuOpen(true);
-    setTimeout(() => {
-      getLenis()?.stop?.();
-      window.dispatchEvent(new Event('spline-pause'));
-    }, 0);
-  }
-
-  function closeMenu() {
-    setMenuOpen(false);
-    setCompanyOpen(false);
-    setResourcesOpen(false);
-    setTimeout(() => {
-      getLenis()?.start?.();
-      window.dispatchEvent(new Event('spline-resume'));
-    }, 0);
-  }
-
 
   return (
     <>
@@ -75,17 +48,16 @@ export function MobileHeader({
           alignItems: 'center',
           justifyContent: 'space-between',
           background: '#fff',
-          height: 'fit-content',
         }}
       >
         {/* Left pill */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          background: pillBg, // 👈
+          background: '#fff',
           borderRadius: 999,
           padding: '0 12px',
-          boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
+          boxShadow: '0 3px 6px rgba(181,181,181,0.25)', // 👈 added
         }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             <AriiaSvgMark className="w-20 h-10" />
@@ -96,11 +68,11 @@ export function MobileHeader({
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          background: pillBg, // 👈
+          background: '#fff',
           borderRadius: 999,
           padding: '4px',
           gap: 4,
-          boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
+          boxShadow: '0 3px 6px rgba(181,181,181,0.25)', // 👈 added
         }}>
           <a
             href="/trial"
@@ -120,8 +92,7 @@ export function MobileHeader({
           </a>
           <button
             type="button"
-            // onClick={() => setMenuOpen(true)}
-            onClick={openMenu}
+            onClick={() => setMenuOpen(true)}
             style={{
               touchAction: 'manipulation',
               background: 'none',
@@ -141,7 +112,6 @@ export function MobileHeader({
       </div>
 
       {/* Menu overlay */}
-     {/* Menu overlay */}
       {menuOpen && (
         <div
           style={{
@@ -151,184 +121,187 @@ export function MobileHeader({
             right: 0,
             bottom: 0,
             zIndex: 200,
-            // background: '#fff', // solid — never transparent
+            background: '#fff',
+            overflowY: 'scroll',
+            WebkitOverflowScrolling: 'touch',
           }}
         >
-          {/* Card wrapper */}
-          <div
+          {/* Close row — with logo */}
+          <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <AriiaSvgMark className="w-20 h-10" />
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                setCompanyOpen(false);
+                setResourcesOpen(false);
+              }}
+              style={{
+                touchAction: 'manipulation',
+                background: '#eee',
+                border: 'none',
+                borderRadius: '50%',
+                width: 40,
+                height: 40,
+                fontSize: 18,
+                cursor: 'pointer',
+              }}
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Single links */}
+          {SINGLE_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              style={{
+                display: 'block',
+                padding: '14px 16px',
+                borderBottom: '1px solid #eee',
+                color: '#111',
+                fontWeight: 700,
+                textDecoration: 'none',
+                touchAction: 'manipulation',
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+
+          {/* Company accordion */}
+          <button
+            type="button"
+            onClick={() => setCompanyOpen((p) => !p)}
             style={{
-              margin: '8px',
-              borderRadius: 18,
-              background: '#fff',
-              boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
-              overflowY: 'auto',
-              WebkitOverflowScrolling: 'touch',
-              display: 'flex', 
-              flexDirection: 'column',  
-              maxHeight: 'calc(100dvh - 1rem)',
+              touchAction: 'manipulation',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
+              padding: '14px 16px',
+              borderBottom: '1px solid #eee',
+              background: 'none',
+              border: 'none',
+              color: '#111',
+              fontWeight: 700,
+              fontSize: 16,
+              cursor: 'pointer',
             }}
           >
-            {/* Close row */}
-            <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <AriiaSvgMark className="w-20 h-10" />
-              <button
-                type="button"
-               onClick={closeMenu}
-                style={{
-                  touchAction: 'manipulation',
-                  background: '#eee',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: 40,
-                  height: 40,
-                  fontSize: 18,
-                  cursor: 'pointer',
-                }}
-              >
-                ✕
-              </button>
-            </div>
-
-            {SINGLE_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                style={{
-                  display: 'block',
-                  padding: '14px 16px',
-                  borderBottom: '1px solid #eee',
-                  color: '#111',
-                  fontWeight: 700,
-                  textDecoration: 'none',
-                  touchAction: 'manipulation',
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-
-            <button
-              type="button"
-              onClick={() => setCompanyOpen((p) => !p)}
+            <span>Company</span>
+            <ChevronDown
               style={{
+                width: 16,
+                height: 16,
+                color: companyOpen ? '#35B5F5' : '#111',
+                transform: companyOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              }}
+            />
+          </button>
+
+          {companyOpen && COMPANY_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              style={{
+                display: 'block',
+                padding: '12px 16px 12px 32px',
+                borderBottom: '1px solid #f5f5f5',
+                color: '#333',
+                textDecoration: 'none',
                 touchAction: 'manipulation',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                width: '100%',
-                padding: '14px 16px',
-                borderBottom: '1px solid #eee',
-                background: 'none',
-                border: 'none',
-                color: '#111',
-                fontWeight: 700,
-                fontSize: 16,
-                cursor: 'pointer',
               }}
             >
-              <span>Company</span>
-              <ChevronDown style={{ width: 16, height: 16, color: companyOpen ? '#35B5F5' : '#111', transform: companyOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-            </button>
+              {link.label}
+            </a>
+          ))}
 
-            {companyOpen && COMPANY_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                style={{
-                  display: 'block',
-                  padding: '12px 16px 12px 32px',
-                  borderBottom: '1px solid #f5f5f5',
-                  color: '#333',
-                  textDecoration: 'none',
-                  touchAction: 'manipulation',
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-
-            <button
-              type="button"
-              onClick={() => setResourcesOpen((p) => !p)}
+          {/* Resources accordion */}
+          <button
+            type="button"
+            onClick={() => setResourcesOpen((p) => !p)}
+            style={{
+              touchAction: 'manipulation',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
+              padding: '14px 16px',
+              background: 'none',
+              border: 'none',
+              borderBottom: '1px solid #eee',
+              color: '#111',
+              fontWeight: 700,
+              fontSize: 16,
+              cursor: 'pointer',
+            }}
+          >
+            <span>Resources</span>
+            <ChevronDown
               style={{
+                width: 16,
+                height: 16,
+                color: resourcesOpen ? '#35B5F5' : '#111',
+                transform: resourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              }}
+            />
+          </button>
+
+          {resourcesOpen && RESOURCES_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              style={{
+                display: 'block',
+                padding: '12px 16px 12px 32px',
+                borderBottom: '1px solid #f5f5f5',
+                color: '#333',
+                textDecoration: 'none',
                 touchAction: 'manipulation',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                width: '100%',
-                padding: '14px 16px',
-                background: 'none',
-                border: 'none',
-                borderBottom: '1px solid #eee',
-                color: '#111',
-                fontWeight: 700,
-                fontSize: 16,
-                cursor: 'pointer',
               }}
             >
-              <span>Resources</span>
-              <ChevronDown style={{ width: 16, height: 16, color: resourcesOpen ? '#35B5F5' : '#111', transform: resourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-            </button>
+              {link.label}
+            </a>
+          ))}
 
-            {resourcesOpen && RESOURCES_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                style={{
-                  display: 'block',
-                  padding: '12px 16px 12px 32px',
-                  borderBottom: '1px solid #f5f5f5',
-                  color: '#333',
-                  textDecoration: 'none',
-                  touchAction: 'manipulation',
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-
-            <div style={{ padding: '24px 16px', display: 'flex', gap: 12 }}>
-              <a
-                href="/login"
-                onClick={closeMenu}
-                style={{
-                  flex: 1,
-                  display: 'block',
-                  padding: '12px',
-                  textAlign: 'center',
-                  color: '#111',
-                  textDecoration: 'none',
-                  border: '1px solid #eee',
-                  borderRadius: 999,
-                  fontWeight: 500,
-                  touchAction: 'manipulation',
-                }}
-              >
-                Log In
-              </a>
-              <a
-                href="/trial"
-                onClick={closeMenu}
-                style={{
-                  flex: 1,
-                  display: 'block',
-                  padding: '12px',
-                  textAlign: 'center',
-                  background: '#111',
-                  color: '#fff',
-                  textDecoration: 'none',
-                  borderRadius: 999,
-                  fontWeight: 500,
-                  touchAction: 'manipulation',
-                }}
-              >
-                Free Trial
-              </a>
-            </div>
-
+          {/* CTA */}
+          <div style={{ padding: '24px 16px', display: 'flex', gap: 12 }}>
+            <a
+              href="/login"
+              style={{
+                flex: 1,
+                display: 'block',
+                padding: '12px',
+                textAlign: 'center',
+                color: '#111',
+                textDecoration: 'none',
+                border: '1px solid #eee',
+                borderRadius: 999,
+                fontWeight: 500,
+                touchAction: 'manipulation',
+              }}
+            >
+              Log In
+            </a>
+            <a
+              href="/trial"
+              style={{
+                flex: 1,
+                display: 'block',
+                padding: '12px',
+                textAlign: 'center',
+                background: '#111',
+                color: '#fff',
+                textDecoration: 'none',
+                borderRadius: 999,
+                fontWeight: 500,
+                touchAction: 'manipulation',
+              }}
+            >
+              Free Trial
+            </a>
           </div>
         </div>
       )}
