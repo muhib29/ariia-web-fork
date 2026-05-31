@@ -36,12 +36,25 @@ export function MobileHeader({
   const [companyOpen, setCompanyOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
 
-  const pillBg = isScrolled ? 'rgba(255,255,255,0.7)' : '#fff'; // 👈 only change
+  const pillBg = isScrolled ? 'rgba(255,255,255,0.7)' : '#fff';
 
   return (
     <>
       {/* Top bar */}
-   {/* Top bar */}
+      {/* <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          padding: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          background: '#fff',
+        }}
+      > */}
       <div
         style={{
           position: 'fixed',
@@ -54,6 +67,7 @@ export function MobileHeader({
           alignItems: 'center',
           justifyContent: 'space-between',
           background: '#fff',
+          height: 'fit-content', // 👈 add this — top bar only as tall as pills
         }}
       >
         {/* Left pill */}
@@ -118,7 +132,7 @@ export function MobileHeader({
       </div>
 
       {/* Menu overlay */}
-     {/* Menu overlay */}
+      {/* Menu overlay */}
       {menuOpen && (
         <div
           style={{
@@ -128,7 +142,7 @@ export function MobileHeader({
             right: 0,
             bottom: 0,
             zIndex: 200,
-            background: '#fff', // solid — never transparent
+            // background: '#fff', // solid — never transparent
           }}
         >
           {/* Card wrapper */}
@@ -138,7 +152,7 @@ export function MobileHeader({
               borderRadius: 18,
               background: '#fff',
               boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
-              overflowY: 'scroll',
+              overflowY: 'auto',
               WebkitOverflowScrolling: 'touch',
               display: 'flex',
               flexDirection: 'column',
