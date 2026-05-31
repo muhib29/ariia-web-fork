@@ -71,7 +71,10 @@ export function MobileHeader({
           height: 40,
           zIndex: 49,
           pointerEvents: 'none',
-          background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
+          // background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
+          // background: '#4E97FA', // blue
+          background: '#35B5F5', // cyan blue
+
           opacity: isScrolled ? 0 : 1,
         }}
       />
