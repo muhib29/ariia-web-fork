@@ -1,4 +1,4 @@
-import { Header } from './header';
+import { Header } from './header/header';
 import { HeroSection } from './hero-section';
 import { VideoSection } from './video-section';
 

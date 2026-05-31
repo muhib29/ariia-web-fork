@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import Link from 'next/link';
 import { Clock } from 'lucide-react';
 import { SectionHeader } from '../SectionHeader';
 import { FadeInWhenInView } from './hero-section';
+import { Header } from './header/header';
 
 export function BlogSection({ blogs }: { blogs: any[] }) {
   const [visibleCount, setVisibleCount] = useState(6);

@@ -1,4 +1,4 @@
-import { Header } from '../../components/homepage/header';
+import { Header } from '@/components/homepage/header/header';
 import { NewsletterFooter } from '../../components/homepage/footer';
 import { PricingSection } from '../../components/homepage/pricing-section';
 import { pricingQuery } from '../../graphql/querys';

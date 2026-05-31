@@ -1,6 +1,7 @@
-import { Header } from '../../components/homepage/header';
+
 import { NewsletterFooter } from '../../components/homepage/footer';
 import { FeaturesSection } from '../../components/homepage/FeaturesSection';
+import { Header } from '@/components/homepage/header/header';
 
 export const revalidate = 60;
 

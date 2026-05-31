@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import MarkdownRenderer from '../markdown-renderer';
 import { SectionHeader } from '../SectionHeader';
+import { Header } from './header/header';
 
 export interface TermsOfServiceData {
   tag?: string;

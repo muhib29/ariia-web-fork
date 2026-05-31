@@ -1,12 +1,12 @@
 'use client';
 import React from 'react';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import MarkdownRenderer from '../markdown-renderer';
 import { SectionHeader } from '../SectionHeader';
 import Image from 'next/image';
 import { cn } from '@workspace/ui/lib/utils';
 import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
+import { Header } from './header/header';
 
 export interface ContactCard {
   id: string;

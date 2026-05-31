@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from '../homepage/header';
+import { Header } from '@/components/homepage/header/header';
 import { NewsletterFooter } from '../homepage/footer';
 import { Share2 } from 'lucide-react';
 import { ShareModal } from '../homepage/ShareModal';

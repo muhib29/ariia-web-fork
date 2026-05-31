@@ -1,5 +1,5 @@
-import { Header } from './header';
 import type React from 'react';
+import { Header } from './header/header';
 
 interface HomepageLayoutProps {
   children: React.ReactNode;

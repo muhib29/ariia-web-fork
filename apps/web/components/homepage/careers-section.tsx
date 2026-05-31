@@ -1,5 +1,4 @@
 'use client';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import Image from 'next/image';
 import { MapPin, Briefcase, PieChart, Gift, DollarSign } from 'lucide-react';
@@ -10,6 +9,7 @@ import { SectionHeader } from '../SectionHeader';
 import dynamic from 'next/dynamic';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
+import { Header } from './header/header';
 
 const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
 

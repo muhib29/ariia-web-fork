@@ -1,12 +1,12 @@
 'Use Client';
 import React from 'react';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import MarkdownRenderer from '../markdown-renderer';
 import Image from 'next/image';
 import { CheckCircle } from 'lucide-react';
 import { GradientHeader } from './GradientHeader';
 import { SectionHeader } from '../SectionHeader';
+import { Header } from './header/header';
 
 export interface SecurityPageSectionProps {
   security: {

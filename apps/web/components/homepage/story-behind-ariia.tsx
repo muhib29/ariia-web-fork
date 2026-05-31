@@ -3,12 +3,12 @@
 
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import MarkdownRenderer from '../markdown-renderer';
 import React from 'react';
 import { SectionHeader } from '../SectionHeader';
 import { FadeInWhenInView } from './hero-section';
+import { Header } from './header/header';
 
 const LottieAnimation = dynamic(() => import('../LottieAnimation'), {
   ssr: false,

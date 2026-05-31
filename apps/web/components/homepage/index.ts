@@ -1,4 +1,6 @@
-export { Header } from './header';
+// export { Header } from './header/header';
+import { Header } from './header/header';
+
 export { HeroSection } from './hero-section';
 export { VideoSection } from './video-section';
 export { ContentSection } from './content-section';

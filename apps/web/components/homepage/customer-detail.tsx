@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import { Share2, Briefcase, Users, MapPin } from 'lucide-react';
 import React, { useState } from 'react';
@@ -10,6 +9,7 @@ import { ShareModal } from './ShareModal';
 import MarkdownRenderer from '../markdown-renderer';
 import { SectionHeader } from '../SectionHeader';
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
+import { Header } from './header/header';
 
 export interface CustomerContentBlock {
   heading?: string;

@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Header } from '../../components/homepage/header';
+
 import { NewsletterFooter } from '../../components/homepage/footer';
 import { SectionHeader } from '@/components/SectionHeader';
 import { useIsMobile } from '@workspace/ui/hooks/use-mobile';
 import LottieAnimation from '../../components/LottieAnimation';
 import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
+import { Header } from '@/components/homepage/header/header';
 
 interface IndustriesClientProps {
   industry: any;

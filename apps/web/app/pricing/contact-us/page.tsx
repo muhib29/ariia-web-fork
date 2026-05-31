@@ -1,5 +1,5 @@
 'use client';
-import { Header } from '../../../components/homepage/header';
+import { Header } from '@/components/homepage/header/header';
 import { NewsletterFooter } from '../../../components/homepage/footer';
 import { Share2 } from 'lucide-react';
 import Link from 'next/link';

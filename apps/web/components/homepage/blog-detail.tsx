@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Header } from './header';
 import { Share2, Clock } from 'lucide-react';
 import { NewsletterFooter } from './footer';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -12,6 +11,7 @@ import MarkdownRenderer from '../markdown-renderer';
 import slugify from 'slugify';
 import { lenisScrollTo } from '@/lib/lenis';
 import { SectionHeader } from '../SectionHeader';
+import { Header } from './header/header';
 
 interface BlogHeading {
   text: string;

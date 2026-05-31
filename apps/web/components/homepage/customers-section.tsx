@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { Header } from './header';
 import { NewsletterFooter } from './footer';
 import Link from 'next/link';
 import Lottie from 'lottie-react';
@@ -8,6 +7,7 @@ import logoAnimation from '../../public/lottie/logo.json';
 import { SectionHeader } from '../SectionHeader';
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
 import React, { useState } from 'react';
+import { Header } from './header/header';
 
 export interface CustomerCard {
   id: string;

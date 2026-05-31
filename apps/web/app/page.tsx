@@ -1,9 +1,9 @@
 import React from 'react';
-import { Header } from '@/components/homepage';
 import { HomeBelowFold } from '@/components/homepage/HomeBelowFold';
 import { HeroSection } from '@/components/homepage/hero-section';
 import { fetchAPI } from '@/utils/api-helper';
 import { homeQuery } from '@/graphql/querys';
+import { Header } from '@/components/homepage/header/header';
 
 export const revalidate = 300;
 
