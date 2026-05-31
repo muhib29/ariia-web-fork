@@ -5,10 +5,12 @@ import { ChevronDown, Sparkles, DollarSign, Users, UserRound, Briefcase, Mail, B
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
 import { getLenis } from '@/lib/lenis';
 
+
 const SINGLE_LINKS = [
-  { href: '/features', label: 'Features', icon: <Sparkles style={{ width: 18, height: 18, color: '#6b7280' }} /> },
-  { href: '/pricing', label: 'Pricing', icon: <DollarSign style={{ width: 18, height: 18, color: '#6b7280' }} /> },
+  { href: '/features', label: 'Features' },
+  { href: '/pricing', label: 'Pricing' },
 ];
+
 
 const COMPANY_LINKS = [
   { href: '/#about-us', label: 'About Us', icon: <UserRound style={{ width: 18, height: 18, color: '#6b7280' }} /> },
@@ -66,12 +68,26 @@ export function MobileHeader({
           top: 0,
           left: 0,
           right: 0,
+          height: 40,
+          zIndex: 49,
+          pointerEvents: 'none',
+          background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
+          opacity: isScrolled ? 0 : 1,
+        }}
+      />
+      {/* <div style={{ position: 'fixed', top: 0, ... }}> */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
           zIndex: 50,
           padding: '16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#fff',
+          // background: '#fff',
         }}
       >
         {/* Left pill */}
@@ -146,10 +162,13 @@ export function MobileHeader({
             bottom: 0,
             zIndex: 200,
             background: '#fff',
+            //  background: 'linear-gradient(135deg, #f0f4ff 0%, #e8f6ff 100%)', 
             overflowY: 'scroll',
             WebkitOverflowScrolling: 'touch',
           }}
         >
+
+
           {/* Close row */}
           <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <AriiaSvgMark className="w-20 h-10" />
@@ -172,7 +191,7 @@ export function MobileHeader({
           </div>
 
           {/* Single links */}
-          {SINGLE_LINKS.map((link) => (
+          {/* {SINGLE_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -190,6 +209,15 @@ export function MobileHeader({
               }}
             >
               {link.icon}
+              {link.label}
+            </a>
+          ))} */}
+          {SINGLE_LINKS.map((link) => (
+            <a key={link.href} href={link.href} style={{
+              display: 'block', padding: '14px 16px',
+              borderBottom: '1px solid #eee', color: '#111', fontWeight: 700, textDecoration: 'none',
+              touchAction: 'manipulation',
+            }}>
               {link.label}
             </a>
           ))}
