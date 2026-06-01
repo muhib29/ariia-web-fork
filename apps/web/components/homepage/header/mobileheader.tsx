@@ -21,7 +21,7 @@
   import { getLenis } from '@/lib/lenis';
 
   const SINGLE_LINKS = [
-    
+
     { href: '/features', label: 'Features' },
     { href: '/pricing', label: 'Pricing' },
   ];
@@ -76,7 +76,8 @@
 
     return (
       <>
-        {/* ── Top bar ── solid white, never transparent */}
+        {/* ── Top bar ── solid white, never transparent  */}
+         {/* // SAFE: solid color, no transparency, no blur */}
         <div
           style={{
             position: 'fixed',
