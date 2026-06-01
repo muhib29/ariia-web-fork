@@ -63,7 +63,8 @@ function SmoothTypewriter({
   const safeWords =
     words && words.length > 0 ? words : ['AI Agents', 'Smart Assistants', 'Digital Co-Pilots'];
   const [wordIndex, setWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState(() => (words && words.length > 0 ? words[0] : 'AI Agents'));
+  // const [displayText, setDisplayText] = useState(() => (words && words.length > 0 ? words[0] : 'AI Agents'));
+  const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -268,7 +269,10 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                 className="relative top-0 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
                 delay={0}
               >
-                <HeroLogo priority={true} className="object-contain max-w-[90px]  md:pb-2 md:max-w-full" />
+                <HeroLogo priority={true}
+                  // className="object-contain w-full h-full md:pb-2"
+                 className="object-contain max-w-[60px]  md:pb-0 md:max-w-full"
+                />
               </FadeInWhenInView>
             </div>
 
@@ -339,25 +343,25 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
               <div className="flex flex-col gap-2 md:gap-[17px]">
                 {rightContent?.listOfWork?.length
                   ? rightContent.listOfWork.map((business) => (
-                      <div
-                        key={business}
-                        onClick={() => setSelectedBusiness(business)}
-                        ref={(el) => {
-                          itemRefs.current[business] = el;
-                        }}
-                        className="cursor-pointer"
-                      >
-                        {selectedBusiness === business ? (
-                          <div className="w-[97%] h-[48px] rounded-[60px] px-3 py-2 md:px-6 md:py-3 bg-[#101828] text-white text-sm flex items-center justify-end md:justify-center">
-                            {business}
-                          </div>
-                        ) : (
-                          <div className="w-[97%] rounded-full px-3 md:px-4 py-2 hover:bg-white/90 hover:shadow-md flex items-center justify-end md:justify-center min-h-[48px] text-sm font-medium text-gray-700">
-                            {business}
-                          </div>
-                        )}
-                      </div>
-                    ))
+                    <div
+                      key={business}
+                      onClick={() => setSelectedBusiness(business)}
+                      ref={(el) => {
+                        itemRefs.current[business] = el;
+                      }}
+                      className="cursor-pointer"
+                    >
+                      {selectedBusiness === business ? (
+                        <div className="w-[97%] h-[48px] rounded-[60px] px-3 py-2 md:px-6 md:py-3 bg-[#101828] text-white text-sm flex items-center justify-end md:justify-center">
+                          {business}
+                        </div>
+                      ) : (
+                        <div className="w-[97%] rounded-full px-3 md:px-4 py-2 hover:bg-white/90 hover:shadow-md flex items-center justify-end md:justify-center min-h-[48px] text-sm font-medium text-gray-700">
+                          {business}
+                        </div>
+                      )}
+                    </div>
+                  ))
                   : null}
               </div>
             </FadeInWhenInView>

@@ -10,8 +10,8 @@ interface HeroLogoProps {
 /** Hero mark — served from /public to avoid multi‑MB inline base64 in the JS bundle. */
 export function HeroLogo({
   className = '',
-  width = 149,
-  height = 143,
+  width = 139,
+  height = 133,
   priority = true,
 }: HeroLogoProps) {
   return (

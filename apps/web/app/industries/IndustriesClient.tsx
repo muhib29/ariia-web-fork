@@ -14,12 +14,27 @@ interface IndustriesClientProps {
 }
 
 export default function IndustriesClient({ industry }: IndustriesClientProps) {
-  const [industryData, setIndustryData] = useState<any>(industry);
-  const isMobile = useIsMobile();
+  // const [industryData, setIndustryData] = useState<any>(industry);
+  const industryData = industry;
+  // const isMobile = useIsMobile();
+
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false; // SSR safe
+    return window.innerWidth < 768;
+  });
+
 
   useEffect(() => {
-    setIndustryData(industry);
-  }, [industry]);
+  const check = () => setIsMobile(window.innerWidth < 768);
+  window.addEventListener('resize', check);
+  return () => window.removeEventListener('resize', check);
+}, []);
+
+
+
+  // useEffect(() => {
+  //   setIndustryData(industry);
+  // }, [industry]);
 
   const sectionCards = [
     {

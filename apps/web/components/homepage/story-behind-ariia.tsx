@@ -10,10 +10,18 @@ import { SectionHeader } from '../SectionHeader';
 import { FadeInWhenInView } from './hero-section';
 import { Header } from './header/header';
 
+// const LottieAnimation = dynamic(() => import('../LottieAnimation'), {
+//   ssr: false,
+//   loading: () => null,
+// });
+
 const LottieAnimation = dynamic(() => import('../LottieAnimation'), {
   ssr: false,
-  loading: () => null,
+  loading: () => (
+    <div className="w-full h-full rounded-[20px] lg:rounded-[28px] bg-gradient-to-br from-[#e3f3ff] via-[#d0eaff] to-[#c2e0ff] animate-pulse" />
+  ),
 });
+
 
 export interface AboutContentSection {
   id?: string;

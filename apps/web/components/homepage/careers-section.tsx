@@ -11,8 +11,13 @@ import { SPLINE_SCENES } from '@/config/spline-scenes';
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
 import { Header } from './header/header';
 
-const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
-
+// const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
+const SplineScene = dynamic(() => import('../SplineScene'), { 
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 bg-gradient-to-br from-[#F8FAFF] to-[#E8F3FF] rounded-[32px]" />
+  )
+});
 export interface CareerJobInfo {
   employment?: string;
   equity?: string;
@@ -220,7 +225,7 @@ export function CareersSection({ career }: { career: CareerData }) {
                 alt="Careers Illustration"
                 fill
                 className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
-                priority
+                // priority
               />
               <SplineScene config={SPLINE_SCENES.career} />
             </div>
