@@ -30,6 +30,7 @@ export default function SplineScene({
   const [SplineComponent, setSplineComponent] = useState<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const splineViewerRef = useRef<HTMLDivElement>(null);
+  const splineAppRef = useRef<Application | null>(null); // ← add this line only
   const screenSize = useScreenSize();
   const currentHeight = config.height[screenSize];
   const shouldLoadImmediately = priority || config.priority;
@@ -84,6 +85,7 @@ export default function SplineScene({
 
   useEffect(() => {
     const onPause = () => {
+      try { splineAppRef.current?.stop?.(); } catch (e) { }
       if (splineViewerRef.current) {
         splineViewerRef.current.style.visibility = 'hidden';
         splineViewerRef.current.style.pointerEvents = 'none';
@@ -91,6 +93,7 @@ export default function SplineScene({
     };
 
     const onResume = () => {
+      try { splineAppRef.current?.play?.(); } catch (e) { }
       if (splineViewerRef.current) {
         splineViewerRef.current.style.visibility = 'visible';
         splineViewerRef.current.style.pointerEvents = 'auto';
@@ -114,7 +117,7 @@ export default function SplineScene({
     try {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('no-spline') === '1') return;
-    } catch (e) {}
+    } catch (e) { }
 
     // Bot detection
     const isBot =
@@ -159,6 +162,7 @@ export default function SplineScene({
   }, [isNearViewport, shouldLoadImmediately, userInteracted]);
 
   const handleLoad = (spline: Application) => {
+    splineAppRef.current = spline; // ← store the reference to the Spline app
     setIsLoaded(true);
     if (config.disableInteractions) {
       try {
