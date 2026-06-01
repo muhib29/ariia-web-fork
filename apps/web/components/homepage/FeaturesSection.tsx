@@ -302,7 +302,7 @@ export function FeaturesSection() {
                       className="bg-no-repeat bg-contain bg-center
                   bg-[url('/images/features/real-time-bg.svg')] z-2 absolute  h-auto w-[400px] sm:h-[339px] sm:w-[339px]"
                     ></div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px] ios-hide-mobile-blur max-md:hidden" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px]" />
                     <Image
                       src="/images/features/real-time.webp"
                       alt="Real-Time Intelligence & Performance Analytics"

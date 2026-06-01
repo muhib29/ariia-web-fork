@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
-import MarkdownRenderer from '../markdown-renderer';
 import { cn } from '@workspace/ui/lib/utils';
 import { SectionHeader } from '../SectionHeader';
-
+import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 export interface FAQSectionProps {
   header?: {
     id?: string;
@@ -64,77 +64,80 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
           <div className="space-y-0 bg-transparent md:bg-white">
             {questions?.length
               ? questions.map((faq, index) => {
-                  const isOpen = openIndex === index;
-                  return (
-                    <div
-                      key={faq.id}
-                      className={cn(
-                        'group border border-gray-200 bg-white bg-opacity-80 backdrop-blur-sm shadow-[0_2px_6px_-2px_rgba(16,24,40,0.12)] transition-all duration-300 hover:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] hover:border-[#bcd6ff] focus-within:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] focus-within:border-[#bcd6ff]',
-                        index === 0 && 'rounded-ss-xl rounded-se-xl',
-                        index === questions?.length - 1 && 'rounded-es-xl rounded-ee-xl',
-                      )}
+                const isOpen = openIndex === index;
+                return (
+                  <div
+                    key={faq.id}
+                    className={cn(
+                      'group border border-gray-200 bg-white bg-opacity-80 backdrop-blur-sm shadow-[0_2px_6px_-2px_rgba(16,24,40,0.12)] transition-all duration-300 hover:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] hover:border-[#bcd6ff] focus-within:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] focus-within:border-[#bcd6ff]',
+                      index === 0 && 'rounded-ss-xl rounded-se-xl',
+                      index === questions?.length - 1 && 'rounded-es-xl rounded-ee-xl',
+                    )}
+                  >
+                    <button
+                      onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                      className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7db3ff] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                     >
-                      <button
-                        onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                        className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7db3ff] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                      >
-                        <span className="text-base font-medium text-[#101828] transition-colors duration-300 group-hover:text-[#175CD3] group-focus-within:text-[#175CD3]">
-                          {faq.title}
+                      <span className="text-base font-medium text-[#101828] transition-colors duration-300 group-hover:text-[#175CD3] group-focus-within:text-[#175CD3]">
+                        {faq.title}
+                      </span>
+                      <span className="ml-4">
+                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-[#3B6BFF] to-[#2E96FF] shadow-[0_4px_10px_-5px_rgba(46,150,255,0.9)] transition-shadow duration-300 group-hover:shadow-[0_8px_18px_-6px_rgba(46,150,255,0.9)] group-focus-within:shadow-[0_8px_18px_-6px_rgba(46,150,255,0.9)]">
+                          {isOpen ? (
+                            <Minus className="w-4 h-4 text-white" />
+                          ) : (
+                            <Plus className="w-4 h-4 text-white" />
+                          )}
                         </span>
-                        <span className="ml-4">
-                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-[#3B6BFF] to-[#2E96FF] shadow-[0_4px_10px_-5px_rgba(46,150,255,0.9)] transition-shadow duration-300 group-hover:shadow-[0_8px_18px_-6px_rgba(46,150,255,0.9)] group-focus-within:shadow-[0_8px_18px_-6px_rgba(46,150,255,0.9)]">
-                            {isOpen ? (
-                              <Minus className="w-4 h-4 text-white" />
-                            ) : (
-                              <Plus className="w-4 h-4 text-white" />
-                            )}
-                          </span>
-                        </span>
-                      </button>
+                      </span>
+                    </button>
 
-                      <div
-                        className={cn(
-                          'grid transition-[grid-template-rows,opacity] duration-300 ease-out',
-                          isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
-                        )}
-                      >
-                        <div className="overflow-hidden min-h-0">
-                          <div className="px-6 pb-5 text-sm text-[#475467] leading-[24px] whitespace-normal">
-                            <MarkdownRenderer
-                              components={{
-                                p: ({ node, ...props }: { node?: any; [key: string]: any }) => <p className="mb-2 last:mb-0" {...props} />,
-                                ul: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                                  <ul
-                                    className="list-disc list-outside pl-5 space-y-1 mb-4"
-                                    {...props}
-                                  />
-                                ),
-                                ol: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                                  <ol
-                                    className="list-decimal list-outside pl-5 space-y-1 mb-4"
-                                    {...props}
-                                  />
-                                ),
-                                a: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                                  <a
-                                    className="text-[#3B6BFF] underline hover:no-underline"
-                                    {...props}
-                                  />
-                                ),
-                              }}
-                            >
-                              {faq.content?.replace(/\\n/g, '\n') || ''}
-                            </MarkdownRenderer>
-                          </div>
+
+                    <motion.div
+                      initial={false}
+                      animate={isOpen ? 'open' : 'collapsed'}
+                      variants={{
+                        open: { height: 'auto', opacity: 1 },
+                        collapsed: { height: 0, opacity: 0 },
+                      }}
+                      transition={{ duration: 0.24, ease: 'easeOut' }}
+                      className="overflow-hidden"
+                    >
+                        <div className="px-6 pb-5 text-sm text-[#475467] leading-[24px] whitespace-normal">
+                          <ReactMarkdown
+                            components={{
+                              p: ({ node, ...props }: { node?: any;[key: string]: any }) => <p className="mb-2 last:mb-0" {...props} />,
+                              ul: ({ node, ...props }: { node?: any;[key: string]: any }) => (
+                                <ul
+                                  className="list-disc list-outside pl-5 space-y-1 mb-4"
+                                  {...props}
+                                />
+                              ),
+                              ol: ({ node, ...props }: { node?: any;[key: string]: any }) => (
+                                <ol
+                                  className="list-decimal list-outside pl-5 space-y-1 mb-4"
+                                  {...props}
+                                />
+                              ),
+                              a: ({ node, ...props }: { node?: any;[key: string]: any }) => (
+                                <a
+                                  className="text-[#3B6BFF] underline hover:no-underline"
+                                  {...props}
+                                />
+                              ),
+                            }}
+                          >
+                            {faq.content?.replace(/\\n/g, '\n') || ''}
+                          </ReactMarkdown>
                         </div>
-                      </div>
+                 </motion.div>
                     </div>
-                  );
+          );
                 })
               : null}
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+    </section >
   );
 }
