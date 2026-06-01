@@ -269,10 +269,11 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                 className="relative top-0 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
                 delay={0}
               >
-                <HeroLogo priority={true}
+                {/* <HeroLogo priority={true}
                   // className="object-contain w-full h-full md:pb-2"
-                 className="object-contain max-w-[60px]  md:pb-0 md:max-w-full"
-                />
+                 className="object-contain max-w-[90px]  md:pb-0 md:max-w-full"
+                /> */}
+                 <HeroLogo priority={true} className="object-contain max-w-[90px]  md:pb-0 md:max-w-full" />
               </FadeInWhenInView>
             </div>
 
