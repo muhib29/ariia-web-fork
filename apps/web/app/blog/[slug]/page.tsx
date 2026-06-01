@@ -58,12 +58,12 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   const otherBlogs = (allRes?.data?.blogs || [])
     .map((b: any) => {
       const c = b.Card || {};
-      const a = c.author || {};
+      const a = c.custom_author || {};
       return {
         date: c.date,
         title: c.title,
         image: c.image?.url,
-        author: a.name,
+        author: a.Name,
         authorRole: a.role,
         readTime: c.readTime,
         avatar: a.avatar?.url,
