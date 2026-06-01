@@ -93,7 +93,7 @@
           }}
         >
           {/* Left pill — logo */}
-          {/* <div
+          <div
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -106,7 +106,7 @@
             <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
               <AriiaSvgMark className="w-20 h-10" />
             </a>
-          </div> */}
+          </div>
 
           {/* Right pill — CTA + hamburger */}
           <div
