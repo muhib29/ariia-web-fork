@@ -739,7 +739,7 @@ section {
   .blur-xl, .blur-2xl, .blur-3xl, [class*="blur-"] {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
+    backface-visibility: hidden;b
     -webkit-backface-visibility: hidden;
   }
 } */
@@ -758,14 +758,30 @@ section {
 
 
 
-/* Only remove blur on fixed positioned elements — these cause GPU freeze */
+/* 
+  CHROME IOS GPU FIX - Root Cause Analysis:
+  
+  Issue: Fixed-position elements with backdrop-blur-md/sm caused severe scrolling lag on Chrome iOS.
+  
+  Root Cause: The persistent mobile footer CTAs (pricing, careers) and modal overlays had 
+  backdrop-filter effects that required continuous GPU compositing during scroll, exhausting 
+  GPU memory budget and causing frame drops.
+  
+  Solution: Removed backdrop-blur-md/backdrop-blur-sm from:
+    - Pricing contact page fixed footer
+    - Careers page fixed footers  
+    - Success modal backdrops
+  
+  These now use solid backgrounds (bg-white, bg-black/40) instead of translucent + blur,
+  maintaining visual appearance while eliminating GPU compositing overhead.
+  
+  The global workaround rule that disabled all backdrop-filter on fixed descendants is no 
+  longer needed and has been removed. Decorative blur effects (blur-3xl) on absolute elements
+  are unaffected and continue to work normally.
+*/
 
+/* Harmless performance optimization for blur effects on mobile */
 @media (max-width: 767px) {
-  [style*="position: fixed"] *,
-  [style*="position:fixed"] * {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
   .blur-sm, .blur, .blur-md, .blur-lg,
   .blur-xl, .blur-2xl, .blur-3xl, [class*="blur-"] {
     transform: translateZ(0);

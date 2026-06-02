@@ -26,7 +26,7 @@ export function SuccessModal({ isOpen, onCloseAction, message }: SuccessModalPro
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onCloseAction} />
+      <div className="absolute inset-0 bg-black/40" onClick={onCloseAction} />
 
       <div className="relative z-[101] mx-4 w-full max-w-md">
         <div className="absolute inset-0 w-full h-full pointer-events-none">

@@ -767,7 +767,7 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
 
         {/* Sticky Apply Button on Mobile - UPDATED */}
         {!showForm && (
-          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-md border-t border-gray-200 p-4 z-50">
+          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50">
             <button
               onClick={handleApplyClick}
               className="min-w-[240px] w-full bg-gradient-to-r from-[#3B6BFF] to-[#2E96FF] shadow-sm hover:scale-105 hover:shadow-lg hover:brightness-110 hover:cursor-pointer active:scale-95 duration-300 ease-out text-white font-semibold py-3 px-4 rounded-full transition-all text-base"
@@ -778,7 +778,7 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
         )}
 
         {showForm && (
-          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-md border-t border-gray-200 p-4 z-50">
+          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50">
             <button
               form="career-application-form"
               type="submit"

@@ -337,8 +337,8 @@ export default function PricingContactUs() {
         </div>
       </div>
 
-      {/* Sticky CTA on mobile to mirror careers interaction */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-md border-t border-gray-200 p-4 z-40">
+      {/* Sticky CTA on mobile - removed backdrop-blur-md for Chrome iOS performance */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
         <button
           form="enterprise-inquiry-form"
           type="submit"
@@ -349,9 +349,9 @@ export default function PricingContactUs() {
         </button>
       </div>
 
-      {/* Success Dialog */}
+      {/* Success Dialog - removed backdrop-blur-sm for Chrome iOS performance */}
       {showDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/40 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/40">
           <div className="bg-white relative overflow-hidden rounded-2xl shadow-2xl px-8 py-10 max-w-md w-full flex flex-col items-center text-center">
             <div className="absolute inset-0">
               <div className="absolute z-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] top-[0px] left-[0px] bg-gradient-to-br from-[#a3eeff] via-white to-[#a3eeff] opacity-90 blur-[70px]" />
