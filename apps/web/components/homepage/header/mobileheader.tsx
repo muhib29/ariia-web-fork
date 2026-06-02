@@ -82,7 +82,7 @@ function closeMenu() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#fff',
+          background: '#35B5F5',
         }}
       >
         {/* Left pill — logo. No boxShadow (confirmed freeze cause on fixed elements) */}
