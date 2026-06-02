@@ -18,7 +18,6 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
-import { getLenis } from '@/lib/lenis';
 
 const SINGLE_LINKS = [
   { href: '/features', label: 'Features' },
@@ -43,34 +42,28 @@ const RESOURCES_LINKS = [
   { href: '/privacy-policy/', label: 'Privacy Policy', icon: <ShieldCheck style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
 ];
 
-export function MobileHeader({
-  isScrolled = false,
-}: {
-  isScrolled?: boolean;
-}) {
+export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
 
-  // SAFE: solid colors only — never transparent, never rgba on fixed elements
-  const pillBg = isScrolled ? '#f0f8ff' : '#fff';
+  function openMenu() {
+    window.dispatchEvent(new Event('spline-pause'));
+    requestAnimationFrame(() => setMenuOpen(true));
+  }
 
-function openMenu() {
-  window.dispatchEvent(new Event('spline-pause'));
-  requestAnimationFrame(() => setMenuOpen(true));
-}
+  function closeMenu() {
+    setMenuOpen(false);
+    setCompanyOpen(false);
+    setResourcesOpen(false);
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('spline-resume'));
+    });
+  }
 
-function closeMenu() {
-  setMenuOpen(false);
-  setCompanyOpen(false);
-  setResourcesOpen(false);
-  requestAnimationFrame(() => {
-    window.dispatchEvent(new Event('spline-resume'));
-  });
-}
   return (
     <>
-      {/* TOP BAR — solid #fff, no boxShadow, no transparency */}
+      {/* TOP BAR — transparent background, floating pills */}
       <div
         style={{
           position: 'fixed',
@@ -78,23 +71,24 @@ function closeMenu() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: '12px 16px',
+          padding: '16px 16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#35B5F5',
-          // background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
-
+          background: 'transparent',
+          pointerEvents: 'none',
         }}
       >
-        {/* Left pill — logo. No boxShadow (confirmed freeze cause on fixed elements) */}
+        {/* Left pill — logo */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            background: pillBg,
+            background: '#fff',
             borderRadius: 999,
             padding: '0 10px',
+            boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
+            pointerEvents: 'auto',
           }}
         >
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
@@ -102,18 +96,20 @@ function closeMenu() {
           </a>
         </div>
 
-        {/* Right pill — CTA + hamburger. No boxShadow */}
+        {/* Right pill — CTA + hamburger */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            background: pillBg,
+            background: '#fff',
             borderRadius: 999,
             padding: '4px',
             gap: 4,
+            boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
+            pointerEvents: 'auto',
           }}
         >
-          <a
+          <a  
             href="/trial"
             style={{
               background: '#111',
@@ -150,11 +146,7 @@ function closeMenu() {
         </div>
       </div>
 
-      {/* MENU OVERLAY
-          — always in DOM, toggled via display (no mount/unmount = no React render delay)
-          — solid gradient background (no transparency, no )
-          — no boxShadow anywhere on this element
-      */}
+      {/* MENU OVERLAY — solid, no blur, no transparency */}
       <div
         style={{
           position: 'fixed',
@@ -169,7 +161,7 @@ function closeMenu() {
           display: menuOpen ? 'block' : 'none',
         }}
       >
-        {/* Header row: CTA pill left, close button right */}
+        {/* Header row */}
         <div
           style={{
             padding: '14px 16px',
@@ -178,7 +170,7 @@ function closeMenu() {
             justifyContent: 'space-between',
           }}
         >
-          {/* CTA pill — solid #fff, no boxShadow */}
+          {/* CTA pill */}
           <div
             style={{
               display: 'flex',
@@ -189,7 +181,7 @@ function closeMenu() {
               gap: 2,
             }}
           >
-            <a
+           <a 
               href="/login"
               onClick={closeMenu}
               style={{
@@ -222,7 +214,7 @@ function closeMenu() {
             </a>
           </div>
 
-          {/* Close button — solid #fff, no boxShadow */}
+          {/* Close button */}
           <button
             type="button"
             onClick={closeMenu}
@@ -246,13 +238,10 @@ function closeMenu() {
           </button>
         </div>
 
-        {/* Divider */}
         <div style={{ height: 1, background: '#c8e6f7', margin: '0 16px' }} />
 
         {/* Nav links */}
         <div style={{ padding: '8px 0' }}>
-
-          {/* Single links */}
           {SINGLE_LINKS.map((link) => (
             <a
               key={link.href}
@@ -276,7 +265,7 @@ function closeMenu() {
             </a>
           ))}
 
-          {/* Company accordion button */}
+          {/* Company accordion */}
           <button
             type="button"
             onClick={() => setCompanyOpen((p) => !p)}
@@ -300,8 +289,6 @@ function closeMenu() {
             <span>Company</span>
             <ChevronDown style={{ width: 16, height: 16, color: '#4E97FA', transform: companyOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           </button>
-
-          {/* Company sub-links — display toggle, no mount/unmount */}
           <div style={{ display: companyOpen ? 'block' : 'none' }}>
             {COMPANY_LINKS.map((link) => (
               <a
@@ -328,7 +315,7 @@ function closeMenu() {
             ))}
           </div>
 
-          {/* Resources accordion button */}
+          {/* Resources accordion */}
           <button
             type="button"
             onClick={() => setResourcesOpen((p) => !p)}
@@ -352,8 +339,6 @@ function closeMenu() {
             <span>Resources</span>
             <ChevronDown style={{ width: 16, height: 16, color: '#4E97FA', transform: resourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           </button>
-
-          {/* Resources sub-links — display toggle, no mount/unmount */}
           <div style={{ display: resourcesOpen ? 'block' : 'none' }}>
             {RESOURCES_LINKS.map((link) => (
               <a
@@ -379,7 +364,6 @@ function closeMenu() {
               </a>
             ))}
           </div>
-
         </div>
       </div>
     </>
