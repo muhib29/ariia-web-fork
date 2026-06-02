@@ -744,7 +744,7 @@ section {
   }
 } */
 
-/* @media (max-width: 767px) {
+@media (max-width: 767px) {
   .ios-flatten-blur,
   .blur-sm, .blur, .blur-md, .blur-lg,
   .blur-xl, .blur-2xl, .blur-3xl, [class*="blur-"] {
@@ -754,22 +754,22 @@ section {
     -webkit-backdrop-filter: none !important;
   }
 }
- */
 
 
- @media (max-width: 767px) {
-  /* Only remove blur on fixed positioned elements — these cause GPU freeze */
+
+/* Only remove blur on fixed positioned elements — these cause GPU freeze */
+/* @media (max-width: 767px) {
   [style*="position: fixed"] *,
   [style*="position:fixed"] * {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-  
+   */
   /* Keep decorative blurs but promote to GPU layer to reduce freeze */
-  .blur-sm, .blur, .blur-md, .blur-lg,
+  /* .blur-sm, .blur, .blur-md, .blur-lg,
   .blur-xl, .blur-2xl, .blur-3xl, [class*="blur-"] {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
     will-change: transform;
   }
-}
+} */
