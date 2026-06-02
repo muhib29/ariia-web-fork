@@ -74,6 +74,30 @@ export function MobileHeader({
       <div
         style={{
           position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 56,
+          zIndex: 49,
+          background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
+        }}
+      />
+      <div
+        style={{
+          position: 'fixed',
+          top: 8,
+          left: 12,
+          right: 12,
+          zIndex: 50,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+
+        {/* <div
+        style={{
+          position: 'fixed',
           top: 12,
           left: 12,
           right: 12,
@@ -84,19 +108,19 @@ export function MobileHeader({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#ffffff',
+          background: '#fff',
           // background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
           // boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
         }}
-      >
-        {/* Left pill — logo. No boxShadow (confirmed freeze cause on fixed elements) */}
+      > */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            background: pillBg,
+            background: '#fff',
             borderRadius: 999,
             padding: '0 10px',
+            boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
           }}
         >
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
@@ -109,10 +133,11 @@ export function MobileHeader({
           style={{
             display: 'flex',
             alignItems: 'center',
-            background: pillBg,
+            background: '#fff',
             borderRadius: 999,
             padding: '4px',
             gap: 4,
+            boxShadow: '0 3px 6px rgba(181,181,181,0.25)',
           }}
         >
           <a
@@ -157,7 +182,7 @@ export function MobileHeader({
             — solid gradient background (no transparency, no )
             — no boxShadow anywhere on this element
         */}
-      <div
+      < div
         style={{
           position: 'fixed',
           top: 0,
@@ -169,10 +194,11 @@ export function MobileHeader({
           overflowY: 'scroll',
           WebkitOverflowScrolling: 'touch',
           display: menuOpen ? 'block' : 'none',
-        }}
+        }
+        }
       >
         {/* Header row: CTA pill left, close button right */}
-        <div
+        < div
           style={{
             padding: '14px 16px',
             display: 'flex',
@@ -181,7 +207,7 @@ export function MobileHeader({
           }}
         >
           {/* CTA pill — solid #fff, no boxShadow */}
-          <div
+          < div
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -222,10 +248,10 @@ export function MobileHeader({
             >
               1-Month Free Trial
             </a>
-          </div>
+          </div >
 
           {/* Close button — solid #fff, no boxShadow */}
-          <button
+          < button
             type="button"
             onClick={closeMenu}
             style={{
@@ -245,11 +271,11 @@ export function MobileHeader({
             <svg style={{ width: 18, height: 18, color: '#444' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </button>
-        </div>
+          </button >
+        </div >
 
         {/* Divider */}
-        <div style={{ height: 1, background: '#c8e6f7', margin: '0 16px' }} />
+        < div style={{ height: 1, background: '#c8e6f7', margin: '0 16px' }} />
 
         {/* Nav links */}
         <div style={{ padding: '8px 0' }}>
@@ -383,7 +409,7 @@ export function MobileHeader({
           </div>
 
         </div>
-      </div>
+      </div >
     </>
   );
 }
