@@ -18,7 +18,6 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
-import { getLenis } from '@/lib/lenis';
 
 const SINGLE_LINKS = [
   { href: '/features', label: 'Features' },
@@ -53,21 +52,22 @@ export function MobileHeader({
   const [resourcesOpen, setResourcesOpen] = useState(false);
 
   // SAFE: solid colors only — never transparent, never rgba on fixed elements
-  const pillBg = isScrolled ? '#f0f8ff' : '#fff';
+  // const pillBg = isScrolled ? '#f0f8ff' : '#fff';
+  const pillBg = isScrolled ? '#fff' : '#fff'; // always white pills
 
-function openMenu() {
-  window.dispatchEvent(new Event('spline-pause'));
-  requestAnimationFrame(() => setMenuOpen(true));
-}
+  function openMenu() {
+    window.dispatchEvent(new Event('spline-pause'));
+    requestAnimationFrame(() => setMenuOpen(true));
+  }
 
-function closeMenu() {
-  setMenuOpen(false);
-  setCompanyOpen(false);
-  setResourcesOpen(false);
-  requestAnimationFrame(() => {
-    window.dispatchEvent(new Event('spline-resume'));
-  });
-}
+  function closeMenu() {
+    setMenuOpen(false);
+    setCompanyOpen(false);
+    setResourcesOpen(false);
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('spline-resume'));
+    });
+  }
   return (
     <>
       {/* TOP BAR — solid #fff, no boxShadow, no transparency */}
@@ -82,7 +82,8 @@ function closeMenu() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#fff',
+          background: 'none',       
+          pointerEvents: 'none',    
         }}
       >
         {/* Left pill — logo. No boxShadow (confirmed freeze cause on fixed elements) */}
@@ -90,9 +91,11 @@ function closeMenu() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            background: pillBg,
+            background: '#fff',
             borderRadius: 999,
             padding: '0 10px',
+            // boxShadow: isScrolled ? '0 2px 10px rgba(0,0,0,0.08)' : 'none',
+            pointerEvents: 'auto',  
           }}
         >
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
@@ -109,6 +112,8 @@ function closeMenu() {
             borderRadius: 999,
             padding: '4px',
             gap: 4,
+            // boxShadow: isScrolled ? '0 2px 10px rgba(0,0,0,0.08)' : 'none',
+            pointerEvents: 'auto',   // ✅ add this
           }}
         >
           <a
@@ -146,6 +151,7 @@ function closeMenu() {
             </svg>
           </button>
         </div>
+
       </div>
 
       {/* MENU OVERLAY
