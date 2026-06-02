@@ -768,7 +768,7 @@
 } */
 
 
- /* @media (max-width: 767px) {
+ @media (max-width: 767px) {
 
    [style*="position: fixed"] *,
    [style*="position:fixed"] * {
@@ -788,15 +788,4 @@
      -webkit-transform: translateZ(0);
      will-change: transform;
    }
- } */
-
-
-
- @media (max-width: 767px) {
-  /* Remove will-change from blur elements — prevents unnecessary GPU layer promotion */
-  .blur-sm, .blur, .blur-md, .blur-lg,
-  .blur-xl, .blur-2xl, .blur-3xl, [class*="blur-"] {
-    will-change: auto;
-  }
-}
-
+ }
