@@ -152,7 +152,7 @@ function closeMenu() {
 
       {/* MENU OVERLAY
           — always in DOM, toggled via display (no mount/unmount = no React render delay)
-          — solid gradient background (no transparency, no blur)
+          — solid gradient background (no transparency, no )
           — no boxShadow anywhere on this element
       */}
       <div

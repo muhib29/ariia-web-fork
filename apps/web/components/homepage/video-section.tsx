@@ -21,30 +21,31 @@ export function VideoSection() {
         <div className="max-w-6xl mx-auto homepage-section-content">
           {/* Video Container */}
           <div className="relative w-full h-[235px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-xl md:shadow-2xl">
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <Image
-              src="/images/thumbnail.webp"
-              alt="Video Background"
-              fill
-              sizes="100vw"
-              className="object-cover aspect-square"
-              loading="lazy"
-            />
-          </div>
-
-          {/* Blurred Overlay Container */}
-          <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
-            <button
-              onClick={handlePlayClick}
-              className="group relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-white/20 backdrop-blur-sm rounded-full shadow-2xl hover:scale-110 transition-all duration-300"
-            >
-              <Play
-                className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-gray-800 ml-1 group-hover:text-blue-600 transition-colors duration-300"
-                fill="currentColor"
+            {/* Background Image */}
+            <div className="absolute inset-0">
+              <Image
+                src="/images/thumbnail.webp"
+                alt="Video Background"
+                fill
+                sizes="100vw"
+                className="object-cover aspect-square"
+                loading="lazy"
               />
-            </button>
-          </div>
+            </div>
+
+            {/* Blurred Overlay Container */}
+            <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
+              <button
+                onClick={handlePlayClick}
+                // className="group relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-white/20 backdrop-blur-sm rounded-full shadow-2xl hover:scale-110 transition-all duration-300"
+                className="group relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-white/90 rounded-full shadow-2xl hover:scale-110 transition-all duration-300"
+              >
+                <Play
+                  className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-gray-800 ml-1 group-hover:text-blue-600 transition-colors duration-300"
+                  fill="currentColor"
+                />
+              </button>
+            </div>
 
             {/* Gradient Border Effect */}
             <div

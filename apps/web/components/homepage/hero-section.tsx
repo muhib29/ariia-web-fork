@@ -404,10 +404,11 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                   rightContent?.cta && (
                     <Button
                       onClick={() => setIsCalling(true)}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[40px] md:w-[150px] md:h-[48px] rounded-[60px] text-[14px] font-medium p-[3px] bg-[#a9d4ff39] backdrop-blur-md md:backdrop-blur-3xl hover:bg-[#43b9f1] in-hover:backdrop-blur-3xl"
+                      // className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[40px] md:w-[150px] md:h-[48px] rounded-[60px] text-[14px] font-medium p-[3px] bg-[#a9d4ff39] backdrop-blur-md md:backdrop-blur-3xl hover:bg-[#43b9f1] in-hover:backdrop-blur-3xl"
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[40px] md:w-[150px] md:h-[48px] rounded-[60px] text-[14px] font-medium p-[3px] bg-[#a9d4ff39] md:backdrop-blur-3xl hover:bg-[#43b9f1] in-hover:backdrop-blur-3xl"
                     >
                       <div className="w-full h-full bg-white rounded-[60px] text-gray-700 hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center">
-                        {rightContent.cta.ctaText}
+                        {rightContent.cta.ctaText} 
                       </div>
                     </Button>
                   )

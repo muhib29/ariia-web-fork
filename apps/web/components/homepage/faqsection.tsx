@@ -69,7 +69,8 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
                   <div
                     key={faq.id}
                     className={cn(
-                      'group border border-gray-200 bg-white bg-opacity-80 backdrop-blur-sm shadow-[0_2px_6px_-2px_rgba(16,24,40,0.12)] transition-all duration-300 hover:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] hover:border-[#bcd6ff] focus-within:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] focus-within:border-[#bcd6ff]',
+                      // 'group border border-gray-200 bg-white bg-opacity-80 backdrop-blur-sm shadow-[0_2px_6px_-2px_rgba(16,24,40,0.12)] transition-all duration-300 hover:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] hover:border-[#bcd6ff] focus-within:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] focus-within:border-[#bcd6ff]',
+                      'group border border-gray-200 bg-white bg-opacity-80 md:backdrop-blur-sm shadow-[0_2px_6px_-2px_rgba(16,24,40,0.12)] transition-all duration-300 hover:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] hover:border-[#bcd6ff] focus-within:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] focus-within:border-[#bcd6ff]',
                       index === 0 && 'rounded-ss-xl rounded-se-xl',
                       index === questions?.length - 1 && 'rounded-es-xl rounded-ee-xl',
                     )}

@@ -1,4 +1,3 @@
-import React from 'react';
 import MarkdownRenderer from './markdown-renderer';
 import { FadeInWhenInView } from './animations/FadeInWhenInView';
 
@@ -72,7 +71,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
               ))}
           </h1>
         )}
-        {description && description?.length > 1 && (
+        {description && description.trim().length > 1 && (
           <div className="max-w-2xl mx-auto mt-4 text-[#101828] text-base md:text-lg leading-[27px]">
             <MarkdownRenderer>{description}</MarkdownRenderer>
           </div>
