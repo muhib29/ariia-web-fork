@@ -77,7 +77,7 @@ function ContactCardComponent({
       {/* Blur Effect */}
       {blurConfig && (
         <div
-          className="absolute pointer-events-none"
+          className="ios-mobile-disable-blob absolute pointer-events-none"
           style={{
             width: blurConfig.size,
             height: blurConfig.size,
@@ -229,14 +229,14 @@ export function ContactUs({ contact }: { contact: ContactUsData }) {
       : defaultCards;
 
   return (
-    <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-[80px] pb-0">
+    <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-20 md:pt-[80px] pb-0">
       {/* Background Blurs */}
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[180px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1800px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
       </div>
 
-     <Header /> {/* //changed */}
+      <Header /> {/* //changed */}
 
       <div className="py-10 px-6 max-w-6xl mx-auto z-10 text-center">
         <SectionHeader

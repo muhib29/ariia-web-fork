@@ -43,9 +43,9 @@ export function TermsOfService({ terms }: { terms: TermsOfServiceData }) {
   rawContent = rawContent.replace(/(\*\*[^*]+?\*\*)\s+(?=[A-Za-z0-9])/g, '$1\n\n');
 
   return (
-    <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-20 ">
+    <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-20">
       {/* Background Blurs */}
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[180px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1800px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[700px] -right-[10%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
@@ -53,7 +53,7 @@ export function TermsOfService({ terms }: { terms: TermsOfServiceData }) {
       </div>
 
       {/* Header */}
-    <Header /> {/* //changed */}
+      <Header /> {/* //changed */}
       {/* Main Content */}
       <div className="px-5 max-w-6xl mx-auto z-10 relative pb-4 md:pb-8">
         <div className="text-center pt-10 pb-0">

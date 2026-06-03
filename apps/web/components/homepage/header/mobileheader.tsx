@@ -56,7 +56,7 @@ export function MobileHeader({
   const pillBg = isScrolled ? '#fff' : '#fff'; // always white pills
 
   function openMenu() {
-    requestAnimationFrame(() => setMenuOpen(true));
+    setMenuOpen(true);
   }
 
   function closeMenu() {

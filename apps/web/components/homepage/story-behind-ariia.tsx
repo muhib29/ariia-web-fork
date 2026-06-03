@@ -72,9 +72,9 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
   }
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex flex-col bg-gradient-to-b from-[#f7fcff] via-[#f6f8ff] to-[#eaf6ff] pt-16 md:pt-20">
+    <section className="relative overflow-hidden min-h-screen flex flex-col bg-gradient-to-b from-[#f7fcff] via-[#f6f8ff] to-[#eaf6ff] pt-20">
       {/* Background Blurs */}
-      <div className="absolute inset-0 z-1">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Top-left circle highlight right above heading */}
         <div className="ios-mobile-disable-blob absolute w-[260px] h-[260px] md:w-[320px] md:h-[320px] top-[40px] left-[-40px] md:top-[30px] md:left-[-60px] rounded-full blur-[90px] bg-gradient-to-br from-[#3B6BFF] via-[#5CA8FF] to-[#B7E0FF] opacity-40 md:opacity-50" />
         <div className="ios-mobile-disable-blob absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-20" />
@@ -82,7 +82,7 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
         <div className="ios-mobile-disable-blob absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-10" />
       </div>
 
-<Header /> {/* //changed */}
+      <Header /> {/* //changed */}
       <div className="flex-1 flex flex-col items-center px-4 max-w-6xl mx-auto w-full z-2">
         {/* Title and Badge */}
         <FadeInWhenInView className="text-center pt-10">
