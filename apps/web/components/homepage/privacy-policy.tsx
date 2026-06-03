@@ -43,7 +43,10 @@ export function PrivacyPolicy({ policy }: { policy: PrivacyPolicyData }) {
   rawContent = rawContent.replace(/(\*\*[^*]+?\*\*)\s+(?=[A-Za-z0-9])/g, '$1\n\n');
 
   return (
-    <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-20">
+    <section
+      className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-20"
+      style={{ backgroundColor: '#fff' }}
+    >
       {/* Background Blurs */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[180px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
@@ -56,7 +59,7 @@ export function PrivacyPolicy({ policy }: { policy: PrivacyPolicyData }) {
       <Header /> {/* //changed */}
 
       {/* Main Content */}
-      <div className="px-5 max-w-6xl mx-auto z-10 relative pb-4 pt-10 md:pb-8">
+      <div className="px-5 max-w-6xl mx-auto z-10 relative pb-4 pt-10 md:pb-8 bg-white">
         <div className="text-center">
           <SectionHeader
             tag={policy.tag}
