@@ -9,6 +9,7 @@ export interface SectionHeaderProps {
   breakAfterTitle?: boolean;
   breakAfterTitleOnLaptop?: boolean;
   splitGradientAfterFirstWordOnLaptop?: boolean;
+  disableRevealOnMobile?: boolean;
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
@@ -19,6 +20,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   breakAfterTitle = false,
   breakAfterTitleOnLaptop = false,
   splitGradientAfterFirstWordOnLaptop = false,
+  disableRevealOnMobile = false,
 }) => {
   const normalizedTitle = (title ?? '').trim();
   const normalizedGradientTitle = (gradientTitle ?? '').trim();
@@ -30,7 +32,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   const gradientRemainingText = gradientWords.slice(1).join(' ');
 
   return (
-    <FadeInWhenInView delay={0}>
+    <FadeInWhenInView delay={0} disableOnMobile={disableRevealOnMobile}>
       <div className="flex flex-col items-center pb-7 md:pb-7 z-10 w-full">
         {tag && (
           <span className="px-4 py-2 rounded-full text-sm font-medium bg-[#DEF4FA] text-blue-700">

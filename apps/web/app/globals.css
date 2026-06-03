@@ -760,6 +760,13 @@ section {
     display: none !important;
   }
 
+  .ios-mobile-no-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto !important;
+    transition: none !important;
+  }
+
   .ios-mobile-fixed-layer,
   .ios-mobile-fixed-layer * {
     filter: none !important;

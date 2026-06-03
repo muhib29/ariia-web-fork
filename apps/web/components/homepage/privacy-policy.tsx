@@ -65,6 +65,7 @@ export function PrivacyPolicy({ policy }: { policy: PrivacyPolicyData }) {
             tag={policy.tag}
             title={policy.title}
             gradientTitle={policy.styledTitle}
+            disableRevealOnMobile
           />
         </div>
         {effectiveDate && (

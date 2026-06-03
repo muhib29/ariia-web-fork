@@ -64,6 +64,7 @@ export function TermsOfService({ terms }: { terms: TermsOfServiceData }) {
             tag={terms.tag}
             title={terms.title}
             gradientTitle={terms.styledTitle}
+            disableRevealOnMobile
           />
         </div>
         {effectiveDate && (
