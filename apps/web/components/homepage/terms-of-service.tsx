@@ -3,6 +3,7 @@ import React from 'react';
 import { NewsletterFooter } from './footer';
 import { SectionHeader } from '../SectionHeader';
 import { Header } from './header/header';
+import { SimplePolicyRenderer } from './simple-policy-renderer';
 
 export interface TermsOfServiceData {
   tag?: string;
@@ -71,7 +72,7 @@ export function TermsOfService({ terms }: { terms: TermsOfServiceData }) {
 
         <div className="space-y-10 text-gray-800 text-base leading-relaxed">
           {rawContent ? (
-            <div className="whitespace-pre-wrap text-gray-700 leading-7">{rawContent}</div>
+            <SimplePolicyRenderer content={rawContent} />
           ) : (
             <p>No terms of service content available.</p>
           )}
