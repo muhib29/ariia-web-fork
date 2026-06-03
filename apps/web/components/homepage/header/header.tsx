@@ -294,7 +294,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
       {/* Gradient bar */}
       <div
         id="gradient-bar"
-        className="h-10 fixed top-0 left-0 w-full z-40 pointer-events-none"
+        className="hidden md:block h-10 fixed top-0 left-0 w-full z-40 pointer-events-none"
         style={{
           background: 'linear-gradient(90deg, #6779FF 0%, #4E97FA 25%, #35B5F5 50%, #2EFFEA 100%)',
           opacity: !isScrolled ? 1 : 0,

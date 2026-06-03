@@ -16,7 +16,7 @@ export function AriiaSvgMark({
 }: AriiaSvgMarkProps) {
   return (
     <Image
-      src="/images/headerlogo.webp"
+      src="/images/logo-desktop.webp"
       alt="ARIIA"
       width={width}
       height={height}
