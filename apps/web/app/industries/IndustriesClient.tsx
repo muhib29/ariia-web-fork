@@ -74,9 +74,9 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
   return (
     <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-20">
       <div className="absolute inset-0 -z-0">
-        <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[800px] left-[1%] bg-gradient-to-r from-[#4E97FA] via-[#35B5F5] to-[#2EFFEA] opacity-20 blur-[70px]" />
-        <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[600px] right-[1%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
-        <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1080px] right-[1%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
+        <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[800px] left-[1%] bg-gradient-to-r from-[#4E97FA] via-[#35B5F5] to-[#2EFFEA] opacity-20 blur-[70px]" />
+        <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[600px] right-[1%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
+        <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1080px] right-[1%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
       </div>
       <Header /> {/* //changed */}
       <div className="py-10 z-0 px-4 sm:px-4 md:px-6 max-w-6xl mx-auto relative w-full">

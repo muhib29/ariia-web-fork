@@ -144,7 +144,7 @@ export function CareersSection({ career }: { career: CareerData }) {
     <section className="relative min-h-screen flex flex-col justify-start bg-white overflow-hidden">
       {/* Background Gradients */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[300px] top-[690px] left-[1%] bg-gradient-to-r from-[#4E97FA] via-[#35B5F5] to-[#2EFFEA] opacity-20 blur-[80px]" />
+        <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[300px] top-[690px] left-[1%] bg-gradient-to-r from-[#4E97FA] via-[#35B5F5] to-[#2EFFEA] opacity-20 blur-[80px]" />
       </div>
 
       <Header /> {/* //changed */}

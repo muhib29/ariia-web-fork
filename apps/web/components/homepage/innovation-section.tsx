@@ -2,7 +2,6 @@
 import { SPLINE_SCENES } from '@/config/spline-scenes';
 import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
 import { SectionHeader } from '../SectionHeader';
 const SplineScene = dynamic(() => import('../SplineScene'), {
     ssr: false,  // Spline is WebGL — no SSR
@@ -45,16 +44,6 @@ const markdownComponents = {
 // export function InnovationSection({ header, image: _image }: InnovationSectionProps) {
 export function InnovationSection({ header }: InnovationSectionProps) {
     const description = normalizeMarkdownContent(header?.description);
-    const [isMobileViewport, setIsMobileViewport] = useState<boolean | null>(null);
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(max-width: 767px)');
-        const updateViewport = () => setIsMobileViewport(mediaQuery.matches);
-
-        updateViewport();
-        mediaQuery.addEventListener('change', updateViewport);
-        return () => mediaQuery.removeEventListener('change', updateViewport);
-    }, []);
 
     return (
         <section
@@ -134,11 +123,7 @@ export function InnovationSection({ header }: InnovationSectionProps) {
                             <div className="flex justify-center items-center relative">
                                 <div className="ios-mobile-disable-blob absolute w-[250px] md:w-[400px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[80px] bg-gradient-to-r from-[#51C7F0] via-[#35B5F5] to-[#2EFFEA] opacity-45 z-0" />
                                 <div className="relative w-full max-w-md aspect-square z-10">
-                                    {isMobileViewport === false ? (
-                                        <SplineScene config={SPLINE_SCENES.aboutUs} />
-                                    ) : (
-                                        <div className="w-full h-full rounded-2xl bg-[linear-gradient(135deg,_#eef7ff_0%,_#f8fbff_100%)]" aria-hidden />
-                                    )}
+                                    <SplineScene config={SPLINE_SCENES.aboutUs} />
                                 </div>
                             </div>
                         </FadeInWhenInView>
