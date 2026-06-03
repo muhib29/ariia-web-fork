@@ -389,13 +389,13 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
         <div className="absolute inset-0 z-0">
           {showForm ? (
             <>
-              <div className="absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[300px] left-[40%] bg-gradient-to-r from-[#C4CDF3] to-[#D0F0FB] opacity-25 blur-[100px]" />
-              <div className="absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[400px] left-[40%] bg-gradient-to-r from-[#C4CDF3] to-[#D0F0FB] opacity-25 blur-[100px]" />
+              <div className="ios-mobile-disable-blob absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[300px] left-[40%] bg-gradient-to-r from-[#C4CDF3] to-[#D0F0FB] opacity-25 blur-[100px]" />
+              <div className="ios-mobile-disable-blob absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[400px] left-[40%] bg-gradient-to-r from-[#C4CDF3] to-[#D0F0FB] opacity-25 blur-[100px]" />
             </>
           ) : (
             <>
-              <div className="absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[300px] -left-[5%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-10 blur-[70px]" />
-              <div className="absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[400px] -left-[5%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-10 blur-[70px]" />
+              <div className="ios-mobile-disable-blob absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[300px] -left-[5%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-10 blur-[70px]" />
+              <div className="ios-mobile-disable-blob absolute w-[250px] h-[300px] md:w-[400px] md:h-[400px] top-[400px] -left-[5%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-10 blur-[70px]" />
             </>
           )}
         </div>

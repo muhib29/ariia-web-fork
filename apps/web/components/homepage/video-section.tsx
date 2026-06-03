@@ -37,7 +37,7 @@ export function VideoSection() {
           <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
             <button
               onClick={handlePlayClick}
-              className="group relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-white/20 backdrop-blur-sm rounded-full shadow-2xl hover:scale-110 transition-all duration-300"
+              className="group relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-white/20 md:backdrop-blur-sm rounded-full shadow-2xl hover:scale-110 transition-all duration-300"
             >
               <Play
                 className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-gray-800 ml-1 group-hover:text-blue-600 transition-colors duration-300"

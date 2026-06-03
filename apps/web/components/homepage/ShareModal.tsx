@@ -46,7 +46,7 @@ export function ShareModal({ open, onClose, shareTitle, shareUrl }: ShareModalPr
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+    <div className="ios-mobile-fixed-layer fixed inset-0 z-50 flex items-center justify-center bg-black/30">
       <div className="bg-white rounded-2xl shadow-xl p-6 min-w-[320px] max-w-[90vw] flex flex-col items-center relative">
         <button
           onClick={onClose}

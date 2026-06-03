@@ -69,7 +69,7 @@ export function ContentSection() {
   return (
     <section className="home-content-section py-10 px-6 bg-white relative overflow-hidden">
       <div className="absolute inset-0 section-bg-fade pointer-events-none">
-        <div className="absolute w-full h-[200px] top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[240px] bg-gradient-to-r from-[#4E97FA] to-[#35B5F5] opacity-30 z-0" />
+        <div className="ios-mobile-disable-blob absolute w-full h-[200px] top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[240px] bg-gradient-to-r from-[#4E97FA] to-[#35B5F5] opacity-30 z-0" />
       </div>
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center">

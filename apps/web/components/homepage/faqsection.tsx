@@ -32,11 +32,11 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
       {/* Background Gradient Blur */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden homepage-decor-blur">
         {/* Top glow matches Use Cases card gradient palette */}
-        <div className="absolute top-[-70px] left-1/2 -translate-x-1/2 w-[100%] h-[100px] rounded-full blur-3xl opacity-[15%] bg-[linear-gradient(90deg,rgba(53,128,255,0.22)_20%,#3580FF_100%,#2E96FF_100%)]" />
+        <div className="ios-mobile-disable-blob absolute top-[-70px] left-1/2 -translate-x-1/2 w-[100%] h-[100px] rounded-full blur-3xl opacity-[15%] bg-[linear-gradient(90deg,rgba(53,128,255,0.22)_20%,#3580FF_100%,#2E96FF_100%)]" />
 
         <div className="absolute top-0 left-0 w-full h-[220px] opacity-30 bg-[linear-gradient(180deg,rgba(53,128,255,0.12)_0%,rgba(46,150,255,0.08)_45%,rgba(255,255,255,0)_100%)]" />
         {/* Top blue blur */}
-        <div className="absolute w-full h-[300px] -top-40 left-1/2 -translate-x-1/2 blur-[60px] bg-[linear-gradient(91deg,rgba(53,128,255,0.45)_35.93%,#3580FF_51.47%,#2E96FF_67.02%)] opacity-20" />
+        <div className="ios-mobile-disable-blob absolute w-full h-[300px] -top-40 left-1/2 -translate-x-1/2 blur-[60px] bg-[linear-gradient(91deg,rgba(53,128,255,0.45)_35.93%,#3580FF_51.47%,#2E96FF_67.02%)] opacity-20" />
         {/* Keep bottom clear so FAQ ends on white */}
       </div>
 
@@ -69,7 +69,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
                   <div
                     key={faq.id}
                     className={cn(
-                      'group border border-gray-200 bg-white bg-opacity-80 backdrop-blur-sm shadow-[0_2px_6px_-2px_rgba(16,24,40,0.12)] transition-all duration-300 hover:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] hover:border-[#bcd6ff] focus-within:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] focus-within:border-[#bcd6ff]',
+                      'group border border-gray-200 bg-white bg-opacity-80 md:backdrop-blur-sm shadow-[0_2px_6px_-2px_rgba(16,24,40,0.12)] transition-all duration-300 hover:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] hover:border-[#bcd6ff] focus-within:shadow-[0_16px_40px_-24px_rgba(20,132,180,0.55)] focus-within:border-[#bcd6ff]',
                       index === 0 && 'rounded-ss-xl rounded-se-xl',
                       index === questions?.length - 1 && 'rounded-es-xl rounded-ee-xl',
                     )}

@@ -25,7 +25,7 @@ export function SuccessModal({ isOpen, onCloseAction, message }: SuccessModalPro
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+    <div className="ios-mobile-fixed-layer fixed inset-0 z-[100] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onCloseAction} />
 
       <div className="relative z-[101] mx-4 w-full max-w-md">

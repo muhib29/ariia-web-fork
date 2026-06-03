@@ -253,9 +253,9 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
     <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-[120px] pb-16 md:pb-12">
       {/* Background Blurs */}
       <div className="absolute inset-0 -z-10 ios-flatten-blur pointer-events-none">
-        <div className="absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-20" />
-        <div className="absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-10" />
-        <div className="absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-10" />
+        <div className="ios-mobile-disable-blob absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-20" />
+        <div className="ios-mobile-disable-blob absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-10" />
+        <div className="ios-mobile-disable-blob absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-10" />
       </div>
 
       {/* Main Content */}
@@ -430,12 +430,12 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
         {/* Plans Grid - 3 columns, 2 rows, center card spans 2 rows */}
         <div className="relative z-[1] w-full ios-safe-content">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative gap-6 w-full lg:px-20 md:px-10 px-6 sm:px-10">
-            <div className="pointer-events-none absolute top-[-100px] left-[0%] z-0 w-full h-[320px] rounded-full blur-3xl opacity-10 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
-            <div className="pointer-events-none absolute top-[400px] left-[0%] z-0 w-full h-[220px] rounded-full blur-3xl opacity-20 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
+            <div className="ios-mobile-disable-blob pointer-events-none absolute top-[-100px] left-[0%] z-0 w-full h-[320px] rounded-full blur-3xl opacity-10 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
+            <div className="ios-mobile-disable-blob pointer-events-none absolute top-[400px] left-[0%] z-0 w-full h-[220px] rounded-full blur-3xl opacity-20 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
             {/* For mobile only */}
-            <div className="pointer-events-none absolute block md:hidden bottom-[600px] left-[0%] z-0 w-full h-[220px] rounded-full blur-2xl opacity-8 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
-            <div className="pointer-events-none absolute block md:hidden bottom-[400px] left-[0%] z-0 w-full h-[220px] rounded-full blur-2xl opacity-8 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
-            <div className="pointer-events-none absolute block md:hidden bottom-[-20px] left-[0%] z-0 w-full h-[220px] rounded-full blur-2xl opacity-8 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
+            <div className="ios-mobile-disable-blob pointer-events-none absolute block md:hidden bottom-[600px] left-[0%] z-0 w-full h-[220px] rounded-full blur-2xl opacity-8 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
+            <div className="ios-mobile-disable-blob pointer-events-none absolute block md:hidden bottom-[400px] left-[0%] z-0 w-full h-[220px] rounded-full blur-2xl opacity-8 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
+            <div className="ios-mobile-disable-blob pointer-events-none absolute block md:hidden bottom-[-20px] left-[0%] z-0 w-full h-[220px] rounded-full blur-2xl opacity-8 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
 
             {/* Map Strapi plans to fixed order: Starter, Growth, Scale, Business, Enterprise (Custom) */}
             {(() => {
@@ -645,8 +645,8 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                         loading="lazy"
                         className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[60%] object-cover z-0"
                       />
-                      <div className="absolute bottom-0 left-[60%] -translate-y-1/2 z-0 w-full h-[200px] md:h-[600px] lg:h-[320px] rounded-full blur-3xl opacity-40 bg-[linear-gradient(180deg,_#36C5F0_100%,_#58E6FD_100%)]"></div>
-                      <div className="absolute bottom-0 left-[-10%] -translate-y-1/2 z-0 w-full h-[200px] md:h-[600px] lg:h-[320px] rounded-full blur-3xl opacity-40 bg-[linear-gradient(180deg,_#667BD6_100%,_#7F56D9_100%)]"></div>
+                      <div className="ios-mobile-disable-blob absolute bottom-0 left-[60%] -translate-y-1/2 z-0 w-full h-[200px] md:h-[600px] lg:h-[320px] rounded-full blur-3xl opacity-40 bg-[linear-gradient(180deg,_#36C5F0_100%,_#58E6FD_100%)]"></div>
+                      <div className="ios-mobile-disable-blob absolute bottom-0 left-[-10%] -translate-y-1/2 z-0 w-full h-[200px] md:h-[600px] lg:h-[320px] rounded-full blur-3xl opacity-40 bg-[linear-gradient(180deg,_#667BD6_100%,_#7F56D9_100%)]"></div>
                     </div>
                   </FadeInWhenInView>
                   {/* Right Column (Scale, Business) */}

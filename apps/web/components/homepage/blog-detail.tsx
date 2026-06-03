@@ -177,11 +177,11 @@ export function BlogDetail({ blog, otherBlogs = [] }: { blog: any; otherBlogs?: 
       />
       {/* Background Blurs */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-30" />
-        <div className="absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-10" />
-        <div className="absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-10" />
+        <div className="ios-mobile-disable-blob absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-30" />
+        <div className="ios-mobile-disable-blob absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-10" />
+        <div className="ios-mobile-disable-blob absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-10" />
         {/* Title Background Glare - Matching Index Page Cyan/Blue Glow */}
-        <div className="absolute w-[500px] h-[300px] md:w-[800px] md:h-[500px] top-[100px] left-1/2 -translate-x-1/2 rounded-full blur-[100px] md:blur-[160px] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-25 md:opacity-35 -z-1" />
+        <div className="ios-mobile-disable-blob absolute w-[500px] h-[300px] md:w-[800px] md:h-[500px] top-[100px] left-1/2 -translate-x-1/2 rounded-full blur-[100px] md:blur-[160px] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-25 md:opacity-35 -z-1" />
       </div>
      <Header /> {/* //changed */}
       <div className="w-full flex items-center justify-between pt-22 md:pt-28  px-5 md:px-4 max-w-6xl mx-auto z-10 relative">

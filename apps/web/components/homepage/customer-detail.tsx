@@ -57,9 +57,9 @@ export function CustomerDetail({ customer }: { customer: CustomerDetailData }) {
       />
       {/* Background Blurs */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-20" />
-        <div className="absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-10" />
-        <div className="absolute w-[520px] h-[320px] md:w-[860px] md:h-[520px] top-[90px] left-1/2 -translate-x-1/2 rounded-full blur-[110px] md:blur-[170px] bg-gradient-to-r from-[#6779FF] via-[#7F56D9] to-[#2E96FF] opacity-20 md:opacity-30" />
+        <div className="ios-mobile-disable-blob absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-20" />
+        <div className="ios-mobile-disable-blob absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-10" />
+        <div className="ios-mobile-disable-blob absolute w-[520px] h-[320px] md:w-[860px] md:h-[520px] top-[90px] left-1/2 -translate-x-1/2 rounded-full blur-[110px] md:blur-[170px] bg-gradient-to-r from-[#6779FF] via-[#7F56D9] to-[#2E96FF] opacity-20 md:opacity-30" />
       </div>
 
       <Header /> {/* //changed */}

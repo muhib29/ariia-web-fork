@@ -302,7 +302,7 @@ export function FeaturesSection() {
                       className="bg-no-repeat bg-contain bg-center
                   bg-[url('/images/features/real-time-bg.svg')] z-2 absolute  h-auto w-[400px] sm:h-[339px] sm:w-[339px]"
                     ></div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px]" />
+                    <div className="ios-mobile-disable-blob pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px]" />
                     <Image
                       src="/images/features/real-time.webp"
                       alt="Real-Time Intelligence & Performance Analytics"
@@ -729,10 +729,10 @@ export function FeaturesSection() {
       {/* Background — fades at top/bottom */}
       <div className="absolute inset-0 z-[0] pointer-events-none section-bg-fade overflow-hidden ios-flatten-blur">
         {/* Top-left bluish shadow */}
-        <div className="absolute w-[520px] h-[520px] -top-40 -left-62 rounded-full blur-[80px] md:blur-[150px] bg-gradient-to-br from-[#3B6BFF] via-[#4E97FA] to-[#BFD9FF] opacity-40 md:opacity-70" />
+        <div className="ios-mobile-disable-blob absolute w-[520px] h-[520px] -top-40 -left-62 rounded-full blur-[80px] md:blur-[150px] bg-gradient-to-br from-[#3B6BFF] via-[#4E97FA] to-[#BFD9FF] opacity-40 md:opacity-70" />
 
         {/* Bottom-left shadow near Transcription Card (matched to global light-blue page tone) */}
-        <div className="absolute w-[520px] h-[520px] -bottom-20 -left-40 rounded-full blur-[60px] md:blur-[150px] bg-gradient-to-br from-[#3B6BFF] via-[#4E97FA] to-[#BFD9FF] opacity-25 md:opacity-45" />
+        <div className="ios-mobile-disable-blob absolute w-[520px] h-[520px] -bottom-20 -left-40 rounded-full blur-[60px] md:blur-[150px] bg-gradient-to-br from-[#3B6BFF] via-[#4E97FA] to-[#BFD9FF] opacity-25 md:opacity-45" />
 
         {/* <div className="absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-70" />
         <div className="absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-70" /> */}

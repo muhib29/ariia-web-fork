@@ -139,9 +139,9 @@ export default function PricingContactUs() {
       />
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
-        <div className="absolute w-[760px] h-[760px] top-[-280px] left-[8%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-25" />
-        <div className="absolute w-[560px] h-[560px] top-[20%] left-1/2 -translate-x-1/2 rounded-full blur-[160px] bg-gradient-to-br from-[#C4CDF3] to-[#D0F0FB] opacity-30" />
-        <div className="absolute w-[620px] h-[620px] bottom-[-260px] right-[0%] rounded-full blur-[170px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-20" />
+        <div className="ios-mobile-disable-blob absolute w-[760px] h-[760px] top-[-280px] left-[8%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-25" />
+        <div className="ios-mobile-disable-blob absolute w-[560px] h-[560px] top-[20%] left-1/2 -translate-x-1/2 rounded-full blur-[160px] bg-gradient-to-br from-[#C4CDF3] to-[#D0F0FB] opacity-30" />
+        <div className="ios-mobile-disable-blob absolute w-[620px] h-[620px] bottom-[-260px] right-[0%] rounded-full blur-[170px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-20" />
       </div>
 
       <Header /> {/* //changed */}
@@ -338,7 +338,7 @@ export default function PricingContactUs() {
       </div>
 
       {/* Sticky CTA on mobile - removed backdrop-blur-md for Chrome iOS performance */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
+      <div className="ios-mobile-fixed-layer md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
         <button
           form="enterprise-inquiry-form"
           type="submit"
@@ -351,7 +351,7 @@ export default function PricingContactUs() {
 
       {/* Success Dialog - removed backdrop-blur-sm for Chrome iOS performance */}
       {showDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/40">
+        <div className="ios-mobile-fixed-layer fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/40">
           <div className="bg-white relative overflow-hidden rounded-2xl shadow-2xl px-8 py-10 max-w-md w-full flex flex-col items-center text-center">
             <div className="absolute inset-0">
               <div className="absolute z-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] top-[0px] left-[0px] bg-gradient-to-br from-[#a3eeff] via-white to-[#a3eeff] opacity-90 blur-[70px]" />
