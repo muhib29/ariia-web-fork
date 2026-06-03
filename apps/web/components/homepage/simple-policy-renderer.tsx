@@ -131,7 +131,11 @@ export function SimplePolicyRenderer({ content }: { content: string }) {
           );
         }
 
-        return <p key={block.key} className="text-gray-800 text-base leading-relaxed mb-4">{renderInlineBold(block.text)}</p>;
+        if (block.type === 'p') {
+          return <p key={block.key} className="text-gray-800 text-base leading-relaxed mb-4">{renderInlineBold(block.text)}</p>;
+        }
+
+        return null;
       })}
     </>
   );
