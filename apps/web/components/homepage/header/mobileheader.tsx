@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   ChevronDown,
   ChevronRight,
@@ -56,8 +56,6 @@ export function MobileHeader({
   const pillBg = isScrolled ? '#fff' : '#fff'; // always white pills
 
   function openMenu() {
-    document.body.classList.add('mobile-menu-open');
-    window.dispatchEvent(new Event('spline-pause'));
     requestAnimationFrame(() => setMenuOpen(true));
   }
 
@@ -65,18 +63,7 @@ export function MobileHeader({
     setMenuOpen(false);
     setCompanyOpen(false);
     setResourcesOpen(false);
-    document.body.classList.remove('mobile-menu-open');
-    requestAnimationFrame(() => {
-      window.dispatchEvent(new Event('spline-resume'));
-    });
   }
-
-  useEffect(() => {
-    return () => {
-      document.body.classList.remove('mobile-menu-open');
-      window.dispatchEvent(new Event('spline-resume'));
-    };
-  }, []);
 
   return (
     <>
@@ -171,7 +158,7 @@ export function MobileHeader({
           — no boxShadow anywhere on this element
       */}
       <div
-        className="ios-mobile-fixed-layer mobile-menu-sheet"
+        className="ios-mobile-fixed-layer"
         style={{
           position: 'fixed',
           top: 0,

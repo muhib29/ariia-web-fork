@@ -237,13 +237,13 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
 
       <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
         <div
-          className="mobile-menu-hide-while-open absolute block bottom-[-80px] right-[-100px] w-[300px] h-[260px] rounded-full blur-3xl opacity-30 bg-[linear-gradient(135deg,_#6779FF_0%,_#4E97FA_50%,_#35B5F5_100%)] md:hidden"
+          className="ios-mobile-disable-blob absolute block bottom-[-80px] right-[-100px] w-[300px] h-[260px] rounded-full blur-3xl opacity-30 bg-[linear-gradient(135deg,_#6779FF_0%,_#4E97FA_50%,_#35B5F5_100%)] md:hidden"
         />
         <div
-          className="mobile-menu-hide-while-open absolute block top-[400px] left-[80px] w-2xs h-28 rounded-full blur-3xl opacity-45 bg-gradient-to-r from-[#4E97FA] to-[#2EFFEA] md:hidden"
+          className="ios-mobile-disable-blob absolute block top-[400px] left-[80px] w-2xs h-28 rounded-full blur-3xl opacity-45 bg-gradient-to-r from-[#4E97FA] to-[#2EFFEA] md:hidden"
         />
         <div
-          className="mobile-menu-hide-while-open absolute md:hidden block -bottom-[10px] -left-[100px] w-[740px] h-[270px] rounded-full blur-3xl opacity-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA]"
+          className="ios-mobile-disable-blob absolute md:hidden block -bottom-[10px] -left-[100px] w-[740px] h-[270px] rounded-full blur-3xl opacity-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA]"
         />
         <div
           className="absolute hidden md:block bottom-[-10px] left-[-100px] w-[380px] h-[420px] rounded-full blur-3xl opacity-15 bg-[linear-gradient(135deg,_#6779FF_0%,_#4E97FA_50%,_#35B5F5_100%)]"
