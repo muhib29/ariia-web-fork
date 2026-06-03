@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import { NewsletterFooter } from './footer';
-import MarkdownRenderer from '../markdown-renderer';
 import { SectionHeader } from '../SectionHeader';
 import { Header } from './header/header';
 
@@ -65,7 +64,6 @@ export function PrivacyPolicy({ policy }: { policy: PrivacyPolicyData }) {
             tag={policy.tag}
             title={policy.title}
             gradientTitle={policy.styledTitle}
-            disableRevealOnMobile
           />
         </div>
         {effectiveDate && (
@@ -75,36 +73,7 @@ export function PrivacyPolicy({ policy }: { policy: PrivacyPolicyData }) {
         {/* Privacy Content */}
         <div className="space-y-10 text-gray-800 text-base leading-relaxed">
           {rawContent ? (
-            <MarkdownRenderer
-              components={{
-                h1: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                  <h1 className="text-2xl font-bold mt-8 mb-4" {...props} />
-                ),
-                h2: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                  <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />
-                ),
-                h3: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                  <h3 className="text-xl font-bold mt-6 mb-2" {...props} />
-                ),
-                h4: ({ node, ...props }: { node?: any; [key: string]: any }) => <h4 className="font-bold mt-4 mb-2" {...props} />,
-                p: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                  <p className="text-gray-800 text-base leading-relaxed mb-4" {...props} />
-                ),
-                ul: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                  <ul className="list-disc list-outside pl-6 space-y-1 mb-4" {...props} />
-                ),
-                ol: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                  <ol className="list-decimal list-outside pl-6 space-y-1 mb-4" {...props} />
-                ),
-                li: ({ node, ...props }: { node?: any; [key: string]: any }) => (
-                  <li className="text-gray-800 text-base leading-relaxed mb-1 pl-1" {...props} />
-                ),
-                a: ({ node, ...props }: { node?: any; [key: string]: any }) => <a className="text-blue-600 underline" {...props} />,
-                strong: ({ node, ...props }: { node?: any; [key: string]: any }) => <strong className="font-semibold" {...props} />,
-              }}
-            >
-              {rawContent}
-            </MarkdownRenderer>
+            <div className="whitespace-pre-wrap text-gray-700 leading-7">{rawContent}</div>
           ) : (
             <p>No privacy policy content available.</p>
           )}

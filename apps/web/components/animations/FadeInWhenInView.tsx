@@ -8,7 +8,6 @@ interface FadeInWhenInViewProps {
   duration?: number; // in seconds
   className?: string;
   yOffset?: number;
-  disableOnMobile?: boolean;
 }
 
 export function FadeInWhenInView({
@@ -17,7 +16,6 @@ export function FadeInWhenInView({
   duration = 0.6,
   yOffset = 20,
   className = '',
-  disableOnMobile = false,
 }: FadeInWhenInViewProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -53,7 +51,7 @@ export function FadeInWhenInView({
   return (
     <div
       ref={ref}
-      className={`${className}${disableOnMobile ? ' ios-mobile-no-reveal' : ''}`}
+      className={className}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translate3d(0, 0, 0)' : `translate3d(0, ${yOffset}px, 0)`,
