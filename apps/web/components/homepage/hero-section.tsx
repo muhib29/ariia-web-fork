@@ -53,15 +53,6 @@ export interface HeroSectionProps {
 
 export { FadeInWhenInView };
 
-function MobileHeroStaticFallback({ className = '' }: { className?: string }) {
-  return (
-    <div
-      className={`bg-[linear-gradient(135deg,_#eef7ff_0%,_#dbeeff_45%,_#f8fbff_100%)] ${className}`}
-      aria-hidden
-    />
-  );
-}
-
 function SmoothTypewriter({
   words,
   renderCursor = true,
@@ -247,9 +238,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
           )}
 
           {isMobileViewport && (
-            <div className="absolute top-[26%] left-0 right-0 mx-auto w-[390px] h-[390px] sm:w-[600px] sm:h-[600px] block md:hidden">
-              <MobileHeroStaticFallback className="w-full h-full rounded-full" />
-            </div>
+            null
           )}
         </>
       )}
@@ -404,7 +393,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                 {isMobileViewport === false ? (
                   <SplineScene config={SPLINE_SCENES.hero} />
                 ) : (
-                  <MobileHeroStaticFallback className="w-full h-full rounded-full" />
+                  <div className="w-full h-full bg-[#f8fbff]" aria-hidden />
                 )}
 
                 {isCalling ? (

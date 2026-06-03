@@ -2,7 +2,7 @@
 import { SPLINE_SCENES } from '@/config/spline-scenes';
 import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
 import dynamic from 'next/dynamic';
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { SectionHeader } from '../SectionHeader';
 const SplineScene = dynamic(() => import('../SplineScene'), {
     ssr: false,  // Spline is WebGL — no SSR
@@ -45,8 +45,16 @@ const markdownComponents = {
 // export function InnovationSection({ header, image: _image }: InnovationSectionProps) {
 export function InnovationSection({ header }: InnovationSectionProps) {
     const description = normalizeMarkdownContent(header?.description);
+    const [isMobileViewport, setIsMobileViewport] = useState<boolean | null>(null);
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 767px)');
+        const updateViewport = () => setIsMobileViewport(mediaQuery.matches);
 
+        updateViewport();
+        mediaQuery.addEventListener('change', updateViewport);
+        return () => mediaQuery.removeEventListener('change', updateViewport);
+    }, []);
 
     return (
         <section
@@ -59,10 +67,10 @@ export function InnovationSection({ header }: InnovationSectionProps) {
             </div>
 
             {/* Mobile-only top purple tint outside the fade mask so it remains visible */}
-            <div className="absolute md:hidden inset-x-6 top-4 h-[220px] rounded-[72px] blur-[44px] bg-gradient-to-b from-[#7F56D9]/24 via-[#635BFF]/16 to-transparent pointer-events-none z-[1]" />
+            <div className="ios-mobile-disable-blob absolute md:hidden inset-x-6 top-4 h-[220px] rounded-[72px] blur-[44px] bg-gradient-to-b from-[#7F56D9]/24 via-[#635BFF]/16 to-transparent pointer-events-none z-[1]" />
 
             {/* Mobile-only bottom glow outside the mask so it stays visible under the card */}
-            <div className="absolute md:hidden inset-x-0 -bottom-3 h-[180px] pointer-events-none z-[1]">
+            <div className="ios-mobile-disable-blob absolute md:hidden inset-x-0 -bottom-3 h-[180px] pointer-events-none z-[1]">
                 <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[94%] h-[80px] rounded-[999px] blur-[34px] bg-gradient-to-t from-[#7F56D9]/30 via-[#5E6BFF]/22 to-transparent" />
             </div>
 
@@ -75,22 +83,22 @@ export function InnovationSection({ header }: InnovationSectionProps) {
             <div className="absolute inset-0 section-bg-fade pointer-events-none z-0">
                 <div className="absolute inset-0 opacity-30 bg-[linear-gradient(180deg,rgba(103,121,255,0.1)_0%,rgba(46,255,234,0.1)_100%)]" />
                 {/* Mobile top section tint for stronger purplish identity */}
-                <div className="absolute md:hidden inset-x-6 top-12 h-[520px] rounded-t-[72px] rounded-b-[96px] blur-[34px] bg-gradient-to-b from-[#7F56D9]/42 via-[#5E6BFF]/30 to-transparent" />
+                <div className="ios-mobile-disable-blob absolute md:hidden inset-x-6 top-12 h-[520px] rounded-t-[72px] rounded-b-[96px] blur-[34px] bg-gradient-to-b from-[#7F56D9]/42 via-[#5E6BFF]/30 to-transparent" />
                 {/* Mobile extra top glow focused behind the card head */}
-                <div className="absolute md:hidden left-1/2 top-8 -translate-x-1/2 w-[88%] h-[260px] rounded-full blur-[48px] bg-gradient-to-r from-[#7F56D9]/22 via-[#635BFF]/18 to-[#3B6BFF]/16" />
+                <div className="ios-mobile-disable-blob absolute md:hidden left-1/2 top-8 -translate-x-1/2 w-[88%] h-[260px] rounded-full blur-[48px] bg-gradient-to-r from-[#7F56D9]/22 via-[#635BFF]/18 to-[#3B6BFF]/16" />
                 {/* Mobile bottom section tint to mirror top identity */}
-                <div className="absolute md:hidden left-1/2 -translate-x-1/2 inset-x-auto bottom-0 w-[92%] h-[240px] rounded-[999px] blur-[44px] bg-gradient-to-t from-[#7F56D9]/58 via-[#5E6BFF]/40 to-transparent" />
+                <div className="ios-mobile-disable-blob absolute md:hidden left-1/2 -translate-x-1/2 inset-x-auto bottom-0 w-[92%] h-[240px] rounded-[999px] blur-[44px] bg-gradient-to-t from-[#7F56D9]/58 via-[#5E6BFF]/40 to-transparent" />
                 {/* Mobile extended purple carry-over at end of section */}
-                <div className="absolute md:hidden inset-x-2 -bottom-56 h-[320px] rounded-[999px] blur-[82px] bg-gradient-to-r from-[#7F56D9]/46 via-[#635BFF]/22 to-[#3B6BFF]/18" />
+                <div className="ios-mobile-disable-blob absolute md:hidden inset-x-2 -bottom-56 h-[320px] rounded-[999px] blur-[82px] bg-gradient-to-r from-[#7F56D9]/46 via-[#635BFF]/22 to-[#3B6BFF]/18" />
                 {/* Top purplish/blue orb - matching UseCases style */}
-                <div className="absolute w-[400px] h-[250px] md:w-[600px] md:h-[400px] -top-40 left-1/2 -translate-x-1/2 rounded-full blur-[100px] md:blur-[140px] bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9] opacity-80 md:opacity-40" />
+                <div className="ios-mobile-disable-blob absolute w-[400px] h-[250px] md:w-[600px] md:h-[400px] -top-40 left-1/2 -translate-x-1/2 rounded-full blur-[100px] md:blur-[140px] bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9] opacity-80 md:opacity-40" />
 
                 {/* Middle purplish blur (#2) */}
-                <div className="absolute w-[400px] h-[400px] top-1/4 -right-20 blur-[100px] bg-[#635BFF] opacity-10 rounded-full" />
+                <div className="ios-mobile-disable-blob absolute w-[400px] h-[400px] top-1/4 -right-20 blur-[100px] bg-[#635BFF] opacity-10 rounded-full" />
                 {/* Bottom purplish blur (#3) */}
-                <div className="absolute w-[400px] h-[400px] bottom-1/4 -left-20 blur-[100px] bg-[#635BFF] opacity-10 rounded-full" />
+                <div className="ios-mobile-disable-blob absolute w-[400px] h-[400px] bottom-1/4 -left-20 blur-[100px] bg-[#635BFF] opacity-10 rounded-full" />
                 {/* Original bottom purplish blur */}
-                <div className="absolute md:hidden w-full h-[300px] -bottom-40 left-1/2 -translate-x-1/2 blur-[60px] bg-[linear-gradient(91deg,rgba(99,91,255,0.50)_35.93%,#635BFF_51.47%,#635BFF_67.02%)] opacity-20" />
+                <div className="ios-mobile-disable-blob absolute md:hidden w-full h-[300px] -bottom-40 left-1/2 -translate-x-1/2 blur-[60px] bg-[linear-gradient(91deg,rgba(99,91,255,0.50)_35.93%,#635BFF_51.47%,#635BFF_67.02%)] opacity-20" />
             </div>
 
             <div className="max-w-6xl mx-auto relative z-10">
@@ -124,9 +132,13 @@ export function InnovationSection({ header }: InnovationSectionProps) {
                         {/* Right Image Content */}
                         <FadeInWhenInView delay={100} duration={0.5} yOffset={10}>
                             <div className="flex justify-center items-center relative">
-                                <div className="absolute w-[250px] md:w-[400px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[80px] bg-gradient-to-r from-[#51C7F0] via-[#35B5F5] to-[#2EFFEA] opacity-45 z-0" />
+                                <div className="ios-mobile-disable-blob absolute w-[250px] md:w-[400px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[80px] bg-gradient-to-r from-[#51C7F0] via-[#35B5F5] to-[#2EFFEA] opacity-45 z-0" />
                                 <div className="relative w-full max-w-md aspect-square z-10">
-                                    <SplineScene config={SPLINE_SCENES.aboutUs} />
+                                    {isMobileViewport === false ? (
+                                        <SplineScene config={SPLINE_SCENES.aboutUs} />
+                                    ) : (
+                                        <div className="w-full h-full rounded-2xl bg-[linear-gradient(135deg,_#eef7ff_0%,_#f8fbff_100%)]" aria-hidden />
+                                    )}
                                 </div>
                             </div>
                         </FadeInWhenInView>
