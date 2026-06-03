@@ -744,7 +744,7 @@ section {
   }
 } */
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .ios-flatten-blur,
   .blur-sm, .blur, .blur-md, .blur-lg,
   .blur-xl, .blur-2xl, .blur-3xl, [class*="blur-"] {
@@ -752,6 +752,28 @@ section {
     -webkit-filter: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+  }
+} */
+
+@media (max-width: 767px) {
+  /* Keep iOS fixed header/menu layers cheap to composite. Do not target Tailwind blur utilities globally. */
+  .ios-mobile-fixed-layer,
+  .ios-mobile-fixed-layer * {
+    filter: none !important;
+    -webkit-filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .ios-mobile-fixed-layer {
+    contain: paint;
+    isolation: isolate;
+  }
+
+  body.mobile-menu-open .mobile-menu-hide-while-open {
+    display: none !important;
   }
 }
 
