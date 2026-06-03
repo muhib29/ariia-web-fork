@@ -53,6 +53,15 @@ export interface HeroSectionProps {
 
 export { FadeInWhenInView };
 
+function MobileHeroStaticFallback({ className = '' }: { className?: string }) {
+  return (
+    <div
+      className={`bg-[linear-gradient(135deg,_#eef7ff_0%,_#dbeeff_45%,_#f8fbff_100%)] ${className}`}
+      aria-hidden
+    />
+  );
+}
+
 function SmoothTypewriter({
   words,
   renderCursor = true,
@@ -111,6 +120,7 @@ function SmoothTypewriter({
 
 export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
   const isMobile = useIsMobile();
+  const [isMobileViewport, setIsMobileViewport] = useState<boolean | null>(null);
   const [selectedBusiness, setSelectedBusiness] = useState(rightContent?.listOfWork?.[0] || '');
   const [isCalling, setIsCalling] = useState(false);
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
@@ -124,6 +134,15 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
     leftContent?.typewriterText?.length
       ? leftContent.typewriterText
       : ['AI Agents', 'Smart Assistants', 'Digital Co-Pilots'];
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const updateViewport = () => setIsMobileViewport(mediaQuery.matches);
+
+    updateViewport();
+    mediaQuery.addEventListener('change', updateViewport);
+    return () => mediaQuery.removeEventListener('change', updateViewport);
+  }, []);
 
   const updatePath = useCallback(() => {
     if (!showConnector) {
@@ -215,21 +234,21 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
       {/* Decorative elements */}
       <div className="absolute inset-0 h-full w-full vertical-lines" />
 
-      {isMobile === undefined ? (
+      {isMobileViewport === null ? (
         <div className="absolute top-[57%] lg:top-[50%] 2xl:top-[50%] left-1/2 w-[690px] h-[690px] -translate-x-1/2 -translate-y-1/2 scale-95">
           {/* Neutral placeholder during hydration — same dimensions as desktop wrapper */}
         </div>
       ) : (
         <>
-          {!isMobile && (
+          {!isMobileViewport && (
             <div className="absolute top-[57%] lg:top-[50%] 2xl:top-[50%] left-1/2 w-[690px] h-[690px] -translate-x-1/2 -translate-y-1/2 scale-95 hidden md:block">
               <SplineScene config={SPLINE_SCENES.heroPattern} />
             </div>
           )}
 
-          {isMobile && (
-            <div className="absolute top-[26%] left-1/2 w-[390px] h-[390px] sm:w-[600px] sm:h-[600px] -translate-x-1/2 -translate-y-1/2 scale-105 block md:hidden">
-              <SplineScene config={SPLINE_SCENES.heroPatternMobile} />
+          {isMobileViewport && (
+            <div className="absolute top-[26%] left-0 right-0 mx-auto w-[390px] h-[390px] sm:w-[600px] sm:h-[600px] block md:hidden">
+              <MobileHeroStaticFallback className="w-full h-full rounded-full" />
             </div>
           )}
         </>
@@ -382,7 +401,11 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
               }
             >
               <div className="relative w-full h-full rounded-full overflow-hidden md:top-5 ">
-                <SplineScene config={SPLINE_SCENES.hero} />
+                {isMobileViewport === false ? (
+                  <SplineScene config={SPLINE_SCENES.hero} />
+                ) : (
+                  <MobileHeroStaticFallback className="w-full h-full rounded-full" />
+                )}
 
                 {isCalling ? (
                   <button
