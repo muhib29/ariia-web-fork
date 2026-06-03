@@ -70,7 +70,7 @@ export function MobileHeader({
   }
   return (
     <>
-      {/* TOP BAR — solid #fff, no boxShadow, no transparency */}
+      {/* TOP BAR — solid #fff, no boxShadow, no transparency any*/}
       <div
         style={{
           position: 'fixed',
