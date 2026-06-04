@@ -63,6 +63,13 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
     >
       {/* Background: top orb, center orb, bottom orb — fades at section edges */}
       <div className="absolute inset-0 pointer-events-none section-bg-fade homepage-decor-blur">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse at 50% 0%, rgba(59,107,255,0.18) 0%, rgba(127,86,217,0.12) 34%, transparent 66%), radial-gradient(ellipse at 50% 60%, rgba(46,150,255,0.14) 0%, rgba(59,107,255,0.10) 42%, transparent 72%), linear-gradient(180deg, transparent 0%, rgba(234,243,255,0.52) 100%)',
+          }}
+        />
         {/* Top circle */}
         <div className="ios-mobile-disable-blob absolute w-[400px] h-[250px] md:w-[500px] md:h-[300px] -top-24 left-1/2 -translate-x-1/2 rounded-full blur-[100px] md:blur-[120px] bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9] opacity-25 md:opacity-30" />
         {/* Center orb */}
@@ -98,6 +105,13 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[420px] w-[92%] rounded-full blur-[96px] bg-gradient-to-r from-[#3B6BFF]/16 via-[#2E96FF]/18 to-[#7F56D9]/14" />
                     <div className="absolute right-[-3rem] bottom-6 h-[360px] w-[360px] rounded-full blur-[84px] opacity-70 bg-gradient-to-r from-[#3B6BFF]/16 to-[#2E96FF]/12" />
           </div>
+          <div
+            className="absolute md:hidden inset-x-0 -top-4 -bottom-12 z-0 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse at 18% 20%, rgba(59,107,255,0.10) 0%, transparent 42%), radial-gradient(ellipse at 76% 48%, rgba(127,86,217,0.10) 0%, transparent 45%), radial-gradient(ellipse at 50% 86%, rgba(46,150,255,0.10) 0%, transparent 48%)',
+            }}
+          />
 
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 relative z-10">
             {audioWithContent?.length

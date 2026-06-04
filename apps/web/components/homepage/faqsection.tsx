@@ -31,6 +31,13 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
     >
       {/* Background Gradient Blur */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden homepage-decor-blur">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse at 50% 0%, rgba(53,128,255,0.14) 0%, rgba(46,150,255,0.08) 38%, transparent 68%), linear-gradient(180deg, rgba(53,128,255,0.06) 0%, rgba(255,255,255,0) 52%)',
+          }}
+        />
         {/* Top glow matches Use Cases card gradient palette */}
         <div className="ios-mobile-disable-blob absolute top-[-70px] left-1/2 -translate-x-1/2 w-[100%] h-[100px] rounded-full blur-3xl opacity-[15%] bg-[linear-gradient(90deg,rgba(53,128,255,0.22)_20%,#3580FF_100%,#2E96FF_100%)]" />
 

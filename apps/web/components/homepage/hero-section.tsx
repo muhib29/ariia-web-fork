@@ -238,7 +238,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
           )}
 
           {isMobileViewport && (
-            <div className="absolute top-[26%] left-0 right-0 mx-auto w-[390px] h-[390px] sm:w-[600px] sm:h-[600px] block md:hidden">
+            <div className="absolute top-[26%] left-1/2 w-[390px] h-[390px] sm:w-[600px] sm:h-[600px] -translate-x-1/2 -translate-y-1/2 scale-105 block md:hidden">
               <SplineScene config={SPLINE_SCENES.heroPatternMobile} />
             </div>
           )}
@@ -246,6 +246,13 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
       )}
 
       <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse 300px 260px at calc(100% + 60px) calc(100% + 20px), rgba(103,121,255,0.24) 0%, rgba(78,151,250,0.18) 38%, rgba(53,181,245,0.10) 58%, transparent 72%), radial-gradient(ellipse 320px 130px at 50% 400px, rgba(78,151,250,0.20) 0%, rgba(46,255,234,0.12) 46%, transparent 72%), radial-gradient(ellipse 740px 270px at 160px calc(100% - 20px), rgba(103,121,255,0.10) 0%, rgba(78,151,250,0.08) 48%, rgba(46,255,234,0.06) 62%, transparent 76%), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(239,247,255,0.36) 76%, rgba(234,243,255,0.52) 100%)',
+          }}
+        />
         <div
           className="ios-mobile-disable-blob absolute block bottom-[-80px] right-[-100px] w-[300px] h-[260px] rounded-full blur-3xl opacity-30 bg-[linear-gradient(135deg,_#6779FF_0%,_#4E97FA_50%,_#35B5F5_100%)] md:hidden"
         />

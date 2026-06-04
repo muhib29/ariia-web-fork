@@ -27,6 +27,13 @@ export function SecuritySection({ header, imageWithContent }: SecuritySectionPro
       className="py-10 mt-8 sm:mt-0 md:py-20 px-6 relative overflow-hidden bg-[#222d53] text-white"
     >
       <div className="absolute inset-0 w-full overflow-hidden pointer-events-none homepage-decor-blur">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse at 50% 0%, rgba(102,123,214,0.28) 0%, rgba(127,86,217,0.16) 36%, transparent 70%), radial-gradient(ellipse at 50% 100%, rgba(34,78,120,0.55) 0%, rgba(42,98,139,0.36) 40%, transparent 72%)',
+          }}
+        />
         <div className="ios-mobile-disable-blob absolute top-[-100px] left-[0px] w-[105%] h-[270px] rounded-full blur-3xl opacity-[30%] bg-gradient-to-r from-[#667BD6] to-[#7F56D9]" />
         <div className="ios-mobile-disable-blob absolute bottom-[-150px] left-[0px] w-[105%] h-[270px] rounded-full blur-3xl opacity-[100%] bg-gradient-to-r from-[#224e78] via-[#285d91] to-[#2a628b]" />
       </div>

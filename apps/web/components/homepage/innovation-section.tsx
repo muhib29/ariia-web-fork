@@ -56,6 +56,13 @@ export function InnovationSection({ header }: InnovationSectionProps) {
             </div>
 
             {/* Mobile-only top purple tint outside the fade mask so it remains visible */}
+            <div
+                className="absolute md:hidden inset-x-0 top-0 bottom-0 pointer-events-none z-[1]"
+                style={{
+                    background:
+                        'radial-gradient(ellipse at 50% 10%, rgba(127,86,217,0.18) 0%, rgba(99,91,255,0.10) 38%, transparent 68%), radial-gradient(ellipse at 50% 96%, rgba(127,86,217,0.18) 0%, rgba(59,107,255,0.10) 36%, transparent 70%)',
+                }}
+            />
             <div className="ios-mobile-disable-blob absolute md:hidden inset-x-6 top-4 h-[220px] rounded-[72px] blur-[44px] bg-gradient-to-b from-[#7F56D9]/24 via-[#635BFF]/16 to-transparent pointer-events-none z-[1]" />
 
             {/* Mobile-only bottom glow outside the mask so it stays visible under the card */}
@@ -71,6 +78,13 @@ export function InnovationSection({ header }: InnovationSectionProps) {
             {/* Background Blur Gradient — fades at top/bottom */}
             <div className="absolute inset-0 section-bg-fade pointer-events-none z-0">
                 <div className="absolute inset-0 opacity-30 bg-[linear-gradient(180deg,rgba(103,121,255,0.1)_0%,rgba(46,255,234,0.1)_100%)]" />
+                <div
+                    className="absolute inset-0 md:hidden"
+                    style={{
+                        background:
+                            'linear-gradient(180deg, rgba(103,121,255,0.08) 0%, rgba(46,255,234,0.06) 100%), radial-gradient(ellipse at 88% 28%, rgba(99,91,255,0.10) 0%, transparent 45%), radial-gradient(ellipse at 12% 72%, rgba(59,107,255,0.08) 0%, transparent 44%)',
+                    }}
+                />
                 {/* Mobile top section tint for stronger purplish identity */}
                 <div className="ios-mobile-disable-blob absolute md:hidden inset-x-6 top-12 h-[520px] rounded-t-[72px] rounded-b-[96px] blur-[34px] bg-gradient-to-b from-[#7F56D9]/42 via-[#5E6BFF]/30 to-transparent" />
                 {/* Mobile extra top glow focused behind the card head */}
@@ -121,6 +135,13 @@ export function InnovationSection({ header }: InnovationSectionProps) {
                         {/* Right Image Content */}
                         <FadeInWhenInView delay={100} duration={0.5} yOffset={10}>
                             <div className="flex justify-center items-center relative">
+                                <div
+                                    className="absolute md:hidden w-[280px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none"
+                                    style={{
+                                        background:
+                                            'radial-gradient(ellipse at 50% 50%, rgba(81,199,240,0.24) 0%, rgba(53,181,245,0.16) 42%, rgba(46,255,234,0.08) 58%, transparent 74%)',
+                                    }}
+                                />
                                 <div className="ios-mobile-disable-blob absolute w-[250px] md:w-[400px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[80px] bg-gradient-to-r from-[#51C7F0] via-[#35B5F5] to-[#2EFFEA] opacity-45 z-0" />
                                 <div className="relative w-full max-w-md aspect-square z-10">
                                     <SplineScene config={SPLINE_SCENES.aboutUs} />
