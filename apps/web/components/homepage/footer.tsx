@@ -43,6 +43,32 @@ const FOOTER_LINKS = [
 const FOOTER_NAV_LINK_CLASS =
   'text-white/90 visited:text-white/90 active:text-white/90 font-medium hover:text-white transition-colors whitespace-pre-line md:whitespace-normal leading-[1.25] md:leading-normal';
 
+function FooterNavLink({
+  href,
+  label,
+  useNativeHashNavigation,
+}: {
+  href: string;
+  label: string;
+  useNativeHashNavigation: boolean;
+}) {
+  const isHashLink = href.includes('#');
+
+  if (isHashLink && useNativeHashNavigation) {
+    return (
+      <a href={href} className={FOOTER_NAV_LINK_CLASS}>
+        {label}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={FOOTER_NAV_LINK_CLASS} prefetch={false}>
+      {label}
+    </Link>
+  );
+}
+
 export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }) {
   // Newsletter state
   const [email, setEmail] = useState('');
@@ -53,9 +79,12 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [enableHoverFx, setEnableHoverFx] = useState(false);
+  const [useNativeHashNavigation, setUseNativeHashNavigation] = useState(false);
 
   useEffect(() => {
-    setEnableHoverFx(!isTouchDevice());
+    const isTouch = isTouchDevice();
+    setEnableHoverFx(!isTouch);
+    setUseNativeHashNavigation(isTouch);
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -276,9 +305,11 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
                   <ul className="space-y-3">
                     {FOOTER_LINKS[1].map((link) => (
                       <li key={link.href}>
-                        <Link href={link.href} className={FOOTER_NAV_LINK_CLASS} prefetch={false}>
-                          {link.label}
-                        </Link>
+                        <FooterNavLink
+                          href={link.href}
+                          label={link.label}
+                          useNativeHashNavigation={useNativeHashNavigation}
+                        />
                       </li>
                     ))}
                   </ul>
@@ -289,9 +320,11 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
                   <ul className="space-y-3">
                     {FOOTER_LINKS[2].map((link) => (
                       <li key={link.href}>
-                        <Link href={link.href} className={FOOTER_NAV_LINK_CLASS} prefetch={false}>
-                          {link.label}
-                        </Link>
+                        <FooterNavLink
+                          href={link.href}
+                          label={link.label}
+                          useNativeHashNavigation={useNativeHashNavigation}
+                        />
                       </li>
                     ))}
                   </ul>
@@ -302,9 +335,11 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
                   <ul className="space-y-3">
                     {FOOTER_LINKS[3].map((link) => (
                       <li key={link.href}>
-                        <Link href={link.href} className={FOOTER_NAV_LINK_CLASS} prefetch={false}>
-                          {link.label}
-                        </Link>
+                        <FooterNavLink
+                          href={link.href}
+                          label={link.label}
+                          useNativeHashNavigation={useNativeHashNavigation}
+                        />
                       </li>
                     ))}
                   </ul>
