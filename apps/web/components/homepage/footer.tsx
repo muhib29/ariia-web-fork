@@ -54,7 +54,7 @@ function FooterNavLink({
 }) {
   const isHashLink = href.includes('#');
 
-  if (isHashLink && useNativeHashNavigation) {
+  if (useNativeHashNavigation) {
     return (
       <a href={href} className={FOOTER_NAV_LINK_CLASS}>
         {label}
