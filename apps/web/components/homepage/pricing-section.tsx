@@ -250,13 +250,20 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
     : '';
 
   return (
-    <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-[120px] pb-16 md:pb-12">
+    <section className="relative overflow-hidden bg-[#f8fbff] md:bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-[120px] pb-16 md:pb-12">
       {/* Background Blurs */}
       <div className="absolute inset-0 -z-10 ios-flatten-blur pointer-events-none">
         <div className="ios-mobile-disable-blob absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-20" />
         <div className="ios-mobile-disable-blob absolute w-[600px] h-[600px] bottom-[-200px] right-[5%] rounded-full blur-[160px] bg-gradient-to-tr from-[#BFD9FF] to-[#E5EFFF] opacity-10" />
         <div className="ios-mobile-disable-blob absolute w-[700px] h-[700px] top-[30%] left-[50%] -translate-x-1/2 rounded-full blur-[140px] bg-gradient-to-br from-[#B5D5FF] to-[#D7EBFF] opacity-10" />
       </div>
+      <div
+        className="absolute inset-0 z-0 md:hidden pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 620px 440px at 12% -120px, rgba(121,216,245,0.26) 0%, rgba(232,243,255,0.18) 42%, transparent 82%), radial-gradient(ellipse 520px 470px at calc(100% + 120px) 28%, rgba(191,217,255,0.20) 0%, rgba(229,239,255,0.13) 42%, transparent 82%), radial-gradient(ellipse 560px 520px at 50% 34%, rgba(181,213,255,0.18) 0%, rgba(215,235,255,0.12) 46%, transparent 84%), linear-gradient(180deg, rgba(248,251,255,0.62) 0%, rgba(246,250,255,0.18) 42%, rgba(234,246,255,0.40) 100%)',
+        }}
+      />
 
       {/* Main Content */}
       <div className="w-full lg:px-20 md:px-10 px-6 ios-safe-content relative z-[1]">
@@ -429,6 +436,13 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
         {/* Plans Grid - 3 columns, 2 rows, center card spans 2 rows */}
         {/* Plans Grid - 3 columns, 2 rows, center card spans 2 rows */}
         <div className="relative z-[1] w-full ios-safe-content">
+          <div
+            className="absolute inset-x-0 -top-20 -bottom-10 z-0 md:hidden pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse 520px 260px at 50% 0%, rgba(54,197,240,0.11) 0%, rgba(88,230,253,0.07) 42%, transparent 82%), radial-gradient(ellipse 420px 540px at -90px 42%, rgba(54,197,240,0.10) 0%, rgba(78,151,250,0.06) 40%, transparent 82%), radial-gradient(ellipse 420px 540px at calc(100% + 90px) 58%, rgba(102,123,214,0.10) 0%, rgba(127,86,217,0.06) 40%, transparent 82%), radial-gradient(ellipse 520px 260px at 50% 96%, rgba(54,197,240,0.08) 0%, rgba(88,230,253,0.05) 44%, transparent 84%)',
+            }}
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative gap-6 w-full lg:px-20 md:px-10 px-6 sm:px-10">
             <div className="ios-mobile-disable-blob pointer-events-none absolute top-[-100px] left-[0%] z-0 w-full h-[320px] rounded-full blur-3xl opacity-10 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
             <div className="ios-mobile-disable-blob pointer-events-none absolute top-[400px] left-[0%] z-0 w-full h-[220px] rounded-full blur-3xl opacity-20 bg-[linear-gradient(135deg,_#36C5F0_0%,_#58E6FD_100%)] ios-flatten-blur"></div>
@@ -775,8 +789,9 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
 
       {/* Features Table Section */}
       {pricing?.pricingTable && (
-        <section className="w-full max-w-7xl mx-auto mt-12 px-2 md:px-6">
-          <FadeInWhenInView>
+        <section className="relative w-full max-w-7xl mx-auto mt-12 px-2 md:px-6">
+          <div className="absolute inset-y-0 left-1/2 z-0 w-screen -translate-x-1/2 bg-white md:hidden" />
+          <FadeInWhenInView className="relative z-10">
             <div className="flex flex-col items-center mb-8 mx-5">
               <span className="px-4 py-2 rounded-full mb-4 text-sm font-medium bg-[#DEF4FA] text-blue-700">
                 {pricing.pricingTable.header?.tag || 'Pricing Table'}
@@ -796,7 +811,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
           </FadeInWhenInView>
 
           {/* Desktop Table */}
-          <FadeInWhenInView delay={120}>
+          <FadeInWhenInView delay={120} className="relative z-10">
             <div className="rounded-3xl bg-gradient-to-br from-[#42ACE1]/30 via-[#50C6F0]/10 to-[#54CAF2]/40 p-6 mb-14 shadow-lg hidden md:block">
               <div className="overflow-x-auto">
                 <table className="min-w-full text-sm text-left border-separate border-spacing-y-2">

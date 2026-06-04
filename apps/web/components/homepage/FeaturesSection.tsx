@@ -184,7 +184,7 @@ export function FeaturesSection() {
   const cardsAreaRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-start bg-white overflow-hidden pt-16 md:pt-[120px] pb-15 md:pb-20">
+    <section className="relative min-h-screen flex flex-col justify-start bg-[#f8fbff] md:bg-white overflow-hidden pt-16 md:pt-[120px] pb-15 md:pb-20">
       {/* Top Badge & Heading */}
       <FadeInWhenInView className="relative z-10 w-[95%] mx-auto">
         <div className="text-center  pt-10 md:pt-0 mb-[5px] md:mb-6">
@@ -302,7 +302,7 @@ export function FeaturesSection() {
                       className="bg-no-repeat bg-contain bg-center
                   bg-[url('/images/features/real-time-bg.svg')] z-2 absolute  h-auto w-[400px] sm:h-[339px] sm:w-[339px]"
                     ></div>
-                    <div className="ios-mobile-disable-blob pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(127,86,217,0.34)_0%,rgba(127,86,217,0.18)_45%,rgba(127,86,217,0)_75%)] blur-[8px] sm:blur-[22px]" />
                     <Image
                       src="/images/features/real-time.webp"
                       alt="Real-Time Intelligence & Performance Analytics"
@@ -728,6 +728,13 @@ export function FeaturesSection() {
 
       {/* Background — fades at top/bottom */}
       <div className="absolute inset-0 z-[0] pointer-events-none section-bg-fade overflow-hidden ios-flatten-blur">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse 520px 420px at -120px 140px, rgba(59,107,255,0.24) 0%, rgba(78,151,250,0.16) 38%, rgba(191,217,255,0.10) 58%, transparent 82%), radial-gradient(ellipse 420px 520px at calc(100% + 110px) 34%, rgba(127,86,217,0.16) 0%, rgba(103,121,255,0.11) 42%, transparent 80%), radial-gradient(ellipse 560px 460px at -120px calc(100% - 120px), rgba(59,107,255,0.18) 0%, rgba(78,151,250,0.12) 42%, rgba(191,217,255,0.08) 62%, transparent 84%), radial-gradient(ellipse 430px 360px at 88% 78%, rgba(181,213,255,0.18) 0%, rgba(215,235,255,0.12) 46%, transparent 82%), linear-gradient(180deg, rgba(248,251,255,0.48) 0%, rgba(246,250,255,0.12) 42%, rgba(234,246,255,0.36) 100%)',
+          }}
+        />
         {/* Top-left bluish shadow */}
         <div className="ios-mobile-disable-blob absolute w-[520px] h-[520px] -top-40 -left-62 rounded-full blur-[80px] md:blur-[150px] bg-gradient-to-br from-[#3B6BFF] via-[#4E97FA] to-[#BFD9FF] opacity-40 md:opacity-70" />
 
