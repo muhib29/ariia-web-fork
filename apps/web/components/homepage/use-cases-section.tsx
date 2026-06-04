@@ -59,7 +59,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
   return (
     <section
       id="use-cases"
-      className="py-7 md:py-15 px-6 bg-white relative overflow-visible md:overflow-hidden"
+      className="py-7 md:py-15 px-6 bg-[#f8fbff] md:bg-white relative overflow-visible md:overflow-hidden"
     >
       {/* Background: top orb, center orb, bottom orb — fades at section edges */}
       <div className="absolute inset-0 pointer-events-none section-bg-fade homepage-decor-blur">
@@ -67,7 +67,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
           className="absolute inset-0 md:hidden"
           style={{
             background:
-              'radial-gradient(ellipse at 50% 0%, rgba(59,107,255,0.18) 0%, rgba(127,86,217,0.12) 34%, transparent 66%), radial-gradient(ellipse at 50% 60%, rgba(46,150,255,0.14) 0%, rgba(59,107,255,0.10) 42%, transparent 72%), linear-gradient(180deg, transparent 0%, rgba(234,243,255,0.52) 100%)',
+              'radial-gradient(ellipse 520px 270px at 50% -24px, rgba(59,107,255,0.20) 0%, rgba(127,86,217,0.13) 42%, transparent 82%), radial-gradient(ellipse 360px 580px at -72px 52%, rgba(46,150,255,0.20) 0%, rgba(59,107,255,0.13) 38%, transparent 78%), radial-gradient(ellipse 360px 580px at calc(100% + 72px) 48%, rgba(127,86,217,0.18) 0%, rgba(59,107,255,0.12) 40%, transparent 78%), radial-gradient(ellipse 480px 330px at 50% 62%, rgba(46,150,255,0.16) 0%, rgba(59,107,255,0.11) 44%, transparent 80%), linear-gradient(180deg, rgba(239,247,255,0.44) 0%, rgba(248,251,255,0.12) 52%, rgba(234,243,255,0.48) 100%)',
           }}
         />
         {/* Top circle */}
@@ -109,7 +109,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
             className="absolute md:hidden inset-x-0 -top-4 -bottom-12 z-0 pointer-events-none"
             style={{
               background:
-                'radial-gradient(ellipse at 18% 20%, rgba(59,107,255,0.10) 0%, transparent 42%), radial-gradient(ellipse at 76% 48%, rgba(127,86,217,0.10) 0%, transparent 45%), radial-gradient(ellipse at 50% 86%, rgba(46,150,255,0.10) 0%, transparent 48%)',
+                'radial-gradient(ellipse 260px 240px at 0% 22%, rgba(59,107,255,0.16) 0%, transparent 78%), radial-gradient(ellipse 260px 240px at 100% 46%, rgba(127,86,217,0.15) 0%, transparent 78%), radial-gradient(ellipse 330px 260px at 50% 52%, rgba(46,150,255,0.12) 0%, transparent 80%), radial-gradient(ellipse 330px 240px at 50% 88%, rgba(46,255,234,0.10) 0%, transparent 80%)',
             }}
           />
 

@@ -48,10 +48,10 @@ export function InnovationSection({ header }: InnovationSectionProps) {
     return (
         <section
             id="about-us"
-            className="py-7 md:py-15 px-6 relative overflow-visible md:overflow-hidden bg-white mt-14 md:mt-10"
+            className="py-7 md:py-15 px-6 relative overflow-visible md:overflow-hidden bg-[#f8fbff] md:bg-white mt-0 md:mt-10 -mb-8 md:mb-0"
         >
             {/* Mobile-only distinct divider between sections */}
-            <div className="absolute md:hidden inset-x-0 -top-8 h-px pointer-events-none z-[10] flex items-center justify-center">
+            <div className="hidden md:flex absolute inset-x-0 -top-8 h-px pointer-events-none z-[10] items-center justify-center">
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-80" />
             </div>
 
@@ -60,7 +60,7 @@ export function InnovationSection({ header }: InnovationSectionProps) {
                 className="absolute md:hidden inset-x-0 top-0 bottom-0 pointer-events-none z-[1]"
                 style={{
                     background:
-                        'radial-gradient(ellipse at 50% 10%, rgba(127,86,217,0.18) 0%, rgba(99,91,255,0.10) 38%, transparent 68%), radial-gradient(ellipse at 50% 96%, rgba(127,86,217,0.18) 0%, rgba(59,107,255,0.10) 36%, transparent 70%)',
+                        'radial-gradient(ellipse 440px 260px at 50% 8%, rgba(127,86,217,0.20) 0%, rgba(99,91,255,0.12) 42%, transparent 82%), radial-gradient(ellipse 500px 250px at 50% 98%, rgba(127,86,217,0.18) 0%, rgba(59,107,255,0.11) 42%, transparent 82%)',
                 }}
             />
             <div className="ios-mobile-disable-blob absolute md:hidden inset-x-6 top-4 h-[220px] rounded-[72px] blur-[44px] bg-gradient-to-b from-[#7F56D9]/24 via-[#635BFF]/16 to-transparent pointer-events-none z-[1]" />
@@ -82,7 +82,7 @@ export function InnovationSection({ header }: InnovationSectionProps) {
                     className="absolute inset-0 md:hidden"
                     style={{
                         background:
-                            'linear-gradient(180deg, rgba(103,121,255,0.08) 0%, rgba(46,255,234,0.06) 100%), radial-gradient(ellipse at 88% 28%, rgba(99,91,255,0.10) 0%, transparent 45%), radial-gradient(ellipse at 12% 72%, rgba(59,107,255,0.08) 0%, transparent 44%)',
+                            'linear-gradient(180deg, rgba(234,243,255,0.42) 0%, rgba(248,251,255,0.10) 52%, rgba(234,243,255,0.34) 100%), radial-gradient(ellipse 340px 230px at 88% 28%, rgba(99,91,255,0.13) 0%, transparent 74%), radial-gradient(ellipse 340px 230px at 12% 72%, rgba(59,107,255,0.11) 0%, transparent 74%)',
                     }}
                 />
                 {/* Mobile top section tint for stronger purplish identity */}
@@ -139,7 +139,7 @@ export function InnovationSection({ header }: InnovationSectionProps) {
                                     className="absolute md:hidden w-[280px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none"
                                     style={{
                                         background:
-                                            'radial-gradient(ellipse at 50% 50%, rgba(81,199,240,0.24) 0%, rgba(53,181,245,0.16) 42%, rgba(46,255,234,0.08) 58%, transparent 74%)',
+                                            'radial-gradient(ellipse at 50% 50%, rgba(81,199,240,0.34) 0%, rgba(53,181,245,0.22) 42%, rgba(46,255,234,0.12) 60%, transparent 80%)',
                                     }}
                                 />
                                 <div className="ios-mobile-disable-blob absolute w-[250px] md:w-[400px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[80px] bg-gradient-to-r from-[#51C7F0] via-[#35B5F5] to-[#2EFFEA] opacity-45 z-0" />

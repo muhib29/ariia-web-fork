@@ -27,7 +27,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
   return (
     <section
       id="faq"
-      className="pt-10 md:pt-18 pb-0 px-4 md:px-6 relative overflow-hidden overflow-x-hidden bg-white"
+      className="pt-10 md:pt-18 pb-0 px-4 md:px-6 relative overflow-hidden overflow-x-hidden bg-[#fbfdff] md:bg-white"
     >
       {/* Background Gradient Blur */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden homepage-decor-blur">
@@ -35,13 +35,13 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
           className="absolute inset-0 md:hidden"
           style={{
             background:
-              'radial-gradient(ellipse at 50% 0%, rgba(53,128,255,0.14) 0%, rgba(46,150,255,0.08) 38%, transparent 68%), linear-gradient(180deg, rgba(53,128,255,0.06) 0%, rgba(255,255,255,0) 52%)',
+              'radial-gradient(ellipse 520px 190px at 50% -24px, rgba(53,128,255,0.18) 0%, rgba(46,150,255,0.10) 44%, transparent 82%), radial-gradient(ellipse 360px 180px at 14% 8%, rgba(127,86,217,0.10) 0%, transparent 78%), linear-gradient(180deg, rgba(239,247,255,0.46) 0%, rgba(251,253,255,0.10) 42%, rgba(251,253,255,0) 72%)',
           }}
         />
         {/* Top glow matches Use Cases card gradient palette */}
         <div className="ios-mobile-disable-blob absolute top-[-70px] left-1/2 -translate-x-1/2 w-[100%] h-[100px] rounded-full blur-3xl opacity-[15%] bg-[linear-gradient(90deg,rgba(53,128,255,0.22)_20%,#3580FF_100%,#2E96FF_100%)]" />
 
-        <div className="absolute top-0 left-0 w-full h-[220px] opacity-30 bg-[linear-gradient(180deg,rgba(53,128,255,0.12)_0%,rgba(46,150,255,0.08)_45%,rgba(255,255,255,0)_100%)]" />
+        <div className="hidden md:block absolute top-0 left-0 w-full h-[220px] opacity-30 bg-[linear-gradient(180deg,rgba(53,128,255,0.12)_0%,rgba(46,150,255,0.08)_45%,rgba(255,255,255,0)_100%)]" />
         {/* Top blue blur */}
         <div className="ios-mobile-disable-blob absolute w-full h-[300px] -top-40 left-1/2 -translate-x-1/2 blur-[60px] bg-[linear-gradient(91deg,rgba(53,128,255,0.45)_35.93%,#3580FF_51.47%,#2E96FF_67.02%)] opacity-20" />
         {/* Keep bottom clear so FAQ ends on white */}

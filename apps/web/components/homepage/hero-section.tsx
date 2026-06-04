@@ -221,7 +221,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
   }, [selectedBusiness, isMobile, isAnimationComplete, schedulePathUpdate, showConnector]);
 
   return (
-    <section className="relative flex flex-col justify-center bg-white overflow-hidden min-h-[760px] md:min-h-[780px] lg:h-[860px] lg:min-h-[860px] lg:max-h-[860px] 2xl:h-[900px] 2xl:min-h-[900px] 2xl:max-h-[900px] pt-20 xl:pt-10 pb-6 md:pb-8 lg:pb-0 hero-orb-breakpoint-1860">
+    <section className="relative flex flex-col justify-center bg-[#f8fbff] md:bg-white overflow-hidden min-h-[760px] md:min-h-[780px] lg:h-[860px] lg:min-h-[860px] lg:max-h-[860px] 2xl:h-[900px] 2xl:min-h-[900px] 2xl:max-h-[900px] pt-20 xl:pt-10 pb-6 md:pb-8 lg:pb-0 hero-orb-breakpoint-1860">
       {/* Decorative elements */}
       <div className="absolute inset-0 h-full w-full vertical-lines" />
 
@@ -250,7 +250,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
           className="absolute inset-0 md:hidden"
           style={{
             background:
-              'radial-gradient(ellipse 300px 260px at calc(100% + 60px) calc(100% + 20px), rgba(103,121,255,0.24) 0%, rgba(78,151,250,0.18) 38%, rgba(53,181,245,0.10) 58%, transparent 72%), radial-gradient(ellipse 320px 130px at 50% 400px, rgba(78,151,250,0.20) 0%, rgba(46,255,234,0.12) 46%, transparent 72%), radial-gradient(ellipse 740px 270px at 160px calc(100% - 20px), rgba(103,121,255,0.10) 0%, rgba(78,151,250,0.08) 48%, rgba(46,255,234,0.06) 62%, transparent 76%), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(239,247,255,0.36) 76%, rgba(234,243,255,0.52) 100%)',
+              'radial-gradient(ellipse 340px 280px at calc(100% + 88px) calc(100% - 84px), rgba(103,121,255,0.22) 0%, rgba(78,151,250,0.16) 36%, rgba(53,181,245,0.09) 58%, transparent 82%), radial-gradient(ellipse 330px 122px at 50% 405px, rgba(78,151,250,0.23) 0%, rgba(46,255,234,0.12) 44%, transparent 80%), radial-gradient(ellipse 660px 220px at 50% calc(100% - 72px), rgba(103,121,255,0.10) 0%, rgba(78,151,250,0.075) 48%, rgba(46,255,234,0.05) 66%, transparent 86%), linear-gradient(180deg, rgba(248,251,255,0) 0%, rgba(239,247,255,0.30) 62%, rgba(234,243,255,0.38) 92%, rgba(248,251,255,0) 100%)',
           }}
         />
         <div

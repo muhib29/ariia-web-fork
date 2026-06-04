@@ -16,9 +16,9 @@ export function VideoSection() {
   };
 
   return (
-    <section className="py-10 md:py-20 px-6">
+    <section className="py-10 md:py-20 px-6 bg-white relative overflow-hidden">
       <FadeInWhenInView>
-        <div className="max-w-6xl mx-auto homepage-section-content">
+        <div className="max-w-6xl mx-auto homepage-section-content relative z-10">
           {/* Video Container */}
           <div className="relative w-full h-[235px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-xl md:shadow-2xl">
           {/* Background Image */}
