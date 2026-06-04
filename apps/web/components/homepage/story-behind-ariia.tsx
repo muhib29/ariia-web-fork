@@ -83,7 +83,7 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
       </div>
 
       <Header /> {/* //changed */}
-      <div className="flex-1 flex flex-col items-center px-4 max-w-6xl mx-auto w-full z-2">
+      <div className="flex-1 flex flex-col items-center px-4 max-w-6xl mx-auto w-full relative z-10">
         {/* Title and Badge */}
         <FadeInWhenInView className="text-center pt-10">
           <SectionHeader

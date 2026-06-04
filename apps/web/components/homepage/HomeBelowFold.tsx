@@ -14,15 +14,19 @@ const ContentSection = dynamic(
 );
 const UseCasesSection = dynamic(
   () => import('@/components/homepage').then((m) => ({ default: m.UseCasesSection })),
+  { loading: () => <div id="use-cases" className="h-0 scroll-mt-20" aria-hidden /> },
 );
 const InnovationSection = dynamic(
   () => import('@/components/homepage').then((m) => ({ default: m.InnovationSection })),
+  { loading: () => <div id="about-us" className="h-0 scroll-mt-20" aria-hidden /> },
 );
 const SecuritySection = dynamic(
   () => import('@/components/homepage').then((m) => ({ default: m.SecuritySection })),
+  { loading: () => <div id="security" className="h-0 scroll-mt-20" aria-hidden /> },
 );
 const FAQSection = dynamic(
   () => import('@/components/homepage').then((m) => ({ default: m.FAQSection })),
+  { loading: () => <div id="faq" className="h-0 scroll-mt-20" aria-hidden /> },
 );
 const NewsletterFooter = dynamic(
   () => import('@/components/homepage').then((m) => ({ default: m.NewsletterFooter })),

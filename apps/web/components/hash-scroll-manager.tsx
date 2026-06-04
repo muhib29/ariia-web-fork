@@ -28,7 +28,7 @@ function scrollToHashWithRetry(hash: string) {
 
     const el = document.getElementById(id);
     if (el) {
-      const offset = -(getHeaderOffset() + extraMargin);
+      const offset = getHeaderOffset() + extraMargin;
       lenisScrollTo(el, offset);
 
       // Re-apply scroll a few frames to counter late layout shifts (images/fonts)
