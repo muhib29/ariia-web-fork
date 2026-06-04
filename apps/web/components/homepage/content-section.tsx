@@ -24,7 +24,7 @@ export function ContentSection() {
       num: '2',
       title: 'Customer Inquiries',
       desc: 'Provide instant, accurate responses to business\ninquiries — store hours, locations, promotions,\n policies, product availability, and pricing.',
-      imgSrc: '/images/customer-inquiries.svg',
+      imgSrc: '/images/customer-inquiries.png',
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow-2.svg',
       bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
@@ -38,13 +38,13 @@ export function ContentSection() {
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow-3.svg',
       bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
-      imgClass: '-mt-12 md:-mt-17 w-[60%] md:w-[120%] mx-auto h-auto object-contain',
+      imgClass: '-mt-12 md:-mt-17 w-[60%] md:w-[90%] mx-auto h-auto object-contain',
     },
     {
       num: '4',
       title: 'Reservations & Phone Orders',
       desc: 'Capture real-time reservations and orders for restaurants, seamlessly integrated with your existing POS system to ensure accurate and efficient processing.',
-      imgSrc: '/images/reservations-interface.svg',
+      imgSrc: '/images/reservations-interface.png',
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow-4.svg',
       bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
@@ -57,9 +57,9 @@ export function ContentSection() {
     num: '5',
     title: 'Customer Support',
     desc: 'Resolves issues and escalates complaints, ensuring seamless customer engagement with minimal human involvement.',
-    imgLeft: '/images/card-5-mobile.webp',
-    imgleftmobile: '/images/mobile.webp',
-    imgRight: '/images/card-5-right.webp',
+    imgLeft: '/images/card-5-mobile.png',
+    imgleftmobile: '/images/mobile.svg',
+    imgRight: '/images/customer-support.png',
     bgImg: '/images/bg-shadow-5.svg',
     mobileLeftBg: '/images/last-card-bg.svg',
     bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
@@ -67,7 +67,7 @@ export function ContentSection() {
   };
 
   return (
-    <section className="home-content-section py-10 px-6 bg-white relative overflow-hidden">
+    <section className="py-10  px-6 bg-white relative overflow-hidden">
       <div className="absolute inset-0 section-bg-fade pointer-events-none">
         <div className="ios-mobile-disable-blob absolute w-full h-[200px] top-[10%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[240px] bg-gradient-to-r from-[#4E97FA] to-[#35B5F5] opacity-30 z-0" />
       </div>
@@ -134,7 +134,6 @@ export function ContentSection() {
                       alt={card.title}
                       width={600}
                       height={600}
-                      sizes="(max-width: 640px) 95vw, (max-width: 1024px) 600px, 720px"
                       className={`relative z-10 w-full md:w-auto md:max-w-none md:h-auto object-contain ${
                         card.num === '3' || card.num === '4'
                           ? 'max-w-[320px] h-[170px]'
@@ -198,7 +197,6 @@ export function ContentSection() {
                       alt="Customer Support Mobile"
                       width={188}
                       height={100}
-                      sizes="(max-width: 1024px) 150px, 188px"
                       className="w-[150px] h-[140px] lg:w-[187.56px] lg:h-[382px] object-contain object-top hidden md:block"
                     />
                     <Image
@@ -206,7 +204,6 @@ export function ContentSection() {
                       alt="Customer Support Mobile"
                       width={188}
                       height={100}
-                      sizes="(max-width: 1024px) 150px, 188px"
                       className="w-[150px] h-[140px] lg:w-[187.56px] lg:h-[382px] object-contain object-top block md:hidden"
                     />
                   </div>
@@ -217,7 +214,6 @@ export function ContentSection() {
                       alt="Customer Support Networking"
                       width={550}
                       height={120}
-                      sizes="(max-width: 640px) 280px, (max-width: 1024px) 500px, 550px"
                       className="relative w-[280px] h-auto bottom-5 left-0 lg:left-4 lg:w-[549.98px] lg:h-[277.98px] max-w-none object-contain lg:object-right"
                     />
                   </div>
