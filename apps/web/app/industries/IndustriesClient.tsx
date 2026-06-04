@@ -72,6 +72,8 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
   ];
   const animationFrameClass =
     'bg-gradient-to-br from-[#edf7ff] via-[#f8fbff] to-[#dbeaff] md:bg-none';
+  const animationPlaceholderClass =
+    'w-full h-full bg-gradient-to-br from-[#eef7ff] via-[#f7fcff] to-[#f8fbff]';
 
   return (
     <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-16 md:pt-20">
@@ -98,7 +100,7 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
         {/* First two cards - side by side */}
         <div className="w-[97%] max-sm:mx-auto md:w-full z-0 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mb-5 sm:mb-10">
           {sectionCards.slice(0, 2).map((card, index) => (
-            <FadeInWhenInView key={index} delay={index * 120}>
+            <div key={index}>
               <div className={`relative overflow-hidden rounded-3xl ${animationFrameClass} shadow-lg w-full border-0 outline-none [&_canvas]:outline-none min-h-[378px]  md:min-h-[480px]`}>
                 <div className="absolute -inset-[2px] overflow-hidden rounded-3xl [&>div]:!min-h-0">
                   <div
@@ -109,13 +111,15 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
                       src={isMobile ? card.mobile : card.desktop}
                       loop
                       autoplay
-                      playWhenInView
+                      eager
+                      playWhenInView={false}
                       className="w-full h-full object-cover"
+                      placeholderClassName={animationPlaceholderClass}
                     />
                   </div>
                 </div>
               </div>
-            </FadeInWhenInView>
+            </div>
           ))}
         </div>
 
@@ -133,6 +137,7 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
                   autoplay
                   playWhenInView
                   className="w-full h-full object-cover"
+                  placeholderClassName={animationPlaceholderClass}
                 />
               </div>
             </div>
@@ -155,6 +160,7 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
                       autoplay
                       playWhenInView
                       className="w-full h-full object-cover"
+                      placeholderClassName={animationPlaceholderClass}
                     />
                   </div>
                 </div>
@@ -177,6 +183,7 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
                   autoplay
                   playWhenInView
                   className="w-full h-full object-cover"
+                  placeholderClassName={animationPlaceholderClass}
                 />
               </div>
             </div>

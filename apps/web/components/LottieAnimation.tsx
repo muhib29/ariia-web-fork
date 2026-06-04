@@ -11,14 +11,16 @@ export type LottieAnimationProps = {
   autoplay?: boolean;
   speed?: number;
   className?: string;
+  placeholderClassName?: string;
+  eager?: boolean;
   /** When true (default), Lottie only mounts and plays when in viewport to save CPU and network. */
   playWhenInView?: boolean;
 };
 
 const LottieAnimation = React.forwardRef<any, LottieAnimationProps>(
-  ({ src, loop = true, autoplay = true, speed = 1, className, playWhenInView = true }, ref) => {
+  ({ src, loop = true, autoplay = true, speed = 1, className, placeholderClassName, eager = false, playWhenInView = true }, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [inView, setInView] = useState(false);
+    const [inView, setInView] = useState(!playWhenInView);
     const [hasEnteredView, setHasEnteredView] = useState(!playWhenInView);
     const [DotLottieComponent, setDotLottieComponent] = useState<any>(null);
     const dotLottieRef = useRef<any>(null);
@@ -35,7 +37,7 @@ const LottieAnimation = React.forwardRef<any, LottieAnimationProps>(
           .catch(() => {});
       };
 
-      if (isMobileDevice()) {
+      if (isMobileDevice() && !eager) {
         const delay = typeof window !== 'undefined' && 'requestIdleCallback' in window
           ? new Promise(resolve => (window as any).requestIdleCallback(resolve, { timeout: 4000 }))
           : new Promise(resolve => setTimeout(resolve, 2500));
@@ -102,6 +104,9 @@ const LottieAnimation = React.forwardRef<any, LottieAnimationProps>(
           visibility: useReveal && !inView && playWhenInView ? 'hidden' : 'visible',
         }}
       >
+        {(!DotLottieComponent || !hasEnteredView) && placeholderClassName ? (
+          <div className={placeholderClassName} aria-hidden />
+        ) : null}
         {DotLottieComponent && hasEnteredView && (
           <DotLottieComponent
             src={src}
