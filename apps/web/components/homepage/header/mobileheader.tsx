@@ -118,7 +118,8 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
           }}
         >
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <AriiaSvgMark className="w-20 h-7" />
+            {/* <AriiaSvgMark className="w-20 h-7" /> */}
+            <AriiaSvgMark priority width={80} height={26} />
           </a>
         </div>
 

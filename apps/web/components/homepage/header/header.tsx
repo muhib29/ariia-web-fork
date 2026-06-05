@@ -123,8 +123,7 @@ function DesktopNav({
   isSticky?: boolean;
 }) {
   const menuItemClasses = (href: string) =>
-    `flex items-start gap-3 p-3 rounded-lg transition-colors ${
-      activePath === href ? 'bg-[#EEFBFF]' : ''
+    `flex items-start gap-3 p-3 rounded-lg transition-colors ${activePath === href ? 'bg-[#EEFBFF]' : ''
     } menu-item-hover`;
 
   const bgClass = isSticky ? 'bg-white/70' : 'bg-white';
@@ -135,38 +134,39 @@ function DesktopNav({
       <div
         className={`flex items-center ${bgClass} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-3 py-0 md:px-4 md:py-2`}
       >
-        <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4">
-          <AriiaSvgMark priority className="w-24 h-11 md:w-32 md:h-12" />
+        <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4 " >
+          {/* <AriiaSvgMark priority className="w-24 h-11 md:w-32 md:h-12" /> */}
+          <AriiaSvgMark priority width={110} height={35} />
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center gap-1">
           <Link
             href="/features"
-            className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 pr-0 py-2 mr-3"
+            className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 py-2"
           >
             Features
           </Link>
+
           <Link
             href="/pricing"
-            className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 py-2 mr-3"
+            className="text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors hover:bg-[#EEFBFF] rounded-full px-4 py-2"
           >
             Pricing
           </Link>
 
-          {/* Company dropdown */}
           <div
             className="relative"
             onMouseEnter={() => handleDropdownEnter('company')}
             onMouseLeave={handleDropdownLeave}
           >
-            <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-3 hover:bg-[#EEFBFF]">
+            <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full px-4 py-2 hover:bg-[#EEFBFF]">
               Company
               <ChevronDown
-                className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                  hoveredDropdown === 'company' ? 'rotate-180' : ''
-                }`}
+                className={`ml-1 h-4 w-4 transition-transform duration-200 ${hoveredDropdown === 'company' ? 'rotate-180' : ''
+                  }`}
               />
             </button>
+
             {hoveredDropdown === 'company' && (
               <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
                 {COMPANY_MENU.map((item) => (
@@ -190,20 +190,19 @@ function DesktopNav({
             )}
           </div>
 
-          {/* Resources dropdown */}
           <div
             className="relative"
             onMouseEnter={() => handleDropdownEnter('resources')}
             onMouseLeave={handleDropdownLeave}
           >
-            <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full py-2 px-3 -mx-2 hover:bg-[#EEFBFF]">
+            <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm transition-colors outline-none rounded-full px-4 py-2 hover:bg-[#EEFBFF]">
               Resources
               <ChevronDown
-                className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                  hoveredDropdown === 'resources' ? 'rotate-180' : ''
-                }`}
+                className={`ml-1 h-4 w-4 transition-transform duration-200 ${hoveredDropdown === 'resources' ? 'rotate-180' : ''
+                  }`}
               />
             </button>
+
             {hoveredDropdown === 'resources' && (
               <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
                 {RESOURCES_MENU.map((item) => (
@@ -305,14 +304,13 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
 
       {/* ── MOBILE ── */}
       <div className="block md:hidden">
-        <MobileHeader  isScrolled={isScrolled}/>
+        <MobileHeader isScrolled={isScrolled} />
       </div>
 
       {/* ── DESKTOP ── */}
       <header
-        className={`hidden md:block fixed left-0 w-full z-50 !bg-transparent ${
-          isHomePage && !isScrolled ? 'header-vertical-lines' : ''
-        }`}
+        className={`hidden md:block fixed left-0 w-full z-50 !bg-transparent ${isHomePage && !isScrolled ? 'header-vertical-lines' : ''
+          }`}
         style={{ maxWidth: '100vw', top: 0 }}
       >
         {!shouldHideGradient && (

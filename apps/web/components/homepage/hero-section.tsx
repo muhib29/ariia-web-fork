@@ -283,16 +283,22 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
             {/* Centered image */}
             <div className="w-full flex justify-center">
               <FadeInWhenInView
+                className="relative top-5 md:top-3 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
+                delay={0}
+              >
+                <HeroLogo priority={true} className="object-contain w-[90px] mx-auto md:w-[132px] md:pb-2" />
+              </FadeInWhenInView>
+            </div>
+{/* 
+             <div className="w-full flex justify-center">
+              <FadeInWhenInView
                 className="relative top-0 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
                 delay={0}
               >
-                {/* <HeroLogo priority={true}
-                  // className="object-contain w-full h-full md:pb-2"
-                 className="object-contain max-w-[90px]  md:pb-0 md:max-w-full"
-                /> */}
-                 <HeroLogo priority={true} className="object-contain max-w-[90px]  md:pb-0 md:max-w-full" />
+                <HeroLogo className="object-contain max-w-[90px]  md:pb-2 md:max-w-full" />
               </FadeInWhenInView>
-            </div>
+            </div> */}
+
 
             <div className="space-y-3 text-center mx-2 md:space-y-6 md:mx-0 lg:text-left">
               <FadeInWhenInView delay={100}>
