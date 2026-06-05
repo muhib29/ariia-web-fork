@@ -76,17 +76,23 @@ function ContactCardComponent({
     >
       {/* Blur Effect */}
       {blurConfig && (
-        <div
-          className="ios-mobile-disable-blob absolute pointer-events-none"
-          style={{
-            width: blurConfig.size,
-            height: blurConfig.size,
-            background: blurConfig.color,
-            opacity: blurConfig.opacity,
-            filter: 'blur(97px)',
-            ...parsePosition(blurConfig.position),
-          }}
-        />
+        <>
+          <div
+            className="absolute inset-0 md:hidden pointer-events-none"
+            style={{ background: staticGlowBackground(blurConfig.position) }}
+          />
+          <div
+            className="ios-mobile-disable-blob absolute pointer-events-none"
+            style={{
+              width: blurConfig.size,
+              height: blurConfig.size,
+              background: blurConfig.color,
+              opacity: blurConfig.opacity,
+              filter: 'blur(97px)',
+              ...parsePosition(blurConfig.position),
+            }}
+          />
+        </>
       )}
 
       {/* Decorative SVG Image */}
@@ -151,6 +157,20 @@ function parsePosition(position: string): React.CSSProperties {
     'bottom-center': { bottom: '-20%', left: '50%', transform: 'translateX(-50%)' },
   };
   return positions[position] || positions['center'];
+}
+
+function staticGlowBackground(position?: string) {
+  const positions: Record<string, string> = {
+    'top-left': '18% 12%',
+    'top-right': '82% 12%',
+    'bottom-left': '18% 88%',
+    'bottom-right': '82% 88%',
+    center: '50% 50%',
+    'top-center': '50% 12%',
+    'bottom-center': '50% 88%',
+  };
+  const at = positions[position || 'center'] || positions.center;
+  return `radial-gradient(ellipse 240px 220px at ${at}, rgba(15,101,126,0.20) 0%, rgba(32,168,190,0.14) 42%, rgba(32,168,190,0.06) 62%, transparent 82%)`;
 }
 
 export function ContactUs({ contact }: { contact: ContactUsData }) {
@@ -232,6 +252,13 @@ export function ContactUs({ contact }: { contact: ContactUsData }) {
     <section className="relative overflow-hidden bg-white min-h-screen flex flex-col justify-start pt-20 md:pt-[80px] pb-0">
       {/* Background Blurs */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse 720px 340px at 50% 150px, rgba(78,151,250,0.14) 0%, rgba(53,181,245,0.09) 42%, rgba(46,255,234,0.05) 62%, transparent 86%), radial-gradient(ellipse 360px 360px at -70px 180px, rgba(103,121,255,0.18) 0%, rgba(78,151,250,0.13) 36%, rgba(46,255,234,0.07) 58%, transparent 82%), radial-gradient(ellipse 380px 420px at -90px 72%, rgba(103,121,255,0.14) 0%, rgba(78,151,250,0.10) 38%, rgba(46,255,234,0.06) 60%, transparent 84%), linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(247,252,255,0.22) 44%, rgba(234,246,255,0.32) 100%)',
+          }}
+        />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[180px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1800px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
       </div>

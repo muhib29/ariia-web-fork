@@ -40,6 +40,13 @@ export function CustomersSection({ customers }: { customers: CustomerCard[] }) {
       <div className="absolute inset-0 z-10">
         {hasCustomersData ? (
           <>
+            <div
+              className="absolute inset-0 md:hidden pointer-events-none"
+              style={{
+                background:
+                  'radial-gradient(ellipse 760px 360px at 50% 150px, rgba(78,151,250,0.18) 0%, rgba(53,181,245,0.12) 42%, rgba(46,255,234,0.06) 62%, transparent 86%), radial-gradient(ellipse 360px 360px at -70px 180px, rgba(103,121,255,0.18) 0%, rgba(78,151,250,0.13) 36%, rgba(46,255,234,0.07) 58%, transparent 82%), radial-gradient(ellipse 380px 420px at -90px 62%, rgba(103,121,255,0.14) 0%, rgba(78,151,250,0.10) 38%, rgba(46,255,234,0.06) 60%, transparent 84%), radial-gradient(ellipse 360px 420px at calc(100% + 90px) 32%, rgba(196,205,243,0.28) 0%, rgba(196,205,243,0.16) 42%, transparent 82%), radial-gradient(ellipse 380px 440px at calc(100% + 90px) 72%, rgba(196,205,243,0.24) 0%, rgba(196,205,243,0.14) 42%, transparent 84%), linear-gradient(180deg, rgba(247,252,255,0.58) 0%, rgba(246,248,255,0.22) 46%, rgba(234,246,255,0.48) 100%)',
+              }}
+            />
             <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[180px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
             <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1800px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
             <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[700px] -right-[10%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
@@ -47,6 +54,13 @@ export function CustomersSection({ customers }: { customers: CustomerCard[] }) {
           </>
         ) : (
           <>
+            <div
+              className="absolute inset-0 md:hidden pointer-events-none"
+              style={{
+                background:
+                  'radial-gradient(ellipse 760px 360px at 50% 150px, rgba(78,151,250,0.16) 0%, rgba(53,181,245,0.10) 42%, rgba(46,255,234,0.06) 62%, transparent 86%), radial-gradient(ellipse 520px 420px at -90px 42%, rgba(103,121,255,0.14) 0%, rgba(78,151,250,0.10) 40%, rgba(46,255,234,0.06) 62%, transparent 84%), linear-gradient(180deg, rgba(247,252,255,0.58) 0%, rgba(246,248,255,0.22) 46%, rgba(234,246,255,0.48) 100%)',
+              }}
+            />
             <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-full md:h-[400px] top-[40%] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-15 blur-[70px]" />
           </>
         )}

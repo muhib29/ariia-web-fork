@@ -75,6 +75,13 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
     <section className="relative overflow-hidden min-h-screen flex flex-col bg-gradient-to-b from-[#f7fcff] via-[#f6f8ff] to-[#eaf6ff] pt-20">
       {/* Background Blurs */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse 280px 260px at -40px 94px, rgba(59,107,255,0.26) 0%, rgba(92,168,255,0.18) 38%, rgba(183,224,255,0.10) 58%, transparent 82%), radial-gradient(ellipse 920px 500px at 50% -150px, rgba(121,216,245,0.24) 0%, rgba(232,243,255,0.18) 48%, transparent 86%), radial-gradient(ellipse 760px 460px at 50% 120px, rgba(78,151,250,0.16) 0%, rgba(121,216,245,0.12) 44%, rgba(191,217,255,0.08) 62%, transparent 86%), radial-gradient(ellipse 980px 720px at calc(100% + 210px) 128px, rgba(78,151,250,0.24) 0%, rgba(121,216,245,0.17) 38%, rgba(191,217,255,0.12) 60%, transparent 88%), radial-gradient(ellipse 620px 520px at 50% 34%, rgba(181,213,255,0.16) 0%, rgba(215,235,255,0.12) 48%, transparent 84%), radial-gradient(ellipse 520px 440px at calc(100% + 130px) calc(100% + 80px), rgba(191,217,255,0.18) 0%, rgba(229,239,255,0.12) 44%, transparent 82%), linear-gradient(180deg, rgba(247,252,255,0.58) 0%, rgba(246,248,255,0.20) 44%, rgba(234,246,255,0.46) 100%)',
+          }}
+        />
         {/* Top-left circle highlight right above heading */}
         <div className="ios-mobile-disable-blob absolute w-[260px] h-[260px] md:w-[320px] md:h-[320px] top-[40px] left-[-40px] md:top-[30px] md:left-[-60px] rounded-full blur-[90px] bg-gradient-to-br from-[#3B6BFF] via-[#5CA8FF] to-[#B7E0FF] opacity-40 md:opacity-50" />
         <div className="ios-mobile-disable-blob absolute w-[800px] h-[800px] top-[-250px] left-[10%] rounded-full blur-[180px] bg-gradient-to-r from-[#79D8F5] to-[#E8F3FF] opacity-20" />
