@@ -1,22 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  ChevronDown,
-  ChevronRight,
-  Users,
-  UserRound,
-  Briefcase,
-  Mail,
-  BookOpen,
-  BoxIcon,
-  Building2,
-  CircleHelp,
-  Lock,
-  ScrollText,
-  ShieldCheck,
-  Sparkles,
-} from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
 
 const SINGLE_LINKS = [
@@ -25,39 +10,30 @@ const SINGLE_LINKS = [
 ];
 
 const COMPANY_LINKS = [
-  { href: '/#about-us', label: 'About Us', icon: <UserRound style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/story-behind-ariia/', label: 'The Story Behind ARIIA', icon: <Sparkles style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/careers/', label: 'Careers', icon: <Briefcase style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/customers/', label: 'Customers', icon: <Users style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/contact-us/', label: 'Contact Us', icon: <Mail style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
+  { href: '/#about-us', label: 'About us' },
+  { href: '/story-behind-ariia/', label: 'Our Story' },
+  { href: '/careers/', label: 'Careers' },
+  { href: '/customers/', label: 'Customers' },
+  { href: '/contact-us/', label: 'Contact us' },
 ];
 
 const RESOURCES_LINKS = [
-  { href: '/blog/', label: 'Blog', icon: <BookOpen style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/#use-cases', label: 'Use Cases', icon: <BoxIcon style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/industries/', label: 'Industries', icon: <Building2 style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/#faq', label: 'Questions & Answers', icon: <CircleHelp style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/#security', label: 'Security & Data Protection', icon: <Lock style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/terms-of-service/', label: 'Terms of Service', icon: <ScrollText style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
-  { href: '/privacy-policy/', label: 'Privacy Policy', icon: <ShieldCheck style={{ width: 17, height: 17, color: '#4E97FA' }} /> },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/#use-cases', label: 'Use Cases' },
+  { href: '/industries/', label: 'Industries' },
+  { href: '/#faq', label: 'Questions & Answers' },
+  { href: '/#security', label: 'Security & Data Protection' },
+  { href: '/terms-of-service/', label: 'Terms of Service' },
+  { href: '/privacy-policy/', label: 'Privacy Policy' },
 ];
 
-export function MobileHeader({
-  isScrolled = false,
-}: {
-  isScrolled?: boolean;
-}) {
+export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
 
-  // SAFE: solid colors only — never transparent, never rgba on fixed elements
-  // const pillBg = isScrolled ? '#f0f8ff' : '#fff';
-  const pillBg = isScrolled ? '#fff' : '#fff'; // always white pills
-
-  function openMenu() {
-    setMenuOpen(true);
-  }
+  const topBarBackground =
+    'linear-gradient(90deg, #6679f4 0%, #4E97FA 25%, #35B5F5 68%, #2EFFEA 100%)';
 
   function closeMenu() {
     setMenuOpen(false);
@@ -65,9 +41,40 @@ export function MobileHeader({
     setResourcesOpen(false);
   }
 
+  const mainLinkStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: '16px 28px',
+    color: '#0d1b2e',
+    fontWeight: 700,
+    fontSize: 15,
+    textDecoration: 'none',
+    touchAction: 'manipulation' as const,
+    border: 'none',
+    borderBottom: '1px solid rgba(148, 210, 225, 0.55)',
+    background: 'transparent',
+    lineHeight: 1.1,
+    cursor: 'pointer',
+    textAlign: 'left' as const,
+  };
+
+  const subLinkStyle = {
+    display: 'block',
+    padding: '10px 28px 10px 36px',
+    color: '#0d1b2e',
+    fontSize: 16,
+    fontWeight: 450,
+    textDecoration: 'none',
+    touchAction: 'manipulation' as const,
+    background: 'transparent',
+    borderBottom: 'none',
+    lineHeight: 1.45,
+  };
+
   return (
     <>
-      {/* TOP BAR — solid #fff, no boxShadow, no transparency */}
       <div
         className="ios-mobile-fixed-layer"
         style={{
@@ -76,87 +83,83 @@ export function MobileHeader({
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: '12px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: 'none',       
-          pointerEvents: 'none',    
+          height: 64,
+          padding: '0 16px',
+          background: 'transparent',
+          pointerEvents: 'none',
         }}
       >
-        {/* Left pill — logo. No boxShadow (confirmed freeze cause on fixed elements) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 40,
+            background: isScrolled ? 'none' : topBarBackground,
+            zIndex: 0,
+          }}
+        />
+
         <div
           style={{
+            position: 'absolute',
+            top: 25,
+            left: 16,
+            zIndex: 1,
             display: 'flex',
             alignItems: 'center',
             background: '#fff',
             borderRadius: 999,
-            padding: '0 10px',
-            // boxShadow: isScrolled ? '0 2px 10px rgba(0,0,0,0.08)' : 'none',
-            pointerEvents: 'auto',  
+            padding: '5px 12px',
+            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.12)',
+            pointerEvents: 'auto',
           }}
         >
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <AriiaSvgMark className="w-20 h-10" />
+            <AriiaSvgMark className="w-20 h-7" />
           </a>
         </div>
 
-        {/* Right pill — CTA + hamburger. No boxShadow */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            background: pillBg,
-            borderRadius: 999,
-            padding: '4px',
-            gap: 4,
-            // boxShadow: isScrolled ? '0 2px 10px rgba(0,0,0,0.08)' : 'none',
-            pointerEvents: 'auto',   // ✅ add this
+            position: 'absolute',
+            top: 25,
+            right: 16,
+            zIndex: 1,
+            pointerEvents: 'auto',
           }}
+          className="flex items-center bg-white rounded-full shadow-[0_4px_12px_rgba(15,23,42,0.12)] px-1 py-1 space-x-1"
         >
           <a
             href="/trial"
-            style={{
-              background: '#111',
-              color: '#fff',
-              borderRadius: 999,
-              padding: '8px 14px',
-              fontSize: 13,
-              fontWeight: 600,
-              textDecoration: 'none',
-              touchAction: 'manipulation',
-              letterSpacing: '-0.01em',
-            }}
+            className="bg-gray-900/95 text-white font-medium text-xs sm:text-sm rounded-full px-3 sm:px-6 h-8 sm:h-9 flex items-center whitespace-nowrap"
+            style={{ textDecoration: 'none' }}
           >
             1-Month Free Trial
           </a>
+
           <button
             type="button"
-            onClick={openMenu}
+            onClick={() => setMenuOpen(true)}
+            className="flex items-center justify-center size-8 sm:size-10 rounded-full text-gray-700"
             style={{
               touchAction: 'manipulation',
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: '6px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              padding: 0,
             }}
+            aria-label="Open menu"
           >
-            <svg style={{ width: 22, height: 22, color: '#111' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg style={{ width: 20, height: 20 }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
-
       </div>
 
-      {/* MENU OVERLAY
-          — always in DOM, toggled via display (no mount/unmount = no React render delay)
-          — solid gradient background (no transparency, no blur)
-          — no boxShadow anywhere on this element
-      */}
       <div
         className="ios-mobile-fixed-layer"
         style={{
@@ -166,30 +169,49 @@ export function MobileHeader({
           right: 0,
           bottom: 0,
           zIndex: 200,
-          background: 'linear-gradient(170deg, #dbeeff 0%, #eaf6ff 40%, #f4fbff 100%)',
+          background:
+            'linear-gradient(rgba(255,255,255,0.42) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.42) 1px, transparent 1px), radial-gradient(ellipse 520px 520px at 96% 86%, rgba(78,151,250,0.26) 0%, rgba(78,151,250,0.13) 42%, transparent 76%), radial-gradient(ellipse 460px 360px at 18% 30%, rgba(46,255,234,0.16) 0%, rgba(46,255,234,0.08) 44%, transparent 76%), linear-gradient(180deg, #dcf7fb 0%, #e2fbfb 58%, #d8f3ff 100%)',
+          backgroundSize: '114px 114px, 114px 114px, auto, auto, auto',
           overflowY: 'scroll',
           WebkitOverflowScrolling: 'touch',
           display: menuOpen ? 'block' : 'none',
         }}
       >
-        {/* Header row: CTA pill left, close button right */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 40,
+            background: 'linear-gradient(90deg, #6675f4 0%, #4d94f2 42%, #37b8ef 72%, #35e5d3 100%)',
+            zIndex: 0,
+          }}
+        />
+
         <div
           style={{
-            padding: '14px 16px',
+            position: 'relative',
+            zIndex: 1,
+            padding: '56px 16px 0',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: 16,
           }}
         >
-          {/* CTA pill — solid #fff, no boxShadow */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               background: '#fff',
               borderRadius: 999,
-              padding: '4px',
-              gap: 2,
+              padding: '10px',
+              gap: 6,
+              boxShadow: '0 8px 18px rgba(15, 23, 42, 0.12)',
+              minHeight: 48,
+              maxWidth: 300,
             }}
           >
             <a
@@ -197,16 +219,17 @@ export function MobileHeader({
               onClick={closeMenu}
               style={{
                 padding: '8px 16px',
-                color: '#111',
+                color: '#2f3745',
                 textDecoration: 'none',
-                fontSize: 14,
-                fontWeight: 500,
+                fontSize: 15,
+                fontWeight: 600,
                 borderRadius: 999,
-                touchAction: 'manipulation',
+                lineHeight: 1,
               }}
             >
               Log In
             </a>
+
             <a
               href="/trial"
               onClick={closeMenu}
@@ -214,175 +237,107 @@ export function MobileHeader({
                 background: '#111',
                 color: '#fff',
                 borderRadius: 999,
-                padding: '8px 16px',
+                padding: '8px 14px',
                 fontSize: 14,
-                fontWeight: 600,
+                fontWeight: 700,
                 textDecoration: 'none',
-                touchAction: 'manipulation',
+                lineHeight: 1,
+                whiteSpace: 'nowrap',
               }}
             >
               1-Month Free Trial
             </a>
           </div>
 
-          {/* Close button — solid #fff, no boxShadow */}
           <button
             type="button"
             onClick={closeMenu}
             style={{
               touchAction: 'manipulation',
-              background: '#fff',
+              background: 'rgba(255,255,255,0.42)',
               border: 'none',
               borderRadius: '50%',
-              width: 42,
-              height: 42,
+              width: 48,
+              height: 48,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
               flexShrink: 0,
             }}
+            aria-label="Close menu"
           >
-            <svg style={{ width: 18, height: 18, color: '#444' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg style={{ width: 24, height: 24, color: '#526273' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
-        {/* Divider */}
-        <div style={{ height: 1, background: '#c8e6f7', margin: '0 16px' }} />
-
-        {/* Nav links */}
-        <div style={{ padding: '8px 0' }}>
-
-          {/* Single links */}
+        <div style={{ position: 'relative', zIndex: 1, padding: '32px 0 28px' }}>
           {SINGLE_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={closeMenu}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '15px 20px',
-                color: '#0d1b2e',
-                fontWeight: 700,
-                fontSize: 16,
-                textDecoration: 'none',
-                touchAction: 'manipulation',
-                borderBottom: '1px solid #c8e6f7',
-              }}
-            >
+            <a key={link.href} href={link.href} onClick={closeMenu} style={mainLinkStyle}>
               <span>{link.label}</span>
-              <ChevronRight style={{ width: 16, height: 16, color: '#4E97FA' }} />
+              <ChevronRight style={{ width: 22, height: 22, color: '#263746' }} strokeWidth={2.3} />
             </a>
           ))}
 
-          {/* Company accordion button */}
           <button
             type="button"
             onClick={() => setCompanyOpen((p) => !p)}
             style={{
-              touchAction: 'manipulation',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '100%',
-              padding: '15px 20px',
-              background: companyOpen ? '#d6ecfa' : 'none',
-              border: 'none',
-              borderBottom: '1px solid #c8e6f7',
-              color: '#0d1b2e',
-              fontWeight: 700,
-              fontSize: 16,
-              cursor: 'pointer',
-              textAlign: 'left',
+              ...mainLinkStyle,
+              borderBottom: companyOpen ? 'none' : '1px solid rgba(148, 210, 225, 0.55)',
             }}
           >
             <span>Company</span>
-            <ChevronDown style={{ width: 16, height: 16, color: '#4E97FA', transform: companyOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+            <ChevronRight
+              style={{
+                width: 22,
+                height: 22,
+                color: '#263746',
+                transform: companyOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s ease',
+              }}
+              strokeWidth={2.3}
+            />
           </button>
 
-          {/* Company sub-links — display toggle, no mount/unmount */}
-          <div style={{ display: companyOpen ? 'block' : 'none' }}>
+          <div style={{ display: companyOpen ? 'contents' : 'none' }}>
             {COMPANY_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  padding: '13px 20px 13px 36px',
-                  borderBottom: '1px solid #ddf0fa',
-                  color: '#1e3a5f',
-                  fontSize: 15,
-                  fontWeight: 500,
-                  textDecoration: 'none',
-                  touchAction: 'manipulation',
-                  background: '#eaf6ff',
-                }}
-              >
-                {link.icon}
-                <span>{link.label}</span>
+              <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
+                {link.label}
               </a>
             ))}
           </div>
 
-          {/* Resources accordion button */}
           <button
             type="button"
             onClick={() => setResourcesOpen((p) => !p)}
             style={{
-              touchAction: 'manipulation',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '100%',
-              padding: '15px 20px',
-              background: resourcesOpen ? '#d6ecfa' : 'none',
-              border: 'none',
-              borderBottom: '1px solid #c8e6f7',
-              color: '#0d1b2e',
-              fontWeight: 700,
-              fontSize: 16,
-              cursor: 'pointer',
-              textAlign: 'left',
+              ...mainLinkStyle,
+              borderBottom: resourcesOpen ? 'none' : '1px solid rgba(148, 210, 225, 0.55)',
             }}
           >
             <span>Resources</span>
-            <ChevronDown style={{ width: 16, height: 16, color: '#4E97FA', transform: resourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+            <ChevronRight
+              style={{
+                width: 22,
+                height: 22,
+                color: '#263746',
+                transform: resourcesOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s ease',
+              }}
+              strokeWidth={2.3}
+            />
           </button>
 
-          {/* Resources sub-links — display toggle, no mount/unmount */}
-          <div style={{ display: resourcesOpen ? 'block' : 'none' }}>
+          <div style={{ display: resourcesOpen ? 'contents' : 'none' }}>
             {RESOURCES_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  padding: '13px 20px 13px 36px',
-                  borderBottom: '1px solid #ddf0fa',
-                  color: '#1e3a5f',
-                  fontSize: 15,
-                  fontWeight: 500,
-                  textDecoration: 'none',
-                  touchAction: 'manipulation',
-                  background: '#eaf6ff',
-                }}
-              >
-                {link.icon}
-                <span>{link.label}</span>
+              <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
+                {link.label}
               </a>
             ))}
           </div>
-
         </div>
       </div>
     </>
