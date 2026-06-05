@@ -23,6 +23,13 @@ export function BlogSection({ blogs }: { blogs: any[] }) {
     <section className="relative overflow-hidden min-h-screen flex flex-col justify-start bg-[#f7fcff] bg-gradient-to-b from-[#f7fcff] via-[#f6f8ff] to-[#eaf6ff] pt-16 md:pt-[80px]">
       {/* Background Blurs */}
       <div className="absolute inset-0 z-10">
+        <div
+          className="absolute inset-0 md:hidden pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 760px 360px at 50% 150px, rgba(78,151,250,0.15) 0%, rgba(53,181,245,0.10) 42%, rgba(46,255,234,0.05) 62%, transparent 86%), radial-gradient(ellipse 360px 360px at -70px 180px, rgba(103,121,255,0.15) 0%, rgba(78,151,250,0.11) 36%, rgba(46,255,234,0.06) 58%, transparent 82%), radial-gradient(ellipse 380px 420px at -90px 62%, rgba(103,121,255,0.12) 0%, rgba(78,151,250,0.085) 38%, rgba(46,255,234,0.05) 60%, transparent 84%), radial-gradient(ellipse 360px 420px at calc(100% + 90px) 32%, rgba(196,205,243,0.22) 0%, rgba(196,205,243,0.13) 42%, transparent 82%), radial-gradient(ellipse 380px 440px at calc(100% + 90px) 72%, rgba(196,205,243,0.19) 0%, rgba(196,205,243,0.11) 42%, transparent 84%), linear-gradient(180deg, rgba(247,252,255,0.55) 0%, rgba(246,248,255,0.20) 46%, rgba(234,246,255,0.42) 100%)',
+          }}
+        />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[180px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bottom-[1800px] -left-[10%] bg-gradient-to-r from-[#6779FF] via-[#4E97FA] to-[#2EFFEA] opacity-20 blur-[70px]" />
         <div className="ios-mobile-disable-blob absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] top-[700px] -right-[10%] bg-gradient-to-tr from-[#C4CDF3] to-[#C4CDF3] opacity-40 blur-[100px]" />
@@ -31,12 +38,21 @@ export function BlogSection({ blogs }: { blogs: any[] }) {
       <Header /> {/* //changed */}
       <div className="flex-1 flex flex-col justify-start text-center items-center pt-10 py-0 px-4 max-w-6xl mx-auto z-10 relative w-full">
         {/* Blog Header */}
-        <FadeInWhenInView>
-          <SectionHeader
-            tag={'Blog'}
-            title={'Stay Up to Date with '}
-            gradientTitle={'Insights, Product Updates, and Perspectives from the Team Behind ARIIA'}
+        <FadeInWhenInView className="relative isolate">
+          <div
+            className="absolute inset-x-[-48px] -top-8 h-[260px] md:hidden pointer-events-none z-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 420px 220px at 50% 38%, rgba(160,235,255,0.48) 0%, rgba(190,245,255,0.28) 38%, rgba(220,250,255,0.14) 58%, transparent 82%), radial-gradient(ellipse 260px 120px at 50% 32%, rgba(120,220,255,0.28) 0%, rgba(190,245,255,0.16) 48%, transparent 78%)',
+            }}
           />
+          <div className="relative z-10">
+            <SectionHeader
+              tag={'Blog'}
+              title={'Stay Up to Date with '}
+              gradientTitle={'Insights, Product Updates, and Perspectives from the Team Behind ARIIA'}
+            />
+          </div>
         </FadeInWhenInView>
         {/* Blog Cards Grid */}
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px] mb-10 sm:mt-8">
