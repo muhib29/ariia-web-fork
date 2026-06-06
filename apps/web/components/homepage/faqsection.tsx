@@ -84,7 +84,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
                     <button
                       type="button"
                       onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                      className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7db3ff] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                      className="w-full text-left px-6 py-5 flex justify-between items-center touch-manipulation transition-transform duration-150 active:scale-[0.97] active:brightness-[1.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7db3ff] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                     >
                       <span className="text-base font-medium text-[#101828] transition-colors duration-300 group-hover:text-[#175CD3] group-focus-within:text-[#175CD3]">
                         {faq.title}
