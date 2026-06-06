@@ -20,7 +20,7 @@ export interface FAQSectionProps {
     content: string;
   }>;
 }
-
+// CHECKING
 export function FAQSection({ header, questions }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState(0);
 
