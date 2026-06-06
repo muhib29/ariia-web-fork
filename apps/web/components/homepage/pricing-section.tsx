@@ -275,12 +275,12 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                 {pricing?.tag || 'Pricing'}
               </span>
             </div>
-            <h1 className="text-gray-900 font-bold text-[32px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
+            <h2 className="text-gray-900 font-bold text-[33px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
               <span className="block md:inline">{pricing?.title || 'Flexible Pricing'}</span>
               <span className="block md:inline text-transparent bg-clip-text bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9] md:ml-2">
                 {pricing?.styledTitle || 'Designed to Scale'}
               </span>
-            </h1>
+            </h2>
           </div>
         </FadeInWhenInView>
 
@@ -389,7 +389,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                 {subscriptionTag}
               </span>
             </div>
-            <h2 className="text-gray-900 font-bold text-[34px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
+            <h2 className="text-gray-900 font-bold text-[33px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
               {pricing?.subscriptionSection?.header?.title || 'Plan that'}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9]">
                 {pricing?.subscriptionSection?.header?.styledTitle || 'Grows with Your Business'}

@@ -10,11 +10,11 @@ const SINGLE_LINKS = [
 ];
 
 const COMPANY_LINKS = [
-  { href: '/#about-us', label: 'About us' },
+  { href: '/#about-us', label: 'About Us' },
   { href: '/story-behind-ariia/', label: 'The Story Behind ARIIA' },
   { href: '/careers/', label: 'Careers' },
   { href: '/customers/', label: 'Customers' },
-  { href: '/contact-us/', label: 'Contact us' },
+  { href: '/contact-us/', label: 'Contact Us' },
 ];
 
 const RESOURCES_LINKS = [
