@@ -389,12 +389,12 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                 {subscriptionTag}
               </span>
             </div>
-            <h1 className="text-gray-900 font-bold text-[32px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
+            <h2 className="text-gray-900 font-bold text-[34px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
               {pricing?.subscriptionSection?.header?.title || 'Plan that'}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9]">
                 {pricing?.subscriptionSection?.header?.styledTitle || 'Grows with Your Business'}
               </span>
-            </h1>
+            </h2>
             {pricing?.subscriptionSection?.header?.description && (
               <div className="mt-2 text-gray-600">
                 <MarkdownRenderer>{pricing.subscriptionSection.header.description}</MarkdownRenderer>
@@ -795,12 +795,12 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
               <span className="px-4 py-2 rounded-full mb-4 text-sm font-medium bg-[#DEF4FA] text-blue-700">
                 {pricing.pricingTable.header?.tag || 'Pricing Table'}
               </span>
-              <h1 className="text-gray-900 font-bold text-center text-[32px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
+              <h2 className="text-gray-900 font-bold text-center text-[33px] leading-[42px] md:text-[40px] md:leading-[52px] tracking-tight">
                 {pricing.pricingTable.header?.title || 'Level the Playing Field with AI at'}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B6BFF] to-[#7F56D9]">
                   {pricing.pricingTable.header?.styledTitle || 'Every Plan'}
                 </span>
-              </h1>
+              </h2>
               {pricing.pricingTable.header?.description && (
                 <div className="text-gray-600 text-center mt-2 max-w-2xl">
                   <MarkdownRenderer>{pricing.pricingTable.header.description}</MarkdownRenderer>

@@ -38,7 +38,7 @@ export function ContentSection() {
       bgColor: 'bg-white',
       bgImg: '/images/bg-shadow-3.svg',
       bgImgClass: 'opacity-100 scale-[1.15] md:scale-[1.15]',
-      imgClass: '-mt-12 md:-mt-17 w-[60%] md:w-[90%] mx-auto h-auto object-contain',
+      imgClass: '-mt-8 md:-mt-17 w-[60%] md:w-[90%] mx-auto h-auto object-contain',
     },
     {
       num: '4',

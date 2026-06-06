@@ -38,7 +38,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           </span>
         )}
         {(hasTitle || hasGradientTitle) && (
-          <h1 className="text-gray-900 font-bold leading-[36px] w-full md:max-w-4xl text-[28px] md:text-[36px] md:leading-[42px] tracking-tight pt-4 text-center">
+          <h2 className="text-gray-900 font-bold leading-[36px] w-full md:max-w-4xl text-[29px] md:text-[36px] md:leading-[42px] tracking-tight pt-4 text-center">
             {normalizedTitle}
             {hasTitle &&
               hasGradientTitle &&
@@ -69,7 +69,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                   {normalizedGradientTitle}
                 </span>
               ))}
-          </h1>
+          </h2>
         )}
         {description && description.trim().length > 1 && (
           <div className="max-w-2xl mx-auto mt-4 text-[#101828] text-base md:text-lg leading-[27px]">
