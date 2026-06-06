@@ -239,7 +239,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
 
           {isMobileViewport && (
             <div className="absolute top-[26%] left-1/2 w-[390px] h-[390px] sm:w-[600px] sm:h-[600px] -translate-x-1/2 -translate-y-1/2 scale-105 block md:hidden">
-              <SplineScene config={SPLINE_SCENES.heroPatternMobile} />
+              <SplineScene config={SPLINE_SCENES.heroPatternMobile} loadOnMount loadOnMountDelay={1200} />
             </div>
           )}
         </>
@@ -396,7 +396,11 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
               }
             >
               <div className="relative w-full h-full rounded-full overflow-hidden md:top-5 ">
-                <SplineScene config={SPLINE_SCENES.hero} loadOnMount={isMobileViewport === false} />
+                <SplineScene
+                  config={SPLINE_SCENES.hero}
+                  loadOnMount={isMobileViewport !== null}
+                  loadOnMountDelay={isMobileViewport ? 1200 : 0}
+                />
 
                 {isCalling ? (
                   <button

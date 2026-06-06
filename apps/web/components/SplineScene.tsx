@@ -17,6 +17,7 @@ interface SplineSceneProps {
   onLoad?: (spline: Application) => void;
   priority?: boolean;
   loadOnMount?: boolean;
+  loadOnMountDelay?: number;
 }
 
 export default function SplineScene({
@@ -26,6 +27,7 @@ export default function SplineScene({
   onLoad,
   priority = false,
   loadOnMount = false,
+  loadOnMountDelay = 0,
 }: SplineSceneProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -151,7 +153,7 @@ export default function SplineScene({
         'requestIdleCallback' in window
           ? window.requestIdleCallback(load, { timeout: 8000 })
           : load();
-      }, shouldLoadImmediately ? 0 : 2500);
+      }, loadOnMount ? loadOnMountDelay : shouldLoadImmediately ? 0 : 2500);
     };
 
     if (document.readyState === 'complete') {
@@ -161,7 +163,7 @@ export default function SplineScene({
     }
 
     return () => { cancelled = true; };
-  }, [isNearViewport, shouldLoadImmediately, userInteracted, loadOnMount]);
+  }, [isNearViewport, shouldLoadImmediately, userInteracted, loadOnMount, loadOnMountDelay]);
 
   const handleLoad = (spline: Application) => {
     splineAppRef.current = spline; // ← store the reference to the Spline app

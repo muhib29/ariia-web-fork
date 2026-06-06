@@ -17,6 +17,8 @@ import dynamic from 'next/dynamic';
 import { SectionHeader } from '../SectionHeader';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
 import { ComponentPropsWithoutRef } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 const SplineScene = dynamic(() => import('../SplineScene'), {
   ssr: false,
   loading: () => (
@@ -381,6 +383,20 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
     br: () => <br />,
   };
 
+  const renderCareerMarkdown = (content: string) =>
+    isSalesRepresentativeRole ? (
+      <ReactMarkdown remarkPlugins={[remarkBreaks]} components={markdownComponents}>
+        {content}
+      </ReactMarkdown>
+    ) : (
+      <MarkdownRenderer
+        withBreaks
+        components={markdownComponents}
+      >
+        {content}
+      </MarkdownRenderer>
+    );
+
   return (
     <>
       <section className="relative min-h-screen overflow-hidden flex flex-col bg-gradient-to-b from-[#f7fcff] via-[#f6f8ff] to-[#eaf6ff]">
@@ -654,23 +670,13 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
                     {jobData.careerCard?.description && (
                       <div className="mb-8">
                         <div className="text-gray-700 text-base leading-relaxed">
-                          <MarkdownRenderer
-                            withBreaks
-                            components={markdownComponents}
-                          >
-                            {careerDescription}
-                          </MarkdownRenderer>
+                          {renderCareerMarkdown(careerDescription)}
                         </div>
                       </div>
                     )}
                     {jobData.careerCard?.jobDescription && (
                       <div className="mb-8 text-gray-700 text-base leading-relaxed">
-                        <MarkdownRenderer
-                          withBreaks
-                          components={markdownComponents}
-                        >
-                          {careerJobDescription}
-                        </MarkdownRenderer>
+                        {renderCareerMarkdown(careerJobDescription)}
                       </div>
                     )}
                   </div>
