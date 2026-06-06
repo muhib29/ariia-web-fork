@@ -218,7 +218,7 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
                 <div
                   className={`relative w-full overflow-hidden rounded-[20px] lg:rounded-[28px] flex justify-center items-center ${isMobileForGlobe
                       ? 'md:hidden w-screen max-w-none relative left-1/2 -translate-x-1/2 aspect-square my-6 rounded-none'
-                      : 'hidden md:flex md:float-right md:ml-6 md:mb-6 md:w-[360px] xl:w-[400px] xl:h-[450px] mt-1'
+                      : 'hidden md:flex md:float-right md:ml-6 md:mb-6 md:w-[360px] md:h-[405px] xl:w-[400px] xl:h-[450px] mt-1'
                     }`}
                 >
                   <LottieAnimation
@@ -227,6 +227,7 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
                     autoplay
                     playWhenInView
                     className="w-[100%] h-[100%] object-cover pointer-events-none"
+                    placeholderClassName="w-full h-full rounded-[20px] lg:rounded-[28px] bg-gradient-to-br from-[#e3f3ff] via-[#d0eaff] to-[#c2e0ff]"
                   />
                 </div>
               );

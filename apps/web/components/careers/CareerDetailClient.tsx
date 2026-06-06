@@ -17,7 +17,12 @@ import dynamic from 'next/dynamic';
 import { SectionHeader } from '../SectionHeader';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
 import { ComponentPropsWithoutRef } from 'react';
-const SplineScene = dynamic(() => import('../SplineScene'), { ssr: false });
+const SplineScene = dynamic(() => import('../SplineScene'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[280px] md:h-[310px] bg-gradient-to-br from-[#F8FAFF] to-[#E8F3FF]" />
+  ),
+});
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
 
 // Define types for the career data
