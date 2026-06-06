@@ -25,6 +25,13 @@ const SplineScene = dynamic(() => import('../SplineScene'), {
 });
 import { FadeInWhenInView } from '../animations/FadeInWhenInView';
 
+function InstantCareerDetailContent({
+  children,
+  className = '',
+}: ComponentPropsWithoutRef<typeof FadeInWhenInView>) {
+  return <div className={className}>{children}</div>;
+}
+
 // Define types for the career data
 interface CareerJobInfo {
   employment?: string;
@@ -146,6 +153,9 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
   const careerDescription = normalizeMarkdownContent(jobData.careerCard?.description);
   const careerJobDescription = normalizeMarkdownContent(jobData.careerCard?.jobDescription);
   const whyJoinUsDescription = normalizeMarkdownContent(jobData.whyJoinUs?.description);
+  const MainContentWrapper = isSalesRepresentativeRole
+    ? InstantCareerDetailContent
+    : FadeInWhenInView;
 
   const jobInfo = [
     {
@@ -456,7 +466,7 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
           </FadeInWhenInView>
 
           {/* Main Content Flex Layout */}
-          <FadeInWhenInView delay={120} className="w-full">
+          <MainContentWrapper delay={120} className="w-full">
             <div className="w-full flex flex-col md:flex-row  md:gap-12 items-start justify-between max-w-6xl mx-auto">
               {/* Main Content - CONDITIONAL RENDERING */}
               <div className="flex-1 w-full min-w-0 flex flex-col items-center md:items-start order-1 md:order-none">
@@ -714,7 +724,7 @@ export function CareerDetailClient({ careerData }: { careerData: CareerData }) {
                 )}
               </div>
             </div>
-          </FadeInWhenInView>
+          </MainContentWrapper>
 
           {/* Why Join Us Card */}
           {!showForm && (
