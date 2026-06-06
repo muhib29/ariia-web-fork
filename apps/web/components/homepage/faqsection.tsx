@@ -68,7 +68,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
           </div>
 
           {/* Accordion List */}
-          <div className="space-y-0 bg-transparent md:bg-white">
+          <div className="relative z-20 pointer-events-auto space-y-0 bg-transparent md:bg-white">
             {questions?.length
               ? questions.map((faq, index) => {
                 const isOpen = openIndex === index;
@@ -82,6 +82,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
                     )}
                   >
                     <button
+                      type="button"
                       onClick={() => setOpenIndex(isOpen ? -1 : index)}
                       className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7db3ff] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                     >

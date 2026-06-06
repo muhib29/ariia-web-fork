@@ -126,7 +126,9 @@ function DesktopNav({
     `flex items-start gap-3 p-3 rounded-lg transition-colors ${activePath === href ? 'bg-[#EEFBFF]' : ''
     } menu-item-hover`;
 
-  const bgClass = isSticky ? 'bg-white/70' : 'bg-white';
+  const bgClass = isSticky
+    ? 'bg-white/85 backdrop-blur-xl border border-white/60'
+    : 'bg-white';
 
   return (
     <div className="flex items-center justify-between">
@@ -134,11 +136,11 @@ function DesktopNav({
       <div
         className={`flex items-center ${bgClass} rounded-full shadow-[0_3px_6px_rgba(181,181,181,0.25)] px-3 py-0 md:px-4 md:py-2`}
       >
-        <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4 " >
-          {/* <AriiaSvgMark priority className="w-24 h-11 md:w-32 md:h-12" /> */}
-          <AriiaSvgMark priority width={110} height={35} />
+        {/* <AriiaSvgMark priority className="w-24 h-11 md:w-32 md:h-12" /> */}
+        {/* <AriiaSvgMark width={110} height={35} /> */}
+        <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4">
+          <AriiaSvgMark className="w-20 h-10 md:h-10 md:w-28" />
         </Link>
-
         <nav className="hidden md:flex items-center gap-1">
           <Link
             href="/features"

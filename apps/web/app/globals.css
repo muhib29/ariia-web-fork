@@ -690,8 +690,8 @@ section {
   animation-delay: 500ms;
 }
 
-/* Hide Spline badge by targeting the #logo anchor */
-#logo {
+/* Hide Spline badge by targeting the #logo anchor inside Spline scenes */
+.spline-container #logo {
   display: none !important;
 }
 

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { MapPin, Briefcase, PieChart, Gift, DollarSign } from 'lucide-react';
 import Link from 'next/link';
 import MarkdownRenderer from '../markdown-renderer';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SectionHeader } from '../SectionHeader';
 import dynamic from 'next/dynamic';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
@@ -108,15 +108,6 @@ function JobCard({ title, slug, description, jobInfo }: JobCardProps) {
 }
 
 export function CareersSection({ career }: { career: CareerData }) {
-  useEffect(() => {
-    if (!document.querySelector('script[src*="spline-viewer.js"]')) {
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = 'https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js';
-      document.body.appendChild(script);
-    }
-  }, []);
-
   const jobsToDisplay =
     career.career_details
       ?.filter((job: CareerDetail) => job.title)
