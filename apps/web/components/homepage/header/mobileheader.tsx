@@ -11,7 +11,7 @@ const SINGLE_LINKS = [
 
 const COMPANY_LINKS = [
   { href: '/#about-us', label: 'About us' },
-  { href: '/story-behind-ariia/', label: 'Our Story' },
+  { href: '/story-behind-ariia/', label: 'The Story Behind ARIIA' },
   { href: '/careers/', label: 'Careers' },
   { href: '/customers/', label: 'Customers' },
   { href: '/contact-us/', label: 'Contact us' },
@@ -119,7 +119,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
         >
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             {/* <AriiaSvgMark className="w-20 h-7" /> */}
-            <AriiaSvgMark width={82} height={28} />
+            <AriiaSvgMark width={80} height={28} />
           </a>
         </div>
 

@@ -16,6 +16,7 @@ interface SplineSceneProps {
   style?: CSSProperties;
   onLoad?: (spline: Application) => void;
   priority?: boolean;
+  loadOnMount?: boolean;
 }
 
 export default function SplineScene({
@@ -24,6 +25,7 @@ export default function SplineScene({
   style = {},
   onLoad,
   priority = false,
+  loadOnMount = false,
 }: SplineSceneProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -33,7 +35,7 @@ export default function SplineScene({
   const splineAppRef = useRef<Application | null>(null); // ← add this line only
   const screenSize = useScreenSize();
   const currentHeight = config.height[screenSize];
-  const shouldLoadImmediately = priority || config.priority;
+  const shouldLoadImmediately = priority || config.priority || loadOnMount;
   const [isNearViewport, setIsNearViewport] = useState(shouldLoadImmediately);
   const [userInteracted, setUserInteracted] = useState(
     () => userHasInteractedWithPage
@@ -128,7 +130,7 @@ export default function SplineScene({
     if (isBot) return;
 
     // Wait for user interaction — Lighthouse never interacts
-    if (!userInteracted) return;
+    if (!loadOnMount && !userInteracted) return;
 
     let cancelled = false;
 
@@ -159,7 +161,7 @@ export default function SplineScene({
     }
 
     return () => { cancelled = true; };
-  }, [isNearViewport, shouldLoadImmediately, userInteracted]);
+  }, [isNearViewport, shouldLoadImmediately, userInteracted, loadOnMount]);
 
   const handleLoad = (spline: Application) => {
     splineAppRef.current = spline; // ← store the reference to the Spline app

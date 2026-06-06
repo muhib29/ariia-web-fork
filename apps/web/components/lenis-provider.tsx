@@ -22,15 +22,24 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
     registerLenis(lenis);
 
+    const stopInertiaForLinkPress = (event: PointerEvent) => {
+      if (event.button !== 0 || !(event.target instanceof Element)) return;
+      const link = event.target.closest('a[href]');
+      if (!link) return;
+      lenis.scrollTo(lenis.actualScroll, { immediate: true, force: true });
+    };
+
     let rafId = 0;
     const raf = (time: number) => {
       lenis.raf(time);
       rafId = window.requestAnimationFrame(raf);
     };
 
+    document.addEventListener('pointerdown', stopInertiaForLinkPress, { capture: true });
     rafId = window.requestAnimationFrame(raf);
 
     return () => {
+      document.removeEventListener('pointerdown', stopInertiaForLinkPress, { capture: true });
       window.cancelAnimationFrame(rafId);
       unregisterLenis(lenis);
       lenis.destroy();
