@@ -283,21 +283,12 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
             {/* Centered image */}
             <div className="w-full flex justify-center">
               <FadeInWhenInView
-                className="relative top-5 md:top-3 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
-                delay={0}
-              >
-                <HeroLogo priority={true} className="object-contain w-[90px] mx-auto md:w-[132px] md:pb-2" />
-              </FadeInWhenInView>
-            </div>
-{/* 
-             <div className="w-full flex justify-center">
-              <FadeInWhenInView
                 className="relative top-0 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
                 delay={0}
               >
                 <HeroLogo className="object-contain max-w-[90px]  md:pb-2 md:max-w-full" />
               </FadeInWhenInView>
-            </div> */}
+            </div>
 
 
             <div className="space-y-3 text-center mx-2 md:space-y-6 md:mx-0 lg:text-left">
@@ -313,20 +304,20 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                     </GradientHeader>
                   </span>
 
-                  {/* Desktop: keep current dynamic title */}
-                  <span className="hidden md:inline">
-                    {leftContent?.title || 'Reimagine Your Business Operations with'}
+                  <span
+                    className="hidden md:block h-0 overflow-hidden whitespace-nowrap opacity-0"
+                    aria-hidden="true"
+                  >
+                    Reimagine Your Business Operations with AI Agents
                   </span>
-                  <span className="hidden md:mt-0 md:ml-2 md:inline-flex md:items-baseline">
-                    <GradientHeader className="gradient-header-no-anim gradient-header-hero-blue">
-                      <SmoothTypewriter words={typewriterWords} renderCursor={false} />
+                  <span className="hidden md:block">Reimagine Your</span>
+                  <span className="hidden md:block">Business Operations</span>
+                  <span className="hidden md:block">
+                    with
+                    {' '}
+                    <GradientHeader className="gradient-header-no-anim gradient-header-hero-blue inline">
+                      AI Agents
                     </GradientHeader>
-                    <span
-                      className="typewriter-cursor ml-0.5 inline-block min-w-[0.35em] w-[10px] animate-pulse align-baseline"
-                      aria-hidden
-                    >
-                      _
-                    </span>
                   </span>
                 </h1>
               </FadeInWhenInView>
