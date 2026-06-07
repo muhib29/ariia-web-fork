@@ -369,7 +369,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                     }
                     target={pricing.heroSection.sliderInfo.cta.httpsUrl ? '_blank' : undefined}
                   >
-                    <button className="mt-4 px-5 py-2 rounded-full bg-white text-blue-700 font-semibold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 text-base shadow-md border-2 border-blue-100 hover:cursor-pointer">
+                    <button className="mt-4 px-5 py-2 rounded-full bg-white text-blue-700 font-semibold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 focus-visible:scale-105 active:scale-95 text-base shadow-md border-2 border-blue-100 hover:cursor-pointer">
                       {pricing.heroSection.sliderInfo.cta.ctaText || '1-Month Free Trial'}
                     </button>
                   </Link>
@@ -409,7 +409,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
             <div className="flex isolate bg-white rounded-full p-1.5 shadow-lg relative z-[60]">
               <button
                 type="button"
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all hover:cursor-pointer ${
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all transform focus-visible:scale-105 active:scale-95 hover:cursor-pointer ${
                   billing === 'monthly'
                     ? 'bg-[#1976FF] text-white shadow'
                     : 'bg-white text-blue-700 hover:bg-[#f5f9ff]'
@@ -420,7 +420,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
               </button>
               <button
                 type="button"
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all hover:cursor-pointer ${
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all transform focus-visible:scale-105 active:scale-95 hover:cursor-pointer ${
                   billing === 'annually'
                     ? 'bg-[#1976FF] text-white shadow'
                     : 'bg-white text-blue-700 hover:bg-[#f5f9ff]'
@@ -535,7 +535,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
 
                           <p className="text-gray-500 text-sm mb-4">{starter.description}</p>
                           {starter.cta && (
-                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105">
+                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105 focus-visible:scale-105 active:scale-95">
                               {starter.cta.ctaText || '1-Month Free Trial'}
                             </button>
                           )}
@@ -594,7 +594,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                           </span>
                           <p className="text-gray-500 text-sm mb-4">{growth.description}</p>
                           {growth.cta && (
-                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105">
+                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105 focus-visible:scale-105 active:scale-95">
                               {growth.cta.ctaText || '1-Month Free Trial'}
                             </button>
                           )}
@@ -641,7 +641,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                             'Designed for enterprises running large-scale operations that require maximum cost efficiency and custom integrations. Get in touch with our team to receive a quote tailored to your needs and usage.'}
                         </p>
                         <Link href="/pricing/contact-us/" className="w-full">
-                          <button className="w-full bg-[#1976FF] text-white rounded-full py-2 z-10 font-semibold mb-3 relative hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105">
+                          <button className="w-full bg-[#1976FF] text-white rounded-full py-2 z-10 font-semibold mb-3 relative hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105 focus-visible:scale-105 active:scale-95">
                             Contact Us
                           </button>
                         </Link>
@@ -697,7 +697,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                           </span>
                           <p className="text-gray-500 text-sm mb-4">{scale.description}</p>
                           {scale.cta && (
-                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105">
+                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105 focus-visible:scale-105 active:scale-95">
                               {scale.cta.ctaText || '1-Month Free Trial'}
                             </button>
                           )}
@@ -756,7 +756,7 @@ export function PricingSection({ pricing }: { pricing: PricingData }) {
                           </span>
                           <p className="text-gray-500 text-sm mb-4">{business.description}</p>
                           {business.cta && (
-                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105">
+                            <button className="w-full bg-[#1976FF] text-white rounded-full py-2 font-semibold mb-3 hover:cursor-pointer hover:bg-[#4a92fe] active:bg-[#4a92fe] transition-all duration-200 transform hover:scale-105 focus-visible:scale-105 active:scale-95">
                               {business.cta.ctaText || '1-Month Free Trial'}
                             </button>
                           )}
