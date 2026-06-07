@@ -181,8 +181,10 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             margin: '8px',
             borderRadius: 18,
             border: '1px solid rgba(255,255,255,0.40)',
+//        'linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08)), linear-gradient(135deg, rgba(248,251,255,0.58), rgba(236,249,255,0.44))',
+//   'linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08)), linear-gradient(135deg, rgba(248,251,255,0.82), rgba(236,249,255,0.72))',
             background:
-              'linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08)), linear-gradient(135deg, rgba(248,251,255,0.82), rgba(236,249,255,0.72))',
+        'linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08)), linear-gradient(135deg, rgba(248,251,255,0.34), rgba(236,249,255,0.24))',
             WebkitBackdropFilter: 'blur(12px)',
             backdropFilter: 'blur(12px)',
             boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
