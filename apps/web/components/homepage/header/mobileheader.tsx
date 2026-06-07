@@ -183,7 +183,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             borderRadius: 18,
             border: '1px solid rgba(255,255,255,0.40)',
             background:
-              'linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08))',
+              'linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08)), linear-gradient(135deg, rgba(248,251,255,0.58), rgba(236,249,255,0.44))',
             WebkitBackdropFilter: 'blur(12px)',
             backdropFilter: 'blur(12px)',
             boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
@@ -195,18 +195,6 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             position: 'relative',
           }}
         >
-          <div
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              borderRadius: 18,
-              background:
-                'linear-gradient(135deg, rgba(248,251,255,0.42), rgba(236,249,255,0.30))',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          />
           <div
             style={{
               position: 'sticky',
@@ -261,7 +249,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             </button>
           </div>
 
-          <nav style={{ paddingBottom: 24, position: 'relative', zIndex: 1 }}>
+          <nav style={{ paddingBottom: 24 }}>
             {SINGLE_LINKS.map((link) => (
               <a key={link.href} href={link.href} onClick={closeMenu} style={mainLinkStyle}>
                 <span>{link.label}</span>
@@ -328,7 +316,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             </div>
           </nav>
 
-          <div style={{ padding: '8px 16px 24px', flexShrink: 0, position: 'relative', zIndex: 1 }}>
+          <div style={{ padding: '8px 16px 24px', flexShrink: 0 }}>
             <div
               style={{
                 width: '100%',
