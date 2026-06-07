@@ -4,14 +4,6 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { lenisScrollTo } from '@/lib/lenis';
 
-function getHeaderOffset() {
-  const header = document.querySelector('header');
-  if (header instanceof HTMLElement) {
-    return header.getBoundingClientRect().height;
-  }
-  return 0;
-}
-
 export default function useSmoothScroll() {
   const router = useRouter();
   const currentPathname = usePathname();
@@ -53,8 +45,7 @@ export default function useSmoothScroll() {
           const element = document.getElementById(targetHash);
 
           if (element) {
-            const effectiveOffset = offset || getHeaderOffset() + 6;
-            lenisScrollTo(element, effectiveOffset);
+            lenisScrollTo(element, offset);
           } else {
             console.warn(`Element #${targetHash} not found on same page`);
           }
