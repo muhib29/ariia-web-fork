@@ -174,7 +174,6 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
                     />
                   ) : (
                     <video
-                      src="/videos/story.mov"
                       autoPlay
                       loop
                       muted
@@ -183,6 +182,8 @@ export default function StoryBehindAriia({ about }: { about: AboutData }) {
                       className="object-cover rounded-3xl shadow-lg w-full h-full"
                       style={{ objectPosition: 'center' }}
                     >
+                      <source src="/videos/story.mp4" type="video/mp4" />
+                      <source src="/videos/story.mov" type="video/quicktime" />
                       <p className="text-white bg-black/50 p-4 rounded-xl">
                         Your browser does not support the video tag or format.
                       </p>
