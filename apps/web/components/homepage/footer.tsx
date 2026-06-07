@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { isTouchDevice } from '@/lib/device-capabilities';
 import { HeroLogo } from '../icons/HeroLogo';
 import { FadeInWhenInView } from './hero-section';
+import { SmoothLink } from '@/components/SmoothLink';
 
 // Footer link constants for maintainability
 const FOOTER_LINKS = [
@@ -46,9 +47,9 @@ const FOOTER_NAV_LINK_CLASS =
 function FooterNavLink({ href, label }: { href: string; label: string }) {
   if (href.includes('#')) {
     return (
-      <a href={href} className={FOOTER_NAV_LINK_CLASS}>
+      <SmoothLink href={href} className={FOOTER_NAV_LINK_CLASS}>
         {label}
-      </a>
+      </SmoothLink>
     );
   }
 
