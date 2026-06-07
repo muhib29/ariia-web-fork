@@ -7,6 +7,7 @@ import { SectionHeader } from '@/components/SectionHeader';
 import { useIsMobile } from '@workspace/ui/hooks/use-mobile';
 import LottieAnimation from '../../components/LottieAnimation';
 import { Header } from '@/components/homepage/header/header';
+import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
 
 interface IndustriesClientProps {
   industry: any;
@@ -99,7 +100,7 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
         {/* First two cards - side by side */}
         <div className="w-[97%] max-sm:mx-auto md:w-full z-0 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mb-5 sm:mb-10">
           {sectionCards.slice(0, 2).map((card, index) => (
-            <div key={index}>
+            <FadeInWhenInView key={index} delay={index * 120}>
               <div className={`relative overflow-hidden rounded-3xl ${animationFrameClass} shadow-lg w-full border-0 outline-none [&_canvas]:outline-none min-h-[378px]  md:min-h-[480px]`}>
                 <div className="absolute -inset-[2px] overflow-hidden rounded-3xl [&>div]:!min-h-0">
                   <div
@@ -118,12 +119,12 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </FadeInWhenInView>
           ))}
         </div>
 
         {/* Third card - full width */}
-        <div>
+        <FadeInWhenInView delay={200}>
           <div className={`relative w-[97%] max-sm:mx-auto md:w-full z-0 overflow-hidden rounded-3xl ${animationFrameClass} shadow-lg mb-5 sm:mb-10 min-h-[710px]   md:min-h-[264px] border-0 outline-none [&_canvas]:outline-none`}>
             <div className="absolute inset-0 overflow-hidden rounded-3xl [&>div]:!min-h-0">
               <div
@@ -141,12 +142,12 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
               </div>
             </div>
           </div>
-        </div>
+        </FadeInWhenInView>
 
         {/* Fourth and fifth cards - (Moving 7th card to 5th place) */}
         <div className="w-[97%] max-sm:mx-auto md:w-full z-0 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mb-5 sm:mb-10">
           {[sectionCards[3], sectionCards[6]].map((card, index) => (
-            <div key={index + 3}>
+            <FadeInWhenInView key={index + 3} delay={index * 120}>
               <div className={`relative overflow-hidden rounded-3xl ${animationFrameClass} shadow-lg w-full border-0 outline-none [&_canvas]:outline-none min-h-[379px] sm:min-h-[380px] md:min-h-[480px]`}>
                 <div className="absolute -inset-[2px] overflow-hidden rounded-3xl [&>div]:!min-h-0">
                   <div
@@ -164,12 +165,12 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </FadeInWhenInView>
           ))}
         </div>
 
         {/* Sixth card - full width */}
-        <div>
+        <FadeInWhenInView delay={200}>
           <div className={`relative z-0 w-[97%] max-sm:mx-auto md:w-full overflow-hidden rounded-3xl ${animationFrameClass} shadow-lg mb-5 sm:mb-10 min-h-[379px]  md:min-h-[260px] border-0 outline-none [&_canvas]:outline-none`}>
             <div className="absolute -inset-[2px] overflow-hidden rounded-3xl [&>div]:!min-h-0">
               <div
@@ -187,7 +188,7 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
               </div>
             </div>
           </div>
-        </div>
+        </FadeInWhenInView>
       </div>
       <NewsletterFooter isHomePage={false} />
     </section>

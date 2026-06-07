@@ -293,7 +293,7 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
 
             <div className="space-y-3 text-center mx-2 md:space-y-6 md:mx-0 lg:text-left">
               <FadeInWhenInView delay={100}>
-                <h1 className="text-gray-900 !font-bold text-[30px] leading-[42px] md:text-[52px] md:leading-[60px] tracking-tight">
+                <h2 className="text-gray-900 !font-bold text-[32px] leading-[42px] md:text-[54px] md:leading-[62px] tracking-tight">
                   <span className="block md:hidden">Reimagine Your</span>
                   <span className="block md:hidden">Business Operations</span>
                   <span className="block md:hidden">
@@ -316,10 +316,10 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                     with
                     {' '}
                     <GradientHeader className="gradient-header-no-anim gradient-header-hero-blue inline">
-                      AI Agents
+                      <SmoothTypewriter words={['AI Agents']} />
                     </GradientHeader>
                   </span>
-                </h1>
+                </h2>
               </FadeInWhenInView>
               <FadeInWhenInView delay={300}>
                 <div className="text-gray-600 max-w-lg mx-auto lg:mx-0 text-[16px] md:text-[18px] leading-[27px]">

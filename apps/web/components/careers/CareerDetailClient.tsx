@@ -4,7 +4,7 @@ import { Header } from '@/components/homepage/header/header';
 import { NewsletterFooter } from '../homepage/footer';
 import { Share2 } from 'lucide-react';
 import { ShareModal } from '../homepage/ShareModal';
-import { useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
 import MarkdownRenderer from '../markdown-renderer';
 import { LocationIcon } from '../icons/LocationIcon';
 import { WorkIcon } from '../icons/WorkIcon';
@@ -29,9 +29,32 @@ import { FadeInWhenInView } from '../animations/FadeInWhenInView';
 
 function InstantCareerDetailContent({
   children,
+  delay = 0,
+  duration = 0.6,
   className = '',
+  yOffset = 20,
 }: ComponentPropsWithoutRef<typeof FadeInWhenInView>) {
-  return <div className={className}>{children}</div>;
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setIsVisible(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  const transition = `opacity ${duration}s cubic-bezier(0.25, 0.8, 0.25, 1) ${delay / 1000}s, transform ${duration}s cubic-bezier(0.25, 0.8, 0.25, 1) ${delay / 1000}s`;
+
+  return (
+    <div
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translate3d(0, 0, 0)' : `translate3d(0, ${yOffset}px, 0)`,
+        transition,
+      }}
+    >
+      {children}
+    </div>
+  );
 }
 
 // Define types for the career data

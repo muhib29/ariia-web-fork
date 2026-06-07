@@ -8,13 +8,15 @@ interface SmoothLinkProps {
   children: React.ReactNode;
   offset?: number;
   className?: string;
+  onClick?: () => void;
 }
 
-export function SmoothLink({ href, children, offset = 0, className = '' }: SmoothLinkProps) {
+export function SmoothLink({ href, children, offset = 0, className = '', onClick }: SmoothLinkProps) {
   const { scrollTo } = useSmoothScroll();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    onClick?.();
 
     // Parse the href
     if (href.includes('#')) {

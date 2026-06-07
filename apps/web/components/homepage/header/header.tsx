@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import {
   ChevronDown,
@@ -22,6 +23,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@workspace/ui/lib/utils';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
 import { MobileHeader } from './mobileheader';
+import { SmoothLink } from '@/components/SmoothLink';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -122,12 +124,52 @@ function DesktopNav({
   setHoveredDropdown: (name: string | null) => void;
   isSticky?: boolean;
 }) {
+  const isHomeSectionLink = (href: string) => href.startsWith('/#');
+
+  const renderMenuLink = (
+    item: {
+      href: string;
+      title: string;
+      description: string;
+      icon: ReactNode;
+    },
+  ) => {
+    const content = (
+      <>
+        <div className="pt-1">{item.icon}</div>
+        <div className="text-left">
+          <p className="text-sm font-medium text-gray-900">{item.title}</p>
+          <p className="text-xs text-gray-600 leading-tight">{item.description}</p>
+        </div>
+      </>
+    );
+    const handleSelect = () => {
+      setActivePath(item.href);
+      setHoveredDropdown(null);
+    };
+
+    return isHomeSectionLink(item.href) ? (
+      <SmoothLink key={item.href} href={item.href} className={menuItemClasses(item.href)} onClick={handleSelect}>
+        {content}
+      </SmoothLink>
+    ) : (
+      <Link
+        key={item.href}
+        href={item.href}
+        className={menuItemClasses(item.href)}
+        onClick={handleSelect}
+      >
+        {content}
+      </Link>
+    );
+  };
+
   const menuItemClasses = (href: string) =>
     `flex items-start gap-3 p-3 rounded-lg transition-colors ${activePath === href ? 'bg-[#EEFBFF]' : ''
     } menu-item-hover`;
 
   const bgClass = isSticky
-    ? 'bg-white/85 backdrop-blur-xl border border-white/60'
+    ? 'bg-white/60 backdrop-blur-md border border-white/45'
     : 'bg-white';
 
   return (
@@ -171,23 +213,7 @@ function DesktopNav({
 
             {hoveredDropdown === 'company' && (
               <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
-                {COMPANY_MENU.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={menuItemClasses(item.href)}
-                    onClick={() => {
-                      setActivePath(item.href);
-                      setHoveredDropdown(null);
-                    }}
-                  >
-                    <div className="pt-1">{item.icon}</div>
-                    <div className="text-left">
-                      <p className="text-sm font-medium text-gray-900">{item.title}</p>
-                      <p className="text-xs text-gray-600 leading-tight">{item.description}</p>
-                    </div>
-                  </Link>
-                ))}
+                {COMPANY_MENU.map((item) => renderMenuLink(item))}
               </div>
             )}
           </div>
@@ -207,23 +233,7 @@ function DesktopNav({
 
             {hoveredDropdown === 'resources' && (
               <div className="absolute top-full left-0 mt-5 w-96 p-2 rounded-xl shadow-lg border border-gray-100 bg-white space-y-1 z-50 animate-fade-in">
-                {RESOURCES_MENU.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={menuItemClasses(item.href)}
-                    onClick={() => {
-                      setActivePath(item.href);
-                      setHoveredDropdown(null);
-                    }}
-                  >
-                    <div className="pt-1">{item.icon}</div>
-                    <div className="text-left">
-                      <p className="text-sm font-medium text-gray-900">{item.title}</p>
-                      <p className="text-xs text-gray-600 leading-tight">{item.description}</p>
-                    </div>
-                  </Link>
-                ))}
+                {RESOURCES_MENU.map((item) => renderMenuLink(item))}
               </div>
             )}
           </div>
