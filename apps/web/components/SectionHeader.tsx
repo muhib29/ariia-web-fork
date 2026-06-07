@@ -40,7 +40,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         {(hasTitle || hasGradientTitle) && (
                     // <h1 className="text-gray-900 font-bold leading-[36px] w-full md:max-w-4xl text-[28px] md:text-[36px] md:leading-[42px] tracking-tight pt-4 text-center">
 
-          <h2 className="text-gray-900 font-bold leading-[36px] w-full md:max-w-4xl text-[30px] md:text-[36px] md:leading-[42px] tracking-tight pt-4 text-center">
+          <h2 className="text-gray-900 font-bold leading-[36px] w-full md:max-w-4xl text-[28.5px] md:text-[36px] md:leading-[42px] tracking-tight pt-4 text-center">
             {normalizedTitle}
             {hasTitle &&
               hasGradientTitle &&

@@ -265,7 +265,7 @@ export function ContactUs({ contact }: { contact: ContactUsData }) {
 
       <Header /> {/* //changed */}
 
-      <div className="py-10 px-6 max-w-6xl mx-auto z-10 text-center">
+      <div className="py-5 md:py-10 px-6 max-w-6xl mx-auto z-10 text-center">
         <SectionHeader
           tag={contact.tag || 'Contact Us'}
           title={contact.title || 'We Aim to Respond to All Inquiries Within 24 Hours.'}
