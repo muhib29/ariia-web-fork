@@ -7,7 +7,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { isTouchDevice } from '@/lib/device-capabilities';
 import { HeroLogo } from '../icons/HeroLogo';
 import { FadeInWhenInView } from './hero-section';
-import { SmoothLink } from '@/components/SmoothLink';
 
 // Footer link constants for maintainability
 const FOOTER_LINKS = [
@@ -44,30 +43,12 @@ const FOOTER_LINKS = [
 const FOOTER_NAV_LINK_CLASS =
   'text-white/90 visited:text-white/90 active:text-white/90 font-medium hover:text-white transition-colors whitespace-pre-line md:whitespace-normal leading-[1.25] md:leading-normal';
 
-function FooterNavLink({
-  href,
-  label,
-  useNativeHashNavigation,
-}: {
-  href: string;
-  label: string;
-  useNativeHashNavigation: boolean;
-}) {
-  const isHashLink = href.includes('#');
-
-  if (useNativeHashNavigation) {
+function FooterNavLink({ href, label }: { href: string; label: string }) {
+  if (href.includes('#')) {
     return (
       <a href={href} className={FOOTER_NAV_LINK_CLASS}>
         {label}
       </a>
-    );
-  }
-
-  if (isHashLink) {
-    return (
-      <SmoothLink href={href} className={FOOTER_NAV_LINK_CLASS}>
-        {label}
-      </SmoothLink>
     );
   }
 
@@ -88,12 +69,9 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [enableHoverFx, setEnableHoverFx] = useState(false);
-  const [useNativeHashNavigation, setUseNativeHashNavigation] = useState(false);
 
   useEffect(() => {
-    const isTouch = isTouchDevice();
-    setEnableHoverFx(!isTouch);
-    setUseNativeHashNavigation(isTouch);
+    setEnableHoverFx(!isTouchDevice());
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -316,11 +294,7 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
                   <ul className="space-y-3">
                     {FOOTER_LINKS[1].map((link) => (
                       <li key={link.href}>
-                        <FooterNavLink
-                          href={link.href}
-                          label={link.label}
-                          useNativeHashNavigation={useNativeHashNavigation}
-                        />
+                        <FooterNavLink href={link.href} label={link.label} />
                       </li>
                     ))}
                   </ul>
@@ -331,11 +305,7 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
                   <ul className="space-y-3">
                     {FOOTER_LINKS[2].map((link) => (
                       <li key={link.href}>
-                        <FooterNavLink
-                          href={link.href}
-                          label={link.label}
-                          useNativeHashNavigation={useNativeHashNavigation}
-                        />
+                        <FooterNavLink href={link.href} label={link.label} />
                       </li>
                     ))}
                   </ul>
@@ -346,11 +316,7 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
                   <ul className="space-y-3">
                     {FOOTER_LINKS[3].map((link) => (
                       <li key={link.href}>
-                        <FooterNavLink
-                          href={link.href}
-                          label={link.label}
-                          useNativeHashNavigation={useNativeHashNavigation}
-                        />
+                        <FooterNavLink href={link.href} label={link.label} />
                       </li>
                     ))}
                   </ul>
