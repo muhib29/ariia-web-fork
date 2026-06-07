@@ -163,7 +163,6 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
       </div>
 
       <div
-        className="ios-mobile-fixed-layer"
         style={{
           position: 'fixed',
           top: 0,
