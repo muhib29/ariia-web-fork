@@ -4,6 +4,10 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { lenisScrollTo } from '@/lib/lenis';
 
+let activeHashRetryTimer: number | null = null;
+let lastCompletedScrollKey = '';
+let lastCompletedAt = 0;
+
 function getHeaderOffset() {
   // Prefer a real header element if present; fall back to a conservative default.
   const header = document.querySelector('header');
@@ -13,9 +17,24 @@ function getHeaderOffset() {
   return 0;
 }
 
+function clearActiveHashRetry() {
+  if (activeHashRetryTimer !== null) {
+    window.clearTimeout(activeHashRetryTimer);
+    activeHashRetryTimer = null;
+  }
+}
+
 function scrollToHashWithRetry(hash: string) {
   const id = hash.replace(/^#/, '');
   if (!id) return;
+
+  const scrollKey = `${window.location.pathname}#${id}`;
+  const now = performance.now();
+  if (lastCompletedScrollKey === scrollKey && now - lastCompletedAt < 750) {
+    return;
+  }
+
+  clearActiveHashRetry();
 
   // Extra margin from the top (in addition to header compensation).
   const extraMargin = 6;
@@ -29,16 +48,14 @@ function scrollToHashWithRetry(hash: string) {
     const el = document.getElementById(id);
     if (el) {
       const offset = getHeaderOffset() + extraMargin;
+      lastCompletedScrollKey = scrollKey;
+      lastCompletedAt = performance.now();
       lenisScrollTo(el, offset);
-
-      // Re-apply scroll a few frames to counter late layout shifts (images/fonts)
-      requestAnimationFrame(() => lenisScrollTo(el, offset));
-      requestAnimationFrame(() => requestAnimationFrame(() => lenisScrollTo(el, offset)));
       return;
     }
 
     if (attempt < maxAttempts) {
-      window.setTimeout(tick, 100);
+      activeHashRetryTimer = window.setTimeout(tick, 100);
     }
   };
 
@@ -60,24 +77,12 @@ export function HashScrollManager() {
     // Wait a tick so the new page/sections are mounted, then retry until the element exists.
     const t = window.setTimeout(runScroll, 0);
 
-    // Some pages still shift after hydration (fonts, images, async sections).
-    // Do another retry after first paint, and again when window fully loads.
-    const raf1 = window.requestAnimationFrame(() => {
-      runScroll();
-    });
-
-    const onLoad = () => {
-      runScroll();
-    };
-    window.addEventListener('load', onLoad);
-
     // Back/forward navigation can restore a hash without a pathname change.
     window.addEventListener('popstate', runScroll);
 
     return () => {
       window.clearTimeout(t);
-      window.cancelAnimationFrame(raf1);
-      window.removeEventListener('load', onLoad);
+      clearActiveHashRetry();
       window.removeEventListener('popstate', runScroll);
     };
   }, [pathname]);
