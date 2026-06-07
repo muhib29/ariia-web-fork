@@ -46,31 +46,32 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    padding: '16px 28px',
-    color: '#0d1b2e',
+    padding: '8px 16px',
+    color: '#374151',
     fontWeight: 700,
     fontSize: 15,
     textDecoration: 'none',
     touchAction: 'manipulation' as const,
     border: 'none',
-    borderBottom: '1px solid rgba(148, 210, 225, 0.55)',
+    borderBottom: '1px solid rgba(147, 216, 250, 0.30)',
     background: 'transparent',
-    lineHeight: 1.1,
+    lineHeight: 1.45,
     cursor: 'pointer',
     textAlign: 'left' as const,
   };
 
   const subLinkStyle = {
     display: 'block',
-    padding: '10px 28px 10px 36px',
-    color: '#0d1b2e',
+    padding: '5px',
+    marginLeft: 8,
+    color: '#1f2937',
     fontSize: 16,
-    fontWeight: 450,
+    fontWeight: 400,
     textDecoration: 'none',
     touchAction: 'manipulation' as const,
     background: 'transparent',
     borderBottom: 'none',
-    lineHeight: 1.45,
+    lineHeight: 1.5,
   };
 
   return (
@@ -170,174 +171,202 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
           right: 0,
           bottom: 0,
           zIndex: 200,
-          background:
-            'linear-gradient(rgba(255,255,255,0.42) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.42) 1px, transparent 1px), radial-gradient(ellipse 520px 520px at 96% 86%, rgba(78,151,250,0.26) 0%, rgba(78,151,250,0.13) 42%, transparent 76%), radial-gradient(ellipse 460px 360px at 18% 30%, rgba(46,255,234,0.16) 0%, rgba(46,255,234,0.08) 44%, transparent 76%), linear-gradient(180deg, #dcf7fb 0%, #e2fbfb 58%, #d8f3ff 100%)',
-          backgroundSize: '114px 114px, 114px 114px, auto, auto, auto',
-          overflowY: 'scroll',
-          WebkitOverflowScrolling: 'touch',
+          background: 'transparent',
+          overflow: 'hidden',
           display: menuOpen ? 'block' : 'none',
+          pointerEvents: menuOpen ? 'auto' : 'none',
         }}
       >
         <div
-          aria-hidden="true"
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 40,
-            background: 'linear-gradient(90deg, #6675f4 0%, #4d94f2 42%, #37b8ef 72%, #35e5d3 100%)',
-            zIndex: 0,
-          }}
-        />
-
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            padding: '56px 16px 0',
+            margin: '8px',
+            borderRadius: 18,
+            border: '1px solid rgba(255,255,255,0.40)',
+            background:
+              'linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08))',
+            WebkitBackdropFilter: 'blur(12px)',
+            backdropFilter: 'blur(12px)',
+            boxShadow: '0 14px 36px rgba(15,23,42,0.12)',
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            maxHeight: 'calc(100dvh - 16px)',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 16,
+            flexDirection: 'column',
           }}
         >
           <div
             style={{
+              position: 'sticky',
+              top: 0,
+              zIndex: 2,
               display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
-              background: '#fff',
-              borderRadius: 999,
-              padding: '10px',
-              gap: 6,
-              boxShadow: '0 8px 18px rgba(15, 23, 42, 0.12)',
-              minHeight: 48,
-              maxWidth: 300,
-            }}
-          >
-            <a
-              href="/login"
-              onClick={closeMenu}
-              style={{
-                padding: '8px 16px',
-                color: '#2f3745',
-                textDecoration: 'none',
-                fontSize: 15,
-                fontWeight: 600,
-                borderRadius: 999,
-                lineHeight: 1,
-              }}
-            >
-              Log In
-            </a>
-
-            <a
-              href="/trial"
-              onClick={closeMenu}
-              style={{
-                background: '#111',
-                color: '#fff',
-                borderRadius: 999,
-                padding: '8px 14px',
-                fontSize: 14,
-                fontWeight: 700,
-                textDecoration: 'none',
-                lineHeight: 1,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              1-Month Free Trial
-            </a>
-          </div>
-
-          <button
-            type="button"
-            onClick={closeMenu}
-            style={{
-              touchAction: 'manipulation',
-              background: 'rgba(255,255,255,0.42)',
-              border: 'none',
-              borderRadius: '50%',
-              width: 48,
-              height: 48,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
+              padding: '12px 16px 8px',
+              background: 'transparent',
               flexShrink: 0,
             }}
-            aria-label="Close menu"
           >
-            <svg style={{ width: 24, height: 24, color: '#526273' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
-        <div style={{ position: 'relative', zIndex: 1, padding: '32px 0 28px' }}>
-          {SINGLE_LINKS.map((link) => (
-            <a key={link.href} href={link.href} onClick={closeMenu} style={mainLinkStyle}>
-              <span>{link.label}</span>
-              <ChevronRight style={{ width: 22, height: 22, color: '#263746' }} strokeWidth={2.3} />
-            </a>
-          ))}
-
-          <button
-            type="button"
-            onClick={() => setCompanyOpen((p) => !p)}
-            style={{
-              ...mainLinkStyle,
-              borderBottom: companyOpen ? 'none' : '1px solid rgba(148, 210, 225, 0.55)',
-            }}
-          >
-            <span>Company</span>
-            <ChevronRight
+            <a
+              href="/"
+              onClick={closeMenu}
               style={{
-                width: 22,
-                height: 22,
-                color: '#263746',
-                transform: companyOpen ? 'rotate(90deg)' : 'rotate(0deg)',
-                transition: 'transform 0.2s ease',
+                display: 'flex',
+                alignItems: 'center',
+                background: 'rgba(255,255,255,0.45)',
+                borderRadius: 999,
+                padding: '4px 12px',
+                border: '1px solid rgba(255,255,255,0.45)',
+                textDecoration: 'none',
               }}
-              strokeWidth={2.3}
-            />
-          </button>
+            >
+              <AriiaSvgMark width={64} height={28} />
+            </a>
 
-          <div style={{ display: companyOpen ? 'contents' : 'none' }}>
-            {COMPANY_LINKS.map((link) => (
-              <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
-                {link.label}
-              </a>
-            ))}
+            <button
+              type="button"
+              onClick={closeMenu}
+              style={{
+                touchAction: 'manipulation',
+                width: 36,
+                height: 36,
+                borderRadius: '50%',
+                border: '1px solid rgba(255,255,255,0.45)',
+                background: 'rgba(255,255,255,0.45)',
+                boxShadow: '0 8px 18px rgba(15,23,42,0.10)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                opacity: 0.9,
+              }}
+              aria-label="Close menu"
+            >
+              <svg style={{ width: 16, height: 16, color: '#374151' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setResourcesOpen((p) => !p)}
-            style={{
-              ...mainLinkStyle,
-              borderBottom: resourcesOpen ? 'none' : '1px solid rgba(148, 210, 225, 0.55)',
-            }}
-          >
-            <span>Resources</span>
-            <ChevronRight
-              style={{
-                width: 22,
-                height: 22,
-                color: '#263746',
-                transform: resourcesOpen ? 'rotate(90deg)' : 'rotate(0deg)',
-                transition: 'transform 0.2s ease',
-              }}
-              strokeWidth={2.3}
-            />
-          </button>
-
-          <div style={{ display: resourcesOpen ? 'contents' : 'none' }}>
-            {RESOURCES_LINKS.map((link) => (
-              <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
-                {link.label}
+          <nav style={{ paddingBottom: 24 }}>
+            {SINGLE_LINKS.map((link) => (
+              <a key={link.href} href={link.href} onClick={closeMenu} style={mainLinkStyle}>
+                <span>{link.label}</span>
+                <ChevronRight style={{ width: 18, height: 18, color: '#263746' }} strokeWidth={2.3} />
               </a>
             ))}
+
+            <button
+              type="button"
+              onClick={() => setCompanyOpen((p) => !p)}
+              style={{
+                ...mainLinkStyle,
+                borderBottom: companyOpen ? 'none' : '1px solid rgba(147, 216, 250, 0.30)',
+              }}
+            >
+              <span>Company</span>
+              <ChevronRight
+                style={{
+                  width: 18,
+                  height: 18,
+                  color: companyOpen ? '#35B5F5' : '#263746',
+                  transform: companyOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease',
+                }}
+                strokeWidth={2.3}
+              />
+            </button>
+
+            <div style={{ display: companyOpen ? 'block' : 'none', padding: '0 16px 16px', borderBottom: '1px solid rgba(147, 216, 250, 0.30)' }}>
+              {COMPANY_LINKS.map((link) => (
+                <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setResourcesOpen((p) => !p)}
+              style={{
+                ...mainLinkStyle,
+                borderBottom: resourcesOpen ? 'none' : '1px solid rgba(147, 216, 250, 0.30)',
+              }}
+            >
+              <span>Resources</span>
+              <ChevronRight
+                style={{
+                  width: 18,
+                  height: 18,
+                  color: resourcesOpen ? '#35B5F5' : '#263746',
+                  transform: resourcesOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease',
+                }}
+                strokeWidth={2.3}
+              />
+            </button>
+
+            <div style={{ display: resourcesOpen ? 'block' : 'none', padding: '0 16px 16px' }}>
+              {RESOURCES_LINKS.map((link) => (
+                <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </nav>
+
+          <div style={{ padding: '8px 16px 24px', flexShrink: 0 }}>
+            <div
+              style={{
+                width: '100%',
+                background: 'rgba(255,255,255,0.45)',
+                borderRadius: 999,
+                padding: 5,
+                boxShadow: '0 14px 36px rgba(15,23,42,0.14)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 8,
+                border: '1px solid rgba(255,255,255,0.45)',
+              }}
+            >
+              <a
+                href="/login"
+                onClick={closeMenu}
+                style={{
+                  flex: 1,
+                  color: '#374151',
+                  fontWeight: 500,
+                  fontSize: 14,
+                  textDecoration: 'none',
+                  padding: '8px 12px',
+                  borderRadius: 999,
+                  textAlign: 'center',
+                }}
+              >
+                Log In
+              </a>
+              <a
+                href="/trial"
+                onClick={closeMenu}
+                style={{
+                  flex: 1,
+                  background: 'rgba(17,24,39,0.95)',
+                  color: '#fff',
+                  borderRadius: 999,
+                  height: 32,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                1-Month Free Trial
+              </a>
+            </div>
           </div>
         </div>
       </div>
