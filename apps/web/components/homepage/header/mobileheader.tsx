@@ -192,8 +192,21 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             maxHeight: 'calc(100dvh - 16px)',
             display: 'flex',
             flexDirection: 'column',
+            position: 'relative',
           }}
         >
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              borderRadius: 18,
+              background:
+                'linear-gradient(135deg, rgba(248,251,255,0.42), rgba(236,249,255,0.30))',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
           <div
             style={{
               position: 'sticky',
@@ -248,7 +261,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             </button>
           </div>
 
-          <nav style={{ paddingBottom: 24 }}>
+          <nav style={{ paddingBottom: 24, position: 'relative', zIndex: 1 }}>
             {SINGLE_LINKS.map((link) => (
               <a key={link.href} href={link.href} onClick={closeMenu} style={mainLinkStyle}>
                 <span>{link.label}</span>
@@ -315,7 +328,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
             </div>
           </nav>
 
-          <div style={{ padding: '8px 16px 24px', flexShrink: 0 }}>
+          <div style={{ padding: '8px 16px 24px', flexShrink: 0, position: 'relative', zIndex: 1 }}>
             <div
               style={{
                 width: '100%',
