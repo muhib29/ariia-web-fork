@@ -149,7 +149,12 @@ function DesktopNav({
     };
 
     return isHomeSectionLink(item.href) ? (
-      <SmoothLink key={item.href} href={item.href} className={menuItemClasses(item.href)}>
+      <SmoothLink
+        key={item.href}
+        href={item.href}
+        className={menuItemClasses(item.href)}
+        onClick={handleSelect}
+      >
         {content}
       </SmoothLink>
     ) : (

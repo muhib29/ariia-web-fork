@@ -4,6 +4,29 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { lenisScrollTo } from '@/lib/lenis';
 
+function scrollToMissingSamePageHash(targetHash: string, offset: number) {
+  const maxAttempts = 30;
+  let attempt = 0;
+
+  const tick = () => {
+    attempt += 1;
+
+    const element = document.getElementById(targetHash);
+    if (element) {
+      lenisScrollTo(element, offset);
+      return;
+    }
+
+    if (attempt < maxAttempts) {
+      window.setTimeout(tick, 100);
+    } else {
+      console.warn(`Element #${targetHash} not found on same page`);
+    }
+  };
+
+  tick();
+}
+
 export default function useSmoothScroll() {
   const router = useRouter();
   const currentPathname = usePathname();
@@ -47,7 +70,9 @@ export default function useSmoothScroll() {
           if (element) {
             lenisScrollTo(element, offset);
           } else {
-            console.warn(`Element #${targetHash} not found on same page`);
+            const hashHref = `${targetPathname}#${targetHash}`;
+            window.history.pushState(null, '', hashHref);
+            scrollToMissingSamePageHash(targetHash, offset);
           }
         } else {
           const fullHref = targetHash ? `${targetPathname}#${targetHash}` : targetPathname;
