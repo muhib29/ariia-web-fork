@@ -3,6 +3,8 @@
 import { useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 
+const PENDING_HASH_KEY = 'ariia:pending-home-hash';
+
 export default function useSmoothScroll() {
   const router = useRouter();
   const currentPathname = usePathname();
@@ -40,33 +42,14 @@ export default function useSmoothScroll() {
       const isSamePage = normalizedCurrent === normalizedTarget;
 
       if (targetHash) {
+        const normalizedHash = targetHash.replace(/^#/, '');
+        window.sessionStorage.setItem(PENDING_HASH_KEY, normalizedHash);
+
         if (isSamePage) {
-          const hashHref = `${targetPathname}#${targetHash}`;
-          window.history.pushState(null, '', hashHref);
+          window.history.pushState(null, '', `${targetPathname}#${normalizedHash}`);
           window.dispatchEvent(new HashChangeEvent('hashchange'));
         } else {
           router.push(targetPathname, { scroll: false });
-          const hashHref = `${targetPathname}#${targetHash}`;
-          const normalizedTargetPath = normalizedTarget;
-          let attempts = 0;
-
-          const notifyRouteReady = () => {
-            attempts += 1;
-
-            const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
-
-            if (currentPath === normalizedTargetPath) {
-              window.history.pushState(null, '', hashHref);
-              window.dispatchEvent(new HashChangeEvent('hashchange'));
-              return;
-            }
-
-            if (attempts < 60) {
-              window.setTimeout(notifyRouteReady, 100);
-            }
-          };
-
-          window.setTimeout(notifyRouteReady, 0);
           // Scrolling is handled centrally (after route navigation) by HashScrollManager.
           // This avoids race conditions with route transitions and prevents scroll
           // logic from fighting with LenisProvider's route scroll behavior.

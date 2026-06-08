@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import { getLenis, registerLenis, unregisterLenis } from '@/lib/lenis';
 import { shouldUseSmoothScroll } from '@/lib/device-capabilities';
 
+const PENDING_HASH_KEY = 'ariia:pending-home-hash';
+
 export function LenisProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
@@ -48,8 +50,14 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
   // Reset Lenis on route change
   useEffect(() => {
-    if (typeof window !== 'undefined' && !window.location.hash) {
+    if (
+      typeof window !== 'undefined' &&
+      !window.location.hash &&
+      !window.sessionStorage.getItem(PENDING_HASH_KEY)
+    ) {
       const timeout = window.setTimeout(() => {
+        if (window.sessionStorage.getItem(PENDING_HASH_KEY)) return;
+
         const lenis = getLenis();
         if (lenis) {
           lenis.scrollTo(0, { immediate: true });

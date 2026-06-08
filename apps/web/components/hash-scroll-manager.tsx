@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { lenisScrollTo } from '@/lib/lenis';
 
+const PENDING_HASH_KEY = 'ariia:pending-home-hash';
+
 function getHeaderOffset() {
   // Prefer a real header element if present; fall back to a conservative default.
   const header = document.querySelector('header');
@@ -15,7 +17,11 @@ function getHeaderOffset() {
 
 let activeScrollRequest = 0;
 
-function scrollToHashWithRetry(hash: string) {
+function getPendingHash() {
+  return window.sessionStorage.getItem(PENDING_HASH_KEY);
+}
+
+function scrollToHashWithRetry(hash: string, options: { pending?: boolean } = {}) {
   const requestId = ++activeScrollRequest;
   const id = hash.replace(/^#/, '');
   if (!id) return;
@@ -32,6 +38,11 @@ function scrollToHashWithRetry(hash: string) {
 
     const el = document.getElementById(id);
     if (el) {
+      if (options.pending) {
+        window.sessionStorage.removeItem(PENDING_HASH_KEY);
+        window.history.pushState(null, '', `/#${id}`);
+      }
+
       const offset = getHeaderOffset() + extraMargin;
       lenisScrollTo(el, offset);
       return;
@@ -49,8 +60,13 @@ export function HashScrollManager() {
   const pathname = usePathname();
 
   const runScroll = () => {
-    const hash = window.location.hash;
+    const pendingHash = getPendingHash();
+    if (pendingHash) {
+      scrollToHashWithRetry(pendingHash, { pending: true });
+      return;
+    }
 
+    const hash = window.location.hash;
     if (!hash) return;
     scrollToHashWithRetry(hash);
   };
@@ -60,24 +76,11 @@ export function HashScrollManager() {
     // Wait a tick so the new page/sections are mounted, then retry until the element exists.
     const t = window.setTimeout(runScroll, 0);
 
-    // Some pages still shift after hydration (fonts, images, async sections).
-    // Do another retry after first paint, and again when window fully loads.
-    const raf1 = window.requestAnimationFrame(() => {
-      runScroll();
-    });
-
-    const onLoad = () => {
-      runScroll();
-    };
-    window.addEventListener('load', onLoad);
-
     // Back/forward navigation can restore a hash without a pathname change.
     window.addEventListener('popstate', runScroll);
 
     return () => {
       window.clearTimeout(t);
-      window.cancelAnimationFrame(raf1);
-      window.removeEventListener('load', onLoad);
       window.removeEventListener('popstate', runScroll);
     };
   }, [pathname]);
