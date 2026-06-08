@@ -2,30 +2,6 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
-import { lenisScrollTo } from '@/lib/lenis';
-
-function scrollToMissingSamePageHash(targetHash: string, offset: number) {
-  const maxAttempts = 30;
-  let attempt = 0;
-
-  const tick = () => {
-    attempt += 1;
-
-    const element = document.getElementById(targetHash);
-    if (element) {
-      lenisScrollTo(element, offset);
-      return;
-    }
-
-    if (attempt < maxAttempts) {
-      window.setTimeout(tick, 100);
-    } else {
-      console.warn(`Element #${targetHash} not found on same page`);
-    }
-  };
-
-  tick();
-}
 
 export default function useSmoothScroll() {
   const router = useRouter();
@@ -65,18 +41,29 @@ export default function useSmoothScroll() {
 
       if (targetHash) {
         if (isSamePage) {
-          const element = document.getElementById(targetHash);
-
-          if (element) {
-            lenisScrollTo(element, offset);
-          } else {
-            const hashHref = `${targetPathname}#${targetHash}`;
-            window.history.pushState(null, '', hashHref);
-            scrollToMissingSamePageHash(targetHash, offset);
-          }
+          const hashHref = `${targetPathname}#${targetHash}`;
+          window.history.pushState(null, '', hashHref);
+          window.dispatchEvent(new HashChangeEvent('hashchange'));
         } else {
           const fullHref = targetHash ? `${targetPathname}#${targetHash}` : targetPathname;
           router.push(fullHref, { scroll: false });
+          const expectedHash = `#${targetHash}`;
+          let attempts = 0;
+
+          const notifyHashReady = () => {
+            attempts += 1;
+
+            if (window.location.hash === expectedHash) {
+              window.dispatchEvent(new HashChangeEvent('hashchange'));
+              return;
+            }
+
+            if (attempts < 60) {
+              window.setTimeout(notifyHashReady, 100);
+            }
+          };
+
+          window.setTimeout(notifyHashReady, 0);
           // Scrolling is handled centrally (after route navigation) by HashScrollManager.
           // This avoids race conditions with route transitions and prevents scroll
           // logic from fighting with LenisProvider's route scroll behavior.

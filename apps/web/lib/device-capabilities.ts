@@ -14,6 +14,12 @@ export function isTouchDevice(): boolean {
   );
 }
 
+export function canUseHoverEffects(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (prefersReducedMotion()) return false;
+  return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+}
+
 let webglSupported: boolean | null = null;
 
 /** Cached WebGL probe — avoids creating multiple contexts during checks. */

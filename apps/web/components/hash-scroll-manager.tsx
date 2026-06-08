@@ -13,7 +13,10 @@ function getHeaderOffset() {
   return 0;
 }
 
+let activeScrollRequest = 0;
+
 function scrollToHashWithRetry(hash: string) {
+  const requestId = ++activeScrollRequest;
   const id = hash.replace(/^#/, '');
   if (!id) return;
 
@@ -21,19 +24,33 @@ function scrollToHashWithRetry(hash: string) {
   const extraMargin = 6;
 
   let attempt = 0;
-  const maxAttempts = 30; // ~3s at 100ms interval
+  const maxAttempts = 100; // ~10s at 100ms interval for slow below-fold chunks/data
+  const maxAlignments = 24; // ~2.4s after the section exists
 
   const tick = () => {
+    if (requestId !== activeScrollRequest) return;
     attempt += 1;
 
     const el = document.getElementById(id);
     if (el) {
-      const offset = getHeaderOffset() + extraMargin;
-      lenisScrollTo(el, offset);
+      let alignment = 0;
 
-      // Re-apply scroll a few frames to counter late layout shifts (images/fonts)
-      requestAnimationFrame(() => lenisScrollTo(el, offset));
-      requestAnimationFrame(() => requestAnimationFrame(() => lenisScrollTo(el, offset)));
+      const align = () => {
+        if (requestId !== activeScrollRequest) return;
+
+        const currentEl = document.getElementById(id);
+        if (!currentEl) return;
+
+        const offset = getHeaderOffset() + extraMargin;
+        lenisScrollTo(currentEl, offset, { immediate: true });
+
+        alignment += 1;
+        if (alignment < maxAlignments) {
+          window.setTimeout(align, 100);
+        }
+      };
+
+      align();
       return;
     }
 

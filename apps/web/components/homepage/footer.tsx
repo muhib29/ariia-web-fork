@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ThumbsUp } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { isTouchDevice } from '@/lib/device-capabilities';
+import { canUseHoverEffects } from '@/lib/device-capabilities';
 import { HeroLogo } from '../icons/HeroLogo';
 import { FadeInWhenInView } from './hero-section';
 import { SmoothLink } from '@/components/SmoothLink';
@@ -72,7 +72,7 @@ export function NewsletterFooter({ isHomePage = true }: { isHomePage?: boolean }
   const [enableHoverFx, setEnableHoverFx] = useState(false);
 
   useEffect(() => {
-    setEnableHoverFx(!isTouchDevice());
+    setEnableHoverFx(canUseHoverEffects());
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
