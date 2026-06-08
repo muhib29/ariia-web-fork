@@ -4,7 +4,9 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { lenisScrollTo } from '@/lib/lenis';
 
-const PENDING_HASH_KEY = 'ariia:pending-home-hash';
+type WindowWithPendingHash = Window & {
+  __pendingScrollHash?: string | null;
+};
 
 function getHeaderOffset() {
   // Prefer a real header element if present; fall back to a conservative default.
@@ -16,12 +18,18 @@ function getHeaderOffset() {
 }
 
 let activeScrollRequest = 0;
+let retryTimer: number | null = null;
 
 function getPendingHash() {
-  return window.sessionStorage.getItem(PENDING_HASH_KEY);
+  return (window as WindowWithPendingHash).__pendingScrollHash || null;
 }
 
 function scrollToHashWithRetry(hash: string, options: { pending?: boolean } = {}) {
+  if (retryTimer !== null) {
+    window.clearTimeout(retryTimer);
+    retryTimer = null;
+  }
+
   const requestId = ++activeScrollRequest;
   const id = hash.replace(/^#/, '');
   if (!id) return;
@@ -30,7 +38,7 @@ function scrollToHashWithRetry(hash: string, options: { pending?: boolean } = {}
   const extraMargin = 6;
 
   let attempt = 0;
-  const maxAttempts = 100; // ~10s at 100ms interval for slow below-fold chunks/data
+  const maxAttempts = 10; // ~1s at 100ms interval
 
   const tick = () => {
     if (requestId !== activeScrollRequest) return;
@@ -39,8 +47,8 @@ function scrollToHashWithRetry(hash: string, options: { pending?: boolean } = {}
     const el = document.getElementById(id);
     if (el) {
       if (options.pending) {
-        window.sessionStorage.removeItem(PENDING_HASH_KEY);
-        window.history.pushState(null, '', `/#${id}`);
+        window.history.replaceState(null, '', `/#${id}`);
+        (window as WindowWithPendingHash).__pendingScrollHash = null;
       }
 
       const offset = getHeaderOffset() + extraMargin;
@@ -49,7 +57,7 @@ function scrollToHashWithRetry(hash: string, options: { pending?: boolean } = {}
     }
 
     if (attempt < maxAttempts) {
-      window.setTimeout(tick, 100);
+      retryTimer = window.setTimeout(tick, 100);
     }
   };
 

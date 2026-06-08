@@ -3,7 +3,9 @@
 import { useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 
-const PENDING_HASH_KEY = 'ariia:pending-home-hash';
+type WindowWithPendingHash = Window & {
+  __pendingScrollHash?: string | null;
+};
 
 export default function useSmoothScroll() {
   const router = useRouter();
@@ -43,10 +45,9 @@ export default function useSmoothScroll() {
 
       if (targetHash) {
         const normalizedHash = targetHash.replace(/^#/, '');
-        window.sessionStorage.setItem(PENDING_HASH_KEY, normalizedHash);
+        (window as WindowWithPendingHash).__pendingScrollHash = normalizedHash;
 
         if (isSamePage) {
-          window.history.pushState(null, '', `${targetPathname}#${normalizedHash}`);
           window.dispatchEvent(new HashChangeEvent('hashchange'));
         } else {
           router.push(targetPathname, { scroll: false });
