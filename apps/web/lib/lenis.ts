@@ -28,6 +28,7 @@ export function lenisScrollTo(
   const behavior = useSmooth && !options.immediate ? 'smooth' : 'auto';
 
   if (activeLenis && useSmooth) {
+    activeLenis.resize();
     activeLenis.scrollTo(target as Parameters<Lenis['scrollTo']>[0], {
       offset: -offset,
       immediate: options.immediate,
