@@ -25,7 +25,6 @@ function scrollToHashWithRetry(hash: string) {
 
   let attempt = 0;
   const maxAttempts = 100; // ~10s at 100ms interval for slow below-fold chunks/data
-  const maxAlignments = 24; // ~2.4s after the section exists
 
   const tick = () => {
     if (requestId !== activeScrollRequest) return;
@@ -33,24 +32,8 @@ function scrollToHashWithRetry(hash: string) {
 
     const el = document.getElementById(id);
     if (el) {
-      let alignment = 0;
-
-      const align = () => {
-        if (requestId !== activeScrollRequest) return;
-
-        const currentEl = document.getElementById(id);
-        if (!currentEl) return;
-
-        const offset = getHeaderOffset() + extraMargin;
-        lenisScrollTo(currentEl, offset, { immediate: true });
-
-        alignment += 1;
-        if (alignment < maxAlignments) {
-          window.setTimeout(align, 100);
-        }
-      };
-
-      align();
+      const offset = getHeaderOffset() + extraMargin;
+      lenisScrollTo(el, offset);
       return;
     }
 

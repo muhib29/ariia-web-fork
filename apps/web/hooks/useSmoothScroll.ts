@@ -45,25 +45,28 @@ export default function useSmoothScroll() {
           window.history.pushState(null, '', hashHref);
           window.dispatchEvent(new HashChangeEvent('hashchange'));
         } else {
-          const fullHref = targetHash ? `${targetPathname}#${targetHash}` : targetPathname;
-          router.push(fullHref, { scroll: false });
-          const expectedHash = `#${targetHash}`;
+          router.push(targetPathname, { scroll: false });
+          const hashHref = `${targetPathname}#${targetHash}`;
+          const normalizedTargetPath = normalizedTarget;
           let attempts = 0;
 
-          const notifyHashReady = () => {
+          const notifyRouteReady = () => {
             attempts += 1;
 
-            if (window.location.hash === expectedHash) {
+            const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+
+            if (currentPath === normalizedTargetPath) {
+              window.history.pushState(null, '', hashHref);
               window.dispatchEvent(new HashChangeEvent('hashchange'));
               return;
             }
 
             if (attempts < 60) {
-              window.setTimeout(notifyHashReady, 100);
+              window.setTimeout(notifyRouteReady, 100);
             }
           };
 
-          window.setTimeout(notifyHashReady, 0);
+          window.setTimeout(notifyRouteReady, 0);
           // Scrolling is handled centrally (after route navigation) by HashScrollManager.
           // This avoids race conditions with route transitions and prevents scroll
           // logic from fighting with LenisProvider's route scroll behavior.
