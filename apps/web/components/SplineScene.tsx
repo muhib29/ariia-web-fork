@@ -43,6 +43,12 @@ export default function SplineScene({
     () => userHasInteractedWithPage
   );
 
+  useEffect(() => {
+    if (shouldLoadImmediately) {
+      setIsNearViewport(true);
+    }
+  }, [shouldLoadImmediately]);
+
   // Viewport detection
   useEffect(() => {
     if (shouldLoadImmediately || !containerRef.current) return;
