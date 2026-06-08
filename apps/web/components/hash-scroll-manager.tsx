@@ -38,7 +38,7 @@ function scrollToHashWithRetry(hash: string, options: { pending?: boolean } = {}
   const extraMargin = 6;
 
   let attempt = 0;
-  const maxAttempts = 10; // ~1s at 100ms interval
+  const maxAttempts = 30; // ~3s at 100ms interval
 
   const tick = () => {
     if (requestId !== activeScrollRequest) return;
