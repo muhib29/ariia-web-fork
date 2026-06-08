@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
+import useSmoothScroll from '@/hooks/useSmoothScroll';
 
 const SINGLE_LINKS = [
   { href: '/features', label: 'Features' },
@@ -31,6 +32,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const { scrollTo } = useSmoothScroll();
 
   const topBarBackground =
     'linear-gradient(90deg, #6679f4 0%, #4E97FA 25%, #35B5F5 68%, #2EFFEA 100%)';
@@ -39,6 +41,17 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
     setMenuOpen(false);
     setCompanyOpen(false);
     setResourcesOpen(false);
+  }
+
+  function handleMenuLinkClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (href.includes('#')) {
+      e.preventDefault();
+      closeMenu();
+      scrollTo(href);
+      return;
+    }
+
+    closeMenu();
   }
 
   const mainLinkStyle = {
@@ -281,7 +294,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
 
             <div style={{ display: companyOpen ? 'block' : 'none', padding: '0 16px 16px', borderBottom: '1px solid rgba(147, 216, 250, 0.30)' }}>
               {COMPANY_LINKS.map((link) => (
-                <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
+                <a key={link.href} href={link.href} onClick={(e) => handleMenuLinkClick(e, link.href)} style={subLinkStyle}>
                   {link.label}
                 </a>
               ))}
@@ -310,7 +323,7 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
 
             <div style={{ display: resourcesOpen ? 'block' : 'none', padding: '0 16px 16px' }}>
               {RESOURCES_LINKS.map((link) => (
-                <a key={link.href} href={link.href} onClick={closeMenu} style={subLinkStyle}>
+                <a key={link.href} href={link.href} onClick={(e) => handleMenuLinkClick(e, link.href)} style={subLinkStyle}>
                   {link.label}
                 </a>
               ))}
