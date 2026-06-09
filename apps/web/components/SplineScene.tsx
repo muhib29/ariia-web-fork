@@ -4,11 +4,11 @@ import { useState, CSSProperties, useEffect, useRef } from 'react';
 import type { SplineSceneConfig } from '@/config/spline-scenes';
 import type { Application } from '@splinetool/runtime';
 import { useScreenSize } from '@/hooks/useScreenSize';
+import { releaseSplineSlot, requestSplineSlot } from '@/lib/spline-loader';
 import { SplineStaticPlaceholder } from './SplineStaticPlaceholder';
 
-// Module-level flag — listeners added once across ALL instances
-let globalInteractionListenersAdded = false;
-let userHasInteractedWithPage = false;
+const MOBILE_SPLINE_DELAY = 4500;
+const MOBILE_SPLINE_IDLE_TIMEOUT = 5000;
 
 interface SplineSceneProps {
   config: SplineSceneConfig;
@@ -34,14 +34,11 @@ export default function SplineScene({
   const [SplineComponent, setSplineComponent] = useState<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const splineViewerRef = useRef<HTMLDivElement>(null);
-  const splineAppRef = useRef<Application | null>(null); // ← add this line only
+  const splineAppRef = useRef<Application | null>(null);
   const screenSize = useScreenSize();
   const currentHeight = config.height[screenSize];
   const shouldLoadImmediately = priority || config.priority || loadOnMount;
   const [isNearViewport, setIsNearViewport] = useState(shouldLoadImmediately);
-  const [userInteracted, setUserInteracted] = useState(
-    () => userHasInteractedWithPage
-  );
 
   useEffect(() => {
     if (shouldLoadImmediately) {
@@ -64,34 +61,6 @@ export default function SplineScene({
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [shouldLoadImmediately]);
-
-  // Global interaction detector — added ONCE, notifies ALL instances via custom event
-  useEffect(() => {
-    // Listen for the custom event on every instance
-    const onInteractionEvent = () => setUserInteracted(true);
-    window.addEventListener('spline-user-interacted', onInteractionEvent);
-
-    // Only one instance sets up the source listeners
-    if (!globalInteractionListenersAdded) {
-      globalInteractionListenersAdded = true;
-
-      const handleInteraction = () => {
-        if (userHasInteractedWithPage) return;
-        userHasInteractedWithPage = true;
-        // Broadcast to ALL SplineScene instances
-        window.dispatchEvent(new Event('spline-user-interacted'));
-      };
-
-      document.addEventListener('scroll', handleInteraction, { once: true });
-      document.addEventListener('touchstart', handleInteraction, { once: true });
-      document.addEventListener('mousemove', handleInteraction, { once: true });
-      document.addEventListener('click', handleInteraction, { once: true });
-    }
-
-    return () => {
-      window.removeEventListener('spline-user-interacted', onInteractionEvent);
-    };
-  }, []);
 
   useEffect(() => {
     const onPause = () => {
@@ -123,56 +92,84 @@ export default function SplineScene({
   useEffect(() => {
     if (!isNearViewport) return;
 
-    // URL param override
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('no-spline') === '1') return;
-    } catch (e) { }
-
-    // Bot detection
-    const isBot =
-      /HeadlessChrome|Lighthouse|GTmetrix|Pingdom|PageSpeed|SpeedCurve/i.test(navigator.userAgent) ||
-      window.navigator.webdriver ||
-      (window.outerWidth === 0 && window.outerHeight === 0);
-
-    if (isBot) return;
-
-    // Wait for user interaction — Lighthouse never interacts
-    if (!loadOnMount && !userInteracted) return;
-
     let cancelled = false;
+    let loadListenerAdded = false;
+    let slotHeld = false;
+    let timeoutId: number | undefined;
+    let idleId: number | undefined;
 
     const load = () => {
-      import('@splinetool/react-spline')
+      requestSplineSlot()
+        .then(() => {
+          if (cancelled) {
+            releaseSplineSlot();
+            return null;
+          }
+          slotHeld = true;
+          return import('@splinetool/react-spline');
+        })
         .then((mod) => {
+          if (slotHeld) {
+            releaseSplineSlot();
+            slotHeld = false;
+          }
+          if (!mod) return;
           if (!cancelled) setSplineComponent(() => mod.default);
         })
         .catch((err) => {
+          if (slotHeld) {
+            releaseSplineSlot();
+            slotHeld = false;
+          }
           console.error('Failed to load Spline:', err);
           if (!cancelled) setError(true);
         });
     };
 
+    const isMobileViewport = window.matchMedia('(max-width: 767px)').matches;
+
     const scheduleLoad = () => {
-      setTimeout(() => {
+      const delay = loadOnMount ? loadOnMountDelay : shouldLoadImmediately ? 0 : 2500;
+      const mobileDelay = Math.max(delay, MOBILE_SPLINE_DELAY);
+
+      timeoutId = window.setTimeout(() => {
         if (cancelled) return;
-        'requestIdleCallback' in window
-          ? window.requestIdleCallback(load, { timeout: 8000 })
-          : load();
-      }, loadOnMount ? loadOnMountDelay : shouldLoadImmediately ? 0 : 2500);
+
+        if (isMobileViewport && 'requestIdleCallback' in window) {
+          idleId = window.requestIdleCallback(load, { timeout: MOBILE_SPLINE_IDLE_TIMEOUT });
+          return;
+        }
+
+        if (isMobileViewport) {
+          timeoutId = window.setTimeout(load, MOBILE_SPLINE_IDLE_TIMEOUT);
+          return;
+        }
+
+        load();
+      }, isMobileViewport ? mobileDelay : delay);
     };
 
-    if (document.readyState === 'complete') {
+    if (!isMobileViewport || document.readyState === 'complete') {
       scheduleLoad();
     } else {
+      loadListenerAdded = true;
       window.addEventListener('load', scheduleLoad, { once: true });
     }
 
-    return () => { cancelled = true; };
-  }, [isNearViewport, shouldLoadImmediately, userInteracted, loadOnMount, loadOnMountDelay]);
+    return () => {
+      cancelled = true;
+      if (loadListenerAdded) window.removeEventListener('load', scheduleLoad);
+      if (timeoutId) window.clearTimeout(timeoutId);
+      if (idleId && 'cancelIdleCallback' in window) window.cancelIdleCallback(idleId);
+      if (slotHeld) {
+        releaseSplineSlot();
+        slotHeld = false;
+      }
+    };
+  }, [isNearViewport, shouldLoadImmediately, loadOnMount, loadOnMountDelay]);
 
   const handleLoad = (spline: Application) => {
-    splineAppRef.current = spline; // ← store the reference to the Spline app
+    splineAppRef.current = spline;
     setIsLoaded(true);
     if (config.disableInteractions) {
       try {
