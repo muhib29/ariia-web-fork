@@ -7,7 +7,6 @@ import { GradientHeader } from './GradientHeader';
 import { FadeInWhenInView } from '@/components/animations/FadeInWhenInView';
 import { useIsMobile } from '@workspace/ui/hooks/use-mobile';
 import { SPLINE_SCENES } from '@/config/spline-scenes';
-import { HeroLogo } from '../icons/HeroLogo';
 
 import dynamic from 'next/dynamic';
 
@@ -286,7 +285,14 @@ export function HeroSection({ leftContent, rightContent }: HeroSectionProps) {
                 className="relative top-0 w-[90px] h-[110px] md:h-[150px] md:w-[143px] md:right-0 lg:right-16 xl:right-28 mb-4 md:mb-0"
                 delay={0}
               >
-                <HeroLogo className="object-contain max-w-[90px]  md:pb-2 md:max-w-full" />
+                <Image
+                  src="/images/hero-logo.webp"
+                  alt="ARIIA"
+                  width={143}
+                  height={150}
+                  priority
+                  className="object-contain max-w-[90px] md:pb-2 md:max-w-full"
+                />
               </FadeInWhenInView>
             </div>
 

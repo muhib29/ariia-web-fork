@@ -1,8 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
 import useSmoothScroll from '@/hooks/useSmoothScroll';
 
 const SINGLE_LINKS = [
@@ -133,7 +133,14 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
         >
           <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             {/* <AriiaSvgMark className="w-20 h-7" /> */}
-            <AriiaSvgMark width={80} height={28} />
+            <Image
+              src="/images/headerlogo.webp"
+              alt="ARIIA"
+              width={80}
+              height={28}
+              priority
+              style={{ width: 80, height: 28, objectFit: 'contain' }}
+            />
           </a>
         </div>
 
@@ -235,7 +242,14 @@ export function MobileHeader({ isScrolled = false }: { isScrolled?: boolean }) {
                 textDecoration: 'none',
               }}
             >
-              <AriiaSvgMark width={64} height={28} />
+              <Image
+                src="/images/headerlogo.webp"
+                alt="ARIIA"
+                width={64}
+                height={28}
+                priority
+                style={{ width: 64, height: 28, objectFit: 'contain' }}
+              />
             </a>
 
             <button

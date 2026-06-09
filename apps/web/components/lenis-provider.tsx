@@ -1,6 +1,5 @@
 'use client';
 
-import Lenis from 'lenis';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
@@ -17,36 +16,52 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!shouldUseSmoothScroll()) return;
 
-    const lenis = new Lenis({
-      duration: 1.05,
-      smoothWheel: true,
-      syncTouch: false,
-      touchMultiplier: 1,
+    let cancelled = false;
+    let rafId = 0;
+    let removePointerListener: (() => void) | null = null;
+    let destroyLenis: (() => void) | null = null;
+
+    import('lenis').then(({ default: Lenis }) => {
+      if (cancelled || !shouldUseSmoothScroll()) return;
+
+      const lenis = new Lenis({
+        duration: 1.05,
+        smoothWheel: true,
+        syncTouch: false,
+        touchMultiplier: 1,
+      });
+
+      registerLenis(lenis);
+
+      const stopInertiaForLinkPress = (event: PointerEvent) => {
+        if (event.button !== 0 || !(event.target instanceof Element)) return;
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+        lenis.scrollTo(lenis.actualScroll, { immediate: true, force: true });
+      };
+
+      const raf = (time: number) => {
+        lenis.raf(time);
+        rafId = window.requestAnimationFrame(raf);
+      };
+
+      document.addEventListener('pointerdown', stopInertiaForLinkPress, { capture: true });
+      removePointerListener = () => {
+        document.removeEventListener('pointerdown', stopInertiaForLinkPress, { capture: true });
+      };
+
+      rafId = window.requestAnimationFrame(raf);
+      destroyLenis = () => {
+        window.cancelAnimationFrame(rafId);
+        unregisterLenis(lenis);
+        lenis.destroy();
+      };
     });
 
-    registerLenis(lenis);
-
-    const stopInertiaForLinkPress = (event: PointerEvent) => {
-      if (event.button !== 0 || !(event.target instanceof Element)) return;
-      const link = event.target.closest('a[href]');
-      if (!link) return;
-      lenis.scrollTo(lenis.actualScroll, { immediate: true, force: true });
-    };
-
-    let rafId = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = window.requestAnimationFrame(raf);
-    };
-
-    document.addEventListener('pointerdown', stopInertiaForLinkPress, { capture: true });
-    rafId = window.requestAnimationFrame(raf);
-
     return () => {
-      document.removeEventListener('pointerdown', stopInertiaForLinkPress, { capture: true });
-      window.cancelAnimationFrame(rafId);
-      unregisterLenis(lenis);
-      lenis.destroy();
+      cancelled = true;
+      removePointerListener?.();
+      destroyLenis?.();
     };
   }, []);
 

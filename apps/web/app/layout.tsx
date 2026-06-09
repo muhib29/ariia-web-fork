@@ -28,11 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preload" href="/images/hero-logo.webp" as="image" type="image/webp" />
         <link rel="preload" href="/images/headerlogo.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/lottie/storyglobe.lottie" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/lottie/section1desktop.lottie" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/lottie/section2desktop.lottie" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/lottie/section1.lottie" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/lottie/section2.lottie" as="fetch" crossOrigin="anonymous" />
         {strapiUrl ? (
           <link rel="dns-prefetch" href={strapiUrl} />
         ) : null}

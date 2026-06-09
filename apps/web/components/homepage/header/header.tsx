@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { useState, useEffect, useRef } from 'react';
@@ -21,7 +22,6 @@ import {
 import { Button } from '@workspace/ui/components/button';
 import { usePathname } from 'next/navigation';
 import { cn } from '@workspace/ui/lib/utils';
-import { AriiaSvgMark } from '@/components/icons/AriiaSvgMark';
 import { MobileHeader } from './mobileheader';
 import { SmoothLink } from '@/components/SmoothLink';
 
@@ -186,7 +186,14 @@ function DesktopNav({
         {/* <AriiaSvgMark priority className="w-24 h-11 md:w-32 md:h-12" /> */}
         {/* <AriiaSvgMark width={110} height={35} /> */}
         <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4">
-          <AriiaSvgMark className="w-20 h-10 md:h-9 md:w-28" />
+          <Image
+            src="/images/headerlogo.webp"
+            alt="ARIIA"
+            width={112}
+            height={36}
+            priority
+            className="w-20 h-10 md:h-9 md:w-28 object-contain"
+          />
         </Link>
         <nav className="hidden md:flex items-center gap-1">
           <Link
