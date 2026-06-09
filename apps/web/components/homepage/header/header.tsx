@@ -186,7 +186,7 @@ function DesktopNav({
         {/* <AriiaSvgMark priority className="w-24 h-11 md:w-32 md:h-12" /> */}
         {/* <AriiaSvgMark width={110} height={35} /> */}
         <Link href="/" className="flex items-center justify-center mr-0 shrink-0 md:mr-4">
-          <AriiaSvgMark className="w-20 h-10 md:h-10 md:w-28" />
+          <AriiaSvgMark className="w-20 h-10 md:h-9 md:w-28" />
         </Link>
         <nav className="hidden md:flex items-center gap-1">
           <Link
@@ -271,12 +271,13 @@ function DesktopNav({
 
 // ─── Header: parent ────────────────────────────────────────────────────────────
 
-export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
+export function Header({ isHomePage }: { isHomePage?: boolean }) {
   const NO_GRADIENT_ROUTES = ['/', '/#faq', '/#about-us/', '/pricing'];
   const pathname = usePathname();
   const [activePath, setActivePath] = useState<string | null>(null);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const shouldShowHomeLines = (isHomePage ?? pathname === '/') && !isScrolled;
   const shouldHideGradient = NO_GRADIENT_ROUTES.includes(pathname);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -326,7 +327,7 @@ export function Header({ isHomePage = true }: { isHomePage?: boolean }) {
 
       {/* ── DESKTOP ── */}
       <header
-        className={`hidden md:block fixed left-0 w-full z-50 !bg-transparent ${isHomePage && !isScrolled ? 'header-vertical-lines' : ''
+        className={`hidden md:block fixed left-0 w-full z-50 !bg-transparent ${shouldShowHomeLines ? 'header-vertical-lines' : ''
           }`}
         style={{ maxWidth: '100vw', top: 0 }}
       >
