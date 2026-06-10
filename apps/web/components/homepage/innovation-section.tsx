@@ -46,10 +46,7 @@ export function InnovationSection({ header }: InnovationSectionProps) {
     const description = normalizeMarkdownContent(header?.description);
 
     return (
-        <section
-            id="about-us"
-            className="py-7 md:py-15 px-6 relative overflow-visible md:overflow-hidden bg-[#f8fbff] md:bg-white mt-0 md:mt-10 -mb-8 md:mb-0"
-        >
+        <section className="py-7 md:py-15 px-6 relative overflow-visible md:overflow-hidden bg-[#f8fbff] md:bg-white mt-0 md:mt-10 -mb-8 md:mb-0">
             {/* Mobile-only distinct divider between sections */}
             <div className="hidden md:flex absolute inset-x-0 -top-8 h-px pointer-events-none z-[10] items-center justify-center">
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-80" />

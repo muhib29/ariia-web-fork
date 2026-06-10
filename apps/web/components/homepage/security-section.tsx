@@ -22,10 +22,7 @@ export interface SecuritySectionProps {
 
 export function SecuritySection({ header, imageWithContent }: SecuritySectionProps) {
   return (
-    <section
-      id="security"
-      className="py-10 mt-8 sm:mt-0 md:py-20 px-6 relative overflow-hidden bg-[#222d53] text-white"
-    >
+    <section className="py-10 mt-8 sm:mt-0 md:py-20 px-6 relative overflow-hidden bg-[#222d53] text-white">
       <div className="absolute inset-0 w-full overflow-hidden pointer-events-none homepage-decor-blur">
         <div
           className="absolute inset-0 md:hidden"

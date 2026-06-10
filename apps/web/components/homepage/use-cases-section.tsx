@@ -57,10 +57,7 @@ export function UseCasesSection({ header, audioWithContent }: UseCasesSectionPro
   };
 
   return (
-    <section
-      id="use-cases"
-      className="py-7 md:py-15 px-6 bg-[#f8fbff] md:bg-white relative overflow-visible md:overflow-hidden"
-    >
+    <section className="py-7 md:py-15 px-6 bg-[#f8fbff] md:bg-white relative overflow-visible md:overflow-hidden">
       {/* Background: top orb, center orb, bottom orb — fades at section edges */}
       <div className="absolute inset-0 pointer-events-none section-bg-fade homepage-decor-blur">
         <div

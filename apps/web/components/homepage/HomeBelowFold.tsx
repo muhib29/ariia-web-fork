@@ -1,5 +1,3 @@
-'use client';
-
 import dynamic from 'next/dynamic';
 import type { FAQSectionProps } from './faqsection';
 import type { SecuritySectionProps } from './security-section';
@@ -41,10 +39,26 @@ export function HomeBelowFold({ useCasesProps, innovationProps, securityProps, f
     <>
       <VideoSection />
       <ContentSection />
-      {useCasesProps && <UseCasesSection {...useCasesProps} />}
-      {innovationProps && <InnovationSection {...innovationProps} />}
-      {securityProps && <SecuritySection {...securityProps} />}
-      {faqProps && <FAQSection {...faqProps} />}
+      {useCasesProps && (
+        <div id="use-cases">
+          <UseCasesSection {...useCasesProps} />
+        </div>
+      )}
+      {innovationProps && (
+        <div id="about-us">
+          <InnovationSection {...innovationProps} />
+        </div>
+      )}
+      {securityProps && (
+        <div id="security">
+          <SecuritySection {...securityProps} />
+        </div>
+      )}
+      {faqProps && (
+        <div id="faq">
+          <FAQSection {...faqProps} />
+        </div>
+      )}
       <NewsletterFooter />
     </>
   );

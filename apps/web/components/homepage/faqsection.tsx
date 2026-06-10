@@ -25,10 +25,7 @@ export function FAQSection({ header, questions }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section
-      id="faq"
-      className="pt-10 md:pt-18 pb-0 px-4 md:px-6 relative overflow-hidden overflow-x-hidden bg-[#fbfdff] md:bg-white"
-    >
+    <section className="pt-10 md:pt-18 pb-0 px-4 md:px-6 relative overflow-hidden overflow-x-hidden bg-[#fbfdff] md:bg-white">
       {/* Background Gradient Blur */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden homepage-decor-blur">
         <div
