@@ -111,8 +111,8 @@ export default function IndustriesClient({ industry }: IndustriesClientProps) {
                       src={isMobile ? card.mobile : card.desktop}
                       loop
                       autoplay
-                      eager
-                      playWhenInView={false}
+                      eager={isMobile}
+                      playWhenInView={!isMobile}
                       className="w-full h-full object-cover"
                       placeholderClassName={animationPlaceholderClass}
                     />
